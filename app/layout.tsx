@@ -9,6 +9,7 @@ import { detectLanguage, getServerTranslations } from "@/i18n/server";
 import { I18nProvider } from "@/i18n/i18n-context";
 // custom
 import { withBasePath } from "@/lib";
+import ComposedProvider from "@/components/ComposedProvider";
 
 export async function generateMetadata() {
   const { t } = await getServerTranslations();
@@ -32,7 +33,9 @@ export default async function RootLayout({
       </head>
       <body>
         <I18nProvider language={lng}>
-          <MantineProvider>{children}</MantineProvider>
+          <MantineProvider>
+            <ComposedProvider>{children}</ComposedProvider>
+          </MantineProvider>
         </I18nProvider>
       </body>
     </html>

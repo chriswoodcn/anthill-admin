@@ -15,6 +15,9 @@ module.exports = {
         bg_login: `url('${withBasePath(
           "/assets/images/background/bg-login.jpg"
         )}')`,
+        bg_map: `url('${withBasePath(
+          "/assets/images/background/bg-map.png"
+        )}')`,
       },
     },
   },
