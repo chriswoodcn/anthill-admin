@@ -21,11 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "*.ts"
-, "lib/log.js"  ],
+  "include": ["**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "middleware.ts", "tailwind.config.js"],
   "exclude": ["node_modules"]
 }

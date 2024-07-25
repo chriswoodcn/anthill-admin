@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
+import configuration from "./configuration.mjs";
 const nextConfig = {
-  basePath: "/bmm-dev-admin",
+  basePath: configuration.BasePath,
   swcMinify: true,
   eslint: {
     ignoreDuringBuilds: true,

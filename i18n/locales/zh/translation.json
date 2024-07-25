@@ -1,7 +1,6 @@
 {
-  "home_title": "首页",
-  "second_title": "第二页",
-  "client_title": "客户端渲染页面",
-  "to-second-page": "跳转到第二页",
-  "to-client-page": "跳转到客户端渲染页面"
+  "title": "蚁众后台管理系统",
+  "description": "蚁众后台管理系统 -- 基于Nextjs的后管平台模板",
+  "not_found_text": "请求的页面未找到!",
+  "not_found_back": "返回首页"
 }

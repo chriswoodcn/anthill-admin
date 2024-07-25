@@ -1,7 +1,6 @@
 {
-  "home_title": "Home Page",
-  "second_title": "Second Page",
-  "client_title": "Client Page",
-  "to-second-page": "naviagate to Second Page",
-  "to-client-page": "naviagate to Client Page"
+  "title": "Anthill-Admin",
+  "description": "Anthill-Admin -- Backend Template By Nextjs",
+  "not_found_text": "The page you requested was not found!",
+  "not_found_back": "Back Home"
 }
