@@ -1,9 +1,10 @@
 // middleware/withLogging.ts
 import { NextFetchEvent, NextRequest } from "next/server";
 import { MiddlewareFactory } from "./type";
-export const withLogging: MiddlewareFactory = (next) => {
+import logger from '../logger';
+export const withLogger: MiddlewareFactory = (next) => {
     return async (request: NextRequest, _next: NextFetchEvent) => {
-        console.log("Log some data here", request.nextUrl.pathname);
+        logger.debug("request", request.url);
         return next(request, _next);
     };
 };
