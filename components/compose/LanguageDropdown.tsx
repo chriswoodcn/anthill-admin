@@ -1,15 +1,15 @@
 "use client";
 
-import Dropdown from "../components/core/dropdown";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
-import { IRootState } from "../store";
-import { toggleRTL } from "../store/settingConfigSlice";
+import { IRootState } from "../../store";
+import { toggleRTL } from "../../store/settingConfigSlice";
 import { useRouter } from "next/navigation";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { withBasePath } from "../lib";
+import { withBasePath } from "../../lib";
+import Dropdown from '../core/Dropdown';
 
 interface LanguageDropdownProps {
   className?: string;
@@ -60,7 +60,7 @@ const LanguageDropdown = ({ className = "" }: LanguageDropdownProps) => {
             </>
           }
         >
-          <PerfectScrollbar className="max-h-[300px] overflow-y-scroll rounded-lg shadow-md bg-white dark:bg-black">
+          <PerfectScrollbar className="max-h-[300px] overflow-y-scroll rounded-lg shadow-sm bg-white dark:bg-black">
             <ul className="grid w-[160px] grid-cols-1 gap-2 p-2 font-semibold text-dark dark:text-white-dark dark:text-white-light/90 ">
               {themeConfig.languageList.map((item: any) => {
                 return (

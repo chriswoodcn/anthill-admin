@@ -1,6 +1,5 @@
 "use client";
 
-import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "@/store";
@@ -11,7 +10,6 @@ import {
   toggleLayout,
   toggleAnimation,
 } from "@/store/settingConfigSlice";
-import Loading from "@/components/Loading";
 
 export default ({ children }: PropsWithChildren) => {
   const settingConfig = useSelector((state: IRootState) => state.settingConfig);

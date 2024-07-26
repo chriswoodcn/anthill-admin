@@ -5,8 +5,8 @@ import { Provider } from "react-redux";
 import React, { PropsWithChildren, Suspense } from "react";
 import ProgressBarProvider from "./ProgressBarProvider";
 
-import Loading from "@/components/Loading";
-import App from "@/components/App";
+import Loading from "../core/Loading";
+import App from "./App";
 
 export default ({ children }: PropsWithChildren) => {
   return (
