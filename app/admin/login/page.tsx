@@ -9,6 +9,7 @@ import csObj3 from "@/public/assets/images/auth/coming-soon-object3.png";
 import polygonObj from "@/public/assets/images/auth/polygon-object.svg";
 import logoObj from "@/public/assets/anthill.svg";
 import { getServerTranslations } from "@/i18n/server";
+import Link from "next/link";
 
 export async function generateMetadata() {
   const { t } = await getServerTranslations("admin_login");
@@ -68,6 +69,7 @@ export default async () => {
                 </p>
               </div>
               {/* <ComponentsAuthLoginForm /> */}
+              <Link href={"/aaa"}>link</Link>
             </div>
           </div>
         </div>

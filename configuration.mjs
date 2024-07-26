@@ -41,8 +41,9 @@ const configuraton = {
     animation: "", // animate__fadeIn, animate__fadeInDown, animate__fadeInUp, animate__fadeInLeft, animate__fadeInRight, animate__slideInDown, animate__slideInLeft, animate__slideInRight, animate__zoomIn
   },
   AuthField: "token",
-  FontFamily: ['Nunito', 'sans-serif'],
+  FontFamily: ["Nunito", "sans-serif"],
   Colors: {
+    DefaultLevel: 7,
     Primary: "#1badaa",
     Secondary: "#018ACB",
     Success: "#3ab078",

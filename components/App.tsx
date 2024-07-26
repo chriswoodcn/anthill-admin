@@ -1,5 +1,6 @@
 "use client";
 
+import { AppProgressBar as ProgressBar } from "next-nprogress-bar";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "@/store";
@@ -51,7 +52,7 @@ export default ({ children }: PropsWithChildren) => {
         settingConfig.rtlClass
       } main-section relative font-nunito text-sm font-normal antialiased`}
     >
-      {isLoading ? <Loading /> : children}
+      {children}
     </div>
   );
 };

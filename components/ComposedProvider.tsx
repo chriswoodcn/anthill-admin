@@ -2,20 +2,19 @@
 
 import store from "@/store";
 import { Provider } from "react-redux";
-import React, { ReactNode, Suspense } from "react";
+import React, { PropsWithChildren, Suspense } from "react";
+import ProgressBarProvider from "./ProgressBarProvider";
 
 import Loading from "@/components/Loading";
-import App from '@/components/App';
+import App from "@/components/App";
 
-interface IProps {
-  children?: ReactNode;
-}
-
-export default ({ children }: IProps) => {
+export default ({ children }: PropsWithChildren) => {
   return (
     <Provider store={store}>
       <Suspense fallback={<Loading />}>
-        <App>{children}</App>
+        <ProgressBarProvider>
+          <App>{children}</App>
+        </ProgressBarProvider>
       </Suspense>
     </Provider>
   );

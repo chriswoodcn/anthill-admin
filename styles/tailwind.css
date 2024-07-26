@@ -1,3 +1,5 @@
+@import "./animate.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,36 +26,39 @@
     @apply scroll-smooth;
   }
   body {
-    @apply bg-[#fafafa] font-nunito;
+    @apply bg-white-8 dark:bg-black-8 font-nunito;
   }
 }
 /* screen_loader */
-.screen_loader-instance {
+.anthill-screen_loader-instance {
   @apply space-x-2 flex items-center;
 }
-.screen_loader-instance span {
+.anthill-screen_loader-instance span {
   @apply w-2 sm:w-4 inline-block bg-primary rounded-lg;
-  animation: screen_loader 1s ease infinite;
+  animation: screen_loader 1.2s ease infinite;
 }
-.screen_loader-instance span:nth-child(1) {
+.anthill-screen_loader-instance span:nth-child(1) {
+  animation-delay: 0s;
+}
+.anthill-screen_loader-instance span:nth-child(2) {
   animation-delay: 0.2s;
 }
-.screen_loader-instance span:nth-child(2) {
+.anthill-screen_loader-instance span:nth-child(3) {
   animation-delay: 0.4s;
 }
-.screen_loader-instance span:nth-child(3) {
+.anthill-screen_loader-instance span:nth-child(4) {
   animation-delay: 0.6s;
 }
-.screen_loader-instance span:nth-child(4) {
+.anthill-screen_loader-instance span:nth-child(5) {
   animation-delay: 0.8s;
 }
-.screen_loader-instance span:nth-child(5) {
+.anthill-screen_loader-instance span:nth-child(6) {
   animation-delay: 1s;
 }
 @keyframes screen_loader {
   0%,
   100% {
-    height: 30px;
+    height: 20px;
     @apply bg-primary-8;
   }
   50% {
@@ -69,7 +74,7 @@
       @apply bg-primary-8;
     }
     50% {
-      height: 100px;
+      height: 120px;
       @apply bg-primary-2;
     }
   }

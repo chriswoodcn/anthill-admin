@@ -1,7 +1,7 @@
 import { Config } from "tailwindcss";
 import { withBasePath, } from "./lib";
 import configuraton, { BlackColors, mixBlack, mixWhite, PrimaryColors, WhiteColors } from './configuration.mjs';
-const levelDefault = 7;
+const levelDefault = configuraton.Colors.DefaultLevel
 const config: Config = {
   darkMode: ["selector", "data-mantine-color-scheme"],
   content: [

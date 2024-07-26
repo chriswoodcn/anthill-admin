@@ -3,7 +3,6 @@ import "@mantine/core/styles.css";
 import "@/styles/tailwind.css";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
-import type { MantineColorsTuple } from "@mantine/core";
 // i18next
 import i18next, { dir } from "i18next";
 import { detectLanguage, getServerTranslations } from "@/i18n/server";
