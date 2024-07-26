@@ -1,7 +1,8 @@
 "use client";
 
 import Dropdown from "../components/core/dropdown";
-// import IconCaretDown from "@/components/icon/icon-caret-down";
+import PerfectScrollbar from "react-perfect-scrollbar";
+import { IconChevronDown } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
 import { IRootState } from "../store";
 import { toggleRTL } from "../store/settingConfigSlice";
@@ -38,7 +39,7 @@ const LanguageDropdown = ({ className = "" }: LanguageDropdownProps) => {
         <Dropdown
           offset={[0, 4]}
           placement={`${isRtl ? "bottom-start" : "bottom-end"}`}
-          btnClassName="flex px-4 items-center gap-2.5 rounded-lg border border-white-dark/30 bg-white px-2 py-1.5 text-white-dark hover:border-primary hover:text-primary dark:bg-black"
+          btnClassName="flex items-center gap-2 rounded-lg border border-white-dark/30 bg-white px-2 py-1.5 text-white-dark hover:border-primary hover:text-primary dark:bg-black"
           button={
             <>
               <div>
@@ -53,39 +54,43 @@ const LanguageDropdown = ({ className = "" }: LanguageDropdownProps) => {
               <div className="text-base font-bold uppercase">
                 {i18n.language}
               </div>
-              <span className="shrink-0">{/* <IconCaretDown /> */}</span>
+              <span className="shrink-0">
+                <IconChevronDown stroke={1} size={20} />
+              </span>
             </>
           }
         >
-          <ul className="grid w-[160px] grid-cols-1 gap-2 !px-2 font-semibold text-dark dark:text-white-dark dark:text-white-light/90 bg-white shadow-md rounded-lg">
-            {themeConfig.languageList.map((item: any) => {
-              return (
-                <li key={item.code} className="p-4">
-                  <button
-                    type="button"
-                    className={`flex w-full rounded-lg hover:text-primary ${
-                      i18n.language === item.code
-                        ? "bg-primary/10 text-primary"
-                        : ""
-                    }`}
-                    onClick={() => {
-                      i18n.changeLanguage(item.code);
-                      setLocale(item.code);
-                    }}
-                  >
-                    <img
-                      src={withBasePath(
-                        `/assets/images/flags/${item.code.toUpperCase()}.svg`
-                      )}
-                      alt="flag"
-                      className="h-5 w-5 rounded-full object-cover"
-                    />
-                    <span className="ltr:ml-3 rtl:mr-3">{item.name}</span>
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
+          <PerfectScrollbar className="max-h-[300px] overflow-y-scroll rounded-lg shadow-md bg-white dark:bg-black">
+            <ul className="grid w-[160px] grid-cols-1 gap-2 p-2 font-semibold text-dark dark:text-white-dark dark:text-white-light/90 ">
+              {themeConfig.languageList.map((item: any) => {
+                return (
+                  <li key={item.code} className="p-2">
+                    <button
+                      type="button"
+                      className={`flex w-full rounded-lg hover:text-primary ${
+                        i18n.language === item.code
+                          ? "bg-primary/10 text-primary"
+                          : ""
+                      }`}
+                      onClick={() => {
+                        i18n.changeLanguage(item.code);
+                        setLocale(item.code);
+                      }}
+                    >
+                      <img
+                        src={withBasePath(
+                          `/assets/images/flags/${item.code.toUpperCase()}.svg`
+                        )}
+                        alt="flag"
+                        className="h-5 w-5 rounded-full object-cover"
+                      />
+                      <span className="ltr:ml-3 rtl:mr-3">{item.name}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ul>
+          </PerfectScrollbar>
         </Dropdown>
       )}
     </div>
