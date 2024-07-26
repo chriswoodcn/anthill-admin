@@ -3,6 +3,29 @@
 @tailwind utilities;
 
 @layer components {
+  /* 滚动条美化 */
+  ::-webkit-scrollbar {
+    @apply w-1 h-1;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 rounded-full;
+  }
+
+  .dark::-webkit-scrollbar-thumb,
+  .dark ::-webkit-scrollbar-thumb {
+    @apply bg-slate-700 rounded-full;
+  }
+  html {
+    @apply scroll-smooth;
+  }
+  body {
+    @apply bg-[#fafafa] font-nunito;
+  }
 }
 /* screen_loader */
 .screen_loader-instance {
