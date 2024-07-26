@@ -10,7 +10,7 @@ import {
   toggleLayout,
   toggleAnimation,
 } from "@/store/settingConfigSlice";
-import Loading from "@/components/loading";
+import Loading from "@/components/Loading";
 
 export default ({ children }: PropsWithChildren) => {
   const settingConfig = useSelector((state: IRootState) => state.settingConfig);

@@ -64,10 +64,10 @@ const LanguageDropdown = ({ className = "" }: LanguageDropdownProps) => {
             <ul className="grid w-[160px] grid-cols-1 gap-2 p-2 font-semibold text-dark dark:text-white-dark dark:text-white-light/90 ">
               {themeConfig.languageList.map((item: any) => {
                 return (
-                  <li key={item.code} className="p-2">
+                  <li key={item.code}>
                     <button
                       type="button"
-                      className={`flex w-full rounded-lg hover:text-primary ${
+                      className={`flex w-full p-2 rounded-md hover:text-primary ${
                         i18n.language === item.code
                           ? "bg-primary/10 text-primary"
                           : ""
