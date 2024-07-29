@@ -1,7 +1,7 @@
 import { NextFetchEvent, NextRequest, NextResponse } from "next/server";
-import { MiddlewareFactory } from "./type";
 import { withBasePath } from '..';
 import configuration from "../../configuration.mjs"
+import { MiddlewareFactory } from './stackMiddlewares';
 
 export const withRoot: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {

@@ -1,9 +1,10 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { signIn } from "next-auth/react";
 // custom
 import configuraton from "@/configuration.mjs";
 import logger from "@/lib/logger";
@@ -74,11 +75,25 @@ export default () => {
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
+      try {
+        await signIn("credentials", {
+          email: values.account,
+          password: values.password,
+          device: "WEB",
+        });
+      } catch (error) {
+        // Signin can fail for a number of reasons, such as the user
+        // not existing, or the user not having the correct role.
+        // In some cases, you may want to redirect to a custom error
+        if (error) {
+          logger.debug("signIn error", error);
+        }
+      }
     },
   });
 
   return (
-    <form className="space-y-5 dark:text-white" onSubmit={formik.handleSubmit}>
+    <form className="space-y-5 dark:text-white">
       <div className={formik.errors.account ? "has-error" : ""}>
         <label htmlFor="account">{t("account")}</label>
         <div className="relative text-white-1">
@@ -171,7 +186,12 @@ export default () => {
       <button
         type="submit"
         className="btn btn-gradient !mt-6 w-full border-0 uppercase"
+        disabled={formik.isSubmitting}
+        onClick={() => formik.submitForm()}
       >
+        {formik.isSubmitting && (
+          <span className="animate-spin border-2 border-white border-l-transparent rounded-full w-5 h-5 ltr:mr-4 rtl:ml-4 inline-block align-middle"></span>
+        )}
         {t("login")}
       </button>
     </form>
