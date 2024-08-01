@@ -3,9 +3,7 @@
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { signIn } from "next-auth/react";
 // custom
-import { useSession } from "next-auth/react";
 import logger from "@/lib/logger";
 import { aesDecrypt, aesEncrypt } from "@/lib";
 import { IconUser, IconX, IconEyeClosed } from "@tabler/icons-react";
@@ -51,10 +49,9 @@ const setStorageLoginForm = ({ account, password, remember }: LoginForm) => {
 
 export default () => {
   const { t } = useTranslation("admin_login");
-  const session = useSession();
 
   useEffectAfterMount(() => {
-    logger.debug("session", session);
+
   }, []);
 
   const initialForm: LoginForm = {
@@ -80,11 +77,7 @@ export default () => {
           password: values.password,
           remember: values.remember,
         });
-        await signIn("credentials", {
-          email: values.account,
-          password: values.password,
-          device: "WEB",
-        });
+
       } catch (error) {
         if (error) {
           logger.debug("signIn error", error);

@@ -25,7 +25,7 @@ export const mixBlack = (color, ratio) => {
 };
 const configuraton = {
   AppName: "Anthill-Admin",
-  BasePath: "",
+  BasePath: "/bmm-dev",
   PathAlias: {
     Admin: {
       Pattern: /^\/admin\//,
