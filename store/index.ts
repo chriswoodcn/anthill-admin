@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import settingConfigSlice from "@/store/settingConfigSlice";
+import settingSlice from "@/store/slices/settingSlice";
 
 const rootReducer = combineReducers({
-  settingConfig: settingConfigSlice,
+  setting: settingSlice,
 });
 
 export default configureStore({

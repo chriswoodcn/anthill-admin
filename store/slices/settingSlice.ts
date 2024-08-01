@@ -16,8 +16,8 @@ const initialState = {
   languageList
 };
 
-const settingConfigSlice = createSlice({
-  name: 'settingConfigSlice',
+const settingSlice = createSlice({
+  name: 'setting',
   initialState: initialState,
   reducers: {
     toggleTheme(state, { payload }) {
@@ -70,6 +70,6 @@ const settingConfigSlice = createSlice({
   },
 });
 
-export const { toggleTheme, toggleMenu, toggleLayout, toggleRTL, toggleAnimation, toggleSidebar, resetToggleSidebar } = settingConfigSlice.actions;
+export const { toggleTheme, toggleMenu, toggleLayout, toggleRTL, toggleAnimation, toggleSidebar, resetToggleSidebar } = settingSlice.actions;
 
-export default settingConfigSlice.reducer;
+export default settingSlice.reducer;
