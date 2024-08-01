@@ -25,7 +25,7 @@ export default async () => {
         />
       </div>
 
-      <div className="relative flex min-h-screen items-center justify-center bg-bg_map bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
+      <div className="relative flex min-h-screen items-center justify-center bg-bg_map bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16 pb-10">
         <Image
           src="/assets/images/auth/coming-soon-object1.png"
           alt=""

@@ -1,15 +1,22 @@
 "use client";
 
-import { redirect, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { signIn } from "next-auth/react";
 // custom
-import configuraton from "@/configuration.mjs";
+import { useSession } from "next-auth/react";
 import logger from "@/lib/logger";
 import { aesDecrypt, aesEncrypt } from "@/lib";
 import { IconUser, IconX, IconEyeClosed } from "@tabler/icons-react";
+import { useEffect } from "react";
+import useEffectAfterMount from "@/lib/useEffectAfterMount";
+
+interface LoginForm {
+  account: string | undefined;
+  password: string | undefined;
+  remember: boolean;
+}
 
 const getStorageLoginForm = () => {
   const emptyForm = {
@@ -17,7 +24,7 @@ const getStorageLoginForm = () => {
     password: undefined,
     remember: false,
   };
-  if (typeof window !== "undefined") {
+  if (typeof window != "undefined") {
     let jsonStr = window.localStorage.getItem("__admin_login_form__");
     if (!jsonStr) return emptyForm;
     let target = JSON.parse(jsonStr);
@@ -27,44 +34,36 @@ const getStorageLoginForm = () => {
   }
   return emptyForm;
 };
-const setStorageLoginForm = ({
-  account,
-  password,
-  remember,
-}: {
-  account: string;
-  password: string;
-  remember: boolean;
-}) => {
+const setStorageLoginForm = ({ account, password, remember }: LoginForm) => {
   let target = {};
-  if (remember == true) {
+  if (remember == true && account && password) {
     target = { account: account, password: aesEncrypt(password), remember };
   } else {
-    target = { remember };
+    target = { remember: false };
   }
+  logger.debug("setStorageLoginForm window", window);
   if (typeof window !== "undefined") {
-    window.localStorage.setItem("__admin_unlock_pwd__", aesEncrypt(password));
+    if (password)
+      window.localStorage.setItem("__admin_unlock_pwd__", aesEncrypt(password));
     window.localStorage.setItem("__admin_login_form__", JSON.stringify(target));
   }
-};
-const createInitialForm = () => {
-  const loginForm = getStorageLoginForm();
-  return {
-    account: loginForm.account,
-    password: loginForm.password,
-    remember: loginForm.remember,
-  };
 };
 
 export default () => {
   const { t } = useTranslation("admin_login");
-  const router = useRouter();
-  const submitForm = (e: any) => {
-    e.preventDefault();
-    router.push(configuraton.PathAlias.Admin.Root);
+  const session = useSession();
+
+  useEffectAfterMount(() => {
+    logger.debug("session", session);
+  }, []);
+
+  const initialForm: LoginForm = {
+    account: undefined,
+    password: undefined,
+    remember: false,
   };
   const formik = useFormik({
-    initialValues: createInitialForm(),
+    initialValues: initialForm,
     validationSchema: Yup.object().shape({
       account: Yup.string()
         .matches(/^\w{5,}$/gi, `${t("account")}  ${t("placeholder_invalid")}`)
@@ -76,15 +75,17 @@ export default () => {
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
       try {
+        setStorageLoginForm({
+          account: values.account,
+          password: values.password,
+          remember: values.remember,
+        });
         await signIn("credentials", {
           email: values.account,
           password: values.password,
           device: "WEB",
         });
       } catch (error) {
-        // Signin can fail for a number of reasons, such as the user
-        // not existing, or the user not having the correct role.
-        // In some cases, you may want to redirect to a custom error
         if (error) {
           logger.debug("signIn error", error);
         }
