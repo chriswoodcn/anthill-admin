@@ -5,9 +5,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 // custom
 import logger from "@/lib/logger";
-import { aesDecrypt, aesEncrypt } from "@/lib";
+import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
 import { IconUser, IconX, IconEyeClosed } from "@tabler/icons-react";
-import { useEffect } from "react";
 import useEffectAfterMount from "@/lib/useEffectAfterMount";
 
 interface LoginForm {
@@ -50,9 +49,7 @@ const setStorageLoginForm = ({ account, password, remember }: LoginForm) => {
 export default () => {
   const { t } = useTranslation("admin_login");
 
-  useEffectAfterMount(() => {
-
-  }, []);
+  useEffectAfterMount(() => {}, []);
 
   const initialForm: LoginForm = {
     account: undefined,
@@ -72,12 +69,24 @@ export default () => {
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
       try {
-        setStorageLoginForm({
+        let data = {
           account: values.account,
           password: values.password,
           remember: values.remember,
-        });
-
+        };
+        fetch(withBasePath("/api/auth/login"), {
+          method: "POST",
+          mode: "cors",
+          cache: "no-cache",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((res) => res.json())
+          .then((res) => {
+            logger.debug("login response");
+          });
       } catch (error) {
         if (error) {
           logger.debug("signIn error", error);

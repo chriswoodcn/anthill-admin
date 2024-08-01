@@ -11,6 +11,20 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+  async redirects() {
+    return [
+      {
+        source: "/",
+        destination: "/admin/index", // Change this to your desired destination
+        permanent: false, // Set to true for permanent redirect (301)
+      },
+      {
+        source: "",
+        destination: "/admin/index", // Change this to your desired destination
+        permanent: false, // Set to true for permanent redirect (301)
+      },
+    ];
+  },
   experimental: {
     //support app router tree shaking
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
