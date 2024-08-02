@@ -66,7 +66,8 @@ const settingSlice = createSlice({
       document.querySelector('html')?.setAttribute('dir', state.rtlClass || 'ltr');
     },
     toggleAnimation(state, { payload }) {
-      payload = payload || state.animation; // animate__fadeIn, animate__fadeInDown, animate__fadeInUp, animate__fadeInLeft, animate__fadeInRight, animate__slideInDown, animate__slideInLeft, animate__slideInRight, animate__zoomIn
+      // animate__fadeIn, animate__fadeInDown, animate__fadeInUp, animate__fadeInLeft, animate__fadeInRight, animate__slideInDown, animate__slideInLeft, animate__slideInRight, animate__zoomIn
+      payload = payload || state.animation;
       payload = payload?.trim();
       localStorage.setItem('animation', payload);
       state.animation = payload;
