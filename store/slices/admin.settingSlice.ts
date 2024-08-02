@@ -27,7 +27,7 @@ const initialState: SettingState = {
 };
 
 const settingSlice = createSlice({
-  name: 'setting',
+  name: 'adminSetting',
   initialState: initialState,
   reducers: {
     toggleTheme(state, { payload }) {

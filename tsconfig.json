@@ -26,6 +26,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "*.ts"
-  ],
+, "i18n/I18nProvider.jsx"  ],
   "exclude": ["node_modules"]
 }

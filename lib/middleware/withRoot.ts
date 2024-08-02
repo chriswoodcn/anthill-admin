@@ -6,8 +6,6 @@ import logger from '../logger';
 
 export const withRoot: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-    logger.debug("withRoot request.url", request.url)
-    logger.debug("withRoot request.nextUrl", request.nextUrl)
     // 重定向首页
     if (/^\/$/.test(request.nextUrl.pathname) || "" == request.nextUrl.pathname) {
       return NextResponse.redirect(new URL(withBasePath(configuration.PathAlias.Admin.Root), request.nextUrl.origin))

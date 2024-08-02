@@ -3,27 +3,25 @@
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { IconChevronDown } from "@tabler/icons-react";
 import { useTranslation } from "react-i18next";
-import { IRootState } from "../../store";
-import { toggleRTL } from "../../store/settingConfigSlice";
+import { RootState, useAppDispatch, useAppSelector } from "../../store";
+import { toggleRTL } from "../../store/slices/admin";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { withBasePath } from "../../lib";
-import Dropdown from '../core/Dropdown';
+import Dropdown from "../core/Dropdown";
 
 interface LanguageDropdownProps {
   className?: string;
 }
 
 const LanguageDropdown = ({ className = "" }: LanguageDropdownProps) => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const router = useRouter();
   const { i18n } = useTranslation();
-
   const isRtl =
-    useSelector((state: IRootState) => state.settingConfig.rtlClass) === "rtl";
+    useAppSelector((state: RootState) => state.adminSetting.rtlClass) === "rtl";
+  const themeConfig = useAppSelector((state: RootState) => state.adminSetting);
 
-  const themeConfig = useSelector((state: IRootState) => state.settingConfig);
   const setLocale = (flag: string) => {
     if (flag.toLowerCase() === "ae") {
       dispatch(toggleRTL("rtl"));

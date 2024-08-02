@@ -4,9 +4,12 @@ export const AdminUserService = adminApi.injectEndpoints({
   endpoints: builder => ({
     login: builder.mutation({
       query: ({ body }) => ({
-        url: '/api/auth/login',
-        method: 'POST',
-        body,
+        url: '/backend/login',
+        method: 'post',
+        body: {
+          device: "WEB",
+          ...body
+        },
       }),
       invalidatesTags: [
         TagType.AdminUser,

@@ -6,7 +6,7 @@ import { ColorSchemeScript, MantineProvider } from "@mantine/core";
 // i18next
 import i18next, { dir } from "i18next";
 import { detectLanguage, getServerTranslations } from "@/i18n/server";
-import { I18nProvider } from "@/i18n/i18n-context";
+import { I18nProvider } from "@/i18n/I18nProvider";
 // custom
 import { withBasePath } from "@/lib";
 import ComposedProvider from "@/components/compose/ComposedProvider";

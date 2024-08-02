@@ -3,11 +3,16 @@
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useRouter } from "next/navigation";
 // custom
 import logger from "@/lib/logger";
-import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
+import { aesDecrypt, aesEncrypt } from "@/lib";
 import { IconUser, IconX, IconEyeClosed } from "@tabler/icons-react";
-import useEffectAfterMount from "@/lib/useEffectAfterMount";
+import configuraton from "@/configuration.mjs";
+import useEffectOnce from "@/lib/useEffectOnce";
+import { useAppDispatch } from "@/store";
+import useAxios from "@/lib/hooks/useAxios";
+import { useState } from "react";
 
 interface LoginForm {
   account: string | undefined;
@@ -48,8 +53,10 @@ const setStorageLoginForm = ({ account, password, remember }: LoginForm) => {
 
 export default () => {
   const { t } = useTranslation("admin_login");
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
-  useEffectAfterMount(() => {}, []);
+  useEffectOnce(() => {}, []);
 
   const initialForm: LoginForm = {
     account: undefined,
@@ -68,124 +75,119 @@ export default () => {
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
-      try {
-        let data = {
-          account: values.account,
-          password: values.password,
-          remember: values.remember,
-        };
-        fetch(withBasePath("/api/auth/login"), {
-          method: "POST",
-          mode: "cors",
-          cache: "no-cache",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-          .then((res) => res.json())
-          .then((res) => {
-            logger.debug("login response");
-          });
-      } catch (error) {
-        if (error) {
-          logger.debug("signIn error", error);
-        }
-      }
+      setLoginAction(true);
     },
   });
+  const [loginAciton, setLoginAction] = useState(false);
+  const { data, error } = useAxios(loginAciton, {
+    url: "/backend/login",
+    method: "POST",
+    data: {
+      username: formik.values.account,
+      password: formik.values.password,
+      device: "WEB",
+    },
+  });
+  useEffectOnce(() => {
+    logger.debug("login data", data);
+  }, [data]);
+  useEffectOnce(() => {
+    logger.debug("login error", error);
+  }, [error]);
 
   return (
-    <form className="space-y-5 dark:text-white">
-      <div className={formik.errors.account ? "has-error" : ""}>
-        <label htmlFor="account">{t("account")}</label>
-        <div className="relative text-white-1">
-          <input
-            name="account"
-            type="text"
-            id="account"
-            placeholder={t("placeholder_input") + t("account")}
-            className="form-input pr-10 ps-10 placeholder:text-white-dark"
-            onChange={(e) => {
-              formik.setFieldError("account", undefined);
-              formik.setFieldValue(
-                "account",
-                e.target.value || undefined,
-                false
-              );
-            }}
-            value={formik.values.account || ""}
-          />
-          <span className="absolute start-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
-            <IconUser size={20} stroke={2} className="stroke-white-4" />
-          </span>
-          <span className="btn-click absolute end-4 top-1/2 -translate-y-1/2 flex items-center justify-end">
-            {formik.values.account && (
-              <IconX
-                size={20}
-                stroke={1}
-                onClick={() =>
-                  formik.setFieldValue("account", undefined, false)
-                }
-              />
-            )}
-          </span>
-        </div>
-        {formik.errors.account && (
-          <div className="text-danger mt-1">
-            {formik.errors.account as string}
+    <>
+      <form className="space-y-5 dark:text-white">
+        <div className={formik.errors.account ? "has-error" : ""}>
+          <label htmlFor="account">{t("account")}</label>
+          <div className="relative text-white-1">
+            <input
+              name="account"
+              type="text"
+              id="account"
+              placeholder={t("placeholder_input") + t("account")}
+              className="form-input pr-10 ps-10 placeholder:text-white-dark"
+              onChange={(e) => {
+                formik.setFieldError("account", undefined);
+                formik.setFieldValue(
+                  "account",
+                  e.target.value || undefined,
+                  false
+                );
+              }}
+              value={formik.values.account || ""}
+            />
+            <span className="absolute start-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
+              <IconUser size={20} stroke={2} className="stroke-white-4" />
+            </span>
+            <span className="btn-click absolute end-4 top-1/2 -translate-y-1/2 flex items-center justify-end">
+              {formik.values.account && (
+                <IconX
+                  size={20}
+                  stroke={1}
+                  onClick={() =>
+                    formik.setFieldValue("account", undefined, false)
+                  }
+                />
+              )}
+            </span>
           </div>
-        )}
-      </div>
-      <div className={formik.errors.password ? "has-error" : ""}>
-        <label htmlFor="password">{t("password")}</label>
-        <div className="relative text-white-1">
-          <input
-            name="password"
-            type="text"
-            id="password"
-            placeholder={t("placeholder_input") + t("password")}
-            className="form-input pr-10 ps-10 placeholder:text-white-dark"
-            onChange={(e) => {
-              formik.setFieldError("password", undefined);
-              formik.setFieldValue(
-                "password",
-                e.target.value || undefined,
-                false
-              );
-            }}
-            value={formik.values.password || ""}
-          />
-          <span className="absolute start-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
-            <IconEyeClosed size={20} stroke={2} className="stroke-white-4" />
-          </span>
-          <span className="btn-click absolute end-4 top-1/2 -translate-y-1/2 flex items-center justify-end">
-            {formik.values.password && (
-              <IconX
-                size={20}
-                stroke={1}
-                onClick={() =>
-                  formik.setFieldValue("password", undefined, false)
-                }
-              />
-            )}
-          </span>
+          {formik.errors.account && (
+            <div className="text-danger mt-1">
+              {formik.errors.account as string}
+            </div>
+          )}
         </div>
-        {formik.errors.password && (
-          <div className="text-danger mt-1">
-            {formik.errors.password as string}
+        <div className={formik.errors.password ? "has-error" : ""}>
+          <label htmlFor="password">{t("password")}</label>
+          <div className="relative text-white-1">
+            <input
+              name="password"
+              type="text"
+              id="password"
+              placeholder={t("placeholder_input") + t("password")}
+              className="form-input pr-10 ps-10 placeholder:text-white-dark"
+              onChange={(e) => {
+                formik.setFieldError("password", undefined);
+                formik.setFieldValue(
+                  "password",
+                  e.target.value || undefined,
+                  false
+                );
+              }}
+              value={formik.values.password || ""}
+            />
+            <span className="absolute start-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
+              <IconEyeClosed size={20} stroke={2} className="stroke-white-4" />
+            </span>
+            <span className="btn-click absolute end-4 top-1/2 -translate-y-1/2 flex items-center justify-end">
+              {formik.values.password && (
+                <IconX
+                  size={20}
+                  stroke={1}
+                  onClick={() =>
+                    formik.setFieldValue("password", undefined, false)
+                  }
+                />
+              )}
+            </span>
           </div>
-        )}
-      </div>
-      <div>
-        <label className="flex cursor-pointer items-center">
-          <input
-            type="checkbox"
-            className="form-checkbox bg-white dark:bg-black"
-          />
-          <span className="text-white-dark">{t("remember")}</span>
-        </label>
-      </div>
+          {formik.errors.password && (
+            <div className="text-danger mt-1">
+              {formik.errors.password as string}
+            </div>
+          )}
+        </div>
+        <div>
+          <label className="flex cursor-pointer items-center">
+            <input
+              type="checkbox"
+              className="form-checkbox bg-white dark:bg-black"
+            />
+            <span className="text-white-dark">{t("remember")}</span>
+          </label>
+        </div>
+      </form>
       <button
         type="submit"
         className="btn btn-gradient !mt-6 w-full border-0 uppercase"
@@ -197,6 +199,6 @@ export default () => {
         )}
         {t("login")}
       </button>
-    </form>
+    </>
   );
 };

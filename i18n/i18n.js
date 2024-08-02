@@ -1,10 +1,7 @@
-"use client";
-
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import resourcesToBackend from "i18next-resources-to-backend";
-import React, { useMemo } from "react";
-import { I18nextProvider as Provider, initReactI18next } from "react-i18next";
+import { initReactI18next } from "react-i18next";
 
 import { getOptions } from "./settings";
 
@@ -23,13 +20,3 @@ i18next
     },
   });
 export { i18next };
-/**
- * 客户端I18nProvider
- */
-export function I18nProvider({ children, language }) {
-  useMemo(() => {
-    i18next.changeLanguage(language);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  return <Provider i18n={i18next}>{children}</Provider>;
-}

@@ -1,12 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from 'react-redux'
 // slice
-import settingSlice from "@/store/slices/settingSlice";
+import adminSettingSlice from "@/store/slices/admin.settingSlice";
+import adminUserSlice from "@/store/slices/admin.userSlice";
+
 // RTK query
 import { adminApi } from "./services/admin.api"
 
 const rootReducer = combineReducers({
-  setting: settingSlice,
+  adminSetting: adminSettingSlice,
+  adminUser: adminUserSlice,
   // RTK query
   [adminApi.reducerPath]: adminApi.reducer
 });

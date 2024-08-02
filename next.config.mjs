@@ -19,7 +19,7 @@ const nextConfig = {
         permanent: false, // Set to true for permanent redirect (301)
       },
       {
-        source: "",
+        source: "/admin",
         destination: "/admin/index", // Change this to your desired destination
         permanent: false, // Set to true for permanent redirect (301)
       },
