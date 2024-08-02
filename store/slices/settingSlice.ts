@@ -3,8 +3,18 @@ import configuration from '@/configuration.mjs';
 import { languageList } from '@/i18n/settings';
 
 const DefaultSettings = configuration.Settings
-
-const initialState = {
+export interface SettingState {
+  isDarkMode: boolean,
+  sidebar: boolean,
+  theme: string,
+  menu: string,
+  layout: string,
+  rtlClass: string,
+  animation: string,
+  locale: string,
+  languageList: Record<string, string>[]
+}
+const initialState: SettingState = {
   isDarkMode: false,
   sidebar: false,
   theme: DefaultSettings.theme,

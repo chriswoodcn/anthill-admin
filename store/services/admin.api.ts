@@ -1,7 +1,14 @@
-import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-const apiSlice = createApi({
-  reducerPath: 'api',
+export enum TagType {
+  AdminUser = "AdminUser",
+  AdminRouter = "AdminRouter",
+  AdminView = "AdminView"
+}
+export type TagTypes = keyof typeof TagType
+
+export const adminApi = createApi({
+  reducerPath: 'adminApi',
   baseQuery: fetchBaseQuery({
     baseUrl: '',
     prepareHeaders: async (headers, { getState }) => {
@@ -11,8 +18,12 @@ const apiSlice = createApi({
       return headers
     },
   }),
-  tagTypes: ['AdminUser',],
-  endpoints: builder => ({}),
+  tagTypes: [TagType.AdminUser, TagType.AdminRouter, TagType.AdminView],
+  endpoints: (builder) => ({
+    getPokemonByName: builder.query<string, void>({
+      query: () => `pokemon`,
+      providesTags: [TagType.AdminUser]
+    }),
+  })
 })
 
-export default apiSlice
