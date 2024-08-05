@@ -4,15 +4,16 @@ import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
+import Cookies from 'js-cookie'
 // custom
 import logger from "@/lib/logger";
-import { aesDecrypt, aesEncrypt } from "@/lib";
+import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
 import { IconUser, IconX, IconEyeClosed } from "@tabler/icons-react";
-import configuraton from "@/configuration.mjs";
 import useEffectOnce from "@/lib/useEffectOnce";
 import { useAppDispatch } from "@/store";
-import useAxios from "@/lib/hooks/useAxios";
-import { useState } from "react";
+import useSWR from "swr";
+import { nextFetcher } from "@/lib/fetcher";
+import { decodeAuthorization } from '@/lib/jwt';
 
 interface LoginForm {
   account: string | undefined;
@@ -75,21 +76,30 @@ export default () => {
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
-      setLoginAction(true);
     },
   });
-  const [loginAciton, setLoginAction] = useState(false);
-  const { data, error } = useAxios(loginAciton, {
-    url: "/backend/login",
-    method: "POST",
-    data: {
-      username: formik.values.account,
-      password: formik.values.password,
-      device: "WEB",
-    },
-  });
+  const { data, error, isLoading } = useSWR(
+    formik.isValid && formik.isSubmitting
+      ? {
+          url: withBasePath("/api/auth/login"),
+          method: "POST",
+          data: {
+            username: formik.values.account,
+            password: formik.values.password,
+            device: "WEB",
+          },
+        }
+      : null,
+    nextFetcher
+  );
+  useEffectOnce(() => {
+    logger.debug("isLoading", isLoading);
+  }, [isLoading]);
   useEffectOnce(() => {
     logger.debug("login data", data);
+
+    logger.debug("Authorization", Cookies.get("Authorization"));
+    logger.debug("info",decodeAuthorization(Cookies.get("Authorization")))
   }, [data]);
   useEffectOnce(() => {
     logger.debug("login error", error);

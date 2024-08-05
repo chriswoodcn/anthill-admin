@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from 'next/server'
-import JwtMiddleware from './JwtMiddleware'
 import logger from '@/lib/logger'
 
 function isPublicPath(req: NextRequest) {
@@ -12,9 +11,8 @@ export function ApiHandler(handler: (req: NextRequest, ...args: any[]) => Promis
   return async (req: NextRequest, ...args: any[]) => {
     try {
       if (!isPublicPath(req)) {
-        await JwtMiddleware(req, ...args)
+        throw new Error("not public api path")
       }
-      new Error('test error')
       // route handler
       const responseBody = await handler(req, ...args)
       return NextResponse.json(responseBody || {})
@@ -38,4 +36,8 @@ export function ResponseHandler(data: ResponseData): ResponseData {
 }
 export function ErrorHandler(err: any) {
   logger.debug("ErrorHandler error", err)
+  return NextResponse.json({
+    code: 500,
+    message: err.message || "error",
+  })
 }
