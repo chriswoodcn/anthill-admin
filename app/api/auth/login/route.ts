@@ -1,8 +1,9 @@
+import { cookies } from 'next/headers'
+
 import { ApiHandler, ResponseHandler } from '../../_helper/Handlers'
 import logger from '@/lib/logger'
 import request from '../../_helper/request'
 import { setAuthorizationInfo } from '@/lib/jwt'
-import { cookies } from 'next/headers'
 
 export const POST = ApiHandler(
   async (req) => {
@@ -14,14 +15,16 @@ export const POST = ApiHandler(
     })
     if (res.status == 200) {
       if (res.data.data.token) {
+        //权限信息及凭证保存到cookie中
         setAuthorizationInfo(cookies, {
           token: res.data.data.token,
           permissions: res.data.data.permissions,
           roles: res.data.data.roles
         })
-        return ResponseHandler({ code: 200, data: res.data.data.info })
+        //仅返回用户信息
+        return ResponseHandler({ code: res.data.code, data: res.data.data.info })
       }
-      return res.data
+      return ResponseHandler({ code: res.data.code, data: res.data.data, message: res.data.message })
     } else {
       throw new Error(res.statusText)
     }

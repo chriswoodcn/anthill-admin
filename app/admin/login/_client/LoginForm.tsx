@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 // custom
 import logger from "@/lib/logger";
 import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
@@ -13,17 +13,17 @@ import useEffectOnce from "@/lib/useEffectOnce";
 import { useAppDispatch } from "@/store";
 import useSWR from "swr";
 import { nextFetcher } from "@/lib/fetcher";
-import { decodeAuthorization } from '@/lib/jwt';
+import { decodeAuthorization } from "@/lib/jwt";
 
 interface LoginForm {
-  account: string | undefined;
+  username: string | undefined;
   password: string | undefined;
   remember: boolean;
 }
 
 const getStorageLoginForm = () => {
   const emptyForm = {
-    account: undefined,
+    username: undefined,
     password: undefined,
     remember: false,
   };
@@ -37,10 +37,10 @@ const getStorageLoginForm = () => {
   }
   return emptyForm;
 };
-const setStorageLoginForm = ({ account, password, remember }: LoginForm) => {
+const setStorageLoginForm = ({ username, password, remember }: LoginForm) => {
   let target = {};
-  if (remember == true && account && password) {
-    target = { account: account, password: aesEncrypt(password), remember };
+  if (remember == true && username && password) {
+    target = { username: username, password: aesEncrypt(password), remember };
   } else {
     target = { remember: false };
   }
@@ -60,16 +60,16 @@ export default () => {
   useEffectOnce(() => {}, []);
 
   const initialForm: LoginForm = {
-    account: undefined,
+    username: undefined,
     password: undefined,
     remember: false,
   };
   const formik = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      account: Yup.string()
-        .matches(/^\w{5,}$/gi, `${t("account")}  ${t("placeholder_invalid")}`)
-        .required(t("placeholder_input") + t("account")),
+      username: Yup.string()
+        .matches(/^\w{5,}$/gi, `${t("username")}  ${t("placeholder_invalid")}`)
+        .required(t("placeholder_input") + t("username")),
       password: Yup.string()
         .matches(/^\S{5,}$/gi, `${t("password")}  ${t("placeholder_invalid")}`)
         .required(t("placeholder_input") + t("password")),
@@ -84,13 +84,18 @@ export default () => {
           url: withBasePath("/api/auth/login"),
           method: "POST",
           data: {
-            username: formik.values.account,
+            username: formik.values.username,
             password: formik.values.password,
             device: "WEB",
           },
         }
       : null,
-    nextFetcher
+    nextFetcher,
+    {
+      onSuccess: (data) => {
+
+      },
+    }
   );
   useEffectOnce(() => {
     logger.debug("isLoading", isLoading);
@@ -99,7 +104,7 @@ export default () => {
     logger.debug("login data", data);
 
     logger.debug("Authorization", Cookies.get("Authorization"));
-    logger.debug("info",decodeAuthorization(Cookies.get("Authorization")))
+    logger.debug("info", decodeAuthorization(Cookies.get("Authorization")));
   }, [data]);
   useEffectOnce(() => {
     logger.debug("login error", error);
@@ -108,43 +113,43 @@ export default () => {
   return (
     <>
       <form className="space-y-5 dark:text-white">
-        <div className={formik.errors.account ? "has-error" : ""}>
-          <label htmlFor="account">{t("account")}</label>
+        <div className={formik.errors.username ? "has-error" : ""}>
+          <label htmlFor="username">{t("username")}</label>
           <div className="relative text-white-1">
             <input
-              name="account"
+              name="username"
               type="text"
-              id="account"
-              placeholder={t("placeholder_input") + t("account")}
+              id="username"
+              placeholder={t("placeholder_input") + t("username")}
               className="form-input pr-10 ps-10 placeholder:text-white-dark"
               onChange={(e) => {
-                formik.setFieldError("account", undefined);
+                formik.setFieldError("username", undefined);
                 formik.setFieldValue(
-                  "account",
+                  "username",
                   e.target.value || undefined,
                   false
                 );
               }}
-              value={formik.values.account || ""}
+              value={formik.values.username || ""}
             />
             <span className="absolute start-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
               <IconUser size={20} stroke={2} className="stroke-white-4" />
             </span>
             <span className="btn-click absolute end-4 top-1/2 -translate-y-1/2 flex items-center justify-end">
-              {formik.values.account && (
+              {formik.values.username && (
                 <IconX
                   size={20}
                   stroke={1}
                   onClick={() =>
-                    formik.setFieldValue("account", undefined, false)
+                    formik.setFieldValue("username", undefined, false)
                   }
                 />
               )}
             </span>
           </div>
-          {formik.errors.account && (
+          {formik.errors.username && (
             <div className="text-danger mt-1">
-              {formik.errors.account as string}
+              {formik.errors.username as string}
             </div>
           )}
         </div>

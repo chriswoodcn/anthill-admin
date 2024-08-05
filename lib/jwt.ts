@@ -13,10 +13,13 @@ export const getAuthorizationInfo = (cookies: any) => {
   }
 }
 export const setAuthorizationInfo = (cookies: any, data: any) => {
-  if (!data) return
+  if (!data) {
+    cookies().delete("Authorization")
+  }
   const authorization = jsonwebtoken.sign(data, SECRET)
   cookies().set("Authorization", authorization)
 }
+
 export const decodeAuthorization = (authorization?: string) => {
   if (!authorization) return null
   const decoded = jsonwebtoken.verify(authorization, SECRET);
