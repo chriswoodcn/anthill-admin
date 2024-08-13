@@ -7,11 +7,9 @@ import { cookies } from 'next/headers'
 
 export const withAuth: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
-
-    const sesssion = cookies().get('session')?.value
     const authorization = cookies().get('Authorization')?.value
     logger.debug("withAuth Authorization", authorization)
-    logger.debug("withAuth sesssion", sesssion)
+    logger.debug("request.nextUrl", request.nextUrl)
 
     if ((configuration.PathAlias.Admin.Pattern as RegExp).test(request.nextUrl.pathname) && configuration.PathAlias.Admin.Login != request.nextUrl.pathname) {
       if (!authorization)
@@ -20,6 +18,13 @@ export const withAuth: MiddlewareFactory = (next) => {
     return next(request, _next);
   };
 };
-const redirectAdminLogin = (request: NextRequest) =>
-  NextResponse.redirect(new URL(withBasePath(configuration.PathAlias.Admin.Login), request.nextUrl.origin))
+/**
+ * 重定向后管登录页
+ */
+const redirectAdminLogin = (request: NextRequest) => {
+  const loginUrl = new URL(withBasePath(configuration.PathAlias.Admin.Login), request.nextUrl.origin)
+  loginUrl.searchParams.set('redirect', request.nextUrl.pathname)
+  return NextResponse.redirect(loginUrl)
+}
+
 

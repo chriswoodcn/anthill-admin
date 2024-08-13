@@ -3,7 +3,7 @@
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
 // custom
 import logger from "@/lib/logger";
@@ -61,12 +61,14 @@ export default () => {
   const { t } = useTranslation("admin_login");
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
 
   const [loginAction, setLoginAction] = useState(false);
 
   useEffectOnce(() => {
     const authorizationInfo = getAuthorizationInfoClient();
     logger.debug("authorizationInfo", authorizationInfo);
+    logger.debug("query", searchParams);
   }, []);
 
   const initialForm: LoginForm = {
@@ -122,7 +124,11 @@ export default () => {
               ),
               callback: () => {
                 dispatch(setToken(authorizationInfo?.token));
-                router.replace(configuraton.PathAlias.Admin.Root);
+                if (searchParams.get("redirect")) {
+                  router.replace(searchParams.get("redirect")!!);
+                } else {
+                  router.replace(configuraton.PathAlias.Admin.Root);
+                }
               },
             });
           } else {
