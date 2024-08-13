@@ -10,10 +10,15 @@ import logger from "@/lib/logger";
 import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
 import { IconUser, IconX, IconEyeClosed } from "@tabler/icons-react";
 import useEffectOnce from "@/lib/useEffectOnce";
-import { useAppDispatch } from "@/store";
+import { store, useAppDispatch } from "@/store";
 import useSWR from "swr";
 import { nextFetcher } from "@/lib/fetcher";
-import { decodeAuthorization } from "@/lib/jwt";
+import { decodeAuthorization, getAuthorizationInfoClient } from "@/lib/jwt";
+import configuraton from "@/configuration.mjs";
+import { setToken } from "@/store/slices/admin";
+import { useState } from "react";
+import dayjs from "dayjs";
+import Toast from "@/lib/toast";
 
 interface LoginForm {
   username: string | undefined;
@@ -54,10 +59,15 @@ const setStorageLoginForm = ({ username, password, remember }: LoginForm) => {
 
 export default () => {
   const { t } = useTranslation("admin_login");
-  const dispatch = useAppDispatch();
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  useEffectOnce(() => {}, []);
+  const [loginAction, setLoginAction] = useState(false);
+
+  useEffectOnce(() => {
+    const authorizationInfo = getAuthorizationInfoClient();
+    logger.debug("authorizationInfo", authorizationInfo);
+  }, []);
 
   const initialForm: LoginForm = {
     username: undefined,
@@ -68,21 +78,28 @@ export default () => {
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
       username: Yup.string()
-        .matches(/^\w{5,}$/gi, `${t("username")}  ${t("placeholder_invalid")}`)
-        .required(t("placeholder_input") + t("username")),
+        .matches(/^\w{5,}$/gi, `${t("account")}  ${t("placeholder_invalid")}`)
+        .required(t("placeholder_input") + t("account")),
       password: Yup.string()
         .matches(/^\S{5,}$/gi, `${t("password")}  ${t("placeholder_invalid")}`)
         .required(t("placeholder_input") + t("password")),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
+      setLoginAction(true);
     },
   });
+  useEffectOnce(() => {
+    console.log("formik.isSubmitting", formik.isSubmitting);
+  }, [formik.isSubmitting]);
   const { data, error, isLoading } = useSWR(
-    formik.isValid && formik.isSubmitting
+    loginAction
       ? {
           url: withBasePath("/api/auth/login"),
           method: "POST",
+          params: {
+            t: dayjs().valueOf(),
+          },
           data: {
             username: formik.values.username,
             password: formik.values.password,
@@ -93,34 +110,48 @@ export default () => {
     nextFetcher,
     {
       onSuccess: (data) => {
-
+        logger.debug("onSuccess data", data);
+        const authorizationInfo = getAuthorizationInfoClient();
+        if (data) {
+          if (data.code == 200) {
+            Toast.fireSuccessAction({
+              html: (
+                <p className="text-black-7 dark:text-white-7 text-xl">
+                  {t("toast_success_login")}
+                </p>
+              ),
+              callback: () => {
+                dispatch(setToken(authorizationInfo?.token));
+                router.replace(configuraton.PathAlias.Admin.Root);
+              },
+            });
+          } else {
+            Toast.fireErrorAction({
+              html: <p className="text-2xl font-bold">{data.message}</p>,
+              timer: 0,
+            });
+          }
+        }
+        setLoginAction(false);
+      },
+      onError: (error) => {
+        logger.debug("onError error", error);
+        setLoginAction(false);
       },
     }
   );
-  useEffectOnce(() => {
-    logger.debug("isLoading", isLoading);
-  }, [isLoading]);
-  useEffectOnce(() => {
-    logger.debug("login data", data);
-
-    logger.debug("Authorization", Cookies.get("Authorization"));
-    logger.debug("info", decodeAuthorization(Cookies.get("Authorization")));
-  }, [data]);
-  useEffectOnce(() => {
-    logger.debug("login error", error);
-  }, [error]);
 
   return (
     <>
       <form className="space-y-5 dark:text-white">
         <div className={formik.errors.username ? "has-error" : ""}>
-          <label htmlFor="username">{t("username")}</label>
+          <label htmlFor="username">{t("account")}</label>
           <div className="relative text-white-1">
             <input
               name="username"
               type="text"
               id="username"
-              placeholder={t("placeholder_input") + t("username")}
+              placeholder={t("placeholder_input") + t("account")}
               className="form-input pr-10 ps-10 placeholder:text-white-dark"
               onChange={(e) => {
                 formik.setFieldError("username", undefined);
@@ -209,7 +240,7 @@ export default () => {
         disabled={formik.isSubmitting}
         onClick={() => formik.submitForm()}
       >
-        {formik.isSubmitting && (
+        {isLoading && (
           <span className="animate-spin border-2 border-white border-l-transparent rounded-full w-5 h-5 ltr:mr-4 rtl:ml-4 inline-block align-middle"></span>
         )}
         {t("login")}

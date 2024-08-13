@@ -36,6 +36,8 @@
     "react-perfect-scrollbar": "^1.5.8",
     "react-popper": "^2.3.0",
     "react-redux": "^9.1.2",
+    "sweetalert2": "^11.12.4",
+    "sweetalert2-react-content": "^5.0.7",
     "swr": "^2.2.5",
     "use-immer": "^0.10.0",
     "yup": "^1.4.0"

@@ -9,25 +9,27 @@ export const POST = ApiHandler(
   async (req) => {
     const body = await req.json()
     logger.debug("POST /api/auth/login", body)
-    const res = await request("/backend/login", {
+    const res: any = await request("/backend/login", {
       method: "POST",
       data: body
     })
-    if (res.status == 200) {
-      if (res.data.data.token) {
+    logger.debug("res", res)
+    if (res.code == 200) {
+      if (res.data.token) {
         //权限信息及凭证保存到cookie中
         setAuthorizationInfo(cookies, {
-          token: res.data.data.token,
-          permissions: res.data.data.permissions,
-          roles: res.data.data.roles
+          userId: res.data.info.id,
+          token: res.data.token,
+          permissions: res.data.permissions,
+          roles: res.data.roles
         })
         //仅返回用户信息
-        return ResponseHandler({ code: res.data.code, data: res.data.data.info })
+        return ResponseHandler({ code: res.code, data: res.data.info, message: res.msg })
+      } else {
+        setAuthorizationInfo(cookies, null)
       }
-      return ResponseHandler({ code: res.data.code, data: res.data.data, message: res.data.message })
-    } else {
-      throw new Error(res.statusText)
     }
+    return ResponseHandler({ code: res.code, data: res.data, message: res.msg })
   }
 )
 export const dynamic = 'force-dynamic'

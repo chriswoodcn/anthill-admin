@@ -3,7 +3,7 @@ import logger from '@/lib/logger'
 
 function isPublicPath(req: NextRequest) {
   // public routes that don't require authentication
-  const publicPaths = [`POST:/api/auth/login`, 'POST:/api/auth/logout']
+  const publicPaths = [`POST:/api/auth/login`]
   return publicPaths.includes(`${req.method}:${req.nextUrl.pathname}`)
 }
 
@@ -11,7 +11,7 @@ export function ApiHandler(handler: (req: NextRequest, ...args: any[]) => Promis
   return async (req: NextRequest, ...args: any[]) => {
     try {
       if (!isPublicPath(req)) {
-        throw new Error("not public api path")
+        // throw new Error("not public api path")
       }
       // route handler
       const responseBody = await handler(req, ...args)

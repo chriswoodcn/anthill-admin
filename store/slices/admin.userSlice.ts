@@ -12,18 +12,16 @@ const userSlice = createSlice({
   name: 'adminUser',
   initialState,
   reducers: {
-    adminUserLogout: state => {
-      Cookies.remove('authorization')
+    setToken: state => {
       state.token = ''
     },
 
-    adminUserLogin: (state, action) => {
-      Cookies.set('authorization', action.payload, { expires: 14 })
+    clearToken: (state, action) => {
       state.token = action.payload
     },
   },
 })
 
-export const { adminUserLogout, adminUserLogin } = userSlice.actions
+export const { setToken, clearToken } = userSlice.actions
 
 export default userSlice.reducer

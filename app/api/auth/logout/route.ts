@@ -7,16 +7,13 @@ import { setAuthorizationInfo } from '@/lib/jwt'
 
 export const GET = ApiHandler(
   async (req) => {
-    const body = await req.json()
-    logger.debug("GET /api/routers", body)
-    const res = await request("/backend/logout", {
+    logger.debug("GET /api/auth/logout")
+    const res: any = await request("/backend/logout", {
       method: "GET",
-      data: body
     })
-    if (res.status == 200) {
-      setAuthorizationInfo(cookies, null)
-    }
-    return ResponseHandler({ code: res.data.code, data: res.data.data, message: res.data.message })
+    //删除cookie
+    setAuthorizationInfo(cookies, null)
+    return ResponseHandler({ code: res.code, data: res.data, message: res.msg })
   }
 )
 

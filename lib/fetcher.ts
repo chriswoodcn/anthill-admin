@@ -5,7 +5,7 @@ import { store } from "@/store"
 import { i18next } from '@/i18n/i18n';
 
 export const nextFetcher = async (options: Record<string, any>) => {
-  logger.debug("AxiosNextProvider");
+  logger.debug("nextFetcher");
   logger.debug("options", options);
   return axios({
     ...options,
@@ -17,10 +17,16 @@ export const nextFetcher = async (options: Record<string, any>) => {
       token: store.getState().adminUser.token,
       language: i18next.language || fallbackLng,
     },
-  }).then((res) => res.data);
+  }).then((res) => {
+    logger.debug("res.data", res.data);
+    if (options.showTip) {
+
+    }
+    return res.data
+  });
 }
 export const fetcher = async (options: Record<string, any>) => {
-  logger.debug("AxiosNextProvider");
+  logger.debug("fetcher");
   logger.debug("options", options);
   return axios({
     ...options,
@@ -32,5 +38,11 @@ export const fetcher = async (options: Record<string, any>) => {
       token: store.getState().adminUser.token,
       language: i18next.language || fallbackLng,
     },
-  }).then((res) => res.data);
+  }).then((res) => {
+    logger.debug("res.data", res.data);
+    if (options.showTip) {
+
+    }
+    return res.data
+  });
 }

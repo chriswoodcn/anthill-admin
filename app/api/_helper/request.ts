@@ -3,6 +3,7 @@ import { cookies } from "next/headers"
 import jsonwebtoken, { JwtPayload } from 'jsonwebtoken';
 import { fallbackLng } from '@/i18n/settings';
 import { SECRET } from '@/lib/jwt';
+import logger from '@/lib/logger';
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 
 const request = axios.create({
@@ -17,12 +18,21 @@ request.interceptors.request.use(
     if (authorization) {
       const decoded = jsonwebtoken.verify(authorization, SECRET);
       const token = (decoded as JwtPayload).token
-      config.headers["Authorization"] = "Bearer " + token;
+      config.headers["token"] = "Bearer " + token;
     }
+    logger.debug("request config", config)
     return config;
   },
   (error) => {
     return Promise.reject(error);
   }
 );
+request.interceptors.response.use(
+  (res) => {
+    logger.debug("request response status", res.status)
+    logger.debug("request response data", res.data)
+    return res.data
+  }, (error) => {
+    return Promise.reject(error);
+  })
 export default request
