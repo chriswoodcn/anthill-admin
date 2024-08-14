@@ -37,6 +37,7 @@ import IconMenuMore from "@/components/icon/menu/icon-menu-more";
 import Dropdown from "@/components/core/Dropdown";
 import LanguageDropdown from "@/components/compose/LanguageDropdown";
 import { withBasePath } from "@/lib";
+import Logo from "@/components/compose/Logo";
 
 const Header = () => {
   const pathname = usePathname();
@@ -163,25 +164,21 @@ const Header = () => {
 
   return (
     <header
-      className={`z-40 shadow-md ${
+      className={`z-40 ${
         adminSetting.isDarkMode && adminSetting.menu === "horizontal"
           ? "dark"
           : ""
       }`}
     >
-      <div className="shadow-sm">
-        <div className="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-black-8">
+      <div className="shadow-md">
+        <div className="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-black-9">
           <div className="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
             <Link
               href="/template/"
               className="main-logo flex shrink-0 items-center"
             >
-              <Image
-                className="inline w-8 ltr:-ml-1 rtl:-mr-1"
-                src="assets/anthill.svg"
-                alt="logo"
-              />
-              <span className="hidden align-middle text-2xl  font-semibold  transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-light md:inline">
+              <Logo className="w-5 h-5 md:w-6 md:h-6  text-primary" />
+              <span className="hidden align-middle text-2xl  font-semibold  transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-6 md:inline">
                 Anthill
               </span>
             </Link>
@@ -304,7 +301,7 @@ const Header = () => {
                 btnClassName="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
                 button={<IconMailDot />}
               >
-                <ul className="w-[300px] !py-0 text-xs text-dark dark:text-white-dark sm:w-[375px] bg-white rounded-lg shadow-lg">
+                <ul className="w-[300px] !py-0 text-xs text-black-7 dark:text-white-6 sm:w-[375px] bg-white rounded-lg shadow-lg">
                   <li className="mb-5" onClick={(e) => e.stopPropagation()}>
                     <div className="relative !h-[68px] w-full overflow-hidden rounded-t-md text-white hover:!bg-transparent">
                       <div className="bg-absolute inset-0 h-full w-full bg-bg_message_box bg-cover bg-center bg-no-repeat"></div>
@@ -333,7 +330,7 @@ const Header = () => {
                                 </div>
                                 <div>{message.message}</div>
                               </span>
-                              <span className="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-dark/60 ltr:ml-auto ltr:mr-2 rtl:ml-2 rtl:mr-auto dark:text-white-dark">
+                              <span className="whitespace-pre rounded bg-white-dark/20 px-1 font-semibold text-black-7/60 ltr:ml-auto ltr:mr-2 rtl:ml-2 rtl:mr-auto dark:text-white-6">
                                 {message.time}
                               </span>
                               <button
@@ -390,7 +387,7 @@ const Header = () => {
                   </span>
                 }
               >
-                <ul className="w-[300px] divide-y !py-0 text-dark dark:divide-white/10 dark:text-white-dark sm:w-[350px] bg-white shadow-lg rounded-lg">
+                <ul className="w-[300px] divide-y !py-0 text-black-7 dark:divide-white/10 dark:text-white-6 sm:w-[350px] bg-white shadow-lg rounded-lg">
                   <li onClick={(e) => e.stopPropagation()}>
                     <div className="flex items-center justify-between px-4 py-2 font-semibold">
                       <h4 className="text-lg">Notification</h4>
@@ -488,7 +485,7 @@ const Header = () => {
                   />
                 }
               >
-                <ul className="w-[230px] !py-0 font-semibold text-dark dark:text-white-dark dark:text-white-light/90 bg-white shadow-lg rounded-lg">
+                <ul className="w-[230px] !py-0 font-semibold text-black-7 dark:text-white-6 dark:text-white-light/90 bg-white shadow-lg rounded-lg">
                   <li>
                     <div className="flex items-center px-4 py-4">
                       <Image
@@ -505,7 +502,7 @@ const Header = () => {
                         </h4>
                         <button
                           type="button"
-                          className="text-black/60 hover:text-primary dark:text-dark-light/60 dark:hover:text-white"
+                          className="text-black/60 hover:text-primary dark:text-black-7-light/60 dark:hover:text-white"
                         >
                           johndoe@gmail.com
                         </button>
@@ -555,7 +552,7 @@ const Header = () => {
         </div>
 
         {/* horizontal menu */}
-        <ul className="horizontal-menu hidden border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-black-8 dark:text-white-dark lg:space-x-1.5 xl:space-x-8">
+        <ul className="horizontal-menu hidden border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-black-9 dark:text-white-6 lg:space-x-1.5 xl:space-x-8">
           <li className="menu nav-item relative">
             <button type="button" className="nav-link">
               <div className="flex items-center">
@@ -568,16 +565,16 @@ const Header = () => {
             </button>
             <ul className="sub-menu">
               <li>
-                <Link href="/">{t("sales")}</Link>
+                <Link href="/template/">{t("sales")}</Link>
               </li>
               <li>
-                <Link href="/analytics">{t("analytics")}</Link>
+                <Link href="/template/analytics">{t("analytics")}</Link>
               </li>
               <li>
-                <Link href="/finance">{t("finance")}</Link>
+                <Link href="/template/finance">{t("finance")}</Link>
               </li>
               <li>
-                <Link href="/crypto">{t("crypto")}</Link>
+                <Link href="/template/crypto">{t("crypto")}</Link>
               </li>
             </ul>
           </li>
@@ -617,7 +614,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/apps/invoice/list">{t("list")}</Link>
                   </li>
@@ -784,7 +781,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/datatables/basic">{t("basic")}</Link>
                   </li>
@@ -916,7 +913,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/users/profile">{t("profile")}</Link>
                   </li>
@@ -965,7 +962,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/pages/error404" target="_blank">
                       {t("404")}
@@ -990,7 +987,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/auth/cover-login" target="_blank">
                       {t("login_cover")}
@@ -1010,7 +1007,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/auth/cover-register" target="_blank">
                       {t("register_cover")}
@@ -1030,7 +1027,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/auth/cover-password-reset" target="_blank">
                       {t("recover_id_cover")}
@@ -1050,7 +1047,7 @@ const Header = () => {
                     <IconCaretDown />
                   </div>
                 </button>
-                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow ltr:left-[95%] rtl:right-[95%] dark:bg-[#1b2e4b] dark:text-white-dark">
+                <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
                     <Link href="/auth/cover-lockscreen" target="_blank">
                       {t("unlock_cover")}

@@ -32,28 +32,18 @@ const ScrollToTop = () => {
       {showTopButton && (
         <button
           type="button"
-          className="btn btn-outline-primary animate-pulse rounded-full bg-[#fafafa] p-2 dark:bg-[#060818] dark:hover:bg-primary"
+          className="btn border-0 animate-pulse rounded-full text-white bg-primary hover:bg-primary/50 p-2 dark:bg-primary-8 dark:hover:bg-primary-8/50"
           onClick={goToTop}
         >
           <svg
+            xmlns="http://www.w3.org/2000/svg"
             width="24"
             height="24"
-            className="h-4 w-4"
             viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor"
           >
-            <path
-              opacity="0.5"
-              fillRule="evenodd"
-              clipRule="evenodd"
-              d="M12 20.75C12.4142 20.75 12.75 20.4142 12.75 20L12.75 10.75L11.25 10.75L11.25 20C11.25 20.4142 11.5858 20.75 12 20.75Z"
-              fill="currentColor"
-            ></path>
-            <path
-              d="M6.00002 10.75C5.69667 10.75 5.4232 10.5673 5.30711 10.287C5.19103 10.0068 5.25519 9.68417 5.46969 9.46967L11.4697 3.46967C11.6103 3.32902 11.8011 3.25 12 3.25C12.1989 3.25 12.3897 3.32902 12.5304 3.46967L18.5304 9.46967C18.7449 9.68417 18.809 10.0068 18.6929 10.287C18.5768 10.5673 18.3034 10.75 18 10.75L6.00002 10.75Z"
-              fill="currentColor"
-            ></path>
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M10.586 3l-6.586 6.586a2 2 0 0 0 -.434 2.18l.068 .145a2 2 0 0 0 1.78 1.089h2.586v7a2 2 0 0 0 2 2h4l.15 -.005a2 2 0 0 0 1.85 -1.995l-.001 -7h2.587a2 2 0 0 0 1.414 -3.414l-6.586 -6.586a2 2 0 0 0 -2.828 0z" />
           </svg>
         </button>
       )}
