@@ -32,6 +32,10 @@ const configuraton = {
       Root: "/admin/index",
       Login: "/admin/login",
     },
+    Template: {
+      Pattern: /^\/tempalte\//,
+      Root: "/template/index",
+    },
   },
   Settings: {
     locale: "en", // en, da, de, el, es, fr, hu, it, ja, pl, pt, ru, sv, tr, zh
@@ -40,6 +44,7 @@ const configuraton = {
     layout: "full", // full, boxed-layout
     rtlClass: "ltr", // rtl, ltr
     animation: "", // animate__fadeIn, animate__fadeInDown, animate__fadeInUp, animate__fadeInLeft, animate__fadeInRight, animate__slideInDown, animate__slideInLeft, animate__slideInRight, animate__zoomIn
+    navbar: "navbar-sticky", // navbar-sticky, navbar-floating, navbar-static
   },
   AuthField: "token",
   FontFamily: ["Nunito", "sans-serif"],

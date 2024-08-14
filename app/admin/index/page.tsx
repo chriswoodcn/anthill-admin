@@ -29,7 +29,7 @@ export default () => {
   );
   return (
     <>
-      <div>Index Page</div>
+      <div>Admin Index Page</div>
       <Button onClick={() => setLogoutAction(true)}>LOGOUT</Button>
     </>
   );

@@ -23,6 +23,11 @@ const nextConfig = {
         destination: "/admin/index", // Change this to your desired destination
         permanent: false, // Set to true for permanent redirect (301)
       },
+      {
+        source: "/template",
+        destination: "/template/index", // Change this to your desired destination
+        permanent: false, // Set to true for permanent redirect (301)
+      },
     ];
   },
   experimental: {

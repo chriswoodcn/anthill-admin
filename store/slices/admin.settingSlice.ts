@@ -12,6 +12,7 @@ export interface SettingState {
   rtlClass: string,
   animation: string,
   locale: string,
+  navbar: string,
   languageList: Record<string, string>[]
 }
 const initialState: SettingState = {
@@ -23,6 +24,7 @@ const initialState: SettingState = {
   rtlClass: DefaultSettings.rtlClass,
   animation: DefaultSettings.animation,
   locale: DefaultSettings.locale,
+  navbar: DefaultSettings.navbar,
   languageList
 };
 
@@ -78,9 +80,14 @@ const settingSlice = createSlice({
     resetToggleSidebar(state) {
       state.sidebar = false;
     },
+    toggleNavbar(state, { payload }) {
+      payload = payload || state.navbar; // navbar-sticky, navbar-floating, navbar-static
+      localStorage.setItem('navbar', payload);
+      state.navbar = payload;
+    },
   },
 });
 
-export const { toggleTheme, toggleMenu, toggleLayout, toggleRTL, toggleAnimation, toggleSidebar, resetToggleSidebar } = settingSlice.actions;
+export const { toggleTheme, toggleMenu, toggleLayout, toggleRTL, toggleAnimation, toggleSidebar, resetToggleSidebar, toggleNavbar } = settingSlice.actions;
 
 export default settingSlice.reducer;

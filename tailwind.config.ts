@@ -84,7 +84,12 @@ const config: Config = {
           7: BlackColors[7],
           8: BlackColors[8],
           9: BlackColors[9],
-        }
+        },
+        dark: {
+          DEFAULT: '#3b3f5c',
+          light: '#eaeaec',
+          'dark-light': 'rgba(59,63,92,.15)',
+        },
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
