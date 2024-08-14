@@ -4,18 +4,21 @@ import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter, useSearchParams } from "next/navigation";
-import Cookies from "js-cookie";
 // custom
 import logger from "@/lib/logger";
 import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
-import { IconUser, IconX, IconEyeClosed } from "@tabler/icons-react";
+import { IconUser, IconX, IconEyeClosed, IconEye } from "@tabler/icons-react";
 import useEffectOnce from "@/lib/useEffectOnce";
-import { store, useAppDispatch } from "@/store";
+import { useAppDispatch } from "@/store";
 import useSWR from "swr";
 import { nextFetcher } from "@/lib/fetcher";
-import { decodeAuthorization, getAuthorizationInfoClient } from "@/lib/jwt";
+import { getAuthorizationInfoClient } from "@/lib/jwt";
 import configuraton from "@/configuration.mjs";
-import { setToken } from "@/store/slices/admin";
+import {
+  clearAdminUserState,
+  setToken,
+  setUserInfo,
+} from "@/store/slices/admin";
 import { useState } from "react";
 import dayjs from "dayjs";
 import Toast from "@/lib/toast";
@@ -27,7 +30,7 @@ interface LoginForm {
 }
 
 const getStorageLoginForm = () => {
-  const emptyForm = {
+  const emptyForm: LoginForm = {
     username: undefined,
     password: undefined,
     remember: false,
@@ -38,7 +41,7 @@ const getStorageLoginForm = () => {
     let target = JSON.parse(jsonStr);
     if (!target.remember) return emptyForm;
     if (target.password) target.password = aesDecrypt(target.password);
-    return target;
+    return target as LoginForm;
   }
   return emptyForm;
 };
@@ -49,7 +52,6 @@ const setStorageLoginForm = ({ username, password, remember }: LoginForm) => {
   } else {
     target = { remember: false };
   }
-  logger.debug("setStorageLoginForm window", window);
   if (typeof window !== "undefined") {
     if (password)
       window.localStorage.setItem("__admin_unlock_pwd__", aesEncrypt(password));
@@ -64,6 +66,7 @@ export default () => {
   const searchParams = useSearchParams();
 
   const [loginAction, setLoginAction] = useState(false);
+  const [inputType, setInputType] = useState<"password" | "text">("password");
 
   useEffectOnce(() => {
     const authorizationInfo = getAuthorizationInfoClient();
@@ -71,11 +74,7 @@ export default () => {
     logger.debug("query", searchParams);
   }, []);
 
-  const initialForm: LoginForm = {
-    username: undefined,
-    password: undefined,
-    remember: false,
-  };
+  const initialForm: LoginForm = getStorageLoginForm();
   const formik = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
@@ -91,9 +90,6 @@ export default () => {
       setLoginAction(true);
     },
   });
-  useEffectOnce(() => {
-    console.log("formik.isSubmitting", formik.isSubmitting);
-  }, [formik.isSubmitting]);
   const { data, error, isLoading } = useSWR(
     loginAction
       ? {
@@ -123,7 +119,6 @@ export default () => {
                 </p>
               ),
               callback: () => {
-                dispatch(setToken(authorizationInfo?.token));
                 if (searchParams.get("redirect")) {
                   router.replace(searchParams.get("redirect")!!);
                 } else {
@@ -131,17 +126,22 @@ export default () => {
                 }
               },
             });
+            setStorageLoginForm(formik.values);
+            dispatch(setToken(authorizationInfo?.token));
+            dispatch(setUserInfo(data.data));
           } else {
             Toast.fireErrorAction({
               html: <p className="text-2xl font-bold">{data.message}</p>,
               timer: 0,
             });
+            dispatch(clearAdminUserState());
           }
         }
         setLoginAction(false);
       },
       onError: (error) => {
         logger.debug("onError error", error);
+        dispatch(clearAdminUserState());
         setLoginAction(false);
       },
     }
@@ -195,7 +195,7 @@ export default () => {
           <div className="relative text-white-1">
             <input
               name="password"
-              type="text"
+              type={inputType}
               id="password"
               placeholder={t("placeholder_input") + t("password")}
               className="form-input pr-10 ps-10 placeholder:text-white-dark"
@@ -210,7 +210,21 @@ export default () => {
               value={formik.values.password || ""}
             />
             <span className="absolute start-4 top-1/2 -translate-y-1/2 flex items-center justify-center">
-              <IconEyeClosed size={20} stroke={2} className="stroke-white-4" />
+              {inputType == "password" ? (
+                <IconEyeClosed
+                  size={20}
+                  stroke={2}
+                  className="stroke-white-4"
+                  onClick={() => setInputType("text")}
+                />
+              ) : (
+                <IconEye
+                  size={20}
+                  stroke={2}
+                  className="stroke-white-4"
+                  onClick={() => setInputType("password")}
+                />
+              )}
             </span>
             <span className="btn-click absolute end-4 top-1/2 -translate-y-1/2 flex items-center justify-end">
               {formik.values.password && (
@@ -235,6 +249,14 @@ export default () => {
             <input
               type="checkbox"
               className="form-checkbox bg-white dark:bg-black"
+              checked={formik.values.remember}
+              onChange={(e) => {
+                formik.setFieldValue(
+                  "remember",
+                  e.currentTarget.checked,
+                  false
+                );
+              }}
             />
             <span className="text-white-dark">{t("remember")}</span>
           </label>
