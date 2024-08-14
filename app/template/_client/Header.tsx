@@ -590,22 +590,22 @@ const Header = () => {
             </button>
             <ul className="sub-menu">
               <li>
-                <Link href="/apps/chat">{t("chat")}</Link>
+                <Link href="/template/apps/chat">{t("chat")}</Link>
               </li>
               <li>
-                <Link href="/apps/mailbox">{t("mailbox")}</Link>
+                <Link href="/template/apps/mailbox">{t("mailbox")}</Link>
               </li>
               <li>
-                <Link href="/apps/todolist">{t("todo_list")}</Link>
+                <Link href="/template/apps/todolist">{t("todo_list")}</Link>
               </li>
               <li>
-                <Link href="/apps/notes">{t("notes")}</Link>
+                <Link href="/template/apps/notes">{t("notes")}</Link>
               </li>
               <li>
-                <Link href="/apps/scrumboard">{t("scrumboard")}</Link>
+                <Link href="/template/apps/scrumboard">{t("scrumboard")}</Link>
               </li>
               <li>
-                <Link href="/apps/contacts">{t("contacts")}</Link>
+                <Link href="/template/apps/contacts">{t("contacts")}</Link>
               </li>
               <li className="relative">
                 <button type="button">
@@ -616,21 +616,21 @@ const Header = () => {
                 </button>
                 <ul className="absolute top-0 z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-black-7 shadow ltr:left-[95%] rtl:right-[95%] dark:bg-black-7 dark:text-white-6">
                   <li>
-                    <Link href="/apps/invoice/list">{t("list")}</Link>
+                    <Link href="/template/apps/invoice/list">{t("list")}</Link>
                   </li>
                   <li>
-                    <Link href="/apps/invoice/preview">{t("preview")}</Link>
+                    <Link href="/template/apps/invoice/preview">{t("preview")}</Link>
                   </li>
                   <li>
-                    <Link href="/apps/invoice/add">{t("add")}</Link>
+                    <Link href="/template/apps/invoice/add">{t("add")}</Link>
                   </li>
                   <li>
-                    <Link href="/apps/invoice/edit">{t("edit")}</Link>
+                    <Link href="/template/apps/invoice/edit">{t("edit")}</Link>
                   </li>
                 </ul>
               </li>
               <li>
-                <Link href="/apps/calendar">{t("calendar")}</Link>
+                <Link href="/template/apps/calendar">{t("calendar")}</Link>
               </li>
             </ul>
           </li>
@@ -646,50 +646,50 @@ const Header = () => {
             </button>
             <ul className="sub-menu">
               <li>
-                <Link href="/components/tabs">{t("tabs")}</Link>
+                <Link href="/template/components/tabs">{t("tabs")}</Link>
               </li>
               <li>
-                <Link href="/components/accordions">{t("accordions")}</Link>
+                <Link href="/template/components/accordions">{t("accordions")}</Link>
               </li>
               <li>
-                <Link href="/components/modals">{t("modals")}</Link>
+                <Link href="/template/components/modals">{t("modals")}</Link>
               </li>
               <li>
-                <Link href="/components/cards">{t("cards")}</Link>
+                <Link href="/template/components/cards">{t("cards")}</Link>
               </li>
               <li>
-                <Link href="/components/carousel">{t("carousel")}</Link>
+                <Link href="/template/components/carousel">{t("carousel")}</Link>
               </li>
               <li>
-                <Link href="/components/countdown">{t("countdown")}</Link>
+                <Link href="/template/components/countdown">{t("countdown")}</Link>
               </li>
               <li>
-                <Link href="/components/counter">{t("counter")}</Link>
+                <Link href="/template/components/counter">{t("counter")}</Link>
               </li>
               <li>
-                <Link href="/components/sweetalert">{t("sweet_alerts")}</Link>
+                <Link href="/template/components/sweetalert">{t("sweet_alerts")}</Link>
               </li>
               <li>
-                <Link href="/components/timeline">{t("timeline")}</Link>
+                <Link href="/template/components/timeline">{t("timeline")}</Link>
               </li>
               <li>
-                <Link href="/components/notifications">
+                <Link href="/template/components/notifications">
                   {t("notifications")}
                 </Link>
               </li>
               <li>
-                <Link href="/components/media-object">{t("media_object")}</Link>
+                <Link href="/template/components/media-object">{t("media_object")}</Link>
               </li>
               <li>
-                <Link href="/components/list-group">{t("list_group")}</Link>
+                <Link href="/template/components/list-group">{t("list_group")}</Link>
               </li>
               <li>
-                <Link href="/components/pricing-table">
+                <Link href="/template/components/pricing-table">
                   {t("pricing_tables")}
                 </Link>
               </li>
               <li>
-                <Link href="/components/lightbox">{t("lightbox")}</Link>
+                <Link href="/template/components/lightbox">{t("lightbox")}</Link>
               </li>
             </ul>
           </li>
@@ -705,58 +705,58 @@ const Header = () => {
             </button>
             <ul className="sub-menu">
               <li>
-                <Link href="/elements/alerts">{t("alerts")}</Link>
+                <Link href="/template/elements/alerts">{t("alerts")}</Link>
               </li>
               <li>
-                <Link href="/elements/avatar">{t("avatar")}</Link>
+                <Link href="/template/elements/avatar">{t("avatar")}</Link>
               </li>
               <li>
-                <Link href="/elements/badges">{t("badges")}</Link>
+                <Link href="/template/elements/badges">{t("badges")}</Link>
               </li>
               <li>
-                <Link href="/elements/breadcrumbs">{t("breadcrumbs")}</Link>
+                <Link href="/template/elements/breadcrumbs">{t("breadcrumbs")}</Link>
               </li>
               <li>
-                <Link href="/elements/buttons">{t("buttons")}</Link>
+                <Link href="/template/elements/buttons">{t("buttons")}</Link>
               </li>
               <li>
-                <Link href="/elements/buttons-group">{t("button_groups")}</Link>
+                <Link href="/template/elements/buttons-group">{t("button_groups")}</Link>
               </li>
               <li>
-                <Link href="/elements/color-library">{t("color_library")}</Link>
+                <Link href="/template/elements/color-library">{t("color_library")}</Link>
               </li>
               <li>
-                <Link href="/elements/dropdown">{t("dropdown")}</Link>
+                <Link href="/template/elements/dropdown">{t("dropdown")}</Link>
               </li>
               <li>
-                <Link href="/elements/infobox">{t("infobox")}</Link>
+                <Link href="/template/elements/infobox">{t("infobox")}</Link>
               </li>
               <li>
-                <Link href="/elements/jumbotron">{t("jumbotron")}</Link>
+                <Link href="/template/elements/jumbotron">{t("jumbotron")}</Link>
               </li>
               <li>
-                <Link href="/elements/loader">{t("loader")}</Link>
+                <Link href="/template/elements/loader">{t("loader")}</Link>
               </li>
               <li>
-                <Link href="/elements/pagination">{t("pagination")}</Link>
+                <Link href="/template/elements/pagination">{t("pagination")}</Link>
               </li>
               <li>
-                <Link href="/elements/popovers">{t("popovers")}</Link>
+                <Link href="/template/elements/popovers">{t("popovers")}</Link>
               </li>
               <li>
-                <Link href="/elements/progress-bar">{t("progress_bar")}</Link>
+                <Link href="/template/elements/progress-bar">{t("progress_bar")}</Link>
               </li>
               <li>
-                <Link href="/elements/search">{t("search")}</Link>
+                <Link href="/template/elements/search">{t("search")}</Link>
               </li>
               <li>
-                <Link href="/elements/tooltips">{t("tooltips")}</Link>
+                <Link href="/template/elements/tooltips">{t("tooltips")}</Link>
               </li>
               <li>
-                <Link href="/elements/treeview">{t("treeview")}</Link>
+                <Link href="/template/elements/treeview">{t("treeview")}</Link>
               </li>
               <li>
-                <Link href="/elements/typography">{t("typography")}</Link>
+                <Link href="/template/elements/typography">{t("typography")}</Link>
               </li>
             </ul>
           </li>
@@ -772,7 +772,7 @@ const Header = () => {
             </button>
             <ul className="sub-menu">
               <li>
-                <Link href="/tables">{t("tables")}</Link>
+                <Link href="/template/tables">{t("tables")}</Link>
               </li>
               <li className="relative">
                 <button type="button">

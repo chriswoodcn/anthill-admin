@@ -175,7 +175,7 @@ const Sidebar = () => {
               <li className="nav-item">
                 <ul>
                   <li className="nav-item">
-                    <Link href="/apps/chat" className="group">
+                    <Link href="/template/apps/chat" className="group">
                       <div className="flex items-center">
                         <IconMenuChat className="shrink-0 group-hover:!text-primary" />
                         <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -185,7 +185,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/apps/mailbox" className="group">
+                    <Link href="/template/apps/mailbox" className="group">
                       <div className="flex items-center">
                         <IconMenuMailbox className="shrink-0 group-hover:!text-primary" />
                         <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -195,7 +195,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/apps/todolist" className="group">
+                    <Link href="/template/apps/todolist" className="group">
                       <div className="flex items-center">
                         <IconMenuTodo className="shrink-0 group-hover:!text-primary" />
                         <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -205,7 +205,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/apps/notes" className="group">
+                    <Link href="/template/apps/notes" className="group">
                       <div className="flex items-center">
                         <IconMenuNotes className="shrink-0 group-hover:!text-primary" />
                         <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -215,7 +215,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/apps/scrumboard" className="group">
+                    <Link href="/template/apps/scrumboard" className="group">
                       <div className="flex items-center">
                         <IconMenuScrumboard className="shrink-0 group-hover:!text-primary" />
                         <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -225,7 +225,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link href="/apps/contacts" className="group">
+                    <Link href="/template/apps/contacts" className="group">
                       <div className="flex items-center">
                         <IconMenuContacts className="shrink-0 group-hover:!text-primary" />
                         <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -267,25 +267,25 @@ const Sidebar = () => {
                     >
                       <ul className="sub-menu text-gray-500">
                         <li>
-                          <Link href="/apps/invoice/list">{t("list")}</Link>
+                          <Link href="/template/apps/invoice/list">{t("list")}</Link>
                         </li>
                         <li>
-                          <Link href="/apps/invoice/preview">
+                          <Link href="/template/apps/invoice/preview">
                             {t("preview")}
                           </Link>
                         </li>
                         <li>
-                          <Link href="/apps/invoice/add">{t("add")}</Link>
+                          <Link href="/template/apps/invoice/add">{t("add")}</Link>
                         </li>
                         <li>
-                          <Link href="/apps/invoice/edit">{t("edit")}</Link>
+                          <Link href="/template/apps/invoice/edit">{t("edit")}</Link>
                         </li>
                       </ul>
                     </AnimateHeight>
                   </li>
 
                   <li className="nav-item">
-                    <Link href="/apps/calendar" className="group">
+                    <Link href="/template/apps/calendar" className="group">
                       <div className="flex items-center">
                         <IconMenuCalendar className="shrink-0 group-hover:!text-primary" />
                         <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
