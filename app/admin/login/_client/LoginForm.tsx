@@ -248,7 +248,7 @@ export default () => {
           <label className="flex cursor-pointer items-center">
             <input
               type="checkbox"
-              className="form-checkbox bg-white dark:bg-black"
+              className="form-checkbox bg-white dark:bg-black-8"
               checked={formik.values.remember}
               onChange={(e) => {
                 formik.setFieldValue(

@@ -97,7 +97,7 @@ const Sidebar = () => {
           isDarkMode ? "text-white-dark" : ""
         }`}
       >
-        <div className="h-full bg-white dark:bg-black">
+        <div className="h-full bg-white dark:bg-black-8">
           <div className="flex items-center justify-between px-4 py-3">
             <Link href="/" className="main-logo flex shrink-0 items-center">
               <Image

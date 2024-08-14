@@ -26,13 +26,13 @@
     @apply scroll-smooth;
   }
   body {
-    @apply bg-white-8 dark:bg-black-8 font-nunito;
+    @apply bg-white-8 dark:bg-black-8 font-nunito text-black-7 dark:text-white-7;
   }
   /* #endregion */
 
   /* Panel */
   .panel {
-    @apply relative rounded-md bg-white p-5 shadow dark:bg-black;
+    @apply relative rounded-md bg-white p-5 shadow dark:bg-black-8;
   }
   /* Navbar */
   .navbar-sticky header,
@@ -71,6 +71,7 @@
     @apply dark:!text-white-5;
   }
 
+  .sidebar ul.sub-menu li button,
   .sidebar ul.sub-menu li button,
   .sidebar ul.sub-menu li a {
     @apply flex w-full items-center px-9 py-2.5 before:h-0.5 before:w-2 before:rounded before:bg-gray-300 hover:bg-gray-100
@@ -242,7 +243,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   .form-textarea,
   .form-select,
   .form-multiselect {
-    @apply w-full rounded-md border border-white/70 bg-white px-4 py-2 text-sm text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-8 dark:bg-black-7 dark:text-white-4 dark:focus:border-primary;
+    @apply w-full rounded-md border border-white/70 bg-white px-4 py-2 text-sm text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-9 dark:bg-black-8 dark:text-white-4 dark:focus:border-primary;
   }
 
   .form-input-lg,

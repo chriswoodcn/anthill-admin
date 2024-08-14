@@ -476,7 +476,7 @@ const ComponentsDashboardSales = () => {
                 Total Profit <span className="ml-2 text-primary">$10,840</span>
               </p>
               <div className="relative">
-                <div className="rounded-lg bg-white dark:bg-black">
+                <div className="rounded-lg bg-white dark:bg-black-8">
                   {isMounted ? (
                     <ReactApexChart
                       series={revenueChart.series}
@@ -501,7 +501,7 @@ const ComponentsDashboardSales = () => {
                 </h5>
               </div>
               <div>
-                <div className="rounded-lg bg-white dark:bg-black">
+                <div className="rounded-lg bg-white dark:bg-black-8">
                   {isMounted ? (
                     <ReactApexChart
                       series={salesByCategory.series}
@@ -536,7 +536,7 @@ const ComponentsDashboardSales = () => {
                 </div>
               </div>
               <div>
-                <div className="rounded-lg bg-white dark:bg-black">
+                <div className="rounded-lg bg-white dark:bg-black-8">
                   {isMounted ? (
                     <ReactApexChart
                       series={dailySales.series}
@@ -684,7 +684,7 @@ const ComponentsDashboardSales = () => {
                       Just Now
                     </div>
 
-                    <span className="badge badge-outline-primary absolute bg-primary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-primary absolute bg-primary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Pending
                     </span>
                   </div>
@@ -695,7 +695,7 @@ const ComponentsDashboardSales = () => {
                       2 min ago
                     </div>
 
-                    <span className="badge badge-outline-success absolute bg-success-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-success absolute bg-success-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Completed
                     </span>
                   </div>
@@ -706,7 +706,7 @@ const ComponentsDashboardSales = () => {
                       14:00
                     </div>
 
-                    <span className="badge badge-outline-danger absolute bg-danger-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-danger absolute bg-danger-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Pending
                     </span>
                   </div>
@@ -717,7 +717,7 @@ const ComponentsDashboardSales = () => {
                       16:00
                     </div>
 
-                    <span className="badge badge-outline-dark absolute bg-dark-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-dark absolute bg-dark-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Completed
                     </span>
                   </div>
@@ -730,7 +730,7 @@ const ComponentsDashboardSales = () => {
                       17:00
                     </div>
 
-                    <span className="badge badge-outline-warning absolute bg-warning-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-warning absolute bg-warning-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       In progress
                     </span>
                   </div>
@@ -741,7 +741,7 @@ const ComponentsDashboardSales = () => {
                       17:00
                     </div>
 
-                    <span className="badge badge-outline-info absolute bg-info-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-info absolute bg-info-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Completed
                     </span>
                   </div>
@@ -754,7 +754,7 @@ const ComponentsDashboardSales = () => {
                       18:00
                     </div>
 
-                    <span className="badge badge-outline-secondary absolute bg-secondary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-secondary absolute bg-secondary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Pending
                     </span>
                   </div>
@@ -765,7 +765,7 @@ const ComponentsDashboardSales = () => {
                       Just Now
                     </div>
 
-                    <span className="badge badge-outline-primary absolute bg-primary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-primary absolute bg-primary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Pending
                     </span>
                   </div>
@@ -776,7 +776,7 @@ const ComponentsDashboardSales = () => {
                       2 min ago
                     </div>
 
-                    <span className="badge badge-outline-success absolute bg-success-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-success absolute bg-success-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Completed
                     </span>
                   </div>
@@ -787,7 +787,7 @@ const ComponentsDashboardSales = () => {
                       14:00
                     </div>
 
-                    <span className="badge badge-outline-danger absolute bg-danger-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-danger absolute bg-danger-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Pending
                     </span>
                   </div>
@@ -798,7 +798,7 @@ const ComponentsDashboardSales = () => {
                       16:00
                     </div>
 
-                    <span className="badge badge-outline-dark absolute bg-dark-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-dark absolute bg-dark-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Completed
                     </span>
                   </div>
@@ -811,7 +811,7 @@ const ComponentsDashboardSales = () => {
                       17:00
                     </div>
 
-                    <span className="badge badge-outline-warning absolute bg-warning-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-warning absolute bg-warning-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       In progress
                     </span>
                   </div>
@@ -822,7 +822,7 @@ const ComponentsDashboardSales = () => {
                       17:00
                     </div>
 
-                    <span className="badge badge-outline-info absolute bg-info-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-info absolute bg-info-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Completed
                     </span>
                   </div>
@@ -835,7 +835,7 @@ const ComponentsDashboardSales = () => {
                       18:00
                     </div>
 
-                    <span className="badge badge-outline-secondary absolute bg-secondary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black">
+                    <span className="badge badge-outline-secondary absolute bg-secondary-light text-xs opacity-0 group-hover:opacity-100 ltr:right-0 rtl:left-0 dark:bg-black-8">
                       Pending
                     </span>
                   </div>
@@ -996,7 +996,7 @@ const ComponentsDashboardSales = () => {
                     Received
                     <IconCaretDown className="h-4 w-4 rotate-180 text-success" />
                   </span>
-                  <div className="btn w-full  border-0 bg-[#ebedf2] py-1 text-base text-[#515365] shadow-none dark:bg-black dark:text-[#bfc9d4]">
+                  <div className="btn w-full  border-0 bg-[#ebedf2] py-1 text-base text-[#515365] shadow-none dark:bg-black-8 dark:text-[#bfc9d4]">
                     $97.99
                   </div>
                 </div>
@@ -1005,7 +1005,7 @@ const ComponentsDashboardSales = () => {
                     Spent
                     <IconCaretDown className="h-4 w-4 text-danger" />
                   </span>
-                  <div className="btn w-full  border-0 bg-[#ebedf2] py-1 text-base text-[#515365] shadow-none dark:bg-black dark:text-[#bfc9d4]">
+                  <div className="btn w-full  border-0 bg-[#ebedf2] py-1 text-base text-[#515365] shadow-none dark:bg-black-8 dark:text-[#bfc9d4]">
                     $53.00
                   </div>
                 </div>

@@ -36,6 +36,7 @@ import IconMenuPages from "@/components/icon/menu/icon-menu-pages";
 import IconMenuMore from "@/components/icon/menu/icon-menu-more";
 import Dropdown from "@/components/core/Dropdown";
 import LanguageDropdown from "@/components/compose/LanguageDropdown";
+import { withBasePath } from "@/lib";
 
 const Header = () => {
   const pathname = usePathname();
@@ -79,6 +80,7 @@ const Header = () => {
     useAppSelector((state: RootState) => state.adminSetting.rtlClass) === "rtl";
 
   const adminSetting = useAppSelector((state: RootState) => state.adminSetting);
+
   const setLocale = (flag: string) => {
     if (flag.toLowerCase() === "ae") {
       dispatch(toggleRTL("rtl"));
@@ -133,7 +135,7 @@ const Header = () => {
   const [notifications, setNotifications] = useState([
     {
       id: 1,
-      profile: "user-profile.jpeg",
+      profile: "profile-1.jpeg",
       message:
         '<strong class="text-sm mr-1">John Doe</strong>invite you to <strong>Prototyping</strong>',
       time: "45 min ago",
@@ -161,14 +163,14 @@ const Header = () => {
 
   return (
     <header
-      className={`z-40 ${
+      className={`z-40 shadow-md ${
         adminSetting.isDarkMode && adminSetting.menu === "horizontal"
           ? "dark"
           : ""
       }`}
     >
       <div className="shadow-sm">
-        <div className="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-black">
+        <div className="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-black-8">
           <div className="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
             <Link
               href="/template/"
@@ -196,7 +198,7 @@ const Header = () => {
             <ul className="flex items-center space-x-2 rtl:space-x-reverse dark:text-[#d0d2d6]">
               <li>
                 <Link
-                  href="/apps/calendar"
+                  href="/template/apps/calendar"
                   className="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                 >
                   <IconCalendar />
@@ -204,7 +206,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/apps/todolist"
+                  href="/template/apps/todolist"
                   className="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                 >
                   <IconEdit />
@@ -212,7 +214,7 @@ const Header = () => {
               </li>
               <li>
                 <Link
-                  href="/apps/chat"
+                  href="/template/apps/chat"
                   className="block rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                 >
                   <IconChatNotification />
@@ -277,15 +279,15 @@ const Header = () => {
                     adminSetting.theme === "dark" &&
                     "flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                   }`}
-                  onClick={() => dispatch(toggleTheme("system"))}
+                  onClick={() => dispatch(toggleTheme("auto"))}
                 >
                   <IconMoon />
                 </button>
               )}
-              {adminSetting.theme === "system" && (
+              {adminSetting.theme === "auto" && (
                 <button
                   className={`${
-                    adminSetting.theme === "system" &&
+                    adminSetting.theme === "auto" &&
                     "flex items-center rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary dark:bg-dark/40 dark:hover:bg-dark/60"
                   }`}
                   onClick={() => dispatch(toggleTheme("light"))}
@@ -294,9 +296,7 @@ const Header = () => {
                 </button>
               )}
             </div>
-            <div className="dropdown shrink-0">
-              <LanguageDropdown shape="rounded" />
-            </div>
+            <LanguageDropdown className="shrink-0" shape="rounded" />
             <div className="dropdown shrink-0">
               <Dropdown
                 offset={[0, 8]}
@@ -304,10 +304,10 @@ const Header = () => {
                 btnClassName="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
                 button={<IconMailDot />}
               >
-                <ul className="w-[300px] !py-0 text-xs text-dark dark:text-white-dark sm:w-[375px]">
+                <ul className="w-[300px] !py-0 text-xs text-dark dark:text-white-dark sm:w-[375px] bg-white rounded-lg shadow-lg">
                   <li className="mb-5" onClick={(e) => e.stopPropagation()}>
-                    <div className="relative !h-[68px] w-full overflow-hidden rounded-t-md p-5 text-white hover:!bg-transparent">
-                      <div className="bg- absolute inset-0 h-full w-full bg-[url(/assets/images/menu-heade.jpg)] bg-cover bg-center bg-no-repeat"></div>
+                    <div className="relative !h-[68px] w-full overflow-hidden rounded-t-md text-white hover:!bg-transparent">
+                      <div className="bg-absolute inset-0 h-full w-full bg-bg_message_box bg-cover bg-center bg-no-repeat"></div>
                       <h4 className="relative z-10 text-lg font-semibold">
                         Messages
                       </h4>
@@ -390,7 +390,7 @@ const Header = () => {
                   </span>
                 }
               >
-                <ul className="w-[300px] divide-y !py-0 text-dark dark:divide-white/10 dark:text-white-dark sm:w-[350px]">
+                <ul className="w-[300px] divide-y !py-0 text-dark dark:divide-white/10 dark:text-white-dark sm:w-[350px] bg-white shadow-lg rounded-lg">
                   <li onClick={(e) => e.stopPropagation()}>
                     <div className="flex items-center justify-between px-4 py-2 font-semibold">
                       <h4 className="text-lg">Notification</h4>
@@ -418,7 +418,7 @@ const Header = () => {
                                   <Image
                                     className="h-12 w-12 rounded-full object-cover"
                                     alt="profile"
-                                    src={`/assets/images/${notification.profile}`}
+                                    src={`/assets/images/profile/${notification.profile}`}
                                   />
                                   <span className="absolute bottom-0 right-[6px] block h-2 w-2 rounded-full bg-success"></span>
                                 </div>
@@ -515,7 +515,7 @@ const Header = () => {
                   <li>
                     <Link
                       href="/users/profile"
-                      className="dark:hover:text-white flex justify-start items-center px-4 py-2"
+                      className="hover:text-primary dark:hover:text-white flex justify-start items-center px-4 py-2 "
                     >
                       <IconUser className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                       Profile
@@ -524,7 +524,7 @@ const Header = () => {
                   <li>
                     <Link
                       href="/apps/mailbox"
-                      className="dark:hover:text-white flex justify-start items-center px-4 py-2"
+                      className="hover:text-primary dark:hover:text-white flex justify-start items-center px-4 py-2"
                     >
                       <IconMail className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                       Inbox
@@ -533,7 +533,7 @@ const Header = () => {
                   <li>
                     <Link
                       href="/auth/boxed-lockscreen"
-                      className="dark:hover:text-white flex justify-start items-center px-4 py-2"
+                      className="hover:text-primary dark:hover:text-white flex justify-start items-center px-4 py-2"
                     >
                       <IconLockDots className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                       Lock Screen
@@ -555,7 +555,7 @@ const Header = () => {
         </div>
 
         {/* horizontal menu */}
-        <ul className="horizontal-menu hidden border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-black dark:text-white-dark lg:space-x-1.5 xl:space-x-8">
+        <ul className="horizontal-menu hidden border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-black-8 dark:text-white-dark lg:space-x-1.5 xl:space-x-8">
           <li className="menu nav-item relative">
             <button type="button" className="nav-link">
               <div className="flex items-center">

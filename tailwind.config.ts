@@ -7,7 +7,7 @@ const require = createRequire(import.meta.url);
 
 const levelDefault = configuraton.Colors.DefaultLevel
 const config: Config = {
-  darkMode: ["selector", "data-mantine-color-scheme"],
+  darkMode: ["selector", '[data-mantine-color-scheme="dark"]'],
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -100,6 +100,9 @@ const config: Config = {
         )}')`,
         bg_map: `url('${withBasePath(
           "/assets/images/background/bg-map.png"
+        )}')`,
+        bg_message_box: `url('${withBasePath(
+          "/assets/images/background/menu-heade.jpg"
         )}')`,
       },
       backgroundColor: {

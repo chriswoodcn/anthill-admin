@@ -37,7 +37,7 @@ const LanguageDropdown = ({
   const renderButton = () => {
     if (shape == "rect")
       return (
-        <div className="flex items-center gap-2 rounded-lg border border-white-dark/30 bg-white px-2 py-1.5 text-black-7 dark:text-white-7 hover:border-primary hover:text-primary dark:bg-black">
+        <>
           <div>
             <img
               src={withBasePath(
@@ -51,34 +51,39 @@ const LanguageDropdown = ({
           <span className="shrink-0">
             <IconChevronDown stroke={1} size={20} />
           </span>
-        </div>
+        </>
       );
     if (shape == "rounded")
       return (
-        <div className="flex justify-center items-center w-[36px] h-[36px] ">
-          <div className="rounded-full bg-white text-white-dark border hover:border-primary hover:text-primary dark:bg-black">
-            <img
-              src={withBasePath(
-                `/assets/images/flags/${i18n.language.toUpperCase()}.svg`
-              )}
-              alt="image"
-              className="w-[20px] h-[20px] rounded-full object-cover"
-            />
-          </div>
+        <div className="">
+          <img
+            src={withBasePath(
+              `/assets/images/flags/${i18n.language.toUpperCase()}.svg`
+            )}
+            alt="image"
+            className="w-[20px] h-[20px] rounded-full object-cover"
+          />
         </div>
       );
     return null;
+  };
+  const renderButtonClassName = () => {
+    if (shape == "rect")
+      return "flex items-center gap-2 rounded-lg border border-white-dark/30 bg-white px-2 py-1.5 text-black-7 dark:text-white-7 hover:border-primary hover:text-primary dark:bg-black-8";
+    if (shape == "rounded")
+      return "block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60";
+    return "";
   };
   return (
     <div className={`dropdown ${className}`}>
       {i18n.language && (
         <Dropdown
-          offset={[0, 4]}
+          offset={[0, 8]}
           placement={`${isRtl ? "bottom-start" : "bottom-end"}`}
-          btnClassName=""
+          btnClassName={renderButtonClassName()}
           button={renderButton()}
         >
-          <PerfectScrollbar className="max-h-[300px] overflow-y-scroll rounded-lg shadow-sm bg-white dark:bg-black">
+          <PerfectScrollbar className="max-h-[300px] overflow-y-scroll rounded-lg shadow-sm bg-white dark:bg-black-9">
             <ul className="grid w-[160px] grid-cols-1 gap-2 p-2 font-semibold text-black-7 dark:text-white-7 ">
               {themeConfig.languageList.map((item: any) => {
                 return (
