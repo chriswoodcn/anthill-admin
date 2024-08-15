@@ -48,7 +48,7 @@ const settingSlice = createSlice({
           state.isDarkMode = false;
           document.querySelector('html')?.setAttribute("data-mantine-color-scheme", "dark")
         }
-        document.querySelector('html')?.setAttribute("data-mantine-color-scheme", "auto")
+        document.querySelector('html')?.setAttribute("data-mantine-color-scheme", "light")
       }
     },
     toggleMenu(state, { payload }) {

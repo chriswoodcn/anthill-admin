@@ -119,7 +119,7 @@ const Sidebar = () => {
             </button>
           </div>
           <PerfectScrollbar className="relative h-[calc(100vh-80px)]">
-            <ul className="relative space-y-0.5 p-2 py-0 pr-3 font-semibold">
+            <ul className="relative space-y-0.5 p-2 py-0 pr-3 pb-24 font-semibold">
               <li className="menu nav-item">
                 <button
                   type="button"
@@ -267,7 +267,9 @@ const Sidebar = () => {
                     >
                       <ul className="sub-menu text-gray-500">
                         <li>
-                          <Link href="/template/apps/invoice/list">{t("list")}</Link>
+                          <Link href="/template/apps/invoice/list">
+                            {t("list")}
+                          </Link>
                         </li>
                         <li>
                           <Link href="/template/apps/invoice/preview">
@@ -275,10 +277,14 @@ const Sidebar = () => {
                           </Link>
                         </li>
                         <li>
-                          <Link href="/template/apps/invoice/add">{t("add")}</Link>
+                          <Link href="/template/apps/invoice/add">
+                            {t("add")}
+                          </Link>
                         </li>
                         <li>
-                          <Link href="/template/apps/invoice/edit">{t("edit")}</Link>
+                          <Link href="/template/apps/invoice/edit">
+                            {t("edit")}
+                          </Link>
                         </li>
                       </ul>
                     </AnimateHeight>
@@ -940,7 +946,7 @@ const Sidebar = () => {
                 </AnimateHeight>
               </li>
 
-              <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
+              {/* <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
                 <IconMinus className="hidden h-5 w-4 flex-none" />
                 <span>{t("supports")}</span>
               </h2>
@@ -958,7 +964,7 @@ const Sidebar = () => {
                     </span>
                   </div>
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </PerfectScrollbar>
         </div>

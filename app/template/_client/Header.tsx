@@ -301,7 +301,7 @@ const Header = () => {
                 btnClassName="block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60"
                 button={<IconMailDot />}
               >
-                <ul className="w-[300px] !py-0 text-xs text-black-7 dark:text-white-6 sm:w-[375px] bg-white rounded-lg shadow-lg">
+                <ul className="w-[300px] !p-0 text-xs text-black-7 dark:text-white-6 sm:w-[375px]">
                   <li className="mb-5" onClick={(e) => e.stopPropagation()}>
                     <div className="relative !h-[68px] w-full overflow-hidden rounded-t-md text-white hover:!bg-transparent">
                       <div className="bg-absolute inset-0 h-full w-full bg-bg_message_box bg-cover bg-center bg-no-repeat"></div>
@@ -344,10 +344,10 @@ const Header = () => {
                           );
                         })}
                       </li>
-                      <li className="mt-5 border-t border-white-light text-center dark:border-white/10">
+                      <li className="mt-5 border-t text-center dark:border-white/10">
                         <button
                           type="button"
-                          className="group !h-[48px] justify-center !py-4 font-semibold text-primary dark:text-gray-400"
+                          className="group !h-[48px] justify-center !py-4 px-5 font-semibold text-primary dark:text-gray-400"
                         >
                           <span className="group-hover:underline ltr:mr-1 rtl:ml-1">
                             VIEW ALL ACTIVITIES

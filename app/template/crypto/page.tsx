@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import React from 'react';
-import ComponentsDashboardCrypto from './_client/ComponentsDashboardCrypto';
+import ComponentsDashboardCrypto from './ComponentsDashboardCrypto';
 
 export const metadata: Metadata = {
     title: 'Crypto',

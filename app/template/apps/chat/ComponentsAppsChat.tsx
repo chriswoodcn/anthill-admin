@@ -349,7 +349,7 @@ const ComponentsAppsChat = () => {
                 btnClassName="bg-[#f4f4f4] dark:bg-[#1b2e4b] hover:bg-primary-light w-8 h-8 rounded-full !flex justify-center items-center hover:text-primary"
                 button={<IconHorizontalDots className="opacity-70" />}
               >
-                <ul className="whitespace-nowrap bg-white rounded-lg shadow-lg space-y-4 p-4">
+                <ul className="whitespace-nowrap bg-white rounded-lg shadow-lg space-y-4 p-4 dark:bg-black-7">
                   <li>
                     <button
                       type="button"
@@ -693,7 +693,7 @@ const ComponentsAppsChat = () => {
                         <IconHorizontalDots className="rotate-90 opacity-70 hover:text-primary" />
                       }
                     >
-                      <ul className="text-black dark:text-white-dark bg-white shadow-lg rounded-lg p-4 space-y-4">
+                      <ul className="bg-white shadow-lg rounded-lg p-4 space-y-4 dark:bg-black-7">
                         <li>
                           <button
                             type="button"

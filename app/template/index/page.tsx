@@ -1,4 +1,4 @@
-import ComponentsDashboardSales from "./_client/ComponentsDashboardSales";
+import ComponentsDashboardSales from "./ComponentsDashboardSales";
 
 export default () => {
   return <ComponentsDashboardSales />;

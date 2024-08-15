@@ -83,8 +83,8 @@ const LanguageDropdown = ({
           btnClassName={renderButtonClassName()}
           button={renderButton()}
         >
-          <PerfectScrollbar className="max-h-[300px] overflow-y-scroll rounded-lg shadow-sm bg-white dark:bg-black-9">
-            <ul className="grid w-[160px] grid-cols-1 gap-2 p-2 font-semibold text-black-7 dark:text-white-7 ">
+          <PerfectScrollbar className="max-h-[300px] overflow-y-scroll">
+            <ul className="grid w-[160px] grid-cols-1 gap-2 font-semibold">
               {themeConfig.languageList.map((item: any) => {
                 return (
                   <li key={item.code}>

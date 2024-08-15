@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import React from 'react'
-import ComponentsDashboardFinance from './_client/ComponentsDashboardFinance';
+import ComponentsDashboardFinance from './ComponentsDashboardFinance';
 
 export const metadata: Metadata = {
     title: 'Finance',

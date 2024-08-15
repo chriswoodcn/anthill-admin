@@ -10,7 +10,7 @@ import { I18nProvider } from "@/i18n/I18nProvider";
 // custom
 import { withBasePath } from "@/lib";
 import ComposedProvider from "@/components/compose/ComposedProvider";
-import configuraton, { PrimaryColors } from "@/configuration.mjs";
+import configuraton, { PrimaryColors, BlackColors } from "@/configuration.mjs";
 
 export async function generateMetadata() {
   const { t } = await getServerTranslations();
@@ -37,9 +37,11 @@ export default async function RootLayout({
           <MantineProvider
             theme={{
               primaryColor: "anthill-primary",
+              black: "anthill-dark",
               fontFamily: configuraton.FontFamily.join(","),
               colors: {
                 "anthill-primary": PrimaryColors as any,
+                "anthill-dark": BlackColors as any,
               },
             }}
           >
