@@ -52,6 +52,7 @@
     "react-sortablejs": "^6.1.4",
     "sweetalert2": "^11.12.4",
     "sweetalert2-react-content": "^5.0.7",
+    "swiper": "^8.4.7",
     "swr": "^2.2.5",
     "use-immer": "^0.10.0",
     "yup": "^1.4.0"
