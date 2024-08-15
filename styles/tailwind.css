@@ -8,7 +8,7 @@
 @layer components {
   /* #region 滚动条美化*/
   ::-webkit-scrollbar {
-    @apply w-1 h-1;
+    @apply w-2 h-2;
   }
 
   ::-webkit-scrollbar-track {

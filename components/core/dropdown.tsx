@@ -1,8 +1,8 @@
 "use client";
 
+import useEffectOnce from '@/lib/useEffectOnce';
 import {
   forwardRef,
-  useEffect,
   useImperativeHandle,
   useRef,
   useState,
@@ -42,7 +42,7 @@ const Dropdown = (props: any, forwardedRef: any) => {
     setVisibility(false);
   };
 
-  useEffect(() => {
+  useEffectOnce(() => {
     document.addEventListener("mousedown", handleDocumentClick);
     return () => {
       document.removeEventListener("mousedown", handleDocumentClick);

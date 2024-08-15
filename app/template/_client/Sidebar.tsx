@@ -1,11 +1,16 @@
 "use client";
+
 import PerfectScrollbar from "react-perfect-scrollbar";
-import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
-import { toggleSidebar } from "@/store/slices/admin";
 import AnimateHeight from "react-animate-height";
-import { RootState } from "@/store";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import { useTranslation } from "react-i18next";
+
+import { RootState, useAppDispatch, useAppSelector } from "@/store";
+import { toggleSidebar } from "@/store/slices/admin";
+
+import Logo from "@/components/compose/Logo";
 import IconCaretsDown from "@/components/icon/icon-carets-down";
 import IconMenuDashboard from "@/components/icon/menu/icon-menu-dashboard";
 import IconCaretDown from "@/components/icon/icon-caret-down";
@@ -31,19 +36,15 @@ import IconMenuUsers from "@/components/icon/menu/icon-menu-users";
 import IconMenuPages from "@/components/icon/menu/icon-menu-pages";
 import IconMenuAuthentication from "@/components/icon/menu/icon-menu-authentication";
 import IconMenuDocumentation from "@/components/icon/menu/icon-menu-documentation";
-import { usePathname } from "next/navigation";
-import { useTranslation } from "react-i18next";
-import Image from "@/components/core/Image";
-import Logo from "@/components/compose/Logo";
 
 const Sidebar = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const pathname = usePathname();
   const [currentMenu, setCurrentMenu] = useState<string>("");
   const [errorSubMenu, setErrorSubMenu] = useState(false);
-  const adminSetting = useSelector((state: RootState) => state.adminSetting);
-  const isDarkMode = useSelector(
+  const adminSetting = useAppSelector((state: RootState) => state.adminSetting);
+  const isDarkMode = useAppSelector(
     (state: RootState) => state.adminSetting.isDarkMode
   );
   const toggleMenu = (value: string) => {
@@ -340,58 +341,72 @@ const Sidebar = () => {
                 >
                   <ul className="sub-menu text-gray-500">
                     <li>
-                      <Link href="/components/tabs">{t("tabs")}</Link>
+                      <Link href="/template/components/tabs">{t("tabs")}</Link>
                     </li>
                     <li>
-                      <Link href="/components/accordions">
+                      <Link href="/template/components/accordions">
                         {t("accordions")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/components/modals">{t("modals")}</Link>
+                      <Link href="/template/components/modals">
+                        {t("modals")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/components/cards">{t("cards")}</Link>
+                      <Link href="/template/components/cards">
+                        {t("cards")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/components/carousel">{t("carousel")}</Link>
+                      <Link href="/template/components/carousel">
+                        {t("carousel")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/components/countdown">{t("countdown")}</Link>
+                      <Link href="/template/components/countdown">
+                        {t("countdown")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/components/counter">{t("counter")}</Link>
+                      <Link href="/template/components/counter">
+                        {t("counter")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/components/sweetalert">
+                      <Link href="/template/components/sweetalert">
                         {t("sweet_alerts")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/components/timeline">{t("timeline")}</Link>
+                      <Link href="/template/components/timeline">
+                        {t("timeline")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/components/notifications">
+                      <Link href="/template/components/notifications">
                         {t("notifications")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/components/media-object">
+                      <Link href="/template/components/media-object">
                         {t("media_object")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/components/list-group">
+                      <Link href="/template/components/list-group">
                         {t("list_group")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/components/pricing-table">
+                      <Link href="/template/components/pricing-table">
                         {t("pricing_tables")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/components/lightbox">{t("lightbox")}</Link>
+                      <Link href="/template/components/lightbox">
+                        {t("lightbox")}
+                      </Link>
                     </li>
                   </ul>
                 </AnimateHeight>
@@ -429,73 +444,101 @@ const Sidebar = () => {
                 >
                   <ul className="sub-menu text-gray-500">
                     <li>
-                      <Link href="/elements/alerts">{t("alerts")}</Link>
+                      <Link href="/template/elements/alerts">
+                        {t("alerts")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/avatar">{t("avatar")}</Link>
+                      <Link href="/template/elements/avatar">
+                        {t("avatar")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/badges">{t("badges")}</Link>
+                      <Link href="/template/elements/badges">
+                        {t("badges")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/breadcrumbs">
+                      <Link href="/template/elements/breadcrumbs">
                         {t("breadcrumbs")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/elements/buttons">{t("buttons")}</Link>
+                      <Link href="/template/elements/buttons">
+                        {t("buttons")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/buttons-group">
+                      <Link href="/template/elements/buttons-group">
                         {t("button_groups")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/elements/color-library">
+                      <Link href="/template/elements/color-library">
                         {t("color_library")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/elements/dropdown">{t("dropdown")}</Link>
+                      <Link href="/template/elements/dropdown">
+                        {t("dropdown")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/infobox">{t("infobox")}</Link>
+                      <Link href="/template/elements/infobox">
+                        {t("infobox")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/jumbotron">{t("jumbotron")}</Link>
+                      <Link href="/template/elements/jumbotron">
+                        {t("jumbotron")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/loader">{t("loader")}</Link>
+                      <Link href="/template/elements/loader">
+                        {t("loader")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/pagination">{t("pagination")}</Link>
+                      <Link href="/template/elements/pagination">
+                        {t("pagination")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/popovers">{t("popovers")}</Link>
+                      <Link href="/template/elements/popovers">
+                        {t("popovers")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/progress-bar">
+                      <Link href="/template/elements/progress-bar">
                         {t("progress_bar")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/elements/search">{t("search")}</Link>
+                      <Link href="/template/elements/search">
+                        {t("search")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/tooltips">{t("tooltips")}</Link>
+                      <Link href="/template/elements/tooltips">
+                        {t("tooltips")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/treeview">{t("treeview")}</Link>
+                      <Link href="/template/elements/treeview">
+                        {t("treeview")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/elements/typography">{t("typography")}</Link>
+                      <Link href="/template/elements/typography">
+                        {t("typography")}
+                      </Link>
                     </li>
                   </ul>
                 </AnimateHeight>
               </li>
 
               <li className="menu nav-item">
-                <Link href="/charts" className="group">
+                <Link href="/template/charts" className="group">
                   <div className="flex items-center">
                     <IconMenuCharts className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -506,7 +549,7 @@ const Sidebar = () => {
               </li>
 
               <li className="menu nav-item">
-                <Link href="/widgets" className="group">
+                <Link href="/template/widgets" className="group">
                   <div className="flex items-center">
                     <IconMenuWidgets className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -517,7 +560,7 @@ const Sidebar = () => {
               </li>
 
               <li className="menu nav-item">
-                <Link href="/font-icons" className="group">
+                <Link href="/template/font-icons" className="group">
                   <div className="flex items-center">
                     <IconMenuFontIcons className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -528,7 +571,7 @@ const Sidebar = () => {
               </li>
 
               <li className="menu nav-item">
-                <Link href="/dragndrop" className="group">
+                <Link href="/template/dragndrop" className="group">
                   <div className="flex items-center">
                     <IconMenuDragAndDrop className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -544,7 +587,7 @@ const Sidebar = () => {
               </h2>
 
               <li className="menu nav-item">
-                <Link href="/tables" className="group">
+                <Link href="/template/tables" className="group">
                   <div className="flex items-center">
                     <IconMenuTables className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -586,47 +629,55 @@ const Sidebar = () => {
                 >
                   <ul className="sub-menu text-gray-500">
                     <li>
-                      <Link href="/datatables/basic">{t("basic")}</Link>
+                      <Link href="/template/datatables/basic">
+                        {t("basic")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/advanced">{t("advanced")}</Link>
+                      <Link href="/template/datatables/advanced">
+                        {t("advanced")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/skin">{t("skin")}</Link>
+                      <Link href="/template/datatables/skin">{t("skin")}</Link>
                     </li>
                     <li>
-                      <Link href="/datatables/order-sorting">
+                      <Link href="/template/datatables/order-sorting">
                         {t("order_sorting")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/multi-column">
+                      <Link href="/template/datatables/multi-column">
                         {t("multi_column")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/multiple-tables">
+                      <Link href="/template/datatables/multiple-tables">
                         {t("multiple_tables")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/alt-pagination">
+                      <Link href="/template/datatables/alt-pagination">
                         {t("alt_pagination")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/checkbox">{t("checkbox")}</Link>
+                      <Link href="/template/datatables/checkbox">
+                        {t("checkbox")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/range-search">
+                      <Link href="/template/datatables/range-search">
                         {t("range_search")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/export">{t("export")}</Link>
+                      <Link href="/template/datatables/export">
+                        {t("export")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/datatables/column-chooser">
+                      <Link href="/template/datatables/column-chooser">
                         {t("column_chooser")}
                       </Link>
                     </li>
@@ -664,57 +715,71 @@ const Sidebar = () => {
                 >
                   <ul className="sub-menu text-gray-500">
                     <li>
-                      <Link href="/forms/basic">{t("basic")}</Link>
+                      <Link href="/template/forms/basic">{t("basic")}</Link>
                     </li>
                     <li>
-                      <Link href="/forms/input-group">{t("input_group")}</Link>
+                      <Link href="/template/forms/input-group">
+                        {t("input_group")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/forms/layouts">{t("layouts")}</Link>
+                      <Link href="/template/forms/layouts">{t("layouts")}</Link>
                     </li>
                     <li>
-                      <Link href="/forms/validation">{t("validation")}</Link>
+                      <Link href="/template/forms/validation">
+                        {t("validation")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/forms/input-mask">{t("input_mask")}</Link>
+                      <Link href="/template/forms/input-mask">
+                        {t("input_mask")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/forms/select2">{t("select2")}</Link>
+                      <Link href="/template/forms/select2">{t("select2")}</Link>
                     </li>
                     <li>
-                      <Link href="/forms/touchspin">{t("touchspin")}</Link>
+                      <Link href="/template/forms/touchspin">
+                        {t("touchspin")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/forms/checkbox-radio">
+                      <Link href="/template/forms/checkbox-radio">
                         {t("checkbox_and_radio")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/forms/switches">{t("switches")}</Link>
+                      <Link href="/template/forms/switches">
+                        {t("switches")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/forms/wizards">{t("wizards")}</Link>
+                      <Link href="/template/forms/wizards">{t("wizards")}</Link>
                     </li>
                     <li>
-                      <Link href="/forms/file-upload">{t("file_upload")}</Link>
+                      <Link href="/template/forms/file-upload">
+                        {t("file_upload")}
+                      </Link>
                     </li>
                     <li>
-                      <Link href="/forms/quill-editor">
+                      <Link href="/template/forms/quill-editor">
                         {t("quill_editor")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/forms/markdown-editor">
+                      <Link href="/template/forms/markdown-editor">
                         {t("markdown_editor")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/forms/date-picker">
+                      <Link href="/template/forms/date-picker">
                         {t("date_and_range_picker")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/forms/clipboard">{t("clipboard")}</Link>
+                      <Link href="/template/forms/clipboard">
+                        {t("clipboard")}
+                      </Link>
                     </li>
                   </ul>
                 </AnimateHeight>
@@ -755,10 +820,10 @@ const Sidebar = () => {
                 >
                   <ul className="sub-menu text-gray-500">
                     <li>
-                      <Link href="/users/profile">{t("profile")}</Link>
+                      <Link href="/template/users/profile">{t("profile")}</Link>
                     </li>
                     <li>
-                      <Link href="/users/user-account-settings">
+                      <Link href="/template/users/user-account-settings">
                         {t("account_settings")}
                       </Link>
                     </li>
@@ -796,30 +861,42 @@ const Sidebar = () => {
                 >
                   <ul className="sub-menu text-gray-500">
                     <li>
-                      <Link href="/pages/knowledge-base">
+                      <Link href="/template/pages/knowledge-base">
                         {t("knowledge_base")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/pages/contact-us-boxed" target="_blank">
+                      <Link
+                        href="/template/pages/contact-us-boxed"
+                        target="_blank"
+                      >
                         {t("contact_us_boxed")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/pages/contact-us-cover" target="_blank">
+                      <Link
+                        href="/template/pages/contact-us-cover"
+                        target="_blank"
+                      >
                         {t("contact_us_cover")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/pages/faq">{t("faq")}</Link>
+                      <Link href="/template/pages/faq">{t("faq")}</Link>
                     </li>
                     <li>
-                      <Link href="/pages/coming-soon-boxed" target="_blank">
+                      <Link
+                        href="/template/pages/coming-soon-boxed"
+                        target="_blank"
+                      >
                         {t("coming_soon_boxed")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/pages/coming-soon-cover" target="_blank">
+                      <Link
+                        href="/template/pages/coming-soon-cover"
+                        target="_blank"
+                      >
                         {t("coming_soon_cover")}
                       </Link>
                     </li>
@@ -865,7 +942,7 @@ const Sidebar = () => {
                     </li>
 
                     <li>
-                      <Link href="/pages/maintenence" target="_blank">
+                      <Link href="/template/pages/maintenence" target="_blank">
                         {t("maintenence")}
                       </Link>
                     </li>
@@ -903,42 +980,57 @@ const Sidebar = () => {
                 >
                   <ul className="sub-menu text-gray-500">
                     <li>
-                      <Link href="/auth/boxed-signin" target="_blank">
+                      <Link href="/template/auth/boxed-signin" target="_blank">
                         {t("login_boxed")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/auth/boxed-signup" target="_blank">
+                      <Link href="/template/auth/boxed-signup" target="_blank">
                         {t("register_boxed")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/auth/boxed-lockscreen" target="_blank">
+                      <Link
+                        href="/template/auth/boxed-lockscreen"
+                        target="_blank"
+                      >
                         {t("unlock_boxed")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/auth/boxed-password-reset" target="_blank">
+                      <Link
+                        href="/template/auth/boxed-password-reset"
+                        target="_blank"
+                      >
                         {t("recover_id_boxed")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/auth/cover-login" target="_blank">
+                      <Link href="/template/auth/cover-login" target="_blank">
                         {t("login_cover")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/auth/cover-register" target="_blank">
+                      <Link
+                        href="/template/auth/cover-register"
+                        target="_blank"
+                      >
                         {t("register_cover")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/auth/cover-lockscreen" target="_blank">
+                      <Link
+                        href="/template/auth/cover-lockscreen"
+                        target="_blank"
+                      >
                         {t("unlock_cover")}
                       </Link>
                     </li>
                     <li>
-                      <Link href="/auth/cover-password-reset" target="_blank">
+                      <Link
+                        href="/template/auth/cover-password-reset"
+                        target="_blank"
+                      >
                         {t("recover_id_cover")}
                       </Link>
                     </li>
