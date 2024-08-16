@@ -1,6 +1,11 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import ElementsBreadcrumbsArrowed from './ElementsBreadcrumbsArrowed';
+import ElementsBreadcrumbsBasic from './ElementsBreadcrumbsBasic';
+import ElementsBreadcrumbsDefault from './ElementsBreadcrumbsDefault';
+import ElementsBreadcrumbsDottedSeperators from './ElementsBreadcrumbsDottedSeperators';
+import ElementsBreadcrumbsWithIcon from './ElementsBreadcrumbsWithIcon';
 
 export const metadata: Metadata = {
   title: "Breadcrumbs",
@@ -20,11 +25,11 @@ const Breadcrumbs = () => {
         </li>
       </ul>
       <div className="grid grid-cols-1 gap-6 pt-5 lg:grid-cols-2">
-        {/* <ElementsBreadcrumbsDefault />
-                <ElementsBreadcrumbsBasic />
-                <ElementsBreadcrumbsArrowed />
-                <ElementsBreadcrumbsDottedSeperators />
-                <ElementsBreadcrumbsWithIcon /> */}
+        <ElementsBreadcrumbsDefault />
+        <ElementsBreadcrumbsBasic />
+        <ElementsBreadcrumbsArrowed />
+        <ElementsBreadcrumbsDottedSeperators />
+        <ElementsBreadcrumbsWithIcon />
       </div>
     </div>
   );
