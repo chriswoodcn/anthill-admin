@@ -282,7 +282,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   .form-textarea,
   .form-select,
   .form-multiselect {
-    @apply w-full rounded-md border border-white/70 bg-white px-4 py-2 text-sm text-black !outline-none focus:border-primary focus:ring-transparent dark:border-black-9 dark:bg-black-8 dark:text-white-4 dark:focus:border-primary;
+    @apply w-full rounded-md border border-black-1 bg-white px-4 py-2 text-sm text-black !outline-none focus:border-primary focus:ring-transparent dark:border-white-1 dark:bg-black-8 dark:text-white-4 dark:focus:border-primary;
   }
 
   .form-input-lg,

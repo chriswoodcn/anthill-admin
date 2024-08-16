@@ -15,7 +15,7 @@ const CodeHighlight = ({ children }: PropsWithChildren) => {
   }, []);
 
   return (
-    <div ref={highlightElement} className="highlight-el">
+    <div ref={highlightElement} className="highlight-el relative">
       {children}
     </div>
   );

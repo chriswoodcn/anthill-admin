@@ -1,6 +1,9 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import ElementsButtonGroupHorizontal from "./ElementsButtonGroupHorizontal";
+import ElementsButtonGroupInputGroup from "./ElementsButtonGroupInputGroup";
+import ElementsButtonGroupVertical from "./ElementsButtonGroupVertical";
 
 export const metadata: Metadata = {
   title: "Buttons Group",
@@ -20,9 +23,9 @@ const ButtonsGroup = () => {
         </li>
       </ul>
       <div className="grid grid-cols-1 gap-6 pt-5 lg:grid-cols-2">
-        {/* <ElementsButtonGroupHorizontal />
-                <ElementsButtonGroupInputGroup />
-                <ElementsButtonGroupVertical /> */}
+        <ElementsButtonGroupHorizontal />
+        <ElementsButtonGroupInputGroup />
+        <ElementsButtonGroupVertical />
       </div>
     </div>
   );

@@ -1,6 +1,13 @@
 import React from "react";
 import { Metadata } from "next";
 import Link from "next/link";
+import ElementsButtonsBlock from './ElementsButtonsBlock';
+import ElementsButtonsDefault from './ElementsButtonsDefault';
+import ElementsButtonsOutline from './ElementsButtonsOutline';
+import ElementsButtonsRounded from './ElementsButtonsRounded';
+import ElementsButtonsSizes from './ElementsButtonsSizes';
+import ElementsButtonsSolid from './ElementsButtonsSolid';
+import ElementsButtonsWithIcons from './ElementsButtonsWithIcons';
 
 export const metadata: Metadata = {
   title: "Buttons",
@@ -19,13 +26,13 @@ const Buttons = () => {
         </li>
       </ul>
       <div className="grid grid-cols-1 gap-6 pt-5 lg:grid-cols-2">
-        {/* <ElementsButtonsDefault />
-                <ElementsButtonsRounded />
-                <ElementsButtonsSolid />
-                <ElementsButtonsOutline />
-                <ElementsButtonsSizes />
-                <ElementsButtonsWithIcons />
-                <ElementsButtonsBlock /> */}
+        <ElementsButtonsDefault />
+        <ElementsButtonsRounded />
+        <ElementsButtonsSolid />
+        <ElementsButtonsOutline />
+        <ElementsButtonsSizes />
+        <ElementsButtonsWithIcons />
+        <ElementsButtonsBlock />
       </div>
     </div>
   );

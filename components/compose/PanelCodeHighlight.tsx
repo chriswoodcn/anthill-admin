@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState, ReactNode } from "react";
+import React, { useState, ReactNode, useEffect } from "react";
+import { useCopyToClipboard } from "react-use";
 
+import { IconCopy } from "@tabler/icons-react";
 import CodeHighlight from "../core/CodeHighlight";
 import IconCode from "../icon/icon-code";
+import useEffectOnce from "@/lib/useEffectOnce";
 
 interface PanelCodeHighlightProps {
   children: ReactNode;
@@ -21,6 +24,10 @@ const PanelCodeHighlight = ({
   className = "",
 }: PanelCodeHighlightProps) => {
   const [toggleCode, setToggleCode] = useState(false);
+  const [state, copyToClipboard] = useCopyToClipboard();
+  useEffectOnce(() => {
+    console.log("copyToClipboard state", state);
+  }, [state]);
   return (
     <div className={`panel ${className}`} id={id}>
       <div className="mb-5 flex items-center justify-between">
@@ -39,7 +46,17 @@ const PanelCodeHighlight = ({
       {children}
       {toggleCode && (
         <CodeHighlight>
-          <pre className="language-xml overflow-scroll p-5">{codeHighlight}</pre>
+          <div
+            className="w-5 h-5 flex justify-center items-center absolute right-2 top-2 cursor-pointer active:opacity-50"
+            onClick={() => {
+              if (codeHighlight) copyToClipboard(codeHighlight);
+            }}
+          >
+            <IconCopy size={20} stroke={2} className="stroke-white-4" />
+          </div>
+          <pre className="language-xml overflow-scroll p-5">
+            {codeHighlight}
+          </pre>
         </CodeHighlight>
       )}
     </div>
