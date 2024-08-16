@@ -2,6 +2,11 @@ import IconBell from "@/components/icon/icon-bell";
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import ElementsTooltipsColors from './ElementsTooltipsColors';
+import ElementsTooltipsDefault from './ElementsTooltipsDefault';
+import ElementsTooltipsHtml from './ElementsTooltipsHtml';
+import ElementsTooltipsOptions from './ElementsTooltipsOptions';
+import ElementsTooltipsPlacement from './ElementsTooltipsPlacement';
 
 export const metadata: Metadata = {
   title: "Tooltips",
@@ -36,11 +41,11 @@ const Tooltips = () => {
           </a>
         </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* <ElementsTooltipsDefault />
-                    <ElementsTooltipsPlacement />
-                    <ElementsTooltipsHtml />
-                    <ElementsTooltipsOptions />
-                    <ElementsTooltipsColors /> */}
+          <ElementsTooltipsDefault />
+          <ElementsTooltipsPlacement />
+          <ElementsTooltipsHtml />
+          <ElementsTooltipsOptions />
+          <ElementsTooltipsColors />
         </div>
       </div>
     </div>

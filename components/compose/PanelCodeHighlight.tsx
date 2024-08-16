@@ -7,6 +7,7 @@ import { IconCopy } from "@tabler/icons-react";
 import CodeHighlight from "../core/CodeHighlight";
 import IconCode from "../icon/icon-code";
 import useEffectOnce from "@/lib/useEffectOnce";
+import Tippy from "@tippyjs/react";
 
 interface PanelCodeHighlightProps {
   children: ReactNode;
@@ -24,9 +25,22 @@ const PanelCodeHighlight = ({
   className = "",
 }: PanelCodeHighlightProps) => {
   const [toggleCode, setToggleCode] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [tipContent, setTipContent] = useState("");
   const [state, copyToClipboard] = useCopyToClipboard();
+
   useEffectOnce(() => {
     console.log("copyToClipboard state", state);
+    if (state.error == undefined) {
+      setTipContent("Copied");
+      setVisible(true);
+    } else {
+      setTipContent(state.error!!.message);
+      setVisible(true);
+    }
+    setTimeout(() => {
+      setVisible(false);
+    }, 1000);
   }, [state]);
   return (
     <div className={`panel ${className}`} id={id}>
@@ -46,14 +60,21 @@ const PanelCodeHighlight = ({
       {children}
       {toggleCode && (
         <CodeHighlight>
-          <div
-            className="w-5 h-5 flex justify-center items-center absolute right-2 top-2 cursor-pointer active:opacity-50"
-            onClick={() => {
-              if (codeHighlight) copyToClipboard(codeHighlight);
-            }}
+          <Tippy
+            content={tipContent}
+            visible={visible}
+            placement="bottom-end"
+            onClickOutside={() => setVisible(false)}
           >
-            <IconCopy size={20} stroke={2} className="stroke-white-4" />
-          </div>
+            <div
+              className="w-5 h-5 flex justify-center items-center absolute right-2 top-2 cursor-pointer active:opacity-50"
+              onClick={() => {
+                if (codeHighlight) copyToClipboard(codeHighlight);
+              }}
+            >
+              <IconCopy size={20} stroke={2} className="stroke-white-4" />
+            </div>
+          </Tippy>
           <pre className="language-xml overflow-scroll p-5">
             {codeHighlight}
           </pre>
