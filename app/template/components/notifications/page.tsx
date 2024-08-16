@@ -1,13 +1,14 @@
-import ComponentsNotificationsBasic from '@/components/components/notifications/components-notifications-basic';
-import ComponentsNotificationsBgColor from '@/components/components/notifications/components-notifications-bg-color';
-import ComponentsNotificationsClickCallback from '@/components/components/notifications/components-notifications-click-callback';
-import ComponentsNotificationsDuration from '@/components/components/notifications/components-notifications-duration';
-import ComponentsNotificationsNoAction from '@/components/components/notifications/components-notifications-no-action';
-import ComponentsNotificationsPosition from '@/components/components/notifications/components-notifications-position';
-import IconBell from '@/components/icon/icon-bell';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+
+import IconBell from '@/components/icon/icon-bell';
+import ComponentsNotificationsBasic from './ComponentsNotificationsBasic';
+import ComponentsNotificationsBgColor from './ComponentsNotificationsBgColor';
+import ComponentsNotificationsClickCallback from './ComponentsNotificationsClickCallback';
+import ComponentsNotificationsDuration from './ComponentsNotificationsDuration';
+import ComponentsNotificationsNoAction from './ComponentsNotificationsNoAction';
+import ComponentsNotificationsPosition from './ComponentsNotificationsPosition';
 
 export const metadata: Metadata = {
     title: 'Notifications',
