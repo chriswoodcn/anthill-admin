@@ -4,6 +4,8 @@ import IconSearch from "@/components/icon/icon-search";
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import ElementsSearchLive from "./ElementsSearchLive";
+import ElementsSearchOverlay from "./ElementsSearchOverlay";
 
 export const metadata: Metadata = {
   title: "Search",
@@ -23,8 +25,8 @@ const Search = () => {
         </li>
       </ul>
       <div className="grid grid-cols-1 gap-6 pt-5 lg:grid-cols-2">
-        {/* <ElementsSearchLive />
-                <ElementsSearchOverlay /> */}
+        <ElementsSearchLive />
+        <ElementsSearchOverlay />
         <PanelCodeHighlight
           title="Search Box"
           codeHighlight={`import { useState} from 'react';
