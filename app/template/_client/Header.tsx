@@ -487,7 +487,7 @@ const Header = () => {
               >
                 <ul className="w-[230px] !py-0 font-semibold text-black-7 dark:text-white-6 dark:text-white-light/90 bg-white shadow-lg rounded-lg">
                   <li>
-                    <div className="flex items-center px-4 py-4">
+                    <div className="flex items-center">
                       <Image
                         className="h-10 w-10 rounded-md object-cover"
                         src="/assets/images/profile/profile-1.jpeg"
@@ -512,7 +512,7 @@ const Header = () => {
                   <li>
                     <Link
                       href="/users/profile"
-                      className="hover:text-primary dark:hover:text-white flex justify-start items-center px-4 py-2 "
+                      className="hover:text-primary dark:hover:text-white flex justify-start items-center"
                     >
                       <IconUser className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                       Profile
@@ -521,7 +521,7 @@ const Header = () => {
                   <li>
                     <Link
                       href="/apps/mailbox"
-                      className="hover:text-primary dark:hover:text-white flex justify-start items-center px-4 py-2"
+                      className="hover:text-primary dark:hover:text-white flex justify-start items-center"
                     >
                       <IconMail className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                       Inbox
@@ -530,7 +530,7 @@ const Header = () => {
                   <li>
                     <Link
                       href="/auth/boxed-lockscreen"
-                      className="hover:text-primary dark:hover:text-white flex justify-start items-center px-4 py-2"
+                      className="hover:text-primary dark:hover:text-white flex justify-start items-center"
                     >
                       <IconLockDots className="h-4.5 w-4.5 shrink-0 ltr:mr-2 rtl:ml-2" />
                       Lock Screen
@@ -539,7 +539,7 @@ const Header = () => {
                   <li className="border-t border-white-light dark:border-white-light/10">
                     <Link
                       href="/auth/boxed-signin"
-                      className="!py-3 text-danger flex justify-start items-center px-4"
+                      className="!py-3 text-danger flex justify-start items-center"
                     >
                       <IconLogout className="h-4.5 w-4.5 shrink-0 rotate-90 ltr:mr-2 rtl:ml-2" />
                       Sign Out
