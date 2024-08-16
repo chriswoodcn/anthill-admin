@@ -10,7 +10,7 @@ import IconPhone from "@/components/icon/icon-phone";
 import IconSettings from "@/components/icon/icon-settings";
 import IconUser from "@/components/icon/icon-user";
 import Image from "@/components/core/Image";
-import PanelCodeHighlight from '../timeline/PanelCodeHighlight';
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsTabsBorderTop = () => {
   const [isMounted, setIsMounted] = useState(false);

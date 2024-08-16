@@ -6,7 +6,8 @@ import Image from "@/components/core/Image";
 import IconGallery from "@/components/icon/icon-gallery";
 import IconGlobe from "@/components/icon/icon-globe";
 import IconTxtFile from "@/components/icon/icon-txt-file";
-import PanelCodeHighlight from "./PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
+
 
 export const metadata: Metadata = {
   title: "Timeline",

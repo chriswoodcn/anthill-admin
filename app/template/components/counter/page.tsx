@@ -1,5 +1,4 @@
-import ComponentsCounterSimple from '@/components/components/counter/components-counter-simple';
-import ComponentsCounterWithIcon from '@/components/components/counter/components-counter-with-icon';
+
 import IconBell from '@/components/icon/icon-bell';
 import { Metadata } from 'next';
 import Link from 'next/link';
@@ -33,8 +32,8 @@ const Counter = () => {
                     </a>
                 </div>
                 <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
-                    <ComponentsCounterSimple />
-                    <ComponentsCounterWithIcon />
+                    {/* <ComponentsCounterSimple />
+                    <ComponentsCounterWithIcon /> */}
                 </div>
             </div>
         </div>

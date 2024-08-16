@@ -4,7 +4,7 @@ import IconMessageDots from '@/components/icon/icon-message-dots';
 import IconPencil from '@/components/icon/icon-pencil';
 import IconTrashLines from '@/components/icon/icon-trash-lines';
 import IconXCircle from '@/components/icon/icon-x-circle';
-import PanelCodeHighlight from '@/components/panel-code-highlight';
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';

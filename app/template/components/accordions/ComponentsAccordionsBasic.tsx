@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import AnimateHeight from "react-animate-height";
 
-import PanelCodeHighlight from '../timeline/PanelCodeHighlight';
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 import IconCaretDown from "@/components/icon/icon-caret-down";
 
 const ComponentsAccordionsBasic = () => {

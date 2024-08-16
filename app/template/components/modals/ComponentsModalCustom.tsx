@@ -11,12 +11,10 @@ import Image from "@/components/core/Image";
 import { Transition, Dialog, Tab } from "@headlessui/react";
 import React, { Fragment, useRef, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 import { RootState, useAppSelector } from "@/store";
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
+
 
 const ComponentsModalCustom = () => {
   const swiperRef = useRef<any>();

@@ -10,7 +10,7 @@ import IconInfoCircle from "@/components/icon/icon-info-circle";
 import IconPhone from "@/components/icon/icon-phone";
 import IconUser from "@/components/icon/icon-user";
 import Image from "@/components/core/Image";
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsTabsIcon = () => {
   const [isMounted, setIsMounted] = useState(false);

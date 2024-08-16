@@ -7,7 +7,7 @@ import IconAirplay from "@/components/icon/icon-airplay";
 import IconBox from "@/components/icon/icon-box";
 import IconCaretDown from "@/components/icon/icon-caret-down";
 import IconLayout from "@/components/icon/icon-layout";
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsAccordionsIcons = () => {
   const [active2, setActive2] = useState<string>("1");

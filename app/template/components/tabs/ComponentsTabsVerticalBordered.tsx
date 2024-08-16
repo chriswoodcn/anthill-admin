@@ -5,7 +5,7 @@ import React, { Fragment, useState } from "react";
 
 import useEffectOnce from "@/lib/useEffectOnce";
 
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 import Image from "@/components/core/Image";
 
 const ComponentsTabsVerticalBordered = () => {

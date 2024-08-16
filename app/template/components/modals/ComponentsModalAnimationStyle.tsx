@@ -1,11 +1,12 @@
 "use client";
-import IconX from "@/components/icon/icon-x";
 
 import { RootState } from "@/store";
 import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 import { useSelector } from "react-redux";
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
+import IconX from "@/components/icon/icon-x";
 
 const ComponentsModalAnimationStyle = () => {
   const isRtl =

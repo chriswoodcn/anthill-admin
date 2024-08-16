@@ -5,7 +5,7 @@ import React, { Fragment, useEffect, useState } from "react";
 
 import useEffectOnce from "@/lib/useEffectOnce";
 
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 import IconHome from "@/components/icon/icon-home";
 import IconPhone from "@/components/icon/icon-phone";
 import IconSettings from "@/components/icon/icon-settings";

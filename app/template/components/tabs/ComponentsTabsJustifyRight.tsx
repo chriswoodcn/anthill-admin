@@ -6,7 +6,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import useEffectOnce from "@/lib/useEffectOnce";
 
 import Image from "@/components/core/Image";
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsTabsJustifyRight = () => {
   const [isMounted, setIsMounted] = useState(false);

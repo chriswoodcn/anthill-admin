@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import AnimateHeight from "react-animate-height";
 
 import IconCaretDown from "@/components/icon/icon-caret-down";
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsAccordionsWithoutSpacing = () => {
   const [active1, setActive1] = useState<string>("1");

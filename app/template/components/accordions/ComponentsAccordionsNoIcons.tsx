@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import AnimateHeight from "react-animate-height";
 
-import PanelCodeHighlight from '../timeline/PanelCodeHighlight';
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsAccordionsNoIcons = () => {
   const [active3, setActive3] = useState<string>("1");

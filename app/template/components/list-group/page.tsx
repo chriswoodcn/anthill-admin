@@ -1,7 +1,7 @@
 import IconDroplet from '@/components/icon/icon-droplet';
 import IconMail from '@/components/icon/icon-mail';
 import IconMapPin from '@/components/icon/icon-map-pin';
-import PanelCodeHighlight from '@/components/panel-code-highlight';
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';

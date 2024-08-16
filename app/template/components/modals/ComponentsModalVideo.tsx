@@ -2,7 +2,7 @@
 import IconX from "@/components/icon/icon-x";
 import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
-import PanelCodeHighlight from '../timeline/PanelCodeHighlight';
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsModalVideo = () => {
   const [modal8, setModal8] = useState(false);

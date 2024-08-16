@@ -9,7 +9,7 @@ import IconHome from "@/components/icon/icon-home";
 import IconPhone from "@/components/icon/icon-phone";
 import IconUser from "@/components/icon/icon-user";
 import Image from "@/components/core/Image";
-import PanelCodeHighlight from "../timeline/PanelCodeHighlight";
+import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsTabsLine = () => {
   const [isMounted, setIsMounted] = useState(false);
