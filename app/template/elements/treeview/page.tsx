@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import ElementsTreeviewAnimated from "./ElementsTreeviewAnimated";
+import ElementsTreeviewBasic from "./ElementsTreeviewBasic";
 
 export const metadata: Metadata = {
   title: "Treeview",
@@ -20,8 +22,8 @@ const Treeview = () => {
         </li>
       </ul>
       <div className="grid grid-cols-1 gap-6 pt-6 lg:grid-cols-2">
-        {/* <ElementsTreeviewAnimated />
-                <ElementsTreeviewBasic /> */}
+        <ElementsTreeviewAnimated />
+        <ElementsTreeviewBasic />
       </div>
     </div>
   );
