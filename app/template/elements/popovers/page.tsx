@@ -2,6 +2,11 @@ import IconBell from "@/components/icon/icon-bell";
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
+import ElementsPopoversColors from "./ElementsPopoversColors";
+import ElementsPopoversDefault from "./ElementsPopoversDefault";
+import ElementsPopoversDismissible from "./ElementsPopoversDismissible";
+import ElementsPopoversOptions from "./ElementsPopoversOptions";
+import ElementsPopoversPlacement from "./ElementsPopoversPlacement";
 
 export const metadata: Metadata = {
   title: "Popovers",
@@ -36,11 +41,11 @@ const Popovers = () => {
           </a>
         </div>
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-          {/* <ElementsPopoversDefault />
-                    <ElementsPopoversPlacement />
-                    <ElementsPopoversDismissible />
-                    <ElementsPopoversOptions />
-                    <ElementsPopoversColors /> */}
+          <ElementsPopoversDefault />
+          <ElementsPopoversPlacement />
+          <ElementsPopoversDismissible />
+          <ElementsPopoversOptions />
+          <ElementsPopoversColors />
         </div>
       </div>
     </div>
