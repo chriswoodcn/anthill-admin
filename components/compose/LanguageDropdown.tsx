@@ -24,7 +24,7 @@ const LanguageDropdown = ({
   const { i18n } = useTranslation();
   const isRtl =
     useAppSelector((state: RootState) => state.adminSetting.rtlClass) === "rtl";
-  const themeConfig = useAppSelector((state: RootState) => state.adminSetting);
+  const adminSetting = useAppSelector((state: RootState) => state.adminSetting);
 
   const setLocale = (flag: string) => {
     if (flag.toLowerCase() === "ae") {
@@ -85,7 +85,7 @@ const LanguageDropdown = ({
         >
           <PerfectScrollbar className="max-h-[300px] overflow-y-scroll">
             <ul className="grid w-[160px] grid-cols-1 gap-2 font-semibold">
-              {themeConfig.languageList.map((item: any) => {
+              {adminSetting.languageList.map((item: any) => {
                 return (
                   <li key={item.code}>
                     <button

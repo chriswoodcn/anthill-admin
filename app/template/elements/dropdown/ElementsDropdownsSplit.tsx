@@ -14,7 +14,7 @@ const ElementsDropdownsSplit = () => {
       title="Split"
       codeHighlight={`import Dropdown from '@/components/dropdown';
 
-const isRtl = useSelector((state: RootState) => state.themeConfig.rtlClass) === 'rtl';
+const isRtl = useSelector((state: RootState) => state.adminSetting.rtlClass) === 'rtl';
 
 <div className="inline-flex">
     <button className="btn btn-primary ltr:rounded-r-none rtl:rounded-l-none">Action</button>

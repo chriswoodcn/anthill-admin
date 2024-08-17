@@ -18,7 +18,7 @@ import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 
 const ComponentsModalCustom = () => {
   const swiperRef = useRef<any>();
-  const themeConfig = useAppSelector((state: RootState) => state.adminSetting);
+  const adminSetting = useAppSelector((state: RootState) => state.adminSetting);
   const items = ["carousel1.jpeg", "carousel2.jpeg", "carousel3.jpeg"];
   const [modal17, setModal17] = useState(false);
   const [modal18, setModal18] = useState(false);
@@ -536,8 +536,8 @@ import { useState, Fragment } from 'react';
                                 pagination={{ clickable: true }}
                                 className="swiper mx-auto mb-5 max-w-3xl"
                                 id="slider1"
-                                dir={themeConfig.rtlClass}
-                                key={themeConfig.rtlClass === 'rtl' ? 'true' : 'false'}
+                                dir={adminSetting.rtlClass}
+                                key={adminSetting.rtlClass === 'rtl' ? 'true' : 'false'}
                             >
                                 <div className="swiper-wrapper">
                                     {items.map((item, i) => {
@@ -1219,8 +1219,8 @@ import { useState, Fragment } from 'react';
                       className="swiper mx-auto mb-5 max-w-3xl"
                       id="slider1"
                       parallax={true}
-                      dir={themeConfig.rtlClass}
-                      key={themeConfig.rtlClass === "rtl" ? "true" : "false"}
+                      dir={adminSetting.rtlClass}
+                      key={adminSetting.rtlClass === "rtl" ? "true" : "false"}
                     >
                       <div className="swiper-wrapper">
                         {items.map((item, i) => {

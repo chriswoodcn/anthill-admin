@@ -42,8 +42,8 @@ const adminSetting = useAppSelector((state: RootState) => state.adminSetting);
         nextEl: '.swiper-button-next-ex4',
         prevEl: '.swiper-button-prev-ex4',
     }}
-    dir={themeConfig.rtlClass}
-    key={themeConfig.rtlClass === 'rtl' ? 'true' : 'false'}
+    dir={adminSetting.rtlClass}
+    key={adminSetting.rtlClass === 'rtl' ? 'true' : 'false'}
 >
     <div className="swiper-wrapper">
         {items.map((item, i) => {

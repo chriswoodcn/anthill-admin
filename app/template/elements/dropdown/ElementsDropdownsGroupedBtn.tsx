@@ -15,7 +15,7 @@ const ElementsDropdownsGroupedBtn = () => {
       title="Grouped Dropdown Buttons"
       codeHighlight={`import Dropdown from '@/components/dropdown';
 
-const isRtl = useSelector((state: RootState) => state.themeConfig.rtlClass) === 'rtl';
+const isRtl = useSelector((state: RootState) => state.adminSetting.rtlClass) === 'rtl';
 
 <div className="relative inline-flex align-middle">
     <button type="button" className="btn btn-secondary ltr:rounded-r-none rtl:rounded-l-none">
