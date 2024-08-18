@@ -171,7 +171,7 @@ const Header = () => {
       }`}
     >
       <div className="shadow-md">
-        <div className="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-black-9">
+        <div className="relative flex w-full items-center bg-white px-5 py-2.5 dark:bg-black-8">
           <div className="horizontal-logo flex items-center justify-between ltr:mr-2 rtl:ml-2 lg:hidden">
             <Link
               href="/template/"
@@ -552,7 +552,7 @@ const Header = () => {
         </div>
 
         {/* horizontal menu */}
-        <ul className="horizontal-menu hidden border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-black-9 dark:text-white-6 lg:space-x-1.5 xl:space-x-8">
+        <ul className="horizontal-menu hidden border-t border-[#ebedf2] bg-white px-6 py-1.5 font-semibold text-black rtl:space-x-reverse dark:border-[#191e3a] dark:bg-black-8 dark:text-white-6 lg:space-x-1.5 xl:space-x-8">
           <li className="menu nav-item relative">
             <button type="button" className="nav-link">
               <div className="flex items-center">

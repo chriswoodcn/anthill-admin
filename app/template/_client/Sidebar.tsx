@@ -99,7 +99,7 @@ const Sidebar = () => {
           isDarkMode ? "text-white-3" : "text-black-7"
         }`}
       >
-        <div className="h-full bg-white dark:bg-black-9">
+        <div className="h-full bg-white dark:bg-black-8">
           <div className="flex items-center justify-between px-4 py-3">
             <Link
               href="/template/"
