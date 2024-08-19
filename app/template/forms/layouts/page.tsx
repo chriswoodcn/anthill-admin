@@ -1,14 +1,14 @@
-import ComponentsFormsLayoutsActionsButtons from '@/components/forms/layouts/components-forms-layouts-actions-buttons';
-import ComponentsFormsLayoutsAutoSizing from '@/components/forms/layouts/components-forms-layouts-auto-sizing';
-import ComponentsFormsLayoutsGrid from '@/components/forms/layouts/components-forms-layouts-grid';
-import ComponentsFormsLayoutsHorizontal from '@/components/forms/layouts/components-forms-layouts-horizontal';
-import ComponentsFormsLayoutsInline from '@/components/forms/layouts/components-forms-layouts-inline';
-import ComponentsFormsLayoutsLogin from '@/components/forms/layouts/components-forms-layouts-login';
-import ComponentsFormsLayoutsRegistration from '@/components/forms/layouts/components-forms-layouts-registration';
-import ComponentsFormsLayoutsStack from '@/components/forms/layouts/components-forms-layouts-stack';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import ComponentsFormsLayoutsActionsButtons from './ComponentsFormsLayoutsActionsButtons';
+import ComponentsFormsLayoutsAutoSizing from './ComponentsFormsLayoutsAutoSizing';
+import ComponentsFormsLayoutsGrid from './ComponentsFormsLayoutsGrid';
+import ComponentsFormsLayoutsHorizontal from './ComponentsFormsLayoutsHorizontal';
+import ComponentsFormsLayoutsInline from './ComponentsFormsLayoutsInline';
+import ComponentsFormsLayoutsLogin from './ComponentsFormsLayoutsLogin';
+import ComponentsFormsLayoutsRegistration from './ComponentsFormsLayoutsRegistration';
+import ComponentsFormsLayoutsStack from './ComponentsFormsLayoutsStack';
 
 export const metadata: Metadata = {
     title: 'Layouts',
