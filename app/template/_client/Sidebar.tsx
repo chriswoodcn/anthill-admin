@@ -47,6 +47,7 @@ const Sidebar = () => {
   const isDarkMode = useAppSelector(
     (state: RootState) => state.adminSetting.isDarkMode
   );
+  const menu = useAppSelector((state: RootState) => state.adminSetting.menu);
   const toggleMenu = (value: string) => {
     setCurrentMenu((oldValue) => {
       return oldValue === value ? "" : value;
@@ -548,7 +549,7 @@ const Sidebar = () => {
                 </Link>
               </li>
 
-              <li className="menu nav-item">
+              {/* <li className="menu nav-item">
                 <Link href="/template/widgets" className="group">
                   <div className="flex items-center">
                     <IconMenuWidgets className="shrink-0 group-hover:!text-primary" />
@@ -557,7 +558,7 @@ const Sidebar = () => {
                     </span>
                   </div>
                 </Link>
-              </li>
+              </li> */}
 
               <li className="menu nav-item">
                 <Link href="/template/font-icons" className="group">

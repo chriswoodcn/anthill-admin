@@ -47,7 +47,6 @@ const configuraton = {
     navbar: "navbar-sticky", // navbar-sticky, navbar-floating, navbar-static
   },
   AuthField: "token",
-  FontFamily: ["Nunito", "sans-serif"],
   Colors: {
     DefaultLevel: 7,
     Primary: "#1badaa",

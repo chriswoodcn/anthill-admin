@@ -31,7 +31,7 @@
     @apply scroll-smooth;
   }
   body {
-    @apply bg-white-8 dark:bg-black-7 font-nunito text-black-7 dark:text-white-7;
+    @apply bg-white-8 dark:bg-black-7 text-black-7 dark:text-white-7 font-nunito;
   }
   /* #endregion */
   .main-container .main-content {

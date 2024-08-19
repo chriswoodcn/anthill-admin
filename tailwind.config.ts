@@ -18,7 +18,7 @@ const config: Config = {
     },
     extend: {
       fontFamily: {
-        nunito: configuraton.FontFamily,
+        nunito: ['var(--font-nunito)'],
       },
       colors: {
         primary: {
