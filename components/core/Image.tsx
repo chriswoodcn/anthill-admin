@@ -1,3 +1,5 @@
+"use client";
+
 import { withBasePath } from "@/lib";
 
 interface Props extends Record<string, any> {

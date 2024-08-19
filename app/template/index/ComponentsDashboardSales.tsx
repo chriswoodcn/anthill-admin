@@ -1,4 +1,5 @@
 "use client";
+
 import PerfectScrollbar from "react-perfect-scrollbar";
 import ReactApexChart from "react-apexcharts";
 import Link from "next/link";
