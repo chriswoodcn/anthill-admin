@@ -1,19 +1,19 @@
-import ComponentsFormsInputGroupButtonAddons from '@/components/forms/input-group/components-forms-input-group-button-addons';
-import ComponentsFormsInputGroupButtonsWithDropdowns from '@/components/forms/input-group/components-forms-input-group-buttons-with-dropdowns';
-import ComponentsFormsInputGroupCheckboxes from '@/components/forms/input-group/components-forms-input-group-checkboxes';
-import ComponentsFormsInputGroupDefault from '@/components/forms/input-group/components-forms-input-group-default';
-import ComponentsFormsInputGroupDropdownIcon from '@/components/forms/input-group/components-forms-input-group-dropdown-icon';
-import ComponentsFormsInputGroupMultipleAddons from '@/components/forms/input-group/components-forms-input-group-multiple-addons';
-import ComponentsFormsInputGroupMultipleInputs from '@/components/forms/input-group/components-forms-input-group-multiple-inputs';
-import ComponentsFormsInputGroupRadio from '@/components/forms/input-group/components-forms-input-group-radio';
-import ComponentsFormsInputGroupSegmentedButtons from '@/components/forms/input-group/components-forms-input-group-segmented-buttons';
-import ComponentsFormsInputGroupSimpleIcon from '@/components/forms/input-group/components-forms-input-group-simple-icon';
-import ComponentsFormsInputGroupSizes from '@/components/forms/input-group/components-forms-input-group-sizes';
-import ComponentsFormsInputGroupSpinningIcon from '@/components/forms/input-group/components-forms-input-group-spinning-icon';
-import ComponentsFormsInputGroupSwitch from '@/components/forms/input-group/components-forms-input-group-switch';
 import { Metadata } from 'next';
 import Link from 'next/link';
 import React from 'react';
+import ComponentsFormsInputGroupButtonAddons from './ComponentsFormsInputGroupButtonAddons';
+import ComponentsFormsInputGroupButtonsWithDropdowns from './ComponentsFormsInputGroupButtonsWithDropdowns';
+import ComponentsFormsInputGroupCheckboxes from './ComponentsFormsInputGroupCheckboxes';
+import ComponentsFormsInputGroupDefault from './ComponentsFormsInputGroupDefault';
+import ComponentsFormsInputGroupDropdownIcon from './ComponentsFormsInputGroupDropdownIcon';
+import ComponentsFormsInputGroupMultipleAddons from './ComponentsFormsInputGroupMultipleAddons';
+import ComponentsFormsInputGroupMultipleInputs from './ComponentsFormsInputGroupMultipleInputs';
+import ComponentsFormsInputGroupRadio from './ComponentsFormsInputGroupRadio';
+import ComponentsFormsInputGroupSegmentedButtons from './ComponentsFormsInputGroupSegmentedButtons';
+import ComponentsFormsInputGroupSimpleIcon from './ComponentsFormsInputGroupSimpleIcon';
+import ComponentsFormsInputGroupSizes from './ComponentsFormsInputGroupSizes';
+import ComponentsFormsInputGroupSpinningIcon from './ComponentsFormsInputGroupSpinningIcon';
+import ComponentsFormsInputGroupSwitch from './ComponentsFormsInputGroupSwitch';
 
 export const metadata: Metadata = {
     title: 'Input Group',
