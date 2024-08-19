@@ -30,7 +30,6 @@ const PanelCodeHighlight = ({
   const [state, copyToClipboard] = useCopyToClipboard();
 
   useEffectOnce(() => {
-    console.log("copyToClipboard state", state);
     if (state.error == undefined) {
       setTipContent("Copied");
       setVisible(true);
@@ -61,13 +60,14 @@ const PanelCodeHighlight = ({
       {toggleCode && (
         <CodeHighlight>
           <Tippy
+            className="bg-black-8 p-1 rounded-lg"
             content={tipContent}
             visible={visible}
             placement="bottom-end"
             onClickOutside={() => setVisible(false)}
           >
             <div
-              className="w-5 h-5 flex justify-center items-center absolute right-2 top-2 cursor-pointer active:opacity-50"
+              className="w-5 h-5 flex justify-center items-center absolute right-2 top-2 cursor-pointer active:opacity-50 z-10"
               onClick={() => {
                 if (codeHighlight) copyToClipboard(codeHighlight);
               }}
