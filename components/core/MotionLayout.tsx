@@ -1,6 +1,6 @@
 "use client";
 
-import useEffectOnce from "@/lib/useEffectOnce";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { motion } from "framer-motion";
 import { PropsWithChildren, useEffect, useState } from "react";
 import { useImmer } from "use-immer";

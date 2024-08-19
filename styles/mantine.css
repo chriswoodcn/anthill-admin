@@ -1,0 +1,10 @@
+@import "@mantine/core/styles.layer.css";
+@import "mantine-datatable/styles.layer.css";
+@layer mantine-datatable-override {
+  :root {
+    --mantine-datatable-background-color-light: transparent;
+    --mantine-datatable-background-color-dark: transparent;
+  }
+}
+/* 👇 Make sure the styles are applied in the correct order */
+@layer mantine, mantine-datatable, mantine-datatable-override;

@@ -6,7 +6,7 @@ const ComponentsTablesContextual = () => {
     <PanelCodeHighlight
       title="Contextual"
       codeHighlight={`<div className="table-responsive mb-5">
-    <table>
+    <table className="anthill-table">
         <thead>
             <tr>
                 <th>#</th>
@@ -69,7 +69,7 @@ const ComponentsTablesContextual = () => {
 </div>`}
     >
       <div className="table-responsive mb-5">
-        <table>
+        <table className="anthill-table">
           <thead>
             <tr>
               <th>#</th>

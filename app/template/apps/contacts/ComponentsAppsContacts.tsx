@@ -4,7 +4,7 @@ import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-import Image from "@/components/core/Image"
+import Image from "@/components/core/Image";
 import IconFacebook from "@/components/icon/icon-facebook";
 import IconInstagram from "@/components/icon/icon-instagram";
 import IconLayoutGrid from "@/components/icon/icon-layout-grid";
@@ -345,9 +345,9 @@ const ComponentsAppsContacts = () => {
       {value === "list" && (
         <div className="panel mt-5 overflow-hidden border-0 p-0">
           <div className="table-responsive">
-            <table className="table-striped table-hover">
+            <table className="anthill-table table-striped table-hover">
               <thead>
-                <tr>
+                <tr className="!bg-white-7">
                   <th>Name</th>
                   <th>Email</th>
                   <th>Location</th>

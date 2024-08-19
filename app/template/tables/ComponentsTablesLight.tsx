@@ -80,7 +80,7 @@ const tableData = [
 ];
 
 <div className="table-responsive mb-5">
-    <table className="table-hover">
+    <table className="anthill-table table-hover">
         <thead>
             <tr className="!bg-transparent dark:!bg-transparent">
                 <th>#</th>
@@ -115,7 +115,7 @@ const tableData = [
 </div>`}
         >
             <div className="table-responsive mb-5">
-                <table className="table-hover">
+                <table className="anthill-table table-hover">
                     <thead>
                         <tr className="!bg-transparent dark:!bg-transparent">
                             <th>#</th>

@@ -1,9 +1,6 @@
 @import "./animate.css";
-@import "./mantine-datatable.css";
-@import "swiper/css";
-@import "swiper/css/navigation";
-@import "swiper/css/pagination";
-@import "swiper/css/scrollbar";
+@import "./swiper.css";
+@import "./mantine.css";
 
 @tailwind base;
 @tailwind components;
@@ -417,45 +414,70 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   .table-responsive {
     @apply overflow-auto;
   }
-  table {
+  table.anthill-table {
     @apply w-full !border-collapse;
   }
-  table thead tr,
-  table tfoot tr {
-    @apply border-b-0 !bg-[#f6f8fa]  dark:!bg-[#1a2941];
+  table.anthill-table thead tr,
+  table.anthill-table tfoot tr {
+    @apply border-b-0 bg-white-8  dark:bg-black-8;
   }
-  table thead tr th,
-  table tfoot tr th,
-  table tbody tr td {
+  table.anthill-table thead tr th,
+  table.anthill-table tfoot tr th,
+  table.anthill-table tbody tr td {
     @apply px-4 py-3 ltr:text-left rtl:text-right;
   }
-  table thead tr th,
-  table tfoot tr th {
+  table.anthill-table thead tr th,
+  table.anthill-table tfoot tr th {
     @apply font-semibold;
   }
-  table tbody tr {
-    @apply border-b !border-white-7/40 dark:!border-[#191e3a];
+  table.anthill-table tbody tr {
+    @apply border-b border-white-8/40 dark:border-black-8/40;
   }
-  table.table-hover tbody tr {
-    @apply hover:!bg-white-7/20 dark:hover:!bg-[#1a2941]/40;
+  table.anthill-table.table-hover tbody tr {
+    @apply hover:bg-white-8/20 dark:hover:border-black-8/20;
   }
-  table.table-striped tbody tr:nth-child(odd) {
-    @apply !bg-white-7/20 dark:!bg-[#1a2941]/40;
+  table.anthill-table.table-striped tbody tr:nth-child(odd) {
+    @apply bg-white-8/10 dark:border-black-8/10;
+  }
+  /* mantine-datatable */
+  .mantine-datatable {
+    @apply w-full !border-collapse;
+  }
+  .mantine-datatable thead tr,
+  .mantine-datatable tfoot tr {
+    @apply border-b-0 !bg-white-8  dark:!bg-black-8;
+  }
+  .mantine-datatable thead tr th,
+  .mantine-datatable tfoot tr th,
+  .mantine-datatable tbody tr td {
+    @apply px-4 py-3 ltr:text-left rtl:text-right;
+  }
+  .mantine-datatable thead tr th,
+  .mantine-datatable tfoot tr th {
+    @apply font-semibold;
+  }
+  .mantine-datatable tbody tr {
+    @apply border-b !border-white-8/40 dark:border-black-8/40;
+  }
+  .mantine-datatable.table-hover tbody tr {
+    @apply hover:!bg-white-8/20 dark:hover:!border-black-8/20;
+  }
+  .mantine-datatable.table-striped tbody tr:nth-child(odd) {
+    @apply !bg-white-8/10 dark:!border-black-8/10;
+  }
+  .mantine-datatable.table-bordered table thead tr th,
+  .mantine-datatable.table-bordered table tbody tr td {
+    @apply !border !border-solid !border-[#f6f7fa] dark:!border-[#191e3a];
   }
 
-  table.dataTable-table tbody tr th,
-  table.dataTable-table tbody tr td {
-    @apply border-b border-white-light/40 px-4 py-3 ltr:text-left rtl:text-right dark:border-[#191e3a];
+  .mantine-datatable.table-compact table thead tr th,
+  .mantine-datatable.table-compact table tbody tr td {
+    @apply !py-2 !px-3;
   }
-  table.dataTable-table tbody tr:last-child td {
-    @apply border-b-0;
-  }
-
   /* code hightlight */
   pre {
     direction: ltr;
   }
-
   /* dropdown */
   .dropdown ul {
     @apply whitespace-nowrap bg-white dark:bg-black-7 rounded-lg shadow-lg space-y-4 p-4;

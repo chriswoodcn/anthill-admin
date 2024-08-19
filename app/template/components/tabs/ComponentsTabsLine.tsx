@@ -3,7 +3,7 @@
 import { Tab } from "@headlessui/react";
 import React, { Fragment, useEffect, useState } from "react";
 
-import useEffectOnce from "@/lib/useEffectOnce";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
 
 import IconHome from "@/components/icon/icon-home";
 import IconPhone from "@/components/icon/icon-phone";

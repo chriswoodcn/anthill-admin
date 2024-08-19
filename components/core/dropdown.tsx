@@ -1,6 +1,6 @@
 "use client";
 
-import useEffectOnce from '@/lib/useEffectOnce';
+import useEffectOnce from '@/lib/hooks/useEffectOnce';
 import {
   forwardRef,
   useImperativeHandle,

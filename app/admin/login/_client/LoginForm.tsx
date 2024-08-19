@@ -8,7 +8,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import logger from "@/lib/logger";
 import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
 import { IconUser, IconX, IconEyeClosed, IconEye } from "@tabler/icons-react";
-import useEffectOnce from "@/lib/useEffectOnce";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { useAppDispatch } from "@/store";
 import useSWR from "swr";
 import { nextFetcher } from "@/lib/fetcher";

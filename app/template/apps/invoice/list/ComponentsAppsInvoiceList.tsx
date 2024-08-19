@@ -208,7 +208,7 @@ const ComponentsAppsInvoiceList = () => {
   return (
     <div className="panel border-white-light px-0 dark:border-[#1b2e4b]">
       <div className="invoice-table">
-        <div className="mb-4.5 flex flex-col gap-5 px-5 md:flex-row md:items-center">
+        <div className="mb-5 flex flex-col gap-5 px-5 md:flex-row md:items-center">
           <div className="flex items-center gap-2">
             <button
               type="button"

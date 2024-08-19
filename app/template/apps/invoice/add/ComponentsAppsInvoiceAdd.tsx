@@ -481,7 +481,7 @@ const ComponentsAppsInvoiceAdd = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8">
+        <div className="mt-8 px-4">
           <div className="table-responsive">
             <table>
               <thead>

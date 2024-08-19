@@ -6,7 +6,7 @@ import { useCopyToClipboard } from "react-use";
 import { IconCopy } from "@tabler/icons-react";
 import CodeHighlight from "../core/CodeHighlight";
 import IconCode from "../icon/icon-code";
-import useEffectOnce from "@/lib/useEffectOnce";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import Tippy from "@tippyjs/react";
 
 interface PanelCodeHighlightProps {

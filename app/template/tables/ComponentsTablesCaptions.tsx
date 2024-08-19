@@ -73,7 +73,7 @@ const ComponentsTablesCaptions = () => {
 ];
 
 <div className="table-responsive mb-5">
-    <table>
+    <table className="anthill-table">
         <thead>
             <tr>
                 <th>#</th>
@@ -118,7 +118,7 @@ const ComponentsTablesCaptions = () => {
 </div>`}
     >
       <div className="table-responsive mb-5">
-        <table>
+        <table className="anthill-table">
           <thead>
             <tr>
               <th>#</th>

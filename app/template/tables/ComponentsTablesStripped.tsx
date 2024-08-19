@@ -79,7 +79,7 @@ const tableData = [
 ];
 
 <div className="table-responsive mb-5">
-    <table className="table-striped">
+    <table className="anhill-table table-striped">
         <thead>
             <tr>
                 <th>Name</th>
@@ -112,7 +112,7 @@ const tableData = [
 </div>`}
     >
       <div className="table-responsive mb-5">
-        <table className="table-striped">
+        <table className="anthill-table table-striped">
           <thead>
             <tr>
               <th>Name</th>

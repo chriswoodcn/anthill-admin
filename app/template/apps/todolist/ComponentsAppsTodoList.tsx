@@ -888,7 +888,7 @@ const ComponentsAppsTodoList = () => {
 
             {pagedTasks.length ? (
               <div className="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
-                <table className="table-hover">
+                <table className="anthill-table table-hover">
                   <tbody>
                     {pagedTasks.map((task: any) => {
                       return (
