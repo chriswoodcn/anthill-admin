@@ -104,6 +104,12 @@ const config: Config = {
         bg_message_box: `url('${withBasePath(
           "/assets/images/background/menu-heade.jpg"
         )}')`,
+        bg_checbox_close: `url('${withBasePath(
+          "/assets/images/template/close.svg"
+        )}')`,
+        bg_checbox_checked: `url('${withBasePath(
+          "/assets/images/template/checked.svg"
+        )}')`,
       },
       backgroundColor: {
         "white-gray": mixBlack('#ffffff', 0.05),
