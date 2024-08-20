@@ -1,6 +1,12 @@
+/* 使用animate.css库 */
 @import "./animate.css";
+/* 使用tippy 使用tippy.css样式 */
 @import "./tippy.css";
+/* 使用react-select 引入select2.css样式 */
+@import "./select2.css";
+/* 使用swiper 引入swiper.css样式 */
 @import "./swiper.css";
+/* 使用matine系列库 引入matine.css样式 */
 @import "./mantine.css";
 
 @tailwind base;

@@ -1,5 +1,6 @@
 @import "@mantine/core/styles.layer.css";
 @import "mantine-datatable/styles.layer.css";
+/* 增加layer mantine-datatable-override,对mantine-datatable覆盖样式 */
 @layer mantine-datatable-override {
   :root {
     --mantine-datatable-background-color-light: transparent;
