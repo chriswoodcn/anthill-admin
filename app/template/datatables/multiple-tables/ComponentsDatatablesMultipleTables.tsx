@@ -3,7 +3,6 @@ import { DataTable, DataTableSortStatus } from "mantine-datatable";
 import { useState } from "react";
 import sortBy from "lodash/sortBy";
 import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import IconXCircle from "@/components/icon/icon-x-circle";
 import IconPencil from "@/components/icon/icon-pencil";
 import IconTrashLines from "@/components/icon/icon-trash-lines";

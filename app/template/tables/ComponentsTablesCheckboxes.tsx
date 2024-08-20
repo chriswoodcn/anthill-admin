@@ -4,7 +4,6 @@ import IconSettings from "@/components/icon/icon-settings";
 import IconTrashLines from "@/components/icon/icon-trash-lines";
 
 import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import React from "react";
 import PanelCodeHighlight from "@/components/compose/PanelCodeHighlight";
 

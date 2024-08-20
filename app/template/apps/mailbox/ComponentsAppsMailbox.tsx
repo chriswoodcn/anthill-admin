@@ -6,7 +6,6 @@ import React, { useEffect, useState } from "react";
 import ReactQuill from "react-quill";
 import Swal from "sweetalert2";
 import PerfectScrollbar from "react-perfect-scrollbar";
-import "tippy.js/dist/tippy.css";
 import "react-quill/dist/quill.snow.css";
 
 import { RootState, useAppSelector } from "@/store";

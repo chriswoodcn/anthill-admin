@@ -1,7 +1,6 @@
 "use client";
 
 import Tippy from "@tippyjs/react";
-import "tippy.js/dist/tippy.css";
 import React from "react";
 import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
 import Image from "@/components/core/Image";

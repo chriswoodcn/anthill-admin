@@ -60,7 +60,7 @@ const PanelCodeHighlight = ({
       {toggleCode && (
         <CodeHighlight>
           <Tippy
-            className="bg-black-8 p-1 rounded-lg"
+            // className="bg-black-8 p-1 rounded-lg"
             content={tipContent}
             visible={visible}
             placement="bottom-end"
