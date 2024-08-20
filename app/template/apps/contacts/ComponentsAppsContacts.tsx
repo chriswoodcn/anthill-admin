@@ -347,7 +347,7 @@ const ComponentsAppsContacts = () => {
           <div className="table-responsive">
             <table className="anthill-table table-striped table-hover">
               <thead>
-                <tr className="!bg-white-7">
+                <tr className="!bg-white-7 dark:!bg-black-9">
                   <th>Name</th>
                   <th>Email</th>
                   <th>Location</th>

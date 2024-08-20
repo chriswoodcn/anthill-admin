@@ -36,6 +36,7 @@ import IconMenuUsers from "@/components/icon/menu/icon-menu-users";
 import IconMenuPages from "@/components/icon/menu/icon-menu-pages";
 import IconMenuAuthentication from "@/components/icon/menu/icon-menu-authentication";
 import IconMenuDocumentation from "@/components/icon/menu/icon-menu-documentation";
+import IconMenuMore from "@/components/icon/menu/icon-menu-more";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -539,14 +540,68 @@ const Sidebar = () => {
               </li>
 
               <li className="menu nav-item">
-                <Link href="/template/charts" className="group">
+                <button
+                  type="button"
+                  className={`${
+                    currentMenu === "element" ? "active" : ""
+                  } nav-link group w-full`}
+                  onClick={() => toggleMenu("more")}
+                >
                   <div className="flex items-center">
-                    <IconMenuCharts className="shrink-0 group-hover:!text-primary" />
+                    <IconMenuMore className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
-                      {t("charts")}
+                      {t("more")}
                     </span>
                   </div>
-                </Link>
+
+                  <div
+                    className={
+                      currentMenu !== "more" ? "-rotate-90 rtl:rotate-90" : ""
+                    }
+                  >
+                    <IconCaretDown />
+                  </div>
+                </button>
+                <AnimateHeight
+                  duration={300}
+                  height={currentMenu === "more" ? "auto" : 0}
+                >
+                  <ul className="sub-menu text-gray-500">
+                    <li>
+                      <Link href="/template/more/charts" className="group">
+                        {/* <div className="flex items-center">
+                          <IconMenuCharts className="shrink-0 group-hover:!text-primary" />
+                          <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
+                            {t("charts")}
+                          </span>
+                        </div> */}
+                        {t("charts")}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/template/more/font-icons" className="group">
+                        {/* <div className="flex items-center">
+                          <IconMenuFontIcons className="shrink-0 group-hover:!text-primary" />
+                          <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
+                            {t("font_icons")}
+                          </span>
+                        </div> */}
+                        {t("font_icons")}
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/template/more/dragndrop" className="group">
+                        {/* <div className="flex items-center">
+                          <IconMenuDragAndDrop className="shrink-0 group-hover:!text-primary" />
+                          <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
+                            {t("drag_and_drop")}
+                          </span>
+                        </div> */}
+                        {t("drag_and_drop")}
+                      </Link>
+                    </li>
+                  </ul>
+                </AnimateHeight>
               </li>
 
               {/* <li className="menu nav-item">
@@ -560,8 +615,8 @@ const Sidebar = () => {
                 </Link>
               </li> */}
 
-              <li className="menu nav-item">
-                <Link href="/template/font-icons" className="group">
+              {/* <li className="menu nav-item">
+                <Link href="/template/more/font-icons" className="group">
                   <div className="flex items-center">
                     <IconMenuFontIcons className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -569,10 +624,10 @@ const Sidebar = () => {
                     </span>
                   </div>
                 </Link>
-              </li>
+              </li> */}
 
-              <li className="menu nav-item">
-                <Link href="/template/dragndrop" className="group">
+              {/* <li className="menu nav-item">
+                <Link href="/template/more/dragndrop" className="group">
                   <div className="flex items-center">
                     <IconMenuDragAndDrop className="shrink-0 group-hover:!text-primary" />
                     <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
@@ -580,7 +635,7 @@ const Sidebar = () => {
                     </span>
                   </div>
                 </Link>
-              </li>
+              </li> */}
 
               <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
                 <IconMinus className="hidden h-5 w-4 flex-none" />

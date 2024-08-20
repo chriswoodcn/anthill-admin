@@ -1,6 +1,7 @@
 import configuraton from '@/configuration.mjs'
 import { useState } from 'react'
-import useEffectOnce from '../useEffectOnce'
+import useEffectOnce from './useEffectOnce'
+
 
 export default function useTitle(initialTitle: string | undefined) {
   const [title, setTitle] = useState(initialTitle)

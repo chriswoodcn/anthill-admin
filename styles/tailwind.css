@@ -135,7 +135,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
     @apply text-white/50 hover:text-primary;
   }
 
-  .horizontal-menu .nav-link {
+  /* .horizontal-menu .nav-link {
     @apply flex items-center rounded-lg px-2 py-2.5 hover:bg-[#000]/[0.08] hover:text-primary dark:hover:bg-[#181f32] dark:hover:text-white-5 xl:px-4;
   }
 
@@ -144,7 +144,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   }
 
   .horizontal-menu ul.sub-menu {
-    @apply absolute top-full z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow dark:bg-black-7 dark:text-white-6;
+    @apply absolute top-full z-[10] hidden min-w-[180px] rounded bg-white p-0 py-2 text-dark shadow dark:bg-black-7 dark:text-white-6 max-h-56 overflow-y-scroll;
   }
 
   .horizontal-menu ul.sub-menu a,
@@ -160,6 +160,26 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   .horizontal-menu > li.nav-item:hover > ul.sub-menu,
   .horizontal-menu > li.nav-item > ul.sub-menu > li:hover > ul {
     @apply block;
+  } */
+
+  .horizontal-menu .nav-link {
+    @apply flex items-center rounded-lg px-2 py-2.5 hover:bg-[#000]/[0.08] hover:text-primary dark:hover:bg-[#181f32] dark:hover:text-white-5 xl:px-4;
+  }
+  .horizontal-menu .nav-link.active {
+    @apply bg-[#000]/[0.08] text-primary dark:bg-[#181f32] dark:text-white-5;
+  }
+  .horizontal-menu.sub-menu {
+    @apply w-full min-w-[180px] max-h-[300px] overflow-y-scroll;
+  }
+  .horizontal-menu.sub-menu li {
+    @apply flex w-full items-center justify-between px-4 py-1 hover:bg-gray-100 hover:text-primary dark:hover:bg-primary/10;
+  }
+  .horizontal-menu.sub-menu li button,
+  .horizontal-menu.sub-menu li a {
+    @apply flex w-full items-center justify-between;
+  }
+  .horizontal-menu.sub-menu li.active {
+    @apply bg-gray-100 text-primary dark:bg-primary/10;
   }
   /* #endregion */
 
@@ -543,4 +563,8 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
       @apply bg-primary-2;
     }
   }
+}
+
+.mantine-Popover-dropdown {
+  @apply !p-0;
 }
