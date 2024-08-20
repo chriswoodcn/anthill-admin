@@ -8,6 +8,8 @@
 @import "./swiper.css";
 /* 使用file-upload 引入swiper.css样式 */
 @import "./file-upload.css";
+/* 使用react-quill库 引入quill.css样式 */
+@import "./quill.css";
 /* 使用matine系列库 引入matine.css样式 */
 @import "./mantine.css";
 
