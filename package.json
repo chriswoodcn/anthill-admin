@@ -52,6 +52,7 @@
     "react-quill": "^2.0.0",
     "react-redux": "^9.1.2",
     "react-select": "^5.8.0",
+    "react-simplemde-editor": "^5.2.0",
     "react-sortablejs": "^6.1.4",
     "react-text-mask": "^5.5.0",
     "react-use": "^17.5.1",
