@@ -110,6 +110,9 @@ const config: Config = {
         bg_checbox_checked: `url('${withBasePath(
           "/assets/images/template/checked.svg"
         )}')`,
+        bg_knowledge_pattern: `url('${withBasePath(
+          "/assets/images/template/knowledge/pattern.png"
+        )}')`,
       },
       backgroundColor: {
         "white-gray": mixBlack('#ffffff', 0.05),
