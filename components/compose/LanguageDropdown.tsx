@@ -69,7 +69,7 @@ const LanguageDropdown = ({
   };
   const renderButtonClassName = () => {
     if (shape == "rect")
-      return "flex items-center gap-2 rounded-lg border border-white-dark/30 bg-white px-2 py-1.5 text-black-7 dark:text-white-7 hover:border-primary hover:text-primary dark:bg-black-8";
+      return "flex items-center gap-2 rounded-lg border border-white-7/30 dark:border-black-7/30 bg-white px-2 py-1.5 text-black-7 dark:text-white-7 hover:border-primary hover:text-primary dark:bg-black-8";
     if (shape == "rounded")
       return "block p-2 rounded-full bg-white-light/40 dark:bg-dark/40 hover:text-primary hover:bg-white-light/90 dark:hover:bg-dark/60";
     return "";

@@ -25,17 +25,12 @@ import IconMenuInvoice from "@/components/icon/menu/icon-menu-invoice";
 import IconMenuCalendar from "@/components/icon/menu/icon-menu-calendar";
 import IconMenuComponents from "@/components/icon/menu/icon-menu-components";
 import IconMenuElements from "@/components/icon/menu/icon-menu-elements";
-import IconMenuCharts from "@/components/icon/menu/icon-menu-charts";
-import IconMenuWidgets from "@/components/icon/menu/icon-menu-widgets";
-import IconMenuFontIcons from "@/components/icon/menu/icon-menu-font-icons";
-import IconMenuDragAndDrop from "@/components/icon/menu/icon-menu-drag-and-drop";
 import IconMenuTables from "@/components/icon/menu/icon-menu-tables";
 import IconMenuDatatables from "@/components/icon/menu/icon-menu-datatables";
 import IconMenuForms from "@/components/icon/menu/icon-menu-forms";
 import IconMenuUsers from "@/components/icon/menu/icon-menu-users";
 import IconMenuPages from "@/components/icon/menu/icon-menu-pages";
 import IconMenuAuthentication from "@/components/icon/menu/icon-menu-authentication";
-import IconMenuDocumentation from "@/components/icon/menu/icon-menu-documentation";
 import IconMenuMore from "@/components/icon/menu/icon-menu-more";
 
 const Sidebar = () => {
@@ -979,19 +974,28 @@ const Sidebar = () => {
                       >
                         <ul className="sub-menu text-gray-500">
                           <li>
-                            <a href="/pages/error404" target="_blank">
+                            <Link
+                              href="/template/pages/error404"
+                              target="_blank"
+                            >
                               {t("404")}
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a href="/pages/error500" target="_blank">
+                            <Link
+                              href="/template/pages/error500"
+                              target="_blank"
+                            >
                               {t("500")}
-                            </a>
+                            </Link>
                           </li>
                           <li>
-                            <a href="/pages/error503" target="_blank">
+                            <Link
+                              href="/template/pages/error503"
+                              target="_blank"
+                            >
                               {t("503")}
-                            </a>
+                            </Link>
                           </li>
                         </ul>
                       </AnimateHeight>

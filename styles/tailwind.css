@@ -516,6 +516,13 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   .dropdown ul li button {
     @apply flex items-center;
   }
+  /* img light&dark */
+  .light-img {
+    @apply block dark:!hidden;
+  }
+  .dark-img {
+    @apply hidden dark:!block;
+  }
 }
 
 /* screen_loader */
