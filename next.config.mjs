@@ -34,6 +34,7 @@ const nextConfig = {
     //support app router tree shaking
     optimizePackageImports: ["@mantine/core", "@mantine/hooks"],
   },
+  output: "standalone",
 };
 
 export default nextConfig;

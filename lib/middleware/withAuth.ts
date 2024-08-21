@@ -9,7 +9,7 @@ export const withAuth: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
     const authorization = cookies().get('Authorization')?.value
     logger.debug("withAuth Authorization", authorization)
-    logger.debug("request.nextUrl", request.nextUrl)
+    logger.debug("request.nextUrl.pathname", request.nextUrl.pathname)
 
     if ((configuration.PathAlias.Admin.Pattern as RegExp).test(request.nextUrl.pathname) && configuration.PathAlias.Admin.Login != request.nextUrl.pathname) {
       if (!authorization)

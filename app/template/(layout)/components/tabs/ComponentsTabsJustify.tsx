@@ -3,10 +3,11 @@
 import { Tab } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
 
-import useEffectOnce from '@/lib/useEffectOnce';
+import useEffectOnce from '@/lib/hooks/useEffectOnce';
 
 import Image from "@/components/core/Image";
 import PanelCodeHighlight from '@/components/compose/PanelCodeHighlight';
+
 
 const ComponentsTabsJustify = () => {
   const [isMounted, setIsMounted] = useState(false);

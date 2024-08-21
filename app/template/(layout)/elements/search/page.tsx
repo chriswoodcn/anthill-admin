@@ -56,7 +56,6 @@ const overlaySearchClick = () => {
               <div className="relative flex w-full  border border-white-dark/20">
                 <button
                   type="submit"
-                  placeholder="Let's find your question in fast way"
                   className="m-auto flex items-center justify-center p-3 text-primary"
                 >
                   <IconSearch className="mx-auto h-5 w-5" />

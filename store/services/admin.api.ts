@@ -16,7 +16,7 @@ export const adminApi = createApi({
     credentials: "include",
     prepareHeaders: async (headers, api) => {
       headers.set("access-control-allow-origin","*")
-      const token = (api.getState() as RootState).user?.token
+      const token = (api.getState() as RootState).adminUser?.token
       if (token) headers.set('token', token)
       return headers
     },
