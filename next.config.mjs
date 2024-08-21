@@ -8,7 +8,7 @@ const nextConfig = {
   },
   logging: {
     fetches: {
-      fullUrl: true,
+      fullUrl: process.env.NODE_ENV == "development",
     },
   },
   async redirects() {

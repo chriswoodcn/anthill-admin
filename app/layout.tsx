@@ -7,11 +7,15 @@ import { Nunito } from "next/font/google";
 // i18next
 import i18next, { dir } from "i18next";
 import { detectLanguage, getServerTranslations } from "@/i18n/server";
-import { I18nProvider } from "@/i18n/I18nProvider";
+import { I18nProvider } from "@/i18n/client";
 // custom
 import { withBasePath } from "@/lib";
 import ComposedProvider from "@/components/compose/ComposedProvider";
-import configuraton, { PrimaryColors, BlackColors, WhiteColors } from "@/configuration.mjs";
+import configuraton, {
+  PrimaryColors,
+  BlackColors,
+  WhiteColors,
+} from "@/configuration.mjs";
 
 const nunito = Nunito({
   weight: ["400", "500", "600", "700", "800"],

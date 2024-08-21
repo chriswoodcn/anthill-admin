@@ -2,7 +2,7 @@ import axios from 'axios';
 import logger from './logger';
 import { fallbackLng } from '@/i18n/settings';
 import { store } from "@/store"
-import { i18next } from '@/i18n/i18n';
+import { i18next } from '@/i18n/client';
 
 export const nextFetcher = async (options: Record<string, any>) => {
   logger.debug("nextFetcher");
