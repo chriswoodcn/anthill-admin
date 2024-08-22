@@ -303,6 +303,7 @@ const Setting = () => {
                 <option value="animate__fadeInLeft">Fade Left</option>
                 <option value="animate__fadeInRight">Fade Right</option>
                 <option value="animate__slideInDown">Slide Down</option>
+                <option value="animate__slideInUp">Slide Up</option>
                 <option value="animate__slideInLeft">Slide Left</option>
                 <option value="animate__slideInRight">Slide Right</option>
                 <option value="animate__zoomIn">Zoom In</option>
