@@ -8,11 +8,11 @@ import IconEdit from "@/components/icon/icon-edit";
 import IconPlus from "@/components/icon/icon-plus";
 import IconPrinter from "@/components/icon/icon-printer";
 import IconSend from "@/components/icon/icon-send";
-import Logo from '@/components/compose/Logo';
+import Logo from "@/components/compose/Logo";
 
 const ComponentsAppsInvoicePreview = () => {
   const exportTable = () => {
-    window.print();
+    if (typeof window !== "undefined") window.print();
   };
 
   const items = [

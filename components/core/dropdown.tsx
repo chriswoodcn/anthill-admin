@@ -1,12 +1,7 @@
 "use client";
 
-import useEffectOnce from '@/lib/hooks/useEffectOnce';
-import {
-  forwardRef,
-  useImperativeHandle,
-  useRef,
-  useState,
-} from "react";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { usePopper } from "react-popper";
 
 const Dropdown = (props: any, forwardedRef: any) => {
@@ -43,9 +38,11 @@ const Dropdown = (props: any, forwardedRef: any) => {
   };
 
   useEffectOnce(() => {
-    document.addEventListener("mousedown", handleDocumentClick);
+    if (typeof document !== undefined)
+      document.addEventListener("mousedown", handleDocumentClick);
     return () => {
-      document.removeEventListener("mousedown", handleDocumentClick);
+      if (typeof document !== undefined)
+        document.removeEventListener("mousedown", handleDocumentClick);
     };
   }, []);
 

@@ -84,6 +84,8 @@
     "autoprefixer": "^10.4.19",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
+    "javascript-obfuscator": "^4.1.1",
+    "nextjs-obfuscator": "^3.0.1",
     "postcss": "^8.4.40",
     "postcss-preset-mantine": "^1.17.0",
     "postcss-simple-vars": "^7.0.1",

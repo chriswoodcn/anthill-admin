@@ -1,3 +1,21 @@
+import createNextJsObfuscator from "nextjs-obfuscator";
+
+const obfuscatorOptions = {};
+const pluginOptions = {
+  //  enabled: "detect",
+  //  obfuscateFiles: {
+  //    buildManifest: true,
+  //    ssgManifest: true,
+  //    webpack: true,
+  //    additionalModules: ["echarts-wordcloud"],
+  //  },
+  //  log: true,
+};
+const withNextJsObfuscator = createNextJsObfuscator(
+  obfuscatorOptions,
+  pluginOptions
+);
+
 /** @type {import('next').NextConfig} */
 import configuration from "./configuration.mjs";
 const nextConfig = {
@@ -37,4 +55,9 @@ const nextConfig = {
   output: "standalone",
 };
 
-export default nextConfig;
+const finalNextConfig =
+  process.env.NODE_ENV == "production"
+    ? withNextJsObfuscator(nextConfig)
+    : nextConfig;
+
+export default finalNextConfig;

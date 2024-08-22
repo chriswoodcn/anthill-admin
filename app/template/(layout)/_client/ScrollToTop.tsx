@@ -5,8 +5,10 @@ const ScrollToTop = () => {
   const [showTopButton, setShowTopButton] = useState(false);
 
   const goToTop = () => {
-    document.body.scrollTop = 0;
-    document.documentElement.scrollTop = 0;
+    if (typeof document !== undefined) {
+      document.body.scrollTop = 0;
+      document.documentElement.scrollTop = 0;
+    }
   };
 
   const onScrollHandler = () => {
@@ -21,9 +23,13 @@ const ScrollToTop = () => {
   };
 
   useEffect(() => {
-    window.addEventListener("scroll", onScrollHandler);
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", onScrollHandler);
+    }
     return () => {
-      window.removeEventListener("onscroll", onScrollHandler);
+      if (typeof window !== "undefined") {
+        window.removeEventListener("onscroll", onScrollHandler);
+      }
     };
   });
 
