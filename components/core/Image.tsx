@@ -1,17 +1,44 @@
 "use client";
 
 import { withBasePath } from "@/lib";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import { ReactElement, useRef, useState } from "react";
 
 interface Props extends Record<string, any> {
   basePath?: boolean;
   src: string;
+  showSkeleton?: boolean;
+  skeleton?: ReactElement;
 }
 export default (props: Props) => {
   const { basePath, src } = props;
   const needWithBasePath = basePath == false ? basePath : true;
-  return needWithBasePath ? (
-    <img {...props} src={withBasePath(src)} />
+  const [showSkeleton, setShowSkeleton] = useState(
+    props.showSkeleton == undefined || props.showSkeleton
+  );
+  const [loaded, setLoaded] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
+  useEffectOnce(() => {
+    if (imgRef.current != null && imgRef.current.complete) {
+      setLoaded(true);
+    }
+  }, [imgRef.current]);
+  const cover = props.skeleton ? (
+    <div className="absolute left-0 right-0 top-0 bottom-0 rounded  animate-pulse">
+      {props.skeleton}
+    </div>
   ) : (
-    <img {...props} />
+    <div className="absolute left-0 right-0 top-0 bottom-0 rounded bg-white-5 dark:bg-black-5 animate-pulse"></div>
+  );
+  return needWithBasePath ? (
+    <div className="relative">
+      {!loaded && showSkeleton && cover}
+      <img ref={imgRef} {...props} src={withBasePath(src)} />
+    </div>
+  ) : (
+    <div className="relative">
+      {!loaded && showSkeleton && cover}
+      <img ref={imgRef} {...props} />
+    </div>
   );
 };
