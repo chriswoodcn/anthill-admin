@@ -1,4 +1,5 @@
 "use client";
+import { isBrowser } from '@/lib';
 import React, { useEffect, useState } from "react";
 
 const ScrollToTop = () => {
@@ -23,11 +24,11 @@ const ScrollToTop = () => {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (isBrowser()) {
       window.addEventListener("scroll", onScrollHandler);
     }
     return () => {
-      if (typeof window !== "undefined") {
+      if (isBrowser()) {
         window.removeEventListener("onscroll", onScrollHandler);
       }
     };

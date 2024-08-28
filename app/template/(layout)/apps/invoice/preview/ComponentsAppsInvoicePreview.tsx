@@ -12,7 +12,7 @@ import Logo from "@/components/compose/Logo";
 
 const ComponentsAppsInvoicePreview = () => {
   const exportTable = () => {
-    if (typeof window !== "undefined") window.print();
+    if () window.print();
   };
 
   const items = [

@@ -6,7 +6,7 @@ import * as Yup from "yup";
 import { useRouter, useSearchParams } from "next/navigation";
 // custom
 import logger from "@/lib/logger";
-import { aesDecrypt, aesEncrypt, withBasePath } from "@/lib";
+import { aesDecrypt, aesEncrypt, isBrowser, withBasePath } from "@/lib";
 import { IconUser, IconX, IconEyeClosed, IconEye } from "@tabler/icons-react";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { useAppDispatch } from "@/store";
@@ -52,7 +52,7 @@ const setStorageLoginForm = ({ username, password, remember }: LoginForm) => {
   } else {
     target = { remember: false };
   }
-  if (typeof window !== "undefined") {
+  if (isBrowser()) {
     if (password)
       window.localStorage.setItem("__admin_unlock_pwd__", aesEncrypt(password));
     window.localStorage.setItem("__admin_login_form__", JSON.stringify(target));

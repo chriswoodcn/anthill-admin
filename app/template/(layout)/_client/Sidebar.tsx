@@ -32,6 +32,7 @@ import IconMenuUsers from "@/components/icon/menu/icon-menu-users";
 import IconMenuPages from "@/components/icon/menu/icon-menu-pages";
 import IconMenuAuthentication from "@/components/icon/menu/icon-menu-authentication";
 import IconMenuMore from "@/components/icon/menu/icon-menu-more";
+import { isBrowser } from '@/lib';
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -51,7 +52,7 @@ const Sidebar = () => {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (isBrowser()) {
       const selector = document.querySelector(
         '.sidebar ul a[href="' + window.location.pathname + '"]'
       );

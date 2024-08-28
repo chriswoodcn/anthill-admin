@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import configuration from '@/configuration.mjs';
 import { languageList } from '@/i18n/settings';
+import { isBrowser } from '@/lib';
 
 const DefaultSettings = configuration.Settings
 export interface SettingState {
@@ -43,7 +44,7 @@ const settingSlice = createSlice({
         state.isDarkMode = true;
         document.querySelector('html')?.setAttribute("data-mantine-color-scheme", "dark")
       } else if (payload === 'auto') {
-        if (typeof window !== "undefined" && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        if (isBrowser() && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
           state.isDarkMode = true;
           state.isDarkMode = false;
           document.querySelector('html')?.setAttribute("data-mantine-color-scheme", "dark")

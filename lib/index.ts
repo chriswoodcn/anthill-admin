@@ -58,3 +58,4 @@ export const aesEncrypt = (data: string) => {
 export const aesDecrypt = (encrypted: string) => {
   return aes_decrypt(encrypted, KEY_AES)
 }
+export const isBrowser = () => typeof window !== "undefined"
