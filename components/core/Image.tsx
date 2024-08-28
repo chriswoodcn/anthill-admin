@@ -19,9 +19,10 @@ export default (props: Props) => {
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   useEffectOnce(() => {
-    imgRef.current?.addEventListener("load", function () {
+    if (imgRef.current) imgRef.current.onload = () => setLoaded(true);
+    if (imgRef.current?.complete) {
       setLoaded(true);
-    });
+    }
   }, [imgRef.current]);
   const cover = props.skeleton ? (
     <div className="absolute left-0 right-0 top-0 bottom-0 rounded  animate-pulse">
