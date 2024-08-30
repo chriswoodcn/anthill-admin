@@ -1114,7 +1114,7 @@ const Sidebar = () => {
 
               <li className="menu nav-item">
                 <Link
-                  href="https://vristo.sbthemes.com"
+                  href="https://anthill.sbthemes.com"
                   target="_blank"
                   className="nav-link group"
                 >

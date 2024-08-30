@@ -114,7 +114,7 @@ const ComponentsAppsInvoicePreview = () => {
         <div className="px-4 ltr:text-right rtl:text-left">
           <div className="mt-6 space-y-1 text-white-dark">
             <div>13 Tetrick Road, Cypress Gardens, Florida, 33884, US</div>
-            <div>vristo@gmail.com</div>
+            <div>Anthill@gmail.com</div>
             <div>+1 (070) 123-4567</div>
           </div>
         </div>

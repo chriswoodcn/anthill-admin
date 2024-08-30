@@ -8,6 +8,7 @@ interface Props extends Record<string, any> {
   basePath?: boolean;
   src: string;
   showSkeleton?: boolean;
+  auto?: boolean;
   skeleton?: ReactElement;
   rootclass?: string;
 }
@@ -33,13 +34,12 @@ export default (props: Props) => {
     <div className="absolute left-0 right-0 top-0 bottom-0 rounded bg-white-5 dark:bg-black-5 animate-pulse"></div>
   );
   return needWithBasePath ? (
-    // <div className={`relative ${props.rootclass}`}>
-    <div className="relative w-full h-full">
+    <div className={`relative ${props.auto ? "" : "w-full h-full"}`}>
       {!loaded && showSkeleton && cover}
       <img ref={imgRef} {...props} src={withBasePath(src)} />
     </div>
   ) : (
-    <div className="relative w-full h-full">
+    <div className={`relative ${props.auto ? "" : "w-full h-full"}`}>
       {!loaded && showSkeleton && cover}
       <img ref={imgRef} {...props} />
     </div>
