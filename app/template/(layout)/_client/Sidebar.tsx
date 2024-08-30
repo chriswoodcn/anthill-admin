@@ -32,7 +32,9 @@ import IconMenuUsers from "@/components/icon/menu/icon-menu-users";
 import IconMenuPages from "@/components/icon/menu/icon-menu-pages";
 import IconMenuAuthentication from "@/components/icon/menu/icon-menu-authentication";
 import IconMenuMore from "@/components/icon/menu/icon-menu-more";
-import { isBrowser } from '@/lib';
+import { isBrowser } from "@/lib";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import logger from "@/lib/logger";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -51,23 +53,27 @@ const Sidebar = () => {
     });
   };
 
-  useEffect(() => {
+  useEffectOnce(() => {
     if (isBrowser()) {
+      //找链接dom元素
       const selector = document.querySelector(
         '.sidebar ul a[href="' + window.location.pathname + '"]'
       );
+      logger.debug("selector", selector);
       if (selector) {
         selector.classList.add("active");
-        const ul: any = selector.closest("ul.sub-menu");
-        if (ul) {
-          let ele: any =
-            ul.closest("li.menu").querySelectorAll(".nav-link") || [];
-          if (ele.length) {
-            ele = ele[0];
-            setTimeout(() => {
-              ele.click();
-            });
-          }
+        //找最近的祖先menu
+        const ancestor: any = selector.closest("li.menu");
+        logger.debug("menu", ancestor);
+        if (ancestor) {
+          // let ele: any = ancestor.querySelectorAll("button.nav-link") || [];
+          // if (ele.length) {
+          //   ele = ele[0];
+          //   setTimeout(() => {
+          //     ele.click();
+          //   });
+          // }
+          toggleMenu(ancestor.dataset.menu);
         }
       }
     }
@@ -309,7 +315,7 @@ const Sidebar = () => {
                 <span>{t("user_interface")}</span>
               </h2>
 
-              <li className="menu nav-item">
+              <li className="menu nav-item" data-menu="component">
                 <button
                   type="button"
                   className={`${

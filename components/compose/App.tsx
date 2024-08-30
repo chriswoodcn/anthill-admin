@@ -9,27 +9,22 @@ import {
   toggleLayout,
   toggleAnimation,
 } from "@/store/slices/admin";
+import { isBrowser } from "@/lib";
 
 export default ({ children }: PropsWithChildren) => {
   const setting = useAppSelector((state: RootState) => state.adminSetting);
   const dispatch = useAppDispatch();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    dispatch(toggleTheme(localStorage.getItem("theme") || setting.theme));
-    dispatch(toggleMenu(localStorage.getItem("menu") || setting.menu));
-    dispatch(
-      toggleLayout(localStorage.getItem("layout") || setting.layout)
-    );
-    dispatch(
-      toggleRTL(localStorage.getItem("rtlClass") || setting.rtlClass)
-    );
-    dispatch(
-      toggleAnimation(
-        localStorage.getItem("animation") || setting.animation
-      )
-    );
-    setIsLoading(false);
+    if (isBrowser()) {
+      dispatch(toggleTheme(localStorage.getItem("theme") || setting.theme));
+      dispatch(toggleMenu(localStorage.getItem("menu") || setting.menu));
+      dispatch(toggleLayout(localStorage.getItem("layout") || setting.layout));
+      dispatch(toggleRTL(localStorage.getItem("rtlClass") || setting.rtlClass));
+      dispatch(
+        toggleAnimation(localStorage.getItem("animation") || setting.animation)
+      );
+    }
   }, [
     dispatch,
     setting.theme,

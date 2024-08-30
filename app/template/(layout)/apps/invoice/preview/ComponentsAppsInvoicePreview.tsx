@@ -9,10 +9,11 @@ import IconPlus from "@/components/icon/icon-plus";
 import IconPrinter from "@/components/icon/icon-printer";
 import IconSend from "@/components/icon/icon-send";
 import Logo from "@/components/compose/Logo";
+import { isBrowser } from "@/lib";
 
 const ComponentsAppsInvoicePreview = () => {
   const exportTable = () => {
-    if () window.print();
+    if (isBrowser()) window.print();
   };
 
   const items = [

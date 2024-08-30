@@ -16,24 +16,39 @@ const ComponentsCarouselVertical = () => {
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import { Navigation, Pagination, Autoplay } from 'swiper';
+import { Pagination, Mousewheel } from 'swiper';
 
 import Image from "@/components/core/Image";
 
-<Swiper modules={[Pagination, Autoplay]} pagination={{ clickable: true }} autoplay={{ delay: 2000 }} direction="vertical" className="max-w-3xl mx-auto mb-5" id="slider3">
-    <div className="swiper-wrapper">
-        {items.map((item, i) => {
-            return (
-                <SwiperSlide key={i}>
-                    <Image src={\`/assets/images/template\${item}\`} className="w-full" alt="itemImage" />
-                    <div className="absolute z-[999] text-white top-1/2 left-1/2 w-full -translate-x-1/2 text-center">
-                        <div className="sm:text-xl text-base font-medium">Lorem Ipsum is simply dummy text of the printing.</div>
-                    </div>
-                </SwiperSlide>
-            );
-        })}
-    </div>
-</Swiper>`}
+<Swiper
+  direction={"vertical"}
+  slidesPerView={1}
+  spaceBetween={0}
+  mousewheel={true}
+  pagination={{
+    clickable: true,
+  }}
+  modules={[Mousewheel, Pagination]}
+  className="mx-auto mb-5 max-w-6xl aspect-video"
+>
+  {items.map((item, i) => {
+    return (
+      <SwiperSlide key={i}>
+        <Image
+          src={\`/assets/images/template/\${item}\`}
+          className="w-full"
+          alt="itemImage"
+        />
+        <div className="absolute left-1/2 top-1/2 z-[999] w-full -translate-x-1/2 text-center text-white">
+          <div className="text-base font-medium sm:text-xl">
+            Lorem Ipsum is simply dummy text of the printing.
+          </div>
+        </div>
+      </SwiperSlide>
+    );
+  })}
+</Swiper>
+`}
     >
       <Swiper
         direction={"vertical"}
