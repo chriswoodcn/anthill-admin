@@ -35,11 +35,13 @@ import IconMenuMore from "@/components/icon/menu/icon-menu-more";
 import { isBrowser } from "@/lib";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
+import { Farro } from "next/font/google";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const pathname = usePathname();
+  const [initMenuBar, setInitMenuBar] = useState(false);
   const [currentMenu, setCurrentMenu] = useState<string>("");
   const [errorSubMenu, setErrorSubMenu] = useState(false);
   const adminSetting = useAppSelector((state: RootState) => state.adminSetting);
@@ -55,6 +57,8 @@ const Sidebar = () => {
 
   useEffectOnce(() => {
     if (isBrowser()) {
+      //标记 初始化菜单栏
+      setInitMenuBar(true);
       //找链接dom元素
       const selector = document.querySelector(
         '.sidebar ul a[href="' + window.location.pathname + '"]'
@@ -64,20 +68,33 @@ const Sidebar = () => {
         selector.classList.add("active");
         //找最近的祖先menu
         const ancestor: any = selector.closest("li.menu");
-        logger.debug("menu", ancestor);
+        logger.debug("ancestor", ancestor);
         if (ancestor) {
-          // let ele: any = ancestor.querySelectorAll("button.nav-link") || [];
-          // if (ele.length) {
-          //   ele = ele[0];
-          //   setTimeout(() => {
-          //     ele.click();
-          //   });
-          // }
+          logger.debug("toggleMenu");
           toggleMenu(ancestor.dataset.menu);
+        } else {
+          logger.debug("scrollIntoView");
+          setTimeout(() => {
+            selector?.scrollIntoView({ behavior: "smooth", block: "center" });
+            setInitMenuBar(false);
+          }, 500);
         }
       }
     }
   }, []);
+  useEffectOnce(() => {
+    if (isBrowser() && initMenuBar && currentMenu) {
+      logger.debug("currentMenu", currentMenu);
+      const selector = document.querySelector(
+        '.sidebar ul a[href="' + window.location.pathname + '"]'
+      );
+      logger.debug("scrollIntoView");
+      setTimeout(() => {
+        selector?.scrollIntoView({ behavior: "smooth", block: "center" });
+        setInitMenuBar(false);
+      }, 500);
+    }
+  }, [currentMenu]);
 
   useEffect(() => {
     setActiveRoute();
@@ -891,7 +908,7 @@ const Sidebar = () => {
                 </AnimateHeight>
               </li>
 
-              <li className="menu nav-item">
+              <li className="menu nav-item" data-menu="page">
                 <button
                   type="button"
                   className={`${

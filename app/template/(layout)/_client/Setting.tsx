@@ -10,6 +10,7 @@ import {
   toggleTheme,
   resetToggleSidebar,
 } from "@/store/slices/admin";
+import PerfectScrollbar from "react-perfect-scrollbar";
 import IconSettings from "@/components/icon/icon-settings";
 import IconX from "@/components/icon/icon-x";
 import IconSun from "@/components/icon/icon-sun";
@@ -34,7 +35,7 @@ const Setting = () => {
       <nav
         className={`${
           (showCustomizer && "ltr:!right-0 rtl:!left-0") || ""
-        } fixed bottom-0 top-0 z-[51] w-full max-w-[400px] bg-white p-4 shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-[right] duration-300 ltr:-right-[400px] rtl:-left-[400px] dark:bg-black-8`}
+        } fixed bottom-0 top-0 z-[51] w-full max-w-[400px] bg-white p-4 pr-1 shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-[right] duration-300 ltr:-right-[400px] rtl:-left-[400px] dark:bg-black-8`}
       >
         <button
           type="button"
@@ -44,7 +45,7 @@ const Setting = () => {
           <IconSettings className="h-5 w-5 animate-[spin_3s_linear_infinite]" />
         </button>
 
-        <div className="perfect-scrollbar h-full overflow-y-auto overflow-x-hidden">
+        <PerfectScrollbar className="pr-4">
           <div className="relative pb-5 text-center">
             <button
               type="button"
@@ -310,7 +311,7 @@ const Setting = () => {
               </select>
             </div>
           </div>
-        </div>
+        </PerfectScrollbar>
       </nav>
     </div>
   );

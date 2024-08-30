@@ -759,6 +759,7 @@ export const TemplateMenuTree: Menu[] = [
             parentKey: 'authentication',
             menuKey: 'login_boxed',
             dialect: 'login_boxed',
+            layout: 'blank',
             path: '/template/auth/boxed-signin'
           },
           {
@@ -766,6 +767,7 @@ export const TemplateMenuTree: Menu[] = [
             parentKey: 'authentication',
             menuKey: 'register_boxed',
             dialect: 'register_boxed',
+            layout: 'blank',
             path: '/template/auth/boxed-signup'
           },
           {
@@ -773,15 +775,41 @@ export const TemplateMenuTree: Menu[] = [
             parentKey: 'authentication',
             menuKey: 'unlock_boxed',
             dialect: 'unlock_boxed',
+            layout: 'blank',
             path: '/template/auth/boxed-password-reset'
           },
           {
             type: 'C',
             parentKey: 'authentication',
-            menuKey: 'unlock_boxed',
-            dialect: 'unlock_boxed',
-            path: '/template/auth/boxed-password-reset'
-          }
+            menuKey: 'login_cover',
+            dialect: 'login_cover',
+            layout: 'blank',
+            path: '/template/auth/cover-login'
+          },
+          {
+            type: 'C',
+            parentKey: 'authentication',
+            menuKey: 'register_cover',
+            dialect: 'register_cover',
+            layout: 'blank',
+            path: '/template/auth/cover-register'
+          },
+          {
+            type: 'C',
+            parentKey: 'authentication',
+            menuKey: 'unlock_cover',
+            dialect: 'unlock_cover',
+            layout: 'blank',
+            path: '/template/auth/cover-lockscreen'
+          },
+          {
+            type: 'C',
+            parentKey: 'authentication',
+            menuKey: 'recover_id_cover',
+            dialect: 'recover_id_cover',
+            layout: 'blank',
+            path: '/template/auth/cover-password-reset'
+          },
         ]
       },
     ]
