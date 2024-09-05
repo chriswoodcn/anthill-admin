@@ -515,7 +515,7 @@ export const TemplateMenuTree: Menu[] = [
             parentKey: 'datatables',
             menuKey: 'datatables_column_chooser',
             dialect: 'column_chooser',
-            path: '/template/datatables/column_chooser'
+            path: '/template/datatables/column-chooser'
           }
         ]
       },
