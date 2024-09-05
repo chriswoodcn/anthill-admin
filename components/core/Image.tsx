@@ -10,7 +10,6 @@ interface Props extends Record<string, any> {
   showSkeleton?: boolean;
   auto?: boolean;
   skeleton?: ReactElement;
-  rootclass?: string;
 }
 export default (props: Props) => {
   const { basePath, src } = props;

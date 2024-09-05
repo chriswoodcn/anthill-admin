@@ -542,7 +542,7 @@ const ComponentsAppsInvoiceEdit = () => {
         </div>
         <div className="mt-8 px-4">
           <div className="table-responsive">
-            <table>
+            <table className="anthill-table">
               <thead>
                 <tr>
                   <th>Item</th>

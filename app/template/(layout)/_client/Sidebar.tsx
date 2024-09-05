@@ -36,6 +36,7 @@ import IconMenuMore from "@/components/icon/menu/icon-menu-more";
 import { isBrowser } from "@/lib";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
+import IconMenu from "@/components/icon/template/icon-menu";
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();
@@ -55,21 +56,23 @@ const Sidebar = () => {
       return oldValue === value ? "" : value;
     });
   };
-  useEffectOnce(() => {
-    console.log("currentMenuList", currentMenuList);
-  }, [currentMenuList]);
   const toggleMenuList = (value: string) => {
-    console.log("toggleMenuList", value);
+    logger.debug("toggleMenuList ", value);
     // currentMenuList包含当前的menuKey，截断当前的
     if (currentMenuList.includes(value)) {
       let index = currentMenuList.findIndex((m) => m == value);
       let newList = [...currentMenuList];
-      console.log("index", index);
       newList.splice(index);
       setCurrentMenuList(newList);
     } else {
-      // currentMenuList不包含当前的menuKey
-      setCurrentMenuList([...currentMenuList, value]);
+      const parentKey = findParentKey(value);
+      if (parentKey == undefined) {
+        setCurrentMenuList([value]);
+      } else {
+        const parentKeys = findMenuAllParentKey(value);
+        // currentMenuList不包含当前的menuKey
+        setCurrentMenuList([...parentKeys, value]);
+      }
     }
   };
   /**
@@ -101,33 +104,18 @@ const Sidebar = () => {
     if (isBrowser()) {
       //标记 初始化菜单栏
       setInitMenuBar(true);
-      //找链接dom元素
-      const selector = document.querySelector(
-        '.sidebar ul a[href="' + window.location.pathname + '"]'
+      const templateMenu = TemplateMenuList.find(
+        (item) => item.path == pathname
       );
-      logger.debug("selector", selector);
-
-      if (selector) {
-        selector.classList.add("active");
-        // //找最近的祖先menu
-        // const ancestor: any = selector.closest("li.nav-item");
-        // logger.debug("ancestor", ancestor);
-        // if (ancestor) {
-        //   logger.debug("toggleMenu");
-        //   toggleMenu(ancestor.dataset.menu);
-        // } else {
-        //   logger.debug("scrollIntoView");
-        //   setTimeout(() => {
-        //     selector?.scrollIntoView({ behavior: "smooth", block: "center" });
-        //     setInitMenuBar(false);
-        //   }, 500);
-        // }
+      if (templateMenu && templateMenu.menuKey) {
+        const parentKeys = findMenuAllParentKey(templateMenu.menuKey);
+        setCurrentMenuList([...parentKeys, templateMenu.menuKey]);
       }
     }
   }, []);
   useEffectOnce(() => {
-    if (isBrowser() && initMenuBar && currentMenu) {
-      logger.debug("currentMenu", currentMenu);
+    logger.debug("currentMenuList", currentMenuList);
+    if (isBrowser() && initMenuBar && currentMenuList.length > 0) {
       const selector = document.querySelector(
         '.sidebar ul a[href="' + window.location.pathname + '"]'
       );
@@ -137,7 +125,7 @@ const Sidebar = () => {
         setInitMenuBar(false);
       }, 500);
     }
-  }, [currentMenu]);
+  }, [currentMenuList]);
 
   useEffect(() => {
     setActiveRoute();
@@ -1041,6 +1029,9 @@ const Sidebar = () => {
   </li> */}
     </ul>
   );
+  /**
+   * 生成菜单和下级
+   */
   const generateSidebarMenuTree_Menu = (menu: Menu) => {
     if (menu.type == "M") return null;
     //必需字段判空
@@ -1049,20 +1040,23 @@ const Sidebar = () => {
       return null;
     }
     return (
-      <li className="nav-item" key={menu.menuKey} data-menu={menu.menuKey}>
+      <li className="nav-item" key={menu.menuKey}>
         {menu.children && menu.children.length > 0 ? (
           // 有子级 是button和下拉
           <>
             <button
               type="button"
-              className={`${
+              className={`group ${
                 currentMenuList.includes(menu.menuKey) ? "active" : ""
-              } nav-link group w-full`}
+              } nav-link w-full`}
               onClick={() => toggleMenuList(menu.menuKey!!)}
             >
               <div className="flex items-center">
                 {menu.icon && (
-                  <IconMenuAuthentication className="shrink-0 group-hover:!text-primary" />
+                  <IconMenu
+                    name={menu.icon}
+                    className="shrink-0 group-hover:!text-primary"
+                  />
                 )}
                 <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
                   {t(menu.menuKey)}
@@ -1070,11 +1064,11 @@ const Sidebar = () => {
               </div>
 
               <div
-                className={
+                className={`dark:text-white-4 group-focus:text-white-6 ${
                   !currentMenuList.includes(menu.menuKey)
                     ? "-rotate-90 rtl:rotate-90"
                     : ""
-                }
+                }`}
               >
                 <IconCaretDown />
               </div>
@@ -1091,9 +1085,17 @@ const Sidebar = () => {
           </>
         ) : (
           // 无子级 直接是链接
-          <Link href={menu.path!!} className="group">
+          <Link
+            href={menu.path!!}
+            className={`group ${
+              currentMenuList.includes(menu.menuKey) ? "active" : ""
+            }`}
+          >
             <div className="flex items-center">
-              <IconMenuTables className="shrink-0 group-hover:!text-primary" />
+              <IconMenu
+                name={menu.icon}
+                className="shrink-0 group-hover:!text-primary"
+              />
               <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5">
                 {t(menu.menuKey)}
               </span>
@@ -1103,6 +1105,9 @@ const Sidebar = () => {
       </li>
     );
   };
+  /**
+   * 生成分类和下级
+   */
   const generateSidebarMenuTree_Category = (menu: Menu) => {
     if (menu.type == "C") return null;
     //必需字段判空

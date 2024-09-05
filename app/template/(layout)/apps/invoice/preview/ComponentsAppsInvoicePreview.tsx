@@ -176,7 +176,7 @@ const ComponentsAppsInvoicePreview = () => {
           </div>
         </div>
         <div className="table-responsive mt-6">
-          <table className="table-striped">
+          <table className="anthill-table table-striped">
             <thead>
               <tr>
                 {columns.map((column) => {

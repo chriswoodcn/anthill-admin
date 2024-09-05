@@ -15,7 +15,7 @@ const DropdownPortal = (props: any, forwardedRef: any) => {
   }, []);
   useEffectOnce(() => {
     if (pathname !== memPathname.current) {
-      logger.debug("DropdownPortal watch pathname", pathname);
+      // logger.debug("DropdownPortal watch pathname", pathname);
       memPathname.current = pathname;
       setOpened(false);
     }

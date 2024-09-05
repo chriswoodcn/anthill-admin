@@ -71,6 +71,7 @@
   "treeview": "Treeview",
   "typography": "Typography",
   "basic": "Basic",
+  "datatables_basic": "Basic Datatables",
   "order_sorting": "Order Sorting",
   "multi_column": "Multi Column",
   "multiple_tables": "Multiple Tables",

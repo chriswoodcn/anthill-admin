@@ -971,6 +971,7 @@ const ComponentsDashboardSales = () => {
                 <div className="mb-6 flex items-center justify-between">
                   <div className="flex items-center rounded-full bg-black/50 p-1 font-semibold text-white ltr:pr-3 rtl:pl-3">
                     <Image
+                      auto
                       className="block h-8 w-8 rounded-full border-2 border-white/50 object-cover ltr:mr-1 rtl:ml-1"
                       src="/assets/images/profile/profile-34.jpeg"
                       alt="avatar"
@@ -1056,7 +1057,7 @@ const ComponentsDashboardSales = () => {
                 </h5>
               </div>
               <div className="table-responsive">
-                <table>
+                <table className="anthill-table">
                   <thead>
                     <tr>
                       <th className="ltr:rounded-l-md rtl:rounded-r-md">
@@ -1075,6 +1076,7 @@ const ComponentsDashboardSales = () => {
                       <td className="min-w-[150px] text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/profile/profile-6.jpeg"
                             alt="avatar"
@@ -1097,6 +1099,7 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/profile/profile-7.jpeg"
                             alt="avatar"
@@ -1119,6 +1122,7 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/profile/profile-8.jpeg"
                             alt="avatar"
@@ -1141,6 +1145,7 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/profile/profile-9.jpeg"
                             alt="avatar"
@@ -1165,6 +1170,7 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/profile/profile-10.jpeg"
                             alt="avatar"
@@ -1197,7 +1203,7 @@ const ComponentsDashboardSales = () => {
                 </h5>
               </div>
               <div className="table-responsive">
-                <table>
+                <table className="anthill-table">
                   <thead>
                     <tr className="border-b-0">
                       <th className="ltr:rounded-l-md rtl:rounded-r-md">
@@ -1216,6 +1222,7 @@ const ComponentsDashboardSales = () => {
                       <td className="min-w-[150px] text-black dark:text-white">
                         <div className="flex">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/product/product-headphones.jpg"
                             alt="avatar"
@@ -1245,6 +1252,7 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/product/product-shoes.jpg"
                             alt="avatar"
@@ -1274,6 +1282,7 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/product/product-watch.jpg"
                             alt="avatar"
@@ -1303,12 +1312,13 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/product/product-laptop.jpg"
                             alt="avatar"
                           />
                           <p className="whitespace-nowrap">
-                            Laptop{" "}
+                            Laptop
                             <span className="block text-xs text-primary">
                               Digital
                             </span>
@@ -1332,6 +1342,7 @@ const ComponentsDashboardSales = () => {
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image
+                            auto
                             className="h-8 w-8 rounded-md object-cover ltr:mr-3 rtl:ml-3"
                             src="/assets/images/product/product-camera.jpg"
                             alt="avatar"

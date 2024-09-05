@@ -1,6 +1,6 @@
 "use client";
 
-import Logo from '@/components/compose/Logo';
+import Logo from "@/components/compose/Logo";
 import IconDownload from "@/components/icon/icon-download";
 import IconEye from "@/components/icon/icon-eye";
 import IconSave from "@/components/icon/icon-save";
@@ -483,7 +483,7 @@ const ComponentsAppsInvoiceAdd = () => {
         </div>
         <div className="mt-8 px-4">
           <div className="table-responsive">
-            <table>
+            <table className="anthill-table">
               <thead>
                 <tr>
                   <th>Item</th>
