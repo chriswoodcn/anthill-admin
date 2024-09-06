@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import PanelCodeHighlight from "@/components/compose/PanelCodeHighlight";
+import Image from '@/components/core/Image';
 
 export const metadata: Metadata = {
   title: "Jumbotron",
@@ -86,8 +87,8 @@ const Jumbotron = () => {
             <blockquote className="rounded-br-md rounded-tr-md border border-l-2 border-white-light !border-l-primary bg-white p-5 text-black shadow-md ltr:pl-3.5 rtl:pr-3.5 dark:border-[#060818] dark:bg-[#060818]">
               <div className="flex items-start">
                 <div className="h-14 w-14 flex-none ltr:mr-5 rtl:ml-5">
-                  <img
-                    src="/assets/images/profile-34.jpeg"
+                  <Image
+                    src="/assets/images/template/profile-34.jpeg"
                     alt="img"
                     className="m-auto h-14 w-14 rounded-full object-cover"
                   />
