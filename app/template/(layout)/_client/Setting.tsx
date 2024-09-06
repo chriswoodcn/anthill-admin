@@ -39,7 +39,7 @@ const Setting = () => {
       >
         <button
           type="button"
-          className="absolute bottom-0 top-0 my-auto flex h-10 w-12 cursor-pointer items-center justify-center bg-primary text-white ltr:-left-12 ltr:rounded-bl-full ltr:rounded-tl-full rtl:-right-12 rtl:rounded-br-full rtl:rounded-tr-full"
+          className="absolute bottom-0 top-0 my-auto flex h-10 w-12 cursor-pointer items-center justify-center bg-primary text-white ltr:-left-16 ltr:rounded-bl-full ltr:rounded-tl-full rtl:-right-16 rtl:rounded-br-full rtl:rounded-tr-full"
           onClick={() => setShowCustomizer(!showCustomizer)}
         >
           <IconSettings className="h-5 w-5 animate-[spin_3s_linear_infinite]" />
@@ -62,7 +62,7 @@ const Setting = () => {
             </p>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Color Scheme
             </h5>
@@ -111,7 +111,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Navigation Position
             </h5>
@@ -177,7 +177,7 @@ const Setting = () => {
             </div> */}
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Layout Style
             </h5>
@@ -211,7 +211,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Direction
             </h5>
@@ -245,7 +245,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Navbar Type
             </h5>
@@ -284,7 +284,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Router Transition
             </h5>

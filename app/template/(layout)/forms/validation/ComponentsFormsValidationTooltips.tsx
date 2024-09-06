@@ -110,7 +110,7 @@ const submitForm4 = Yup.object().shape({
                 <div className={submitCount ? (errors.username ? 'has-error' : 'has-success') : ''}>
                     <label htmlFor="username">Username</label>
                     <div className="flex">
-                        <div className="bg-[#eee] flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-white-light dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                        <div className="bg-[#eee] flex justify-center items-center ltr:rounded-l-md rtl:rounded-r-md px-3 font-semibold border ltr:border-r-0 rtl:border-l-0 border-white-light dark:border-[#17263c] dark:bg-black-7">
                             @
                         </div>
 
@@ -295,7 +295,7 @@ const submitForm4 = Yup.object().shape({
                 >
                   <label htmlFor="username">Username</label>
                   <div className="flex">
-                    <div className="flex items-center justify-center border border-white-light bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-[#1b2e4b]">
+                    <div className="flex items-center justify-center border border-white-light bg-[#eee] px-3 font-semibold ltr:rounded-l-md ltr:border-r-0 rtl:rounded-r-md rtl:border-l-0 dark:border-[#17263c] dark:bg-black-7">
                       @
                     </div>
 

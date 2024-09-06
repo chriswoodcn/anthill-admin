@@ -441,7 +441,7 @@ const ComponentsAppsNotes = () => {
               <h3 className="text-lg font-semibold ltr:ml-3 rtl:mr-3">Notes</h3>
             </div>
 
-            <div className="my-4 h-px w-full border-b border-white-light dark:border-[#1b2e4b]"></div>
+            <div className="my-4 h-px w-full border-b border-white-light dark:border-black-7"></div>
             <PerfectScrollbar className="relative h-full grow ltr:-mr-3.5 ltr:pr-3.5 rtl:-ml-3.5 rtl:pl-3.5">
               <div className="space-y-1">
                 <button
@@ -470,7 +470,7 @@ const ComponentsAppsNotes = () => {
                     <div className="ltr:ml-3 rtl:mr-3">Favourites</div>
                   </div>
                 </button>
-                <div className="h-px w-full border-b border-white-light dark:border-[#1b2e4b]"></div>
+                <div className="h-px w-full border-b border-white-light dark:border-black-7"></div>
                 <div className="px-1 py-3 text-white-dark">Tags</div>
                 <button
                   type="button"

@@ -796,7 +796,7 @@ const ComponentsDashboardCrypto = () => {
             Dashboard
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Crypto</span>
         </li>
       </ul>
@@ -971,7 +971,7 @@ const ComponentsDashboardCrypto = () => {
                   <Dropdown
                     offset={[0, 5]}
                     placement={`${isRtl ? "bottom-start" : "bottom-end"}`}
-                    btnClassName="bg-[#f1f2f3] dark:bg-[#1b2e4b] !flex justify-center gap-1 items-center rounded-none px-3 py-2 font-semibold border dark:border-[#253b5c] ltr:rounded-r-md rtl:rounded-l-md cursor-pointer"
+                    btnClassName="bg-[#f1f2f3] dark:bg-black-7 !flex justify-center gap-1 items-center rounded-none px-3 py-2 font-semibold border dark:border-[#253b5c] ltr:rounded-r-md rtl:rounded-l-md cursor-pointer"
                     button={
                       <>
                         BTC

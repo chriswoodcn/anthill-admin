@@ -31,7 +31,7 @@ const Profile = () => {
             Users
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Profile</span>
         </li>
       </ul>
@@ -209,7 +209,7 @@ const Profile = () => {
               </h5>
             </div>
             <div className="space-y-4">
-              <div className="rounded border border-[#ebedf2] dark:border-0 dark:bg-[#1b2e4b]">
+              <div className="rounded border border-[#ebedf2] dark:border-0 dark:bg-black-7">
                 <div className="flex items-center justify-between p-4 py-2">
                   <div className="grid h-9 w-9 place-content-center rounded-md bg-secondary-light text-secondary dark:bg-secondary dark:text-secondary-light">
                     <IconShoppingBag />
@@ -227,7 +227,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="rounded border border-[#ebedf2] dark:border-0 dark:bg-[#1b2e4b]">
+              <div className="rounded border border-[#ebedf2] dark:border-0 dark:bg-black-7">
                 <div className="flex items-center justify-between p-4 py-2">
                   <div className="grid h-9 w-9 place-content-center rounded-md bg-info-light text-info dark:bg-info dark:text-info-light">
                     <IconTag />
@@ -243,7 +243,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="rounded border border-[#ebedf2] dark:border-0 dark:bg-[#1b2e4b]">
+              <div className="rounded border border-[#ebedf2] dark:border-0 dark:bg-black-7">
                 <div className="flex items-center justify-between p-4 py-2">
                   <div className="grid h-9 w-9 place-content-center rounded-md bg-warning-light text-warning dark:bg-warning dark:text-warning-light">
                     <IconCreditCard />
@@ -296,7 +296,7 @@ const Profile = () => {
               </h5>
             </div>
             <div>
-              <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+              <div className="border-b border-[#ebedf2] dark:border-black-7">
                 <div className="flex items-center justify-between py-2">
                   <div className="flex-none">
                     <Image
@@ -317,7 +317,7 @@ const Profile = () => {
                   </div>
                 </div>
               </div>
-              <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+              <div className="border-b border-[#ebedf2] dark:border-black-7">
                 <div className="flex items-center justify-between py-2">
                   <div className="flex-none">
                     <Image src="/assets/images/template/card-mastercard.svg" alt="img" />

@@ -22,7 +22,7 @@ const Cards = () => {
             Components
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Cards</span>
         </li>
       </ul>
@@ -31,7 +31,7 @@ const Cards = () => {
         <PanelCodeHighlight
           title="Card 1"
           codeHighlight={`<div className="mb-5 flex items-center justify-center">
-    <div className="max-w-[19rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+    <div className="max-w-[19rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
         <div className="py-7 px-6">
             <div className="bg-[#3b3f5c] mb-5 inline-block p-3 text-[#f1f2f3] rounded-full">
                 <svg>...</svg>
@@ -43,7 +43,7 @@ const Cards = () => {
 </div>`}
         >
           <div className="mb-5 flex items-center justify-center">
-            <div className="w-full max-w-[19rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+            <div className="w-full max-w-[19rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
               <div className="px-6 py-7">
                 <div className="mb-5 inline-block rounded-full bg-[#3b3f5c] p-3 text-[#f1f2f3]">
                   <IconDroplet />
@@ -62,7 +62,7 @@ const Cards = () => {
         <PanelCodeHighlight
           title="Card 2"
           codeHighlight={`<div className="mb-5 flex items-center justify-center">
-    <div className="max-w-[19rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+    <div className="max-w-[19rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
         <div className="py-7 px-6">
             <div className="-mt-7 mb-7 -mx-6 rounded-tl rounded-tr h-[215px] overflow-hidden">
                 <Image src="/assets/images/template/profile-28.jpeg" alt="cover" className="w-full h-full object-cover" />
@@ -77,7 +77,7 @@ const Cards = () => {
 </div>`}
         >
           <div className="mb-5 flex items-center justify-center">
-            <div className="w-full max-w-[19rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+            <div className="w-full max-w-[19rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
               <div className="px-6 py-7">
                 <div className="-mx-6 -mt-7 mb-7 h-[215px] overflow-hidden rounded-tl rounded-tr">
                   <Image
@@ -104,7 +104,7 @@ const Cards = () => {
         <PanelCodeHighlight
           title="Card 3"
           codeHighlight={`<div className="mb-5 flex items-center justify-center">
-    <div className="max-w-[18rem] w-full bg-[#3b3f5c] shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">
+    <div className="max-w-[18rem] w-full bg-[#3b3f5c] shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none p-5">
         <div className="text-center text-black-light">
             <div className="mb-5 w-20 h-20 rounded-full overflow-hidden mx-auto">
                 <Image src="/assets/images/template/profile-34.jpeg" alt="profile" className="w-full h-full object-cover" />
@@ -124,7 +124,7 @@ const Cards = () => {
 </div>`}
         >
           <div className="mb-5 flex items-center justify-center">
-            <div className="w-full max-w-[18rem] rounded border border-white-light bg-[#3b3f5c] p-5 shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+            <div className="w-full max-w-[18rem] rounded border border-white-light bg-[#3b3f5c] p-5 shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
               <div className="text-center text-black-light">
                 <div className="mx-auto mb-5 h-20 w-20 overflow-hidden rounded-full">
                   <Image
@@ -157,7 +157,7 @@ const Cards = () => {
         <PanelCodeHighlight
           title="Card 4"
           codeHighlight={`<div className="mb-5 flex items-center justify-center">
-    <div className="max-w-[30rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+    <div className="max-w-[30rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
         <div className="p-5 flex items-center flex-col sm:flex-row">
             <div className="mb-5 w-20 h-20 rounded-full overflow-hidden">
                 <Image src="/assets/images/template/profile-34.jpeg" alt="profile" className="w-full h-full object-cover" />
@@ -175,7 +175,7 @@ const Cards = () => {
 </div>`}
         >
           <div className="mb-5 flex items-center justify-center">
-            <div className="w-full max-w-[30rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+            <div className="w-full max-w-[30rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
               <div className="flex flex-col items-center p-5 sm:flex-row">
                 <div className="mb-5 h-20 w-20 overflow-hidden rounded-full">
                   <Image
@@ -251,7 +251,7 @@ const Cards = () => {
         <PanelCodeHighlight
           title="Card 6"
           codeHighlight={`<div className="mb-5 flex items-center justify-center">
-    <div className="max-w-[20rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5 ">
+    <div className="max-w-[20rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none p-5 ">
         <div className="text-[#515365] dark:text-white-light">
             <p className="font-semibold italic mb-5">
                 Maecenas nec mi vel lacus condimentum rhoncus dignissim egestas orci. Integer blandit porta placerat. Vestibulum in ultricies.
@@ -274,7 +274,7 @@ const Cards = () => {
 </div>`}
         >
           <div className="mb-5 flex items-center justify-center">
-            <div className="w-full max-w-[20rem] rounded border border-white-light bg-white p-5 shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none ">
+            <div className="w-full max-w-[20rem] rounded border border-white-light bg-white p-5 shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none ">
               <div className="text-[#515365] dark:text-white-light">
                 <p className="mb-5 font-semibold italic">
                   Maecenas nec mi vel lacus condimentum rhoncus dignissim
@@ -343,7 +343,7 @@ const Cards = () => {
         <PanelCodeHighlight
           title="Card 8"
           codeHighlight={`<div className="mb-5 flex items-center justify-center">
-    <div className="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none p-5">
+    <div className="max-w-[24rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none p-5">
         <div className="flex justify-between mb-5">
             <h6 className="text-black font-semibold text-base dark:text-white-light">Placed Order</h6>
             <span className="badge bg-primary/10 text-primary py-1.5 dark:bg-primary dark:text-white">IN PROGRESS</span>
@@ -376,7 +376,7 @@ const Cards = () => {
 </div>`}
         >
           <div className="mb-5 flex items-center justify-center">
-            <div className="w-full max-w-[24rem] rounded border border-white-light bg-white p-5 shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+            <div className="w-full max-w-[24rem] rounded border border-white-light bg-white p-5 shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
               <div className="mb-5 flex justify-between">
                 <h6 className="text-base font-semibold text-black dark:text-white-light">
                   Placed Order
@@ -421,7 +421,7 @@ const Cards = () => {
         <PanelCodeHighlight
           title="Card 9"
           codeHighlight={`<div className="mb-5 flex items-center justify-center">
-    <div className="max-w-[22rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+    <div className="max-w-[22rem] w-full bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] rounded border border-white-light dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
         <div className="py-7 px-6">
             <div className="-mt-7 mb-7 -mx-6 rounded-tl rounded-tr h-[260px] overflow-hidden">
                 <Image src="/assets/images/template/profile-28.jpeg" alt="profile" className="w-full h-full object-cover" />
@@ -452,7 +452,7 @@ const Cards = () => {
 </div>  `}
         >
           <div className="mb-5 flex items-center justify-center">
-            <div className="w-full max-w-[22rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-[#1b2e4b] dark:bg-[#191e3a] dark:shadow-none">
+            <div className="w-full max-w-[22rem] rounded border border-white-light bg-white shadow-[4px_6px_10px_-3px_#bfc9d4] dark:border-black-7 dark:bg-[#191e3a] dark:shadow-none">
               <div className="px-6 py-7">
                 <div className="-mx-6 -mt-7 mb-7 h-[260px] overflow-hidden rounded-tl rounded-tr">
                   <Image

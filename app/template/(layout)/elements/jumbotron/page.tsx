@@ -15,7 +15,7 @@ const Jumbotron = () => {
             Elements
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Jumbotron</span>
         </li>
       </ul>
@@ -23,7 +23,7 @@ const Jumbotron = () => {
         {/* basic */}
         <PanelCodeHighlight
           title="Basic"
-          codeHighlight={`<div className="prose bg-[#f1f2f3] px-4 py-9 sm:px-8 sm:py-16 rounded max-w-full dark:bg-[#1b2e4b] dark:text-white-light w-full mb-5">
+          codeHighlight={`<div className="prose bg-[#f1f2f3] px-4 py-9 sm:px-8 sm:py-16 rounded max-w-full dark:bg-black-7 dark:text-white-light w-full mb-5">
     <h2 className="text-dark mb-5  mt-4 text-center text-5xl dark:text-white-light">Hello, world!</h2>
     <p className="lead mt-3 mb-4 dark:text-white-light">
         This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.
@@ -37,7 +37,7 @@ const Jumbotron = () => {
     </p>
 </div>`}
         >
-          <div className="prose mb-5 w-full max-w-full rounded bg-[#f1f2f3] px-4 py-9 dark:bg-[#1b2e4b] dark:text-white-light sm:px-8 sm:py-16">
+          <div className="prose mb-5 w-full max-w-full rounded bg-[#f1f2f3] px-4 py-9 dark:bg-black-7 dark:text-white-light sm:px-8 sm:py-16">
             <h2 className="mb-5 mt-4  text-center text-5xl text-dark dark:text-white-light">
               Hello, world!
             </h2>
@@ -60,7 +60,7 @@ const Jumbotron = () => {
         {/* fluid */}
         <PanelCodeHighlight
           title="Jumbotron Fluid"
-          codeHighlight={`<div className="prose bg-[#f1f2f3] px-4 py-9 sm:px-8 sm:py-16 rounded max-w-full dark:bg-[#1b2e4b] dark:text-white-light w-full mb-5">
+          codeHighlight={`<div className="prose bg-[#f1f2f3] px-4 py-9 sm:px-8 sm:py-16 rounded max-w-full dark:bg-black-7 dark:text-white-light w-full mb-5">
     <h2 className="text-dark mb-5  mt-4 text-center text-5xl dark:text-white-light">Fluid Jumbotron</h2>
     <p className="lead mt-3 mb-4 dark:text-white-light">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
     <blockquote className="text-black p-5 ltr:pl-3.5 rtl:pr-3.5 bg-white shadow-md rounded-tr-md rounded-br-md border border-white-light border-l-2 !border-l-primary dark:bg-[#060818] dark:border-[#060818]">
@@ -76,7 +76,7 @@ const Jumbotron = () => {
     </blockquote>
 </div>`}
         >
-          <div className="prose mb-5 w-full max-w-full rounded bg-[#f1f2f3] px-4 py-9 dark:bg-[#1b2e4b] dark:text-white-light sm:px-8 sm:py-16">
+          <div className="prose mb-5 w-full max-w-full rounded bg-[#f1f2f3] px-4 py-9 dark:bg-black-7 dark:text-white-light sm:px-8 sm:py-16">
             <h2 className="mb-5 mt-4  text-center text-5xl text-dark dark:text-white-light">
               Fluid Jumbotron
             </h2>

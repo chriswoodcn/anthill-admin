@@ -489,6 +489,7 @@ const Header = () => {
                   <li>
                     <div className="flex items-center">
                       <Image
+                        auto
                         className="h-10 w-10 rounded-md object-cover"
                         src="/assets/images/profile/profile-1.jpeg"
                         alt="userProfile"
@@ -502,7 +503,7 @@ const Header = () => {
                         </h4>
                         <button
                           type="button"
-                          className="text-black/60 hover:text-primary dark:text-black-7-light/60 dark:hover:text-white"
+                          className="hover:text-primary dark:hover:text-white"
                         >
                           johndoe@gmail.com
                         </button>

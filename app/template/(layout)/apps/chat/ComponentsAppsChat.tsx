@@ -346,7 +346,7 @@ const ComponentsAppsChat = () => {
               <Dropdown
                 offset={[0, 5]}
                 placement={`${isRtl ? "bottom-start" : "bottom-end"}`}
-                btnClassName="bg-[#f4f4f4] dark:bg-[#1b2e4b] hover:bg-primary-light w-8 h-8 rounded-full !flex justify-center items-center hover:text-primary"
+                btnClassName="bg-[#f4f4f4] dark:bg-black-7 hover:bg-primary-light w-8 h-8 rounded-full !flex justify-center items-center hover:text-primary"
                 button={<IconHorizontalDots className="opacity-70" />}
               >
                 <ul className="whitespace-nowrap bg-white rounded-lg shadow-lg space-y-4 p-4 dark:bg-black-7">
@@ -414,7 +414,7 @@ const ComponentsAppsChat = () => {
               Notification
             </button>
           </div>
-          <div className="h-px w-full border-b border-white-light dark:border-[#1b2e4b]"></div>
+          <div className="h-px w-full border-b border-white-light dark:border-black-7"></div>
           <div className="!mt-0">
             <PerfectScrollbar className="chat-users relative h-full min-h-[100px] space-y-0.5 ltr:-mr-3.5 ltr:pr-3.5 rtl:-ml-3.5 rtl:pl-3.5 sm:h-[calc(100vh_-_357px)]">
               {filteredItems.map((person: any) => {
@@ -688,7 +688,7 @@ const ComponentsAppsChat = () => {
                   <div className="dropdown">
                     <Dropdown
                       placement={`${isRtl ? "bottom-start" : "bottom-end"}`}
-                      btnClassName="bg-[#f4f4f4] dark:bg-[#1b2e4b] hover:bg-primary-light w-8 h-8 rounded-full !flex justify-center items-center"
+                      btnClassName="bg-[#f4f4f4] dark:bg-black-7 hover:bg-primary-light w-8 h-8 rounded-full !flex justify-center items-center"
                       button={
                         <IconHorizontalDots className="rotate-90 opacity-70 hover:text-primary" />
                       }
@@ -744,7 +744,7 @@ const ComponentsAppsChat = () => {
                   </div>
                 </div>
               </div>
-              <div className="h-px w-full border-b border-white-light dark:border-[#1b2e4b]"></div>
+              <div className="h-px w-full border-b border-white-light dark:border-black-7"></div>
 
               <PerfectScrollbar className="chat-conversation-box relative h-full sm:h-[calc(100vh_-_300px)]">
                 <div className="min-h-[400px] space-y-5 p-4 pb-[68px] sm:min-h-[300px] sm:pb-0">
@@ -861,25 +861,25 @@ const ComponentsAppsChat = () => {
                   <div className="hidden items-center space-x-3 py-3 rtl:space-x-reverse sm:block sm:py-0">
                     <button
                       type="button"
-                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-[#1b2e4b]"
+                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-black-7"
                     >
                       <IconMicrophoneOff />
                     </button>
                     <button
                       type="button"
-                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-[#1b2e4b]"
+                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-black-7"
                     >
                       <IconDownload />
                     </button>
                     <button
                       type="button"
-                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-[#1b2e4b]"
+                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-black-7"
                     >
                       <IconCamera />
                     </button>
                     <button
                       type="button"
-                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-[#1b2e4b]"
+                      className="rounded-md bg-[#f4f4f4] p-2 hover:bg-primary-light hover:text-primary dark:bg-black-7"
                     >
                       <IconHorizontalDots className="opacity-70" />
                     </button>

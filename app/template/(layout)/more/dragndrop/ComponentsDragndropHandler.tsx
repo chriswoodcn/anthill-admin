@@ -77,7 +77,7 @@ const ComponentsDragndropHandler = () => {
               {handler1.map((item) => {
                 return (
                   <li key={item.id} className="mb-2.5 cursor-grab">
-                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 ltr:text-left rtl:text-right dark:border-dark dark:bg-[#1b2e4b] md:flex-row">
+                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 ltr:text-left rtl:text-right dark:border-dark dark:bg-black-7 md:flex-row">
                       <div className="ltr:sm:mr-4 rtl:sm:ml-4">
                         <Image
                           alt="avatar"
@@ -121,7 +121,7 @@ const ComponentsDragndropHandler = () => {
               {handler2.map((item) => {
                 return (
                   <li key={item.id} className="mb-2.5 cursor-grab">
-                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 ltr:text-left rtl:text-right dark:border-dark dark:bg-[#1b2e4b] md:flex-row">
+                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 ltr:text-left rtl:text-right dark:border-dark dark:bg-black-7 md:flex-row">
                       <div className="ltr:sm:mr-4 rtl:sm:ml-4">
                         <Image
                           alt="avatar"

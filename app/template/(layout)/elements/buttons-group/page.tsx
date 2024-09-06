@@ -18,7 +18,7 @@ const ButtonsGroup = () => {
             Elements
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Button Group</span>
         </li>
       </ul>

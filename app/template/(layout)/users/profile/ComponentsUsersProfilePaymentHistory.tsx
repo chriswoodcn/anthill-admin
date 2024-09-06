@@ -18,7 +18,7 @@ const ComponentsUsersProfilePaymentHistory = () => {
         </h5>
       </div>
       <div>
-        <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+        <div className="border-b border-[#ebedf2] dark:border-black-7">
           <div className="flex items-center justify-between py-2">
             <h6 className="font-semibold text-[#515365] dark:text-white-dark">
               March
@@ -50,7 +50,7 @@ const ComponentsUsersProfilePaymentHistory = () => {
             </div>
           </div>
         </div>
-        <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+        <div className="border-b border-[#ebedf2] dark:border-black-7">
           <div className="flex items-center justify-between py-2">
             <h6 className="font-semibold text-[#515365] dark:text-white-dark">
               February

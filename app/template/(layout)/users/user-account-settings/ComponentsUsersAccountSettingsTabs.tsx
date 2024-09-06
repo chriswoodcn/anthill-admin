@@ -185,7 +185,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
             <h6 className="mb-5 text-lg font-bold">Social</h6>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconLinkedin className="h-5 w-5" />
                 </div>
                 <input
@@ -195,7 +195,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 />
               </div>
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconTwitter className="h-5 w-5" />
                 </div>
                 <input
@@ -205,7 +205,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 />
               </div>
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconFacebook className="h-5 w-5" />
                 </div>
                 <input
@@ -215,7 +215,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 />
               </div>
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconGithub />
                 </div>
                 <input
@@ -243,7 +243,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 </p>
               </div>
               <div className="mb-5">
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #1
@@ -256,7 +256,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                   </div>
                 </div>
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #2
@@ -296,7 +296,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 </p>
               </div>
               <div className="mb-5">
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <div className="flex-none ltr:mr-4 rtl:ml-4">
                       <Image
@@ -315,7 +315,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                   </div>
                 </div>
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <div className="flex-none ltr:mr-4 rtl:ml-4">
                       <Image

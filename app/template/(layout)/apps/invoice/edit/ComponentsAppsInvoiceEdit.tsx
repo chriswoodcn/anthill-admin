@@ -192,7 +192,7 @@ const ComponentsAppsInvoiceEdit = () => {
             </div>
           </div>
         </div>
-        <hr className="my-6 border-white-light dark:border-[#1b2e4b]" />
+        <hr className="my-6 border-white-light dark:border-black-7" />
         <div className="mt-8 px-4">
           <div className="flex flex-col justify-between lg:flex-row">
             <div className="mb-6 w-full lg:w-1/2 ltr:lg:mr-6 rtl:lg:ml-6">

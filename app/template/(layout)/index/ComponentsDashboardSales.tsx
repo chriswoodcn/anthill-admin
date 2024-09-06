@@ -441,7 +441,7 @@ const ComponentsDashboardSales = () => {
               Dashboard
             </Link>
           </li>
-          <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+          <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
             <span>Sales</span>
           </li>
         </ul>
@@ -590,7 +590,7 @@ const ComponentsDashboardSales = () => {
                       <h6>Income</h6>
                       <p className="ltr:ml-auto rtl:mr-auto">$92,600</p>
                     </div>
-                    <div className="h-2 rounded-full bg-dark-light shadow dark:bg-[#1b2e4b]">
+                    <div className="h-2 rounded-full bg-dark-light shadow dark:bg-black-7">
                       <div className="h-full w-11/12 rounded-full bg-gradient-to-r from-[#7579ff] to-[#b224ef]"></div>
                     </div>
                   </div>
@@ -606,7 +606,7 @@ const ComponentsDashboardSales = () => {
                       <h6>Profit</h6>
                       <p className="ltr:ml-auto rtl:mr-auto">$37,515</p>
                     </div>
-                    <div className="h-2 w-full rounded-full bg-dark-light shadow dark:bg-[#1b2e4b]">
+                    <div className="h-2 w-full rounded-full bg-dark-light shadow dark:bg-black-7">
                       <div
                         className="h-full w-full rounded-full bg-gradient-to-r from-[#3cba92] to-[#0ba360]"
                         style={{ width: "65%" }}
@@ -625,7 +625,7 @@ const ComponentsDashboardSales = () => {
                       <h6>Expenses</h6>
                       <p className="ltr:ml-auto rtl:mr-auto">$55,085</p>
                     </div>
-                    <div className="h-2 w-full rounded-full bg-dark-light shadow dark:bg-[#1b2e4b]">
+                    <div className="h-2 w-full rounded-full bg-dark-light shadow dark:bg-black-7">
                       <div
                         className="h-full w-full rounded-full bg-gradient-to-r from-[#f09819] to-[#ff5858]"
                         style={{ width: "80%" }}

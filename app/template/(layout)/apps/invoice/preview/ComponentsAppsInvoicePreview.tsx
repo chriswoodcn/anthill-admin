@@ -119,7 +119,7 @@ const ComponentsAppsInvoicePreview = () => {
           </div>
         </div>
 
-        <hr className="my-6 border-white-light dark:border-[#1b2e4b]" />
+        <hr className="my-6 border-white-light dark:border-black-7" />
         <div className="flex flex-col flex-wrap justify-between gap-6 lg:flex-row">
           <div className="flex-1">
             <div className="space-y-1 text-white-dark">

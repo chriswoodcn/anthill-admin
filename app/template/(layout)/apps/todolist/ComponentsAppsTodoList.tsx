@@ -653,7 +653,7 @@ const ComponentsAppsTodoList = () => {
                 </h3>
               </div>
             </div>
-            <div className="mb-5 h-px w-full border-b border-white-light dark:border-[#1b2e4b]"></div>
+            <div className="mb-5 h-px w-full border-b border-white-light dark:border-black-7"></div>
             <PerfectScrollbar className="relative h-full grow ltr:-mr-3.5 ltr:pr-3.5 rtl:-ml-3.5 rtl:pl-3.5">
               <div className="space-y-1">
                 <button
@@ -733,7 +733,7 @@ const ComponentsAppsTodoList = () => {
                     <div className="ltr:ml-3 rtl:mr-3">Trash</div>
                   </div>
                 </button>
-                <div className="h-px w-full border-b border-white-light dark:border-[#1b2e4b]"></div>
+                <div className="h-px w-full border-b border-white-light dark:border-black-7"></div>
                 <div className="px-1 py-3 text-white-dark">Tags</div>
                 <button
                   type="button"
@@ -884,7 +884,7 @@ const ComponentsAppsTodoList = () => {
                 </button>
               </div>
             </div>
-            <div className="h-px w-full border-b border-white-light dark:border-[#1b2e4b]"></div>
+            <div className="h-px w-full border-b border-white-light dark:border-black-7"></div>
 
             {pagedTasks.length ? (
               <div className="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">

@@ -32,10 +32,10 @@ const [active2, setActive2] = useState<string>('1');
 
 <div className="mb-5">
     <div className="space-y-2 font-semibold">
-        <div className="border border-[#d3d3d3] rounded dark:border-[#1b2e4b]">
+        <div className="border border-white-7 rounded dark:border-black-7">
             <button
                 type="button"
-                className={\`p-4 w-full flex items-center text-white-dark dark:bg-[#1b2e4b] \${active2 === '1' ? '!text-primary' : ''}\`}
+                className={\`p-4 w-full flex items-center text-white-dark dark:bg-black-7 \${active2 === '1' ? '!text-primary' : ''}\`}
                 onClick={() => togglePara2('1')}
             >
                 <svg>...</svg>
@@ -46,7 +46,7 @@ const [active2, setActive2] = useState<string>('1');
             </button>
             <div>
                 <AnimateHeight duration={300} height={active2 === '1' ? 'auto' : 0}>
-                    <div className="space-y-2 p-4 text-white-dark text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
+                    <div className="space-y-2 p-4 text-white-dark text-[13px] border-t border-white-7 dark:border-black-7">
                         <p>
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
                             veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
@@ -59,10 +59,10 @@ const [active2, setActive2] = useState<string>('1');
                 </AnimateHeight>
             </div>
         </div>
-        <div className="border border-[#d3d3d3] dark:border-[#1b2e4b] rounded">
+        <div className="border border-white-7 dark:border-black-7 rounded">
             <button
                 type="button"
-                className={\`p-4 w-full flex items-center text-white-dark dark:bg-[#1b2e4b] \${active2 === '2' ? '!text-primary' : ''}\`}
+                className={\`p-4 w-full flex items-center text-white-dark dark:bg-black-7 \${active2 === '2' ? '!text-primary' : ''}\`}
                 onClick={() => togglePara2('2')}
             >
                 <svg>...</svg>
@@ -73,7 +73,7 @@ const [active2, setActive2] = useState<string>('1');
             </button>
             <div>
                 <AnimateHeight duration={300} height={active2 === '2' ? 'auto' : 0}>
-                    <div className="p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
+                    <div className="p-4 text-[13px] border-t border-white-7 dark:border-black-7">
                         <ul className="space-y-1">
                             <li>
                                 <button type="button">Apple</button>
@@ -92,10 +92,10 @@ const [active2, setActive2] = useState<string>('1');
                 </AnimateHeight>
             </div>
         </div>
-        <div className="border border-[#d3d3d3] dark:border-[#1b2e4b] rounded">
+        <div className="border border-white-7 dark:border-black-7 rounded">
             <button
                 type="button"
-                className={\`p-4 w-full flex items-center text-white-dark dark:bg-[#1b2e4b] \${active2 === '3' ? '!text-primary' : ''}\`}
+                className={\`p-4 w-full flex items-center text-white-dark dark:bg-black-7 \${active2 === '3' ? '!text-primary' : ''}\`}
                 onClick={() => togglePara2('3')}
             >
                 <svg>...</svg>
@@ -106,7 +106,7 @@ const [active2, setActive2] = useState<string>('1');
             </button>
             <div>
                 <AnimateHeight duration={300} height={active2 === '3' ? 'auto' : 0}>
-                    <div className="p-4 text-[13px] border-t border-[#d3d3d3] dark:border-[#1b2e4b]">
+                    <div className="p-4 text-[13px] border-t border-white-7 dark:border-black-7">
                         <p>
                             Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard
                             dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla
@@ -126,10 +126,10 @@ const [active2, setActive2] = useState<string>('1');
     >
       <div className="mb-5">
         <div className="space-y-2 font-semibold">
-          <div className="rounded border border-[#d3d3d3] dark:border-[#1b2e4b]">
+          <div className="rounded border border-white-7 dark:border-black-7">
             <button
               type="button"
-              className={`flex w-full items-center p-4 text-white-dark dark:bg-[#1b2e4b] ${
+              className={`flex w-full items-center p-4 text-white-dark dark:bg-black-7 ${
                 active2 === "1" ? "!text-primary" : ""
               }`}
               onClick={() => togglePara2("1")}
@@ -149,7 +149,7 @@ const [active2, setActive2] = useState<string>('1');
                 duration={300}
                 height={active2 === "1" ? "auto" : 0}
               >
-                <div className="space-y-2 border-t border-[#d3d3d3] p-4 text-[13px] text-white-dark dark:border-[#1b2e4b]">
+                <div className="space-y-2 border-t border-white-7 p-4 text-[13px] text-white-dark dark:border-black-7">
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                     sed do eiusmod tempor incididunt ut labore et dolore magna
@@ -166,10 +166,10 @@ const [active2, setActive2] = useState<string>('1');
               </AnimateHeight>
             </div>
           </div>
-          <div className="rounded border border-[#d3d3d3] dark:border-[#1b2e4b]">
+          <div className="rounded border border-white-7 dark:border-black-7">
             <button
               type="button"
-              className={`flex w-full items-center p-4 text-white-dark dark:bg-[#1b2e4b] ${
+              className={`flex w-full items-center p-4 text-white-dark dark:bg-black-7 ${
                 active2 === "2" ? "!text-primary" : ""
               }`}
               onClick={() => togglePara2("2")}
@@ -189,7 +189,7 @@ const [active2, setActive2] = useState<string>('1');
                 duration={300}
                 height={active2 === "2" ? "auto" : 0}
               >
-                <div className="border-t border-[#d3d3d3] p-4 text-[13px] dark:border-[#1b2e4b]">
+                <div className="border-t border-white-7 p-4 text-[13px] dark:border-black-7">
                   <ul className="space-y-1">
                     <li>
                       <button type="button">Apple</button>
@@ -208,10 +208,10 @@ const [active2, setActive2] = useState<string>('1');
               </AnimateHeight>
             </div>
           </div>
-          <div className="rounded border border-[#d3d3d3] dark:border-[#1b2e4b]">
+          <div className="rounded border border-white-7 dark:border-black-7">
             <button
               type="button"
-              className={`flex w-full items-center p-4 text-white-dark dark:bg-[#1b2e4b] ${
+              className={`flex w-full items-center p-4 text-white-dark dark:bg-black-7 ${
                 active2 === "3" ? "!text-primary" : ""
               }`}
               onClick={() => togglePara2("3")}
@@ -231,7 +231,7 @@ const [active2, setActive2] = useState<string>('1');
                 duration={300}
                 height={active2 === "3" ? "auto" : 0}
               >
-                <div className="border-t border-[#d3d3d3] p-4 text-[13px] dark:border-[#1b2e4b]">
+                <div className="border-t border-white-7 p-4 text-[13px] dark:border-black-7">
                   <p>
                     {`Anim pariatur cliche reprehenderit, enim eiusmod high
                           life accusamus terry richardson ad squid. 3 wolf moon

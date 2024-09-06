@@ -373,7 +373,7 @@ const ComponentsDashboardAnalytics = () => {
             Dashboard
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Analytics</span>
         </li>
       </ul>
@@ -538,7 +538,7 @@ const ComponentsDashboardAnalytics = () => {
 
         <div className="mb-6 grid gap-6 lg:grid-cols-3">
           <div className="panel h-full p-0 lg:col-span-2">
-            <div className="mb-5 flex items-start justify-between border-b border-white-light p-5  dark:border-[#1b2e4b] dark:text-white-light">
+            <div className="mb-5 flex items-start justify-between border-b border-white-light p-5  dark:border-black-7 dark:text-white-light">
               <h5 className="text-lg font-semibold ">Unique Visitors</h5>
               <div className="dropdown">
                 <Dropdown
@@ -576,7 +576,7 @@ const ComponentsDashboardAnalytics = () => {
           </div>
 
           <div className="panel h-full">
-            <div className="-mx-5 mb-5 flex items-start justify-between border-b border-white-light p-5 pt-0  dark:border-[#1b2e4b] dark:text-white-light">
+            <div className="-mx-5 mb-5 flex items-start justify-between border-b border-white-light p-5 pt-0  dark:border-black-7 dark:text-white-light">
               <h5 className="text-lg font-semibold ">Activity Log</h5>
               <div className="dropdown">
                 <Dropdown
@@ -846,7 +846,7 @@ const ComponentsDashboardAnalytics = () => {
 
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
           <div className="panel h-full">
-            <div className="-m-5 mb-5 flex  items-start border-b border-white-light p-5 dark:border-[#1b2e4b]">
+            <div className="-m-5 mb-5 flex  items-start border-b border-white-light p-5 dark:border-black-7">
               <div className="shrink-0 rounded-full ring-2 ring-white-light ltr:mr-4 rtl:ml-4 dark:ring-dark">
                 <Image
                   src="/assets/images/profile/profile-1.jpeg"
@@ -882,7 +882,7 @@ const ComponentsDashboardAnalytics = () => {
           </div>
 
           <div className="panel h-full">
-            <div className="-m-5 mb-5 flex items-center  justify-between border-b border-white-light p-5 dark:border-[#1b2e4b]">
+            <div className="-m-5 mb-5 flex items-center  justify-between border-b border-white-light p-5 dark:border-black-7">
               <div className="flex">
                 <div className="media-aside align-self-start">
                   <div className="shrink-0 rounded-full ring-2 ring-white-light ltr:mr-4 rtl:ml-4 dark:ring-dark">
@@ -936,7 +936,7 @@ const ComponentsDashboardAnalytics = () => {
           </div>
 
           <div className="panel h-full">
-            <div className="-m-5 mb-5 flex items-center justify-between border-b border-white-light p-5 dark:border-[#1b2e4b]">
+            <div className="-m-5 mb-5 flex items-center justify-between border-b border-white-light p-5 dark:border-black-7">
               <button type="button" className="flex font-semibold">
                 <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-secondary text-white ltr:mr-4 rtl:ml-4">
                   <span>FD</span>
