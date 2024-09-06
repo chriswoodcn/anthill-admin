@@ -879,7 +879,7 @@ const ComponentsDashboardFinance = () => {
           <div className="panel">
             <div className="mb-5 text-lg font-bold">Recent Transactions</div>
             <div className="table-responsive">
-              <table>
+              <table className="anthill-table">
                 <thead>
                   <tr>
                     <th className="ltr:rounded-l-md rtl:rounded-r-md">ID</th>

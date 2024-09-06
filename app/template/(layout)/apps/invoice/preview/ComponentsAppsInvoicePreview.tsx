@@ -9,10 +9,11 @@ import IconPlus from "@/components/icon/icon-plus";
 import IconPrinter from "@/components/icon/icon-printer";
 import IconSend from "@/components/icon/icon-send";
 import Logo from "@/components/compose/Logo";
+import { isBrowser } from "@/lib";
 
 const ComponentsAppsInvoicePreview = () => {
   const exportTable = () => {
-    if () window.print();
+    if (isBrowser()) window.print();
   };
 
   const items = [
@@ -113,7 +114,7 @@ const ComponentsAppsInvoicePreview = () => {
         <div className="px-4 ltr:text-right rtl:text-left">
           <div className="mt-6 space-y-1 text-white-dark">
             <div>13 Tetrick Road, Cypress Gardens, Florida, 33884, US</div>
-            <div>vristo@gmail.com</div>
+            <div>Anthill@gmail.com</div>
             <div>+1 (070) 123-4567</div>
           </div>
         </div>
@@ -175,7 +176,7 @@ const ComponentsAppsInvoicePreview = () => {
           </div>
         </div>
         <div className="table-responsive mt-6">
-          <table className="table-striped">
+          <table className="anthill-table table-striped">
             <thead>
               <tr>
                 {columns.map((column) => {

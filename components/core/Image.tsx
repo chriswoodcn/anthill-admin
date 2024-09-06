@@ -8,6 +8,7 @@ interface Props extends Record<string, any> {
   basePath?: boolean;
   src: string;
   showSkeleton?: boolean;
+  auto?: boolean;
   skeleton?: ReactElement;
 }
 export default (props: Props) => {
@@ -19,9 +20,10 @@ export default (props: Props) => {
   const [loaded, setLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   useEffectOnce(() => {
-    imgRef.current?.addEventListener("load", function () {
+    if (imgRef.current) imgRef.current.onload = () => setLoaded(true);
+    if (imgRef.current?.complete) {
       setLoaded(true);
-    });
+    }
   }, [imgRef.current]);
   const cover = props.skeleton ? (
     <div className="absolute left-0 right-0 top-0 bottom-0 rounded  animate-pulse">
@@ -31,12 +33,12 @@ export default (props: Props) => {
     <div className="absolute left-0 right-0 top-0 bottom-0 rounded bg-white-5 dark:bg-black-5 animate-pulse"></div>
   );
   return needWithBasePath ? (
-    <div className="relative">
+    <div className={`relative ${props.auto ? "" : "w-full h-full"}`}>
       {!loaded && showSkeleton && cover}
       <img ref={imgRef} {...props} src={withBasePath(src)} />
     </div>
   ) : (
-    <div className="relative">
+    <div className={`relative ${props.auto ? "" : "w-full h-full"}`}>
       {!loaded && showSkeleton && cover}
       <img ref={imgRef} {...props} />
     </div>

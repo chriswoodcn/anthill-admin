@@ -59,7 +59,6 @@ const ComponentsPagesKnowledgeBaseVideoTutorial = () => {
               </div>
             );
           })}
-          ;
         </div>
         <Transition appear show={modal} as={Fragment}>
           <Dialog as="div" open={modal} onClose={() => setModal(false)}>

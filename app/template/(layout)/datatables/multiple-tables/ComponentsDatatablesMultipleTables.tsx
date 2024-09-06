@@ -7,6 +7,7 @@ import IconXCircle from "@/components/icon/icon-x-circle";
 import IconPencil from "@/components/icon/icon-pencil";
 import IconTrashLines from "@/components/icon/icon-trash-lines";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import Image from '@/components/core/Image';
 
 const rowData = [
   {
@@ -674,9 +675,9 @@ const ComponentsDatatablesMultipleTables = () => {
                   sortable: true,
                   render: ({ firstName, lastName, id }) => (
                     <div className="flex w-max items-center">
-                      <img
+                      <Image
                         className="h-9 w-9 rounded-full object-cover ltr:mr-2 rtl:ml-2"
-                        src={`/assets/images/profile-${id}.jpeg`}
+                        src={`/assets/images/template/profile-${id}.jpeg`}
                         alt=""
                       />
                       <div>{firstName + " " + lastName}</div>
@@ -760,9 +761,9 @@ const ComponentsDatatablesMultipleTables = () => {
                   sortable: true,
                   render: ({ firstName, lastName, id }) => (
                     <div className="flex w-max items-center">
-                      <img
+                      <Image
                         className="h-9 w-9 rounded-full object-cover ltr:mr-2 rtl:ml-2"
-                        src={`/assets/images/profile-${id}.jpeg`}
+                        src={`/assets/images/template/profile-${id}.jpeg`}
                         alt=""
                       />
                       <div>{firstName + " " + lastName}</div>

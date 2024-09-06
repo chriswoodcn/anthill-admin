@@ -1,6 +1,6 @@
 "use client";
 
-import Logo from '@/components/compose/Logo';
+import Logo from "@/components/compose/Logo";
 import IconDownload from "@/components/icon/icon-download";
 import IconEye from "@/components/icon/icon-eye";
 import IconSave from "@/components/icon/icon-save";
@@ -80,7 +80,7 @@ const ComponentsAppsInvoiceAdd = () => {
             </div>
             <div className="mt-6 space-y-1 text-gray-500 dark:text-gray-400">
               <div>13 Tetrick Road, Cypress Gardens, Florida, 33884, US</div>
-              <div>vristo@gmail.com</div>
+              <div>Anthill@gmail.com</div>
               <div>+1 (070) 123-4567</div>
             </div>
           </div>
@@ -483,7 +483,7 @@ const ComponentsAppsInvoiceAdd = () => {
         </div>
         <div className="mt-8 px-4">
           <div className="table-responsive">
-            <table>
+            <table className="anthill-table">
               <thead>
                 <tr>
                   <th>Item</th>

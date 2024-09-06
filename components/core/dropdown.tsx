@@ -67,7 +67,7 @@ const Dropdown = (props: any, forwardedRef: any) => {
         ref={popperRef}
         style={styles.popper}
         {...attributes.popper}
-        className="z-999"
+        className="z-[999]"
         onClick={() => setVisibility(!visibility)}
       >
         {visibility && props.children}
