@@ -86,6 +86,10 @@
   .sidebar .nav-item > a.active {
     @apply bg-white-8 text-primary dark:bg-black-7 dark:hover:text-white-7;
   }
+  .sidebar .nav-item > button.active svg,
+  .sidebar .nav-item > a.active svg {
+    @apply !text-primary;
+  }
   .sidebar .nav-item > button > div > span,
   .sidebar .nav-item > a > div > span {
     @apply dark:text-white-6;
