@@ -31,7 +31,7 @@ const Infobox = () => {
         <div className="text-primary mb-5">
             <svg>...</svg>
         </div>
-        <h5 className="text-lg font-semibold mb-3.5 dark:text-white-light">Layout Package</h5>
+        <h5 className="text-lg font-semibold mb-3.5 dark:text-white-7">Layout Package</h5>
         <p className="text-white-dark text-[15px]  mb-3.5">Lorem ipsum dolor sit amet, labore et dolore magna aliqua.</p>
         <button type="button" className="text-primary font-semibold hover:underline group">
             Discover
@@ -45,7 +45,7 @@ const Infobox = () => {
               <div className="mb-5 text-primary">
                 <IconBox className="h-12 w-12" />
               </div>
-              <h5 className="mb-3.5 text-lg font-semibold dark:text-white-light">
+              <h5 className="mb-3.5 text-lg font-semibold dark:text-white-7">
                 Layout Package
               </h5>
               <p className="mb-3.5 text-[15px]  text-white-dark">
@@ -108,7 +108,7 @@ const Infobox = () => {
         <div className="bg-primary absolute text-white-light ltr:left-6 rtl:right-6 -top-8 w-16 h-16 rounded-md flex items-center justify-center mb-5 mx-auto">
             <svg>...</svg>
         </div>
-        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-light">Layout Package</h5>
+        <h5 className="text-dark text-lg font-semibold mb-3.5 dark:text-white-7">Layout Package</h5>
         <p className="text-white-dark text-[15px]  mb-3.5">Lorem ipsum dolor sit amet, labore et dolore magna aliqua.</p>
         <button type="button" className="text-primary font-semibold hover:underline group">
             Discover
@@ -122,7 +122,7 @@ const Infobox = () => {
               <div className="absolute -top-8 mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-md bg-primary text-white-light ltr:left-6 rtl:right-6">
                 <IconBox className="h-12 w-12" />
               </div>
-              <h5 className="mb-3.5 text-lg font-semibold text-dark dark:text-white-light">
+              <h5 className="mb-3.5 text-lg font-semibold text-dark dark:text-white-7">
                 Layout Package
               </h5>
               <p className="mb-3.5 text-[15px]  text-white-dark">

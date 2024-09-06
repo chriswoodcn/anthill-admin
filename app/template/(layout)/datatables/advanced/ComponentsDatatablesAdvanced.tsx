@@ -697,7 +697,7 @@ const ComponentsDatatablesAdvanced = () => {
 
   return (
     <div className="panel mt-6">
-      <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+      <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
         Advanced
       </h5>
       <div className="datatables">

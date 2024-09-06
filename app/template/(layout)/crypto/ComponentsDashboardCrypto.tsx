@@ -914,25 +914,25 @@ const ComponentsDashboardCrypto = () => {
             <ul className="mt-5 grid grid-cols-2 divide-[#ebedf2] font-semibold text-white-dark rtl:divide-x-reverse dark:divide-[#253b5c] sm:mt-0 sm:grid-cols-4 sm:divide-x ltr:md:ml-auto rtl:md:mr-auto">
               <li className="px-4 py-1">
                 Market Cap
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   ${currentCoin.marketcap}B
                 </span>
               </li>
               <li className="px-4 py-1">
                 Volume
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   ${currentCoin.volume}B
                 </span>
               </li>
               <li className="px-4 py-1">
                 Supply
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   {currentCoin.supply}M
                 </span>
               </li>
               <li className="px-4 py-1">
                 All Time High
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   ${currentCoin.highest}
                 </span>
               </li>

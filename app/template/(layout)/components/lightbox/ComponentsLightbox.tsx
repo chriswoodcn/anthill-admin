@@ -66,7 +66,7 @@ const ComponentsLightbox = () => {
 
   return (
     <div className="panel">
-      <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+      <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
         Lightbox
       </h5>
       <div className="mb-5">

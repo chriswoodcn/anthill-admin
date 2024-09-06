@@ -39,7 +39,7 @@ const Profile = () => {
         <div className="mb-5 grid grid-cols-1 gap-5 lg:grid-cols-3 xl:grid-cols-4">
           <div className="panel">
             <div className="mb-5 flex items-center justify-between">
-              <h5 className="text-lg font-semibold dark:text-white-light">
+              <h5 className="text-lg font-semibold dark:text-white-7">
                 Profile
               </h5>
               <Link
@@ -108,12 +108,12 @@ const Profile = () => {
           </div>
           <div className="panel lg:col-span-2 xl:col-span-3">
             <div className="mb-5">
-              <h5 className="text-lg font-semibold dark:text-white-light">
+              <h5 className="text-lg font-semibold dark:text-white-7">
                 Task
               </h5>
             </div>
             <div className="mb-5">
-              <div className="table-responsive font-semibold text-[#515365] dark:text-white-light">
+              <div className="table-responsive font-semibold text-[#515365] dark:text-white-7">
                 <table className="anthill-table whitespace-nowrap">
                   <thead>
                     <tr>
@@ -204,7 +204,7 @@ const Profile = () => {
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div className="panel">
             <div className="mb-5">
-              <h5 className="text-lg font-semibold dark:text-white-light">
+              <h5 className="text-lg font-semibold dark:text-white-7">
                 Summary
               </h5>
             </div>
@@ -217,7 +217,7 @@ const Profile = () => {
                   <div className="flex flex-auto items-start justify-between font-semibold ltr:ml-4 rtl:mr-4">
                     <h6 className="text-[13px] text-white-dark dark:text-white-dark">
                       Income
-                      <span className="block text-base text-[#515365] dark:text-white-light">
+                      <span className="block text-base text-[#515365] dark:text-white-7">
                         $92,600
                       </span>
                     </h6>
@@ -235,7 +235,7 @@ const Profile = () => {
                   <div className="flex flex-auto items-start justify-between font-semibold ltr:ml-4 rtl:mr-4">
                     <h6 className="text-[13px] text-white-dark dark:text-white-dark">
                       Profit
-                      <span className="block text-base text-[#515365] dark:text-white-light">
+                      <span className="block text-base text-[#515365] dark:text-white-7">
                         $37,515
                       </span>
                     </h6>
@@ -251,7 +251,7 @@ const Profile = () => {
                   <div className="flex flex-auto items-start justify-between font-semibold ltr:ml-4 rtl:mr-4">
                     <h6 className="text-[13px] text-white-dark dark:text-white-dark">
                       Expenses
-                      <span className="block text-base text-[#515365] dark:text-white-light">
+                      <span className="block text-base text-[#515365] dark:text-white-7">
                         $55,085
                       </span>
                     </h6>
@@ -263,7 +263,7 @@ const Profile = () => {
           </div>
           <div className="panel">
             <div className="mb-10 flex items-center justify-between">
-              <h5 className="text-lg font-semibold dark:text-white-light">
+              <h5 className="text-lg font-semibold dark:text-white-7">
                 Pro Plan
               </h5>
               <button className="btn btn-primary">Renew Now</button>
@@ -291,7 +291,7 @@ const Profile = () => {
           <ComponentsUsersProfilePaymentHistory />
           <div className="panel">
             <div className="mb-5 flex items-center justify-between">
-              <h5 className="text-lg font-semibold dark:text-white-light">
+              <h5 className="text-lg font-semibold dark:text-white-7">
                 Card Details
               </h5>
             </div>
@@ -307,7 +307,7 @@ const Profile = () => {
                   <div className="flex flex-auto items-center justify-between ltr:ml-4 rtl:mr-4">
                     <h6 className="font-semibold text-[#515365] dark:text-white-dark">
                       American Express
-                      <span className="block text-white-dark dark:text-white-light">
+                      <span className="block text-white-dark dark:text-white-7">
                         Expires on 12/2025
                       </span>
                     </h6>
@@ -325,7 +325,7 @@ const Profile = () => {
                   <div className="flex flex-auto items-center justify-between ltr:ml-4 rtl:mr-4">
                     <h6 className="font-semibold text-[#515365] dark:text-white-dark">
                       Mastercard
-                      <span className="block text-white-dark dark:text-white-light">
+                      <span className="block text-white-dark dark:text-white-7">
                         Expires on 03/2025
                       </span>
                     </h6>
@@ -340,7 +340,7 @@ const Profile = () => {
                   <div className="flex flex-auto items-center justify-between ltr:ml-4 rtl:mr-4">
                     <h6 className="font-semibold text-[#515365] dark:text-white-dark">
                       Visa
-                      <span className="block text-white-dark dark:text-white-light">
+                      <span className="block text-white-dark dark:text-white-7">
                         Expires on 10/2025
                       </span>
                     </h6>

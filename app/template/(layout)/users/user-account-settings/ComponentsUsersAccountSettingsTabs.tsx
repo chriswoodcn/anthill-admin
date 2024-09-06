@@ -19,7 +19,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
   return (
     <div className="pt-5 text-black-7 dark:text-white-7">
       <div className="mb-5 flex items-center justify-between">
-        <h5 className="text-lg font-semibold dark:text-white-light">
+        <h5 className="text-lg font-semibold dark:text-white-7">
           Settings
         </h5>
       </div>
@@ -247,7 +247,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #1
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         2249 Caynor Circle, New Brunswick, New Jersey
                       </span>
                     </h6>
@@ -260,7 +260,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #2
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         4262 Leverton Cove Road, Springfield, Massachusetts
                       </span>
                     </h6>
@@ -273,7 +273,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #3
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         2692 Berkshire Circle, Knoxville, Tennessee
                       </span>
                     </h6>
@@ -306,7 +306,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Mastercard
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         XXXX XXXX XXXX 9704
                       </span>
                     </h6>
@@ -325,7 +325,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       American Express
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         XXXX XXXX XXXX 310
                       </span>
                     </h6>
@@ -344,7 +344,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Visa
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         XXXX XXXX XXXX 5264
                       </span>
                     </h6>

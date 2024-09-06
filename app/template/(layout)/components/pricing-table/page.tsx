@@ -234,7 +234,7 @@ const PricingTable = () => {
         <div className="md:flex justify-between space-y-14 md:space-y-0 md:space-x-4 rtl:space-x-reverse">
             <div className="border border-white-light dark:border-black-7 rounded transition-all duration-300 group">
                 <div className="border-b border-white-light dark:border-black-7 p-5 pt-0">
-                    <span className="bg-white dark:bg-black text-[#3b3f5c] dark:text-white-light border-2 border-primary w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded flex justify-center items-center text-xl lg:text-3xl font-bold -mt-[30px] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px]">
+                    <span className="bg-white dark:bg-black text-[#3b3f5c] dark:text-white-7 border-2 border-primary w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded flex justify-center items-center text-xl lg:text-3xl font-bold -mt-[30px] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px]">
                         $49
                     </span>
                     <h3 className="text-xl lg:text-2xl mt-4 mb-2.5">Freelancer</h3>
@@ -254,7 +254,7 @@ const PricingTable = () => {
             </div>
             <div className="border border-white-light dark:border-black-7 rounded transition-all duration-300 group">
                 <div className="border-b border-white-light dark:border-black-7 p-5 pt-0">
-                    <span className="bg-white dark:bg-black text-[#3b3f5c] dark:text-white-light border-2 border-primary w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded flex justify-center items-center text-xl lg:text-3xl font-bold -mt-[30px] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px]">
+                    <span className="bg-white dark:bg-black text-[#3b3f5c] dark:text-white-7 border-2 border-primary w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded flex justify-center items-center text-xl lg:text-3xl font-bold -mt-[30px] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px]">
                         $89
                     </span>
                     <h3 className="text-xl lg:text-2xl mt-4 mb-2.5">Small business</h3>
@@ -274,7 +274,7 @@ const PricingTable = () => {
             </div>
             <div className="border border-white-light dark:border-black-7 rounded transition-all duration-300 group">
                 <div className="border-b border-white-light dark:border-black-7 p-5 pt-0">
-                    <span className="bg-white dark:bg-black text-[#3b3f5c] dark:text-white-light border-2 border-primary w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded flex justify-center items-center text-xl lg:text-3xl font-bold -mt-[30px] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px]">
+                    <span className="bg-white dark:bg-black text-[#3b3f5c] dark:text-white-7 border-2 border-primary w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded flex justify-center items-center text-xl lg:text-3xl font-bold -mt-[30px] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px]">
                         $129
                     </span>
                     <h3 className="text-xl lg:text-2xl mt-4 mb-2.5">Larger business</h3>
@@ -301,7 +301,7 @@ const PricingTable = () => {
               <div className="justify-between space-y-14 rtl:space-x-reverse md:flex md:space-x-4 md:space-y-0">
                 <div className="group rounded border border-white-light transition-all duration-300 dark:border-black-7">
                   <div className="border-b border-white-light p-5 pt-0 dark:border-black-7">
-                    <span className="-mt-[30px] flex h-[70px] w-[70px] items-center justify-center rounded border-2 border-primary bg-white text-xl font-bold text-[#3b3f5c] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px] dark:bg-black dark:text-white-light lg:h-[100px] lg:w-[100px] lg:text-3xl">
+                    <span className="-mt-[30px] flex h-[70px] w-[70px] items-center justify-center rounded border-2 border-primary bg-white text-xl font-bold text-[#3b3f5c] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px] dark:bg-black dark:text-white-7 lg:h-[100px] lg:w-[100px] lg:text-3xl">
                       $49
                     </span>
                     <h3 className="mb-2.5 mt-4 text-xl lg:text-2xl">
@@ -325,7 +325,7 @@ const PricingTable = () => {
                 </div>
                 <div className="group rounded border border-white-light transition-all duration-300 dark:border-black-7">
                   <div className="border-b border-white-light p-5 pt-0 dark:border-black-7">
-                    <span className="-mt-[30px] flex h-[70px] w-[70px] items-center justify-center rounded border-2 border-primary bg-white text-xl font-bold text-[#3b3f5c] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px] dark:bg-black dark:text-white-light lg:h-[100px] lg:w-[100px] lg:text-3xl">
+                    <span className="-mt-[30px] flex h-[70px] w-[70px] items-center justify-center rounded border-2 border-primary bg-white text-xl font-bold text-[#3b3f5c] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px] dark:bg-black dark:text-white-7 lg:h-[100px] lg:w-[100px] lg:text-3xl">
                       $89
                     </span>
                     <h3 className="mb-2.5 mt-4 text-xl lg:text-2xl">
@@ -349,7 +349,7 @@ const PricingTable = () => {
                 </div>
                 <div className="group rounded border border-white-light transition-all duration-300 dark:border-black-7">
                   <div className="border-b border-white-light p-5 pt-0 dark:border-black-7">
-                    <span className="-mt-[30px] flex h-[70px] w-[70px] items-center justify-center rounded border-2 border-primary bg-white text-xl font-bold text-[#3b3f5c] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px] dark:bg-black dark:text-white-light lg:h-[100px] lg:w-[100px] lg:text-3xl">
+                    <span className="-mt-[30px] flex h-[70px] w-[70px] items-center justify-center rounded border-2 border-primary bg-white text-xl font-bold text-[#3b3f5c] shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] transition-all duration-300 group-hover:-translate-y-[10px] dark:bg-black dark:text-white-7 lg:h-[100px] lg:w-[100px] lg:text-3xl">
                       $129
                     </span>
                     <h3 className="mb-2.5 mt-4 text-xl lg:text-2xl">

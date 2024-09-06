@@ -61,7 +61,7 @@ const CoverLogin = () => {
 
               <div className="relative my-7 text-center md:mb-9">
                 <span className="absolute inset-x-0 top-1/2 h-px w-full -translate-y-1/2 bg-white-light dark:bg-white-dark"></span>
-                <span className="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-light">
+                <span className="relative bg-white px-2 font-bold uppercase text-white-dark dark:bg-dark dark:text-white-7">
                   or
                 </span>
               </div>

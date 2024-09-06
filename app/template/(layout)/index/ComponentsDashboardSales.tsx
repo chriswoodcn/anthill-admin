@@ -449,7 +449,7 @@ const ComponentsDashboardSales = () => {
         <div className="pt-5">
           <div className="mb-6 grid gap-6 xl:grid-cols-3">
             <div className="panel h-full xl:col-span-2">
-              <div className="mb-5 flex items-center justify-between dark:text-white-light">
+              <div className="mb-5 flex items-center justify-between dark:text-white-7">
                 <h5 className="text-lg font-semibold">Revenue</h5>
                 <div className="dropdown">
                   <Dropdown
@@ -473,7 +473,7 @@ const ComponentsDashboardSales = () => {
                   </Dropdown>
                 </div>
               </div>
-              <p className="text-lg dark:text-white-light/90">
+              <p className="text-lg dark:text-white-7/90">
                 Total Profit <span className="ml-2 text-primary">$10,840</span>
               </p>
               <div className="relative">
@@ -497,7 +497,7 @@ const ComponentsDashboardSales = () => {
 
             <div className="panel h-full">
               <div className="mb-5 flex items-center">
-                <h5 className="text-lg font-semibold dark:text-white-light">
+                <h5 className="text-lg font-semibold dark:text-white-7">
                   Sales By Category
                 </h5>
               </div>
@@ -524,7 +524,7 @@ const ComponentsDashboardSales = () => {
           <div className="mb-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             <div className="panel h-full sm:col-span-2 xl:col-span-1">
               <div className="mb-5 flex items-center">
-                <h5 className="text-lg font-semibold dark:text-white-light">
+                <h5 className="text-lg font-semibold dark:text-white-7">
                   Daily Sales
                   <span className="block text-sm font-normal text-white-dark">
                     Go to columns for details.
@@ -555,7 +555,7 @@ const ComponentsDashboardSales = () => {
               </div>
             </div>
             <div className="panel h-full">
-              <div className="mb-5 flex items-center justify-between dark:text-white-light">
+              <div className="mb-5 flex items-center justify-between dark:text-white-7">
                 <h5 className="text-lg font-semibold">Summary</h5>
                 <div className="dropdown">
                   <Dropdown
@@ -643,7 +643,7 @@ const ComponentsDashboardSales = () => {
                     <IconShoppingCart />
                   </div>
                 </div>
-                <h5 className="text-2xl font-semibold ltr:text-right rtl:text-left dark:text-white-light">
+                <h5 className="text-2xl font-semibold ltr:text-right rtl:text-left dark:text-white-7">
                   3,192
                   <span className="block text-sm font-normal">
                     Total Orders
@@ -670,7 +670,7 @@ const ComponentsDashboardSales = () => {
           </div>
           <div className="mb-6 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             <div className="panel h-full pb-0 sm:col-span-2 xl:col-span-1">
-              <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+              <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
                 Recent Activities
               </h5>
               <PerfectScrollbar
@@ -853,7 +853,7 @@ const ComponentsDashboardSales = () => {
               </div>
             </div>
             <div className="panel h-full">
-              <div className="mb-5 flex items-center justify-between dark:text-white-light">
+              <div className="mb-5 flex items-center justify-between dark:text-white-7">
                 <h5 className="text-lg font-semibold">Transactions</h5>
                 <div className="dropdown">
                   <Dropdown
@@ -1052,7 +1052,7 @@ const ComponentsDashboardSales = () => {
           <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
             <div className="panel h-full w-full">
               <div className="mb-5 flex items-center justify-between">
-                <h5 className="text-lg font-semibold dark:text-white-light">
+                <h5 className="text-lg font-semibold dark:text-white-7">
                   Recent Orders
                 </h5>
               </div>
@@ -1072,7 +1072,7 @@ const ComponentsDashboardSales = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="min-w-[150px] text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
@@ -1086,7 +1086,9 @@ const ComponentsDashboardSales = () => {
                       </td>
                       <td className="text-primary">Headphone</td>
                       <td>
-                        <Link href="/apps/invoice/preview">#46894</Link>
+                        <Link href="/template/apps/invoice/preview">
+                          #46894
+                        </Link>
                       </td>
                       <td>$56.07</td>
                       <td>
@@ -1095,7 +1097,7 @@ const ComponentsDashboardSales = () => {
                         </span>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
@@ -1109,7 +1111,9 @@ const ComponentsDashboardSales = () => {
                       </td>
                       <td className="text-info">Nike Sport</td>
                       <td>
-                        <Link href="/apps/invoice/preview">#76894</Link>
+                        <Link href="/template/apps/invoice/preview">
+                          #76894
+                        </Link>
                       </td>
                       <td>$126.04</td>
                       <td>
@@ -1118,7 +1122,7 @@ const ComponentsDashboardSales = () => {
                         </span>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
@@ -1132,7 +1136,9 @@ const ComponentsDashboardSales = () => {
                       </td>
                       <td className="text-warning">Sunglasses</td>
                       <td>
-                        <Link href="/apps/invoice/preview">#66894</Link>
+                        <Link href="/template/apps/invoice/preview">
+                          #66894
+                        </Link>
                       </td>
                       <td>$56.07</td>
                       <td>
@@ -1141,7 +1147,7 @@ const ComponentsDashboardSales = () => {
                         </span>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
@@ -1157,7 +1163,9 @@ const ComponentsDashboardSales = () => {
                       </td>
                       <td className="text-danger">Sport</td>
                       <td>
-                        <button type="button">#75844</button>
+                        <Link href="/template/apps/invoice/preview">
+                          #75844
+                        </Link>
                       </td>
                       <td>$110.00</td>
                       <td>
@@ -1166,7 +1174,7 @@ const ComponentsDashboardSales = () => {
                         </span>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex items-center">
                           <Image
@@ -1182,7 +1190,9 @@ const ComponentsDashboardSales = () => {
                       </td>
                       <td className="text-secondary">Speakers</td>
                       <td>
-                        <Link href="/apps/invoice/preview">#46894</Link>
+                        <Link href="/template/apps/invoice/preview">
+                          #46894
+                        </Link>
                       </td>
                       <td>$56.07</td>
                       <td>
@@ -1198,7 +1208,7 @@ const ComponentsDashboardSales = () => {
 
             <div className="panel h-full w-full">
               <div className="mb-5 flex items-center justify-between">
-                <h5 className="text-lg font-semibold dark:text-white-light">
+                <h5 className="text-lg font-semibold dark:text-white-7">
                   Top Selling Product
                 </h5>
               </div>
@@ -1218,7 +1228,7 @@ const ComponentsDashboardSales = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="min-w-[150px] text-black dark:text-white">
                         <div className="flex">
                           <Image
@@ -1248,7 +1258,7 @@ const ComponentsDashboardSales = () => {
                         </button>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image
@@ -1258,7 +1268,7 @@ const ComponentsDashboardSales = () => {
                             alt="avatar"
                           />
                           <p className="whitespace-nowrap">
-                            Shoes{" "}
+                            Shoes
                             <span className="block text-xs text-warning">
                               Faishon
                             </span>
@@ -1278,7 +1288,7 @@ const ComponentsDashboardSales = () => {
                         </button>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image
@@ -1308,7 +1318,7 @@ const ComponentsDashboardSales = () => {
                         </button>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image
@@ -1338,7 +1348,7 @@ const ComponentsDashboardSales = () => {
                         </button>
                       </td>
                     </tr>
-                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-light/90">
+                    <tr className="group text-white-dark hover:text-black dark:hover:text-white-7/70">
                       <td className="text-black dark:text-white">
                         <div className="flex">
                           <Image

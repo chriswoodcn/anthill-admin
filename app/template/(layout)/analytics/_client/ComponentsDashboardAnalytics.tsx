@@ -381,7 +381,7 @@ const ComponentsDashboardAnalytics = () => {
         <div className="mb-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           <div className="panel h-full sm:col-span-2 lg:col-span-1">
             {/* statistics */}
-            <div className="mb-5 flex justify-between dark:text-white-light">
+            <div className="mb-5 flex justify-between dark:text-white-7">
               <h5 className="text-lg font-semibold ">Statistics</h5>
               <div className="dropdown">
                 <Dropdown
@@ -446,7 +446,7 @@ const ComponentsDashboardAnalytics = () => {
           </div>
 
           <div className="panel h-full">
-            <div className="mb-5 flex justify-between dark:text-white-light">
+            <div className="mb-5 flex justify-between dark:text-white-7">
               <h5 className="text-lg font-semibold ">Expenses</h5>
 
               <div className="dropdown">
@@ -477,7 +477,7 @@ const ComponentsDashboardAnalytics = () => {
             </div>
             <div className=" my-10 text-3xl font-bold text-[#e95f2b]">
               <span>$ 45,141 </span>
-              <span className="text-sm text-black ltr:mr-2 rtl:ml-2 dark:text-white-light">
+              <span className="text-sm text-black ltr:mr-2 rtl:ml-2 dark:text-white-7">
                 this week
               </span>
               <IconTrendingUp className="inline text-success" />
@@ -489,7 +489,7 @@ const ComponentsDashboardAnalytics = () => {
                   style={{ width: "65%" }}
                 ></div>
               </div>
-              <span className="ltr:ml-5 rtl:mr-5 dark:text-white-light">
+              <span className="ltr:ml-5 rtl:mr-5 dark:text-white-7">
                 57%
               </span>
             </div>
@@ -538,7 +538,7 @@ const ComponentsDashboardAnalytics = () => {
 
         <div className="mb-6 grid gap-6 lg:grid-cols-3">
           <div className="panel h-full p-0 lg:col-span-2">
-            <div className="mb-5 flex items-start justify-between border-b border-white-light p-5  dark:border-black-7 dark:text-white-light">
+            <div className="mb-5 flex items-start justify-between border-b border-white-light p-5  dark:border-black-7 dark:text-white-7">
               <h5 className="text-lg font-semibold ">Unique Visitors</h5>
               <div className="dropdown">
                 <Dropdown
@@ -576,7 +576,7 @@ const ComponentsDashboardAnalytics = () => {
           </div>
 
           <div className="panel h-full">
-            <div className="-mx-5 mb-5 flex items-start justify-between border-b border-white-light p-5 pt-0  dark:border-black-7 dark:text-white-light">
+            <div className="-mx-5 mb-5 flex items-start justify-between border-b border-white-light p-5 pt-0  dark:border-black-7 dark:text-white-7">
               <h5 className="text-lg font-semibold ">Activity Log</h5>
               <div className="dropdown">
                 <Dropdown
@@ -607,7 +607,7 @@ const ComponentsDashboardAnalytics = () => {
                     </div>
                   </div>
                   <div>
-                    <h5 className="font-semibold dark:text-white-light">
+                    <h5 className="font-semibold dark:text-white-7">
                       New project created :{" "}
                       <button type="button" className="text-success">
                         [anthill Admin Template]
@@ -623,7 +623,7 @@ const ComponentsDashboardAnalytics = () => {
                     </div>
                   </div>
                   <div>
-                    <h5 className="font-semibold dark:text-white-light">
+                    <h5 className="font-semibold dark:text-white-7">
                       Mail sent to{" "}
                       <button type="button" className="text-white-dark">
                         HR
@@ -643,7 +643,7 @@ const ComponentsDashboardAnalytics = () => {
                     </div>
                   </div>
                   <div>
-                    <h5 className="font-semibold dark:text-white-light">
+                    <h5 className="font-semibold dark:text-white-7">
                       Server Logs Updated
                     </h5>
                     <p className="text-xs text-white-dark">27 Feb, 2020</p>
@@ -656,7 +656,7 @@ const ComponentsDashboardAnalytics = () => {
                     </div>
                   </div>
                   <div>
-                    <h5 className="font-semibold dark:text-white-light">
+                    <h5 className="font-semibold dark:text-white-7">
                       Task Completed :
                       <button type="button" className="ml-1 text-success">
                         [Backup Files EOD]
@@ -672,7 +672,7 @@ const ComponentsDashboardAnalytics = () => {
                     </div>
                   </div>
                   <div>
-                    <h5 className="font-semibold dark:text-white-light">
+                    <h5 className="font-semibold dark:text-white-7">
                       Documents Submitted from{" "}
                       <button type="button">Sara</button>
                     </h5>
@@ -686,7 +686,7 @@ const ComponentsDashboardAnalytics = () => {
                     </div>
                   </div>
                   <div>
-                    <h5 className="font-semibold dark:text-white-light">
+                    <h5 className="font-semibold dark:text-white-7">
                       Server rebooted successfully
                     </h5>
                     <p className="text-xs text-white-dark">06 Apr, 2020</p>
@@ -700,14 +700,14 @@ const ComponentsDashboardAnalytics = () => {
         <div className="mb-6 grid gap-6 sm:grid-cols-3 xl:grid-cols-5">
           <div className="panel h-full sm:col-span-3 xl:col-span-2">
             <div className="mb-5 flex items-start justify-between">
-              <h5 className="text-lg font-semibold dark:text-white-light">
+              <h5 className="text-lg font-semibold dark:text-white-7">
                 Visitors by Browser
               </h5>
             </div>
             <div className="flex flex-col space-y-5">
               <div className="flex items-center">
                 <div className="h-9 w-9">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary dark:bg-primary dark:text-white-light">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary dark:bg-primary dark:text-white-7">
                     <IconChrome className="h-5 w-5" />
                   </div>
                 </div>
@@ -728,7 +728,7 @@ const ComponentsDashboardAnalytics = () => {
               </div>
               <div className="flex items-center">
                 <div className="h-9 w-9">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-danger/10 text-danger dark:bg-danger dark:text-white-light">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-danger/10 text-danger dark:bg-danger dark:text-white-7">
                     <IconSafari className="h-5 w-5" />
                   </div>
                 </div>
@@ -749,7 +749,7 @@ const ComponentsDashboardAnalytics = () => {
               </div>
               <div className="flex items-center">
                 <div className="h-9 w-9">
-                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-warning/10 text-warning dark:bg-warning dark:text-white-light">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-warning/10 text-warning dark:bg-warning dark:text-white-7">
                     <IconGlobe className="h-5 w-5" />
                   </div>
                 </div>
@@ -773,11 +773,11 @@ const ComponentsDashboardAnalytics = () => {
 
           <div className="panel h-full p-0">
             <div className="flex p-5">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary dark:bg-primary dark:text-white-light">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary dark:bg-primary dark:text-white-7">
                 <IconUsersGroup className="h-5 w-5" />
               </div>
               <div className="font-semibold ltr:ml-3 rtl:mr-3">
-                <p className="text-xl dark:text-white-light">31.6K</p>
+                <p className="text-xl dark:text-white-7">31.6K</p>
                 <h5 className="text-xs text-[#506690]">Followers</h5>
               </div>
             </div>
@@ -797,11 +797,11 @@ const ComponentsDashboardAnalytics = () => {
 
           <div className="panel h-full p-0">
             <div className="flex p-5">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-danger/10 text-danger dark:bg-danger dark:text-white-light">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-danger/10 text-danger dark:bg-danger dark:text-white-7">
                 <IconLink className="h-5 w-5" />
               </div>
               <div className="font-semibold ltr:ml-3 rtl:mr-3">
-                <p className="text-xl dark:text-white-light">1,900</p>
+                <p className="text-xl dark:text-white-7">1,900</p>
                 <h5 className="text-xs text-[#506690]">Referral</h5>
               </div>
             </div>
@@ -821,11 +821,11 @@ const ComponentsDashboardAnalytics = () => {
 
           <div className="panel h-full p-0">
             <div className="flex p-5">
-              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-success/10 text-success dark:bg-success dark:text-white-light">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-success/10 text-success dark:bg-success dark:text-white-7">
                 <IconChatDots className="h-5 w-5" />
               </div>
               <div className="font-semibold ltr:ml-3 rtl:mr-3">
-                <p className="text-xl dark:text-white-light">18.2%</p>
+                <p className="text-xl dark:text-white-7">18.2%</p>
                 <h5 className="text-xs text-[#506690]">Engagement</h5>
               </div>
             </div>

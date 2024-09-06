@@ -44,7 +44,7 @@ const PanelCodeHighlight = ({
   return (
     <div className={`panel ${className}`} id={id}>
       <div className="mb-5 flex items-center justify-between">
-        <h5 className="text-lg font-semibold dark:text-white-light">{title}</h5>
+        <h5 className="text-lg font-semibold dark:text-white-7">{title}</h5>
         <button
           type="button"
           className="font-semibold hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-600"

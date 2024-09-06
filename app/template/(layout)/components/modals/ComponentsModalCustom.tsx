@@ -280,13 +280,13 @@ import { useState, Fragment } from 'react';
                                 leaveTo="opacity-0 scale-95"
                             >
                                 <Dialog.Panel className="panel border-0 p-0 rounded-lg overflow-hidden max-w-[300px] w-full bg-secondary dark:bg-secondary my-8 text-black dark:text-white-dark">
-                                    <div className="flex items-center justify-end pt-4 ltr:pr-4 rtl:pl-4 text-white dark:text-white-light">
+                                    <div className="flex items-center justify-end pt-4 ltr:pr-4 rtl:pl-4 text-white dark:text-white-7">
                                         <button onClick={() => setModal19(false)} type="button" className="text-white-dark hover:text-dark">
                                             <svg>...</svg>
                                         </button>
                                     </div>
                                     <div className="p-5">
-                                        <div className="py-5 text-white dark:text-white-light text-center">
+                                        <div className="py-5 text-white dark:text-white-7 text-center">
                                             <div className="rounded-full w-20 h-20 mx-auto mb-7 overflow-hidden">
                                                 <img src="/assets/images/profile-16.jpeg" alt="img" className="w-full h-full object-cover" />
                                             </div>
@@ -882,7 +882,7 @@ import { useState, Fragment } from 'react';
                       leaveTo="opacity-0 scale-95"
                     >
                       <Dialog.Panel className="panel my-8 w-full max-w-[300px] overflow-hidden rounded-lg border-0 bg-secondary p-0 text-black dark:bg-secondary dark:text-white-dark">
-                        <div className="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-light">
+                        <div className="flex items-center justify-end pt-4 text-white ltr:pr-4 rtl:pl-4 dark:text-white-7">
                           <button
                             onClick={() => setModal19(false)}
                             type="button"
@@ -892,7 +892,7 @@ import { useState, Fragment } from 'react';
                           </button>
                         </div>
                         <div className="p-5">
-                          <div className="py-5 text-center text-white dark:text-white-light">
+                          <div className="py-5 text-center text-white dark:text-white-7">
                             <div className="mx-auto mb-7 h-20 w-20 overflow-hidden rounded-full">
                               <Image
                                 src="/assets/images/template/profile-16.jpeg"

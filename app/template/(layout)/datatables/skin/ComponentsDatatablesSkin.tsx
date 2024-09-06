@@ -673,7 +673,7 @@ const ComponentsDatatablesSkin = () => {
       {/* Skin: Striped  */}
       <div className="panel mt-6">
         <div className="mb-5 flex items-center justify-between">
-          <h5 className="text-lg font-semibold dark:text-white-light">
+          <h5 className="text-lg font-semibold dark:text-white-7">
             Skin: Striped
           </h5>
           <input
@@ -713,7 +713,7 @@ const ComponentsDatatablesSkin = () => {
       {/* Skin: Hover  */}
       <div className="panel mt-6">
         <div className="mb-5 flex items-center justify-between">
-          <h5 className="text-lg font-semibold dark:text-white-light">
+          <h5 className="text-lg font-semibold dark:text-white-7">
             Skin: Hover
           </h5>
           <input
@@ -753,7 +753,7 @@ const ComponentsDatatablesSkin = () => {
       {/* Skin: Bordered  */}
       <div className="panel mt-6">
         <div className="mb-5 flex items-center justify-between">
-          <h5 className="text-lg font-semibold dark:text-white-light">
+          <h5 className="text-lg font-semibold dark:text-white-7">
             Skin: Bordered
           </h5>
           <input
@@ -792,7 +792,7 @@ const ComponentsDatatablesSkin = () => {
       {/* Skin: Compact  */}
       <div className="panel mt-6">
         <div className="mb-5 flex items-center justify-between">
-          <h5 className="text-lg font-semibold dark:text-white-light">
+          <h5 className="text-lg font-semibold dark:text-white-7">
             Skin: Compact
           </h5>
           <input
@@ -831,7 +831,7 @@ const ComponentsDatatablesSkin = () => {
       {/* Skin: All  */}
       <div className="panel mt-6">
         <div className="mb-5 flex items-center justify-between">
-          <h5 className="text-lg font-semibold dark:text-white-light">
+          <h5 className="text-lg font-semibold dark:text-white-7">
             Skin: All
           </h5>
           <input

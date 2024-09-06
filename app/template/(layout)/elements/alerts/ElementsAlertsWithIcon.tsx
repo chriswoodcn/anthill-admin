@@ -20,7 +20,7 @@ const ElementsAlertsWithIcon = () => {
         <svg>...</svg>
     </button>
 </div>
-<div className="relative flex items-center border p-3.5 rounded text-dark bg-dark-light border-dark ltr:border-r-[64px] rtl:border-l-[64px] dark:bg-dark-dark-light dark:text-white-light dark:border-white-light/20">
+<div className="relative flex items-center border p-3.5 rounded text-dark bg-dark-light border-dark ltr:border-r-[64px] rtl:border-l-[64px] dark:bg-dark-dark-light dark:text-white-7 dark:border-white-light/20">
     <span className="absolute ltr:-right-11 rtl:-left-11 inset-y-0 text-white w-6 h-6 m-auto">
         <svg>...</svg>
     </span>
@@ -48,7 +48,7 @@ const ElementsAlertsWithIcon = () => {
             <IconX className="h-5 w-5" />
           </button>
         </div>
-        <div className="relative flex items-center rounded border border-dark bg-dark-light p-3.5 text-dark ltr:border-r-[64px] rtl:border-l-[64px] dark:border-white-light/20 dark:bg-dark-dark-light dark:text-white-light">
+        <div className="relative flex items-center rounded border border-dark bg-dark-light p-3.5 text-dark ltr:border-r-[64px] rtl:border-l-[64px] dark:border-white-light/20 dark:bg-dark-dark-light dark:text-white-7">
           <span className="absolute inset-y-0 m-auto h-6 w-6 text-white ltr:-right-11 rtl:-left-11">
             <IconSettings />
           </span>

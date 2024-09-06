@@ -523,52 +523,52 @@ const Timeline = () => {
           codeHighlight={`<div className="mb-5">
     <div className="max-w-[900px] mx-auto">
         <div className="flex">
-            <p className="text-[#3b3f5c] dark:text-white-light min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">10:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">10:00</p>
             <div className="relative before:absolute before:left-1/2 before:-translate-x-1/2 before:top-[15px] before:w-2.5 before:h-2.5 before:border-2 before:border-primary before:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-primary after:rounded-full"></div>
             <div className="p-2.5 self-center ltr:ml-2.5 rtl:ltr:mr-2.5 rtl:ml-2.5">
-                <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px]">Updated Server Logs</p>
+                <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px]">Updated Server Logs</p>
                 <p className="text-white-dark text-xs font-bold self-center min-w-[100px] max-w-[100px]">25 mins ago</p>
             </div>
         </div>
         <div className="flex">
-            <p className="text-[#3b3f5c] dark:text-white-light min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">12:45</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">12:45</p>
             <div className="relative before:absolute before:left-1/2 before:-translate-x-1/2 before:top-[15px] before:w-2.5 before:h-2.5 before:border-2 before:border-secondary before:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-secondary after:rounded-full"></div>
             <div className="p-2.5 self-center ltr:ml-2.5 rtl:ltr:mr-2.5 rtl:ml-2.5">
-                <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px]">Backup Files EOD</p>
+                <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px]">Backup Files EOD</p>
                 <p className="text-white-dark text-xs font-bold self-center min-w-[100px] max-w-[100px]">2 hrs ago</p>
             </div>
         </div>
         <div className="flex">
-            <p className="text-[#3b3f5c] dark:text-white-light min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">14:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">14:00</p>
             <div className="relative before:absolute before:left-1/2 before:-translate-x-1/2 before:top-[15px] before:w-2.5 before:h-2.5 before:border-2 before:border-success before:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-success after:rounded-full"></div>
             <div className="p-2.5 self-center ltr:ml-2.5 rtl:ltr:mr-2.5 rtl:ml-2.5">
-                <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px]">Send Mail to HR and Admin</p>
+                <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px]">Send Mail to HR and Admin</p>
                 <p className="text-white-dark text-xs font-bold self-center min-w-[100px] max-w-[100px]">4 hrs ago</p>
             </div>
         </div>
         <div className="flex">
-            <p className="text-[#3b3f5c] dark:text-white-light min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">16:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">16:00</p>
             <div className="relative before:absolute before:left-1/2 before:-translate-x-1/2 before:top-[15px] before:w-2.5 before:h-2.5 before:border-2 before:border-danger before:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-danger after:rounded-full"></div>
             <div className="p-2.5 self-center ltr:ml-2.5 rtl:ltr:mr-2.5 rtl:ml-2.5">
-                <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px]">Conference call with Marketing Manager.</p>
+                <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px]">Conference call with Marketing Manager.</p>
                 <p className="text-white-dark text-xs font-bold self-center min-w-[100px] max-w-[100px]">6 hrs ago</p>
             </div>
         </div>
         <div className="flex">
-            <p className="text-[#3b3f5c] dark:text-white-light min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">17:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">17:00</p>
             <div className="relative before:absolute before:left-1/2 before:-translate-x-1/2 before:top-[15px] before:w-2.5 before:h-2.5 before:border-2 before:border-warning before:rounded-full after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-warning after:rounded-full"></div>
             <div className="p-2.5 self-center ltr:ml-2.5 rtl:ltr:mr-2.5 rtl:ml-2.5">
-                <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px]">
+                <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px]">
                     Collected documents from <button type="button">Sara</button>
                 </p>
                 <p className="text-white-dark text-xs font-bold self-center min-w-[100px] max-w-[100px]">9 hrs ago</p>
             </div>
         </div>
         <div className="flex">
-            <p className="text-[#3b3f5c] dark:text-white-light min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">16:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 min-w-[58px] max-w-[100px] text-base font-semibold py-2.5">16:00</p>
             <div className="relative before:absolute before:left-1/2 before:-translate-x-1/2 before:top-[15px] before:w-2.5 before:h-2.5 before:border-2 before:border-info before:rounded-full"></div>
             <div className="p-2.5 self-center ltr:ml-2.5 rtl:ltr:mr-2.5 rtl:ml-2.5">
-                <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px]">Server rebooted successfully</p>
+                <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px]">Server rebooted successfully</p>
                 <p className="text-white-dark text-xs font-bold self-center min-w-[100px] max-w-[100px]">8 hrs ago</p>
             </div>
         </div>
@@ -578,12 +578,12 @@ const Timeline = () => {
           <div className="mb-5">
             <div className="mx-auto max-w-[900px]">
               <div className="flex">
-                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   10:00
                 </p>
                 <div className="relative before:absolute before:left-1/2 before:top-[15px] before:h-2.5 before:w-2.5 before:-translate-x-1/2 before:rounded-full before:border-2 before:border-primary after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-primary"></div>
                 <div className="self-center p-2.5 ltr:ml-2.5 rtl:ml-2.5 rtl:ltr:mr-2.5">
-                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                     Updated Server Logs
                   </p>
                   <p className="min-w-[100px] max-w-[100px] self-center text-xs font-bold text-white-dark">
@@ -592,12 +592,12 @@ const Timeline = () => {
                 </div>
               </div>
               <div className="flex">
-                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   12:45
                 </p>
                 <div className="relative before:absolute before:left-1/2 before:top-[15px] before:h-2.5 before:w-2.5 before:-translate-x-1/2 before:rounded-full before:border-2 before:border-secondary after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-secondary"></div>
                 <div className="self-center p-2.5 ltr:ml-2.5 rtl:ml-2.5 rtl:ltr:mr-2.5">
-                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                     Backup Files EOD
                   </p>
                   <p className="min-w-[100px] max-w-[100px] self-center text-xs font-bold text-white-dark">
@@ -606,12 +606,12 @@ const Timeline = () => {
                 </div>
               </div>
               <div className="flex">
-                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   14:00
                 </p>
                 <div className="relative before:absolute before:left-1/2 before:top-[15px] before:h-2.5 before:w-2.5 before:-translate-x-1/2 before:rounded-full before:border-2 before:border-success after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-success"></div>
                 <div className="self-center p-2.5 ltr:ml-2.5 rtl:ml-2.5 rtl:ltr:mr-2.5">
-                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                     Send Mail to HR and Admin
                   </p>
                   <p className="min-w-[100px] max-w-[100px] self-center text-xs font-bold text-white-dark">
@@ -620,12 +620,12 @@ const Timeline = () => {
                 </div>
               </div>
               <div className="flex">
-                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   16:00
                 </p>
                 <div className="relative before:absolute before:left-1/2 before:top-[15px] before:h-2.5 before:w-2.5 before:-translate-x-1/2 before:rounded-full before:border-2 before:border-danger after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-danger"></div>
                 <div className="self-center p-2.5 ltr:ml-2.5 rtl:ml-2.5 rtl:ltr:mr-2.5">
-                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                     Conference call with Marketing Manager.
                   </p>
                   <p className="min-w-[100px] max-w-[100px] self-center text-xs font-bold text-white-dark">
@@ -634,12 +634,12 @@ const Timeline = () => {
                 </div>
               </div>
               <div className="flex">
-                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   17:00
                 </p>
                 <div className="relative before:absolute before:left-1/2 before:top-[15px] before:h-2.5 before:w-2.5 before:-translate-x-1/2 before:rounded-full before:border-2 before:border-warning after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-warning"></div>
                 <div className="self-center p-2.5 ltr:ml-2.5 rtl:ml-2.5 rtl:ltr:mr-2.5">
-                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                     Collected documents from <button type="button">Sara</button>
                   </p>
                   <p className="min-w-[100px] max-w-[100px] self-center text-xs font-bold text-white-dark">
@@ -648,12 +648,12 @@ const Timeline = () => {
                 </div>
               </div>
               <div className="flex">
-                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="min-w-[58px] max-w-[100px] py-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   16:00
                 </p>
                 <div className="relative before:absolute before:left-1/2 before:top-[15px] before:h-2.5 before:w-2.5 before:-translate-x-1/2 before:rounded-full before:border-2 before:border-info"></div>
                 <div className="self-center p-2.5 ltr:ml-2.5 rtl:ml-2.5 rtl:ltr:mr-2.5">
-                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                  <p className="text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                     Server rebooted successfully
                   </p>
                   <p className="min-w-[100px] max-w-[100px] self-center text-xs font-bold text-white-dark">
@@ -671,44 +671,44 @@ const Timeline = () => {
           codeHighlight={`<div className="mb-5">
     <div className="max-w-[900px] mx-auto text-center ltr:sm:text-left rtl:sm:text-right space-y-3 sm:space-y-0">
         <div className="sm:flex items-center">
-            <p className="text-[#3b3f5c] dark:text-white-light text-base font-semibold p-2.5">09:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 text-base font-semibold p-2.5">09:00</p>
             <div className="p-2.5 relative after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-white-dark/20 after:rounded-full">
                 <img src="/assets/images/template/profile-16.jpeg" alt="img" className="w-11 h-11 rounded-full relative z-[1] mx-auto" />
             </div>
             <p className="text-white-dark text-xs font-bold self-center sm:min-w-[100px] sm:max-w-[100px] p-2.5 mt-5 sm:mt-0">25 mins ago</p>
-            <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px] p-2.5">Conference call with Marketing Manager.</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px] p-2.5">Conference call with Marketing Manager.</p>
         </div>
         <div className="sm:flex items-center">
-            <p className="text-[#3b3f5c] dark:text-white-light text-base font-semibold p-2.5">10:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 text-base font-semibold p-2.5">10:00</p>
             <div className="p-2.5 relative after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-white-dark/20 after:rounded-full">
                 <img src="/assets/images/template/profile-1.jpeg" alt="img" className="w-11 h-11 rounded-full relative z-[1] mx-auto" />
             </div>
             <p className="text-white-dark text-xs font-bold self-center sm:min-w-[100px] sm:max-w-[100px] p-2.5 mt-5 sm:mt-0">2 hrs ago</p>
-            <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px] p-2.5">Server rebooted successfully</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px] p-2.5">Server rebooted successfully</p>
         </div>
         <div className="sm:flex items-center">
-            <p className="text-[#3b3f5c] dark:text-white-light text-base font-semibold p-2.5">11:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 text-base font-semibold p-2.5">11:00</p>
             <div className="p-2.5 relative after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-white-dark/20 after:rounded-full">
                 <img src="/assets/images/template/profile-2.jpeg" alt="img" className="w-11 h-11 rounded-full relative z-[1] mx-auto" />
             </div>
             <p className="text-white-dark text-xs font-bold self-center sm:min-w-[100px] sm:max-w-[100px] p-2.5 mt-5 sm:mt-0">4 hrs ago</p>
-            <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px] p-2.5">Backup Files EOD</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px] p-2.5">Backup Files EOD</p>
         </div>
         <div className="sm:flex items-center">
-            <p className="text-[#3b3f5c] dark:text-white-light text-base font-semibold p-2.5">12:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 text-base font-semibold p-2.5">12:00</p>
             <div className="p-2.5 relative after:absolute after:left-1/2 after:-translate-x-1/2 after:top-[25px] after:-bottom-[15px] after:w-0 after:h-auto after:border-l-2 after:border-white-dark/20 after:rounded-full">
                 <img src="/assets/images/template/profile-3.jpeg" alt="img" className="w-11 h-11 rounded-full relative z-[1] mx-auto" />
             </div>
             <p className="text-white-dark text-xs font-bold self-center sm:min-w-[100px] sm:max-w-[100px] p-2.5 mt-5 sm:mt-0">6 hrs ago</p>
-            <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px] p-2.5">Collected documents from Sara</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px] p-2.5">Collected documents from Sara</p>
         </div>
         <div className="sm:flex items-center">
-            <p className="text-[#3b3f5c] dark:text-white-light text-base font-semibold p-2.5">01:00</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 text-base font-semibold p-2.5">01:00</p>
             <div className="p-2.5 relative">
                 <img src="/assets/images/template/profile-4.jpeg" alt="img" className="w-11 h-11 rounded-full relative z-[1] mx-auto" />
             </div>
             <p className="text-white-dark text-xs font-bold self-center sm:min-w-[100px] sm:max-w-[100px] p-2.5 mt-5 sm:mt-0">9 hrs ago</p>
-            <p className="text-[#3b3f5c] dark:text-white-light font-semibold text-[13px] p-2.5">PDF file Download</p>
+            <p className="text-[#3b3f5c] dark:text-white-7 font-semibold text-[13px] p-2.5">PDF file Download</p>
         </div>
     </div>
 </div>`}
@@ -716,7 +716,7 @@ const Timeline = () => {
           <div className="mb-5">
             <div className="mx-auto max-w-[900px] space-y-3 text-center sm:space-y-0 ltr:sm:text-left rtl:sm:text-right">
               <div className="items-center sm:flex">
-                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   09:00
                 </p>
                 <div className="relative p-2.5 after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-white-dark/20">
@@ -729,12 +729,12 @@ const Timeline = () => {
                 <p className="mt-5 self-center p-2.5 text-xs font-bold text-white-dark sm:mt-0 sm:min-w-[100px] sm:max-w-[100px]">
                   25 mins ago
                 </p>
-                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                   Conference call with Marketing Manager.
                 </p>
               </div>
               <div className="items-center sm:flex">
-                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   10:00
                 </p>
                 <div className="relative p-2.5 after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-white-dark/20">
@@ -747,12 +747,12 @@ const Timeline = () => {
                 <p className="mt-5 self-center p-2.5 text-xs font-bold text-white-dark sm:mt-0 sm:min-w-[100px] sm:max-w-[100px]">
                   2 hrs ago
                 </p>
-                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                   Server rebooted successfully
                 </p>
               </div>
               <div className="items-center sm:flex">
-                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   11:00
                 </p>
                 <div className="relative p-2.5 after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-white-dark/20">
@@ -765,12 +765,12 @@ const Timeline = () => {
                 <p className="mt-5 self-center p-2.5 text-xs font-bold text-white-dark sm:mt-0 sm:min-w-[100px] sm:max-w-[100px]">
                   4 hrs ago
                 </p>
-                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                   Backup Files EOD
                 </p>
               </div>
               <div className="items-center sm:flex">
-                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   12:00
                 </p>
                 <div className="relative p-2.5 after:absolute after:-bottom-[15px] after:left-1/2 after:top-[25px] after:h-auto after:w-0 after:-translate-x-1/2 after:rounded-full after:border-l-2 after:border-white-dark/20">
@@ -783,12 +783,12 @@ const Timeline = () => {
                 <p className="mt-5 self-center p-2.5 text-xs font-bold text-white-dark sm:mt-0 sm:min-w-[100px] sm:max-w-[100px]">
                   6 hrs ago
                 </p>
-                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                   Collected documents from Sara
                 </p>
               </div>
               <div className="items-center sm:flex">
-                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-base font-semibold text-[#3b3f5c] dark:text-white-7">
                   01:00
                 </p>
                 <div className="relative p-2.5">
@@ -801,7 +801,7 @@ const Timeline = () => {
                 <p className="mt-5 self-center p-2.5 text-xs font-bold text-white-dark sm:mt-0 sm:min-w-[100px] sm:max-w-[100px]">
                   9 hrs ago
                 </p>
-                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-light">
+                <p className="p-2.5 text-[13px] font-semibold text-[#3b3f5c] dark:text-white-7">
                   PDF file Download
                 </p>
               </div>
