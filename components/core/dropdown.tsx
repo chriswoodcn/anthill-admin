@@ -1,6 +1,7 @@
 "use client";
 
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import logger from "@/lib/logger";
 import { forwardRef, useImperativeHandle, useRef, useState } from "react";
 import { usePopper } from "react-popper";
 
@@ -58,7 +59,10 @@ const Dropdown = (props: any, forwardedRef: any) => {
         ref={referenceRef}
         type="button"
         className={props.btnClassName}
-        onClick={() => setVisibility(!visibility)}
+        onClick={(e) => {
+          console.log("button e", e.currentTarget);
+          setVisibility(!visibility);
+        }}
       >
         {props.button}
       </button>
@@ -67,8 +71,11 @@ const Dropdown = (props: any, forwardedRef: any) => {
         ref={popperRef}
         style={styles.popper}
         {...attributes.popper}
-        className="z-[999]"
-        onClick={() => setVisibility(!visibility)}
+        className="z-[999] shadow-lg"
+        onClick={(e) => {
+          console.log("popperRef e", e.currentTarget);
+          setVisibility(!visibility);
+        }}
       >
         {visibility && props.children}
       </div>

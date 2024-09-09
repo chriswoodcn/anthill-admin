@@ -27,14 +27,16 @@ const DropdownPortal = (props: any, forwardedRef: any) => {
       shadow="lg"
       offset={1}
       // clickOutsideEvents={["mouseup", "touchend"]}
-      closeOnClickOutside={false}
+      // closeOnClickOutside={false}
       opened={opened}
       onChange={setOpened}
     >
       <Popover.Target>
-        {cloneElement(props.button, {
-          onClick: () => setOpened((o) => !o),
-        })}
+        {!props.onClick
+          ? cloneElement(props.button, {
+              onClick: () => setOpened((o) => !o),
+            })
+          : props.button}
       </Popover.Target>
       <Popover.Dropdown>{props.children}</Popover.Dropdown>
     </Popover>

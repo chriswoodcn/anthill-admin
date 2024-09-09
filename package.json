@@ -66,6 +66,7 @@
     "swiper": "^11.1.9",
     "swr": "^2.2.5",
     "use-immer": "^0.10.0",
+    "uuid": "^10.0.0",
     "yet-another-react-lightbox": "^3.21.3",
     "yup": "^1.4.0"
   },
@@ -83,6 +84,7 @@
     "@types/react-dom": "^18",
     "@types/react-flatpickr": "^3.8.11",
     "@types/react-text-mask": "^5.4.14",
+    "@types/uuid": "^10.0.0",
     "autoprefixer": "^10.4.19",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",

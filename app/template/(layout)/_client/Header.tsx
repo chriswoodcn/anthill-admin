@@ -11,6 +11,7 @@ import logger from "@/lib/logger";
 
 import Image from "@/components/core/Image";
 import IconMenu from "@/components/icon/template/icon-menu";
+import IconMenuIcon from "@/components/icon/icon-menu";
 import IconCalendar from "@/components/icon/icon-calendar";
 import IconEdit from "@/components/icon/icon-edit";
 import IconChatNotification from "@/components/icon/icon-chat-notification";
@@ -37,47 +38,19 @@ import IconMenuForms from "@/components/icon/menu/icon-menu-forms";
 import IconMenuPages from "@/components/icon/menu/icon-menu-pages";
 import IconMenuMore from "@/components/icon/menu/icon-menu-more";
 import Dropdown from "@/components/core/Dropdown";
-import DropdownPortal from "@/components/core/DropdownPortal";
+// import DropdownPortal from "@/components/core/DropdownPortal";
 import LanguageDropdown from "@/components/compose/LanguageDropdown";
 import Logo from "@/components/compose/Logo";
+import AnimateHeight from "react-animate-height";
+import DropdownPortal from "@/components/core/DropdownPortal";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import { isBrowser } from "@/lib";
 
 const Header = () => {
   const pathname = usePathname();
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { t, i18n } = useTranslation();
-
-  // useEffect(() => {
-  //   const selector = document.querySelector(
-  //     'ul.horizontal-menu a[href="' + window.location.pathname + '"]'
-  //   );
-  //   if (selector) {
-  //     const all: any = document.querySelectorAll(
-  //       "ul.horizontal-menu .nav-link.active"
-  //     );
-  //     for (let i = 0; i < all.length; i++) {
-  //       all[0]?.classList.remove("active");
-  //     }
-
-  //     let allLinks = document.querySelectorAll("ul.horizontal-menu a.active");
-  //     for (let i = 0; i < allLinks.length; i++) {
-  //       const element = allLinks[i];
-  //       element?.classList.remove("active");
-  //     }
-  //     selector?.classList.add("active");
-
-  //     const ul: any = selector.closest("ul.sub-menu");
-  //     if (ul) {
-  //       let ele: any = ul.closest("li.menu").querySelectorAll(".nav-link");
-  //       if (ele) {
-  //         ele = ele[0];
-  //         setTimeout(() => {
-  //           ele?.classList.add("active");
-  //         });
-  //       }
-  //     }
-  //   }
-  // }, [pathname]);
 
   const isRtl =
     useAppSelector((state: RootState) => state.adminSetting.rtlClass) === "rtl";
@@ -824,6 +797,65 @@ const Header = () => {
       </li>
     </ul>
   );
+
+  const [currentMenuList, setCurrentMenuList] = useState<string[]>([]);
+  const toggleMenuList = (value: string) => {
+    logger.debug("toggleMenuList ", value);
+    // currentMenuList包含当前的menuKey，截断当前的
+    if (currentMenuList.includes(value)) {
+      let index = currentMenuList.findIndex((m) => m == value);
+      let newList = [...currentMenuList];
+      newList.splice(index);
+      setCurrentMenuList(newList);
+    } else {
+      const parentKey = findParentKey(value);
+      if (parentKey == undefined) {
+        setCurrentMenuList([value]);
+      } else {
+        const parentKeys = findMenuAllParentKey(value);
+        // currentMenuList不包含当前的menuKey
+        setCurrentMenuList([...parentKeys, value]);
+      }
+    }
+  };
+  /**
+   * 查找上一级菜单的MenuKey
+   */
+  const findParentKey = (parentKey: string) => {
+    const find = TemplateMenuList.find((item) => item.menuKey == parentKey);
+    return find && find.parentKey ? find.parentKey : undefined;
+  };
+  /**
+   * 查找出所有上级菜单的MenuKey
+   */
+  const findMenuAllParentKey = (menuKey: string) => {
+    if (!menuKey) return [];
+    const keys = [];
+    const selectedMenu = TemplateMenuList.find(
+      (m) => m.menuKey && m.menuKey == menuKey
+    );
+    if (!selectedMenu) return [];
+    let key: string | undefined = selectedMenu.parentKey;
+    while (key) {
+      keys.push(key);
+      key = findParentKey(key);
+    }
+    return keys;
+  };
+  useEffectOnce(() => {
+    if (isBrowser()) {
+      logger.debug("初始化菜单栏");
+      //标记 初始化菜单栏
+      const templateMenu = TemplateMenuList.find(
+        (item) => item.path == pathname
+      );
+      if (templateMenu && templateMenu.menuKey) {
+        const parentKeys = findMenuAllParentKey(templateMenu.menuKey);
+        setCurrentMenuList([...parentKeys, templateMenu.menuKey]);
+      }
+    }
+  }, [pathname]);
+
   /**
    * 生成分类和下级
    */
@@ -836,13 +868,10 @@ const Header = () => {
     }
     return (
       <DropdownPortal
+        placement="bottom-start"
         button={
-          <button
-            type="button"
-            className="nav-link"
-            disabled={!menu.children || menu.children.length == 0}
-          >
-            <div className="flex items-center">
+          <div className="nav-link cursor-pointer">
+            <div className="flex items-center w-full group min-w-20">
               {menu.icon && (
                 <IconMenu
                   name={menu.icon!!}
@@ -854,17 +883,16 @@ const Header = () => {
             <div className="right_arrow">
               <IconCaretDown />
             </div>
-          </button>
+          </div>
         }
       >
-        <ul className="horizontal-menu sub-menu">
+        <ul className="bg-white dark:bg-black-7 shadow-lg rounded-lg min-w-20">
           {menu.children && menu.children?.length > 0
             ? menu.children.map((c) => generateHorizontalMenuTree_All(c))
             : null}
         </ul>
       </DropdownPortal>
     );
-    return null;
   };
   /**
    * 生成菜单和下级
@@ -876,56 +904,75 @@ const Header = () => {
       logger.debug("C type menu menuKey is blank - ", menu);
       return null;
     }
-    return (
+    return menu.children && menu.children.length > 0 ? (
+      // 有子级 是button和下拉
       <li
-        className={`${
+        className={`py-2 min-w-20 ${
           menu.children && menu.children.length > 0 ? "relative" : ""
         }`}
-        key={menu.menuKey}
+        key={"horizontal-" + menu.menuKey}
       >
-        {menu.children && menu.children.length > 0 ? (
-          <DropdownPortal
-            placement="right-start"
-            button={
-              <button className="w-full" type="button">
-                <div className="flex items-center w-full group">
-                  {menu.icon && (
-                    <IconMenu
-                      name={menu.icon}
-                      className="shrink-0 group-hover:!text-primary"
-                    />
-                  )}
-                  <span className="flex-1 ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5 text-start group-hover:!text-primary">
-                    {t(menu.menuKey)}
-                  </span>
-                  <div className="-rotate-90 ltr:ml-auto rtl:mr-auto rtl:rotate-90 justify-self-end">
-                    <IconCaretDown />
-                  </div>
-                </div>
-              </button>
-            }
-            key={menu.menuKey}
+        <div
+          className={`px-4 cursor-pointer group flex items-center nav-link ${
+            currentMenuList.includes(menu.menuKey) ? "active" : ""
+          }`}
+          onClick={() => toggleMenuList(menu.menuKey!!)}
+        >
+          <div className="flex-1 flex items-center">
+            {menu.icon && (
+              <IconMenu
+                name={menu.icon}
+                className="shrink-0 group-hover:!text-primary"
+              />
+            )}
+            <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5 group-hover:!text-primary">
+              {t(menu.menuKey)}
+            </span>
+          </div>
+
+          <div
+            className={`dark:text-white-4 group-focus:text-white-6 group-hover:!text-primary ${
+              !currentMenuList.includes(menu.menuKey)
+                ? "-rotate-90 rtl:rotate-90"
+                : ""
+            }`}
           >
-            <ul className="horizontal-menu sub-menu">
-              {menu.children.map((c) => generateHorizontalMenuTree_All(c))}
+            <IconCaretDown />
+          </div>
+        </div>
+
+        <div className="max-h-48 overflow-y-scroll">
+          <AnimateHeight
+            duration={300}
+            height={currentMenuList.includes(menu.menuKey) ? "auto" : 0}
+          >
+            <ul className="sub-menu text-gray-500 py-2">
+              {menu.children.map((c) => generateHorizontalMenuTree_Menu(c))}
             </ul>
-          </DropdownPortal>
-        ) : (
-          menu.path && (
-            <Link className="w-full" href={menu.path}>
-              <div className="flex items-center group">
-                {menu.icon && (
-                  <IconMenu
-                    name={menu.icon}
-                    className="shrink-0 group-hover:!text-primary"
-                  />
-                )}
-                <span className="flex-1 ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5 group-hover:!text-primary">
-                  {t(menu.menuKey)}
-                </span>
-              </div>
-            </Link>
-          )
+          </AnimateHeight>
+        </div>
+      </li>
+    ) : (
+      <li
+        className={`px-4 py-2 min-w-32 nav-link ${
+          menu.children && menu.children.length > 0 ? "relative" : ""
+        } ${currentMenuList.includes(menu.menuKey) ? "active" : ""}`}
+        key={"horizontal-" + menu.menuKey}
+      >
+        {menu.path && (
+          <Link className="nav-link w-full" href={menu.path}>
+            <div className="flex items-center group">
+              {menu.icon && (
+                <IconMenu
+                  name={menu.icon}
+                  className="shrink-0 group-hover:!text-primary"
+                />
+              )}
+              <span className="flex-1 ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5 group-hover:!text-primary">
+                {t(menu.menuKey)}
+              </span>
+            </div>
+          </Link>
         )}
       </li>
     );
@@ -960,7 +1007,7 @@ const Header = () => {
               className="main-logo flex shrink-0 items-center"
             >
               <Logo className="w-5 h-5 md:w-6 md:h-6  text-primary" />
-              <span className="hidden align-middle text-2xl  font-semibold  transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-6 md:inline">
+              <span className="hidden align-middle text-2xl font-semibold  transition-all duration-300 ltr:ml-1.5 rtl:mr-1.5 dark:text-white-6 md:inline">
                 Anthill
               </span>
             </Link>
@@ -969,7 +1016,7 @@ const Header = () => {
               className="collapse-icon flex flex-none rounded-full bg-white-light/40 p-2 hover:bg-white-light/90 hover:text-primary ltr:ml-2 rtl:mr-2 dark:bg-dark/40 dark:text-[#d0d2d6] dark:hover:bg-dark/60 dark:hover:text-primary lg:hidden"
               onClick={() => dispatch(toggleSidebar())}
             >
-              <IconMenu className="h-5 w-5" />
+              <IconMenuIcon className="h-5 w-5" />
             </button>
           </div>
 

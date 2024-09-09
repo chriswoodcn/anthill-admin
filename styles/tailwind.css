@@ -182,10 +182,15 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   } */
 
   .horizontal-menu .nav-link {
-    @apply flex items-center rounded-lg px-2 py-2.5 hover:bg-[#000]/[0.08] hover:text-primary dark:hover:bg-[#181f32] dark:hover:text-white-5 xl:px-4;
+    @apply flex items-center rounded-lg p-2 hover:bg-[#000]/[0.08] hover:text-primary dark:hover:bg-primary/50 dark:hover:text-white-5 xl:px-4;
   }
+  .nav-link.active,
+  .nav-link.active span {
+    @apply !text-primary;
+  }
+  /*
   .horizontal-menu .nav-link.active {
-    @apply bg-[#000]/[0.08] text-primary dark:bg-[#181f32] dark:text-white-5;
+    @apply bg-[#000]/[0.08] text-primary dark:bg-primary/50 dark:text-white-5;
   }
   .horizontal-menu.sub-menu {
     @apply w-full min-w-[180px] max-h-[300px] py-2 overflow-y-scroll;
@@ -199,7 +204,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   }
   .horizontal-menu.sub-menu li.active {
     @apply bg-gray-100 text-primary dark:bg-primary/10;
-  }
+  } */
   /* #endregion */
 
   /* #region Vertical layouts*/
