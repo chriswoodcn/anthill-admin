@@ -325,7 +325,7 @@ const Header = () => {
                                 )}
                               ></div>
                               <span className="px-3 dark:text-gray-500">
-                                <div className="text-sm font-semibold dark:text-white-light/90">
+                                <div className="text-sm font-semibold dark:text-white-7/90">
                                   {message.title}
                                 </div>
                                 <div>{message.message}</div>
@@ -406,7 +406,7 @@ const Header = () => {
                         return (
                           <li
                             key={notification.id}
-                            className="dark:text-white-light/90"
+                            className="dark:text-white-7/90"
                             onClick={(e) => e.stopPropagation()}
                           >
                             <div className="group flex items-center px-4 py-2">
@@ -485,10 +485,11 @@ const Header = () => {
                   />
                 }
               >
-                <ul className="w-[230px] !py-0 font-semibold text-black-7 dark:text-white-6 dark:text-white-light/90 bg-white shadow-lg rounded-lg">
+                <ul className="w-[230px] !py-0 font-semibold text-black-7 dark:text-white-6 dark:text-white-7/90 bg-white shadow-lg rounded-lg">
                   <li>
                     <div className="flex items-center">
                       <Image
+                        auto
                         className="h-10 w-10 rounded-md object-cover"
                         src="/assets/images/profile/profile-1.jpeg"
                         alt="userProfile"
@@ -502,7 +503,7 @@ const Header = () => {
                         </h4>
                         <button
                           type="button"
-                          className="text-black/60 hover:text-primary dark:text-black-7-light/60 dark:hover:text-white"
+                          className="hover:text-primary dark:hover:text-white"
                         >
                           johndoe@gmail.com
                         </button>

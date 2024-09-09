@@ -43,6 +43,12 @@
   body {
     @apply bg-white-8 dark:bg-black-7 text-black-7 dark:text-white-7 font-nunito;
   }
+  p,
+  span,
+  a,
+  label {
+    @apply text-black-7 dark:text-white-7;
+  }
   /* #endregion */
   .main-container .main-content {
     @apply transition-all duration-300 lg:ltr:ml-[260px] lg:rtl:mr-[260px];
@@ -80,11 +86,15 @@
 
   .sidebar .nav-item > button,
   .sidebar .nav-item > a {
-    @apply mb-1 flex w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md p-2.5 text-black-7 hover:bg-[#000]/[0.08]  dark:hover:bg-[#181f32] dark:hover:text-white-5 hover:text-primary;
+    @apply mb-1 flex w-full items-center justify-between overflow-hidden whitespace-nowrap rounded-md p-2.5 text-black-7 hover:bg-white-8 dark:hover:bg-black-7 dark:hover:text-white-5 hover:text-primary font-semibold;
   }
   .sidebar .nav-item > button.active,
   .sidebar .nav-item > a.active {
-    @apply bg-[#000]/[0.08] text-primary dark:bg-[#181f32] dark:hover:text-white-9;
+    @apply bg-white-8 text-primary dark:bg-black-7 dark:hover:text-white-7;
+  }
+  .sidebar .nav-item > button.active svg,
+  .sidebar .nav-item > a.active svg {
+    @apply !text-primary;
   }
   .sidebar .nav-item > button > div > span,
   .sidebar .nav-item > a > div > span {
@@ -92,7 +102,7 @@
   }
   .sidebar .nav-item > button.active > div > span,
   .sidebar .nav-item > a.active > div > span {
-    @apply dark:text-white-7;
+    @apply text-primary;
   }
 
   /* .sidebar ul.sub-menu .nav-item button,
@@ -102,8 +112,7 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
   } */
   .sidebar ul.sub-menu .nav-item button,
   .sidebar ul.sub-menu .nav-item a {
-    @apply flex w-full justify-start items-center px-9 py-2.5  hover:bg-gray-100
-hover:text-primary dark:hover:bg-gray-900 dark:hover:text-primary;
+    @apply flex w-full justify-start items-center px-9 py-2.5  hover:bg-white-8/[0.5] hover:text-primary dark:hover:bg-black-7/[0.5] dark:hover:text-primary;
   }
   .sidebar ul.sub-menu .nav-item button.active,
   .sidebar ul.sub-menu .nav-item a.active {

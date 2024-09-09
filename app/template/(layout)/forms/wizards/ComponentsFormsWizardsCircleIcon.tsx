@@ -25,7 +25,7 @@ const [activeTab3, setActiveTab3] = useState<any>(1);
             <li className="mx-auto">
                 <button type="button"
                     className={\`\${activeTab3 === 1 ? '!border-primary !bg-primary text-white' : ''}
-                bg-white dark:bg-[#253b5c] border-[3px] border-[#f3f2ee] dark:border-[#1b2e4b] flex justify-center items-center w-16 h-16 rounded-full\`}
+                bg-white dark:bg-[#253b5c] border-[3px] border-[#f3f2ee] dark:border-black-7 flex justify-center items-center w-16 h-16 rounded-full\`}
                     onClick={() => setActiveTab3(1)}
                 >
                     <svg>...</svg>
@@ -34,7 +34,7 @@ const [activeTab3, setActiveTab3] = useState<any>(1);
             <li className="mx-auto">
                 <button type="button"
                     className={\`\${activeTab3 === 2 ? '!border-primary !bg-primary text-white' : ''}
-                bg-white dark:bg-[#253b5c] border-[3px] border-[#f3f2ee] dark:border-[#1b2e4b] flex justify-center items-center w-16 h-16 rounded-full\`}
+                bg-white dark:bg-[#253b5c] border-[3px] border-[#f3f2ee] dark:border-black-7 flex justify-center items-center w-16 h-16 rounded-full\`}
                     onClick={() => setActiveTab3(2)}
                 >
                     <svg>...</svg>
@@ -43,7 +43,7 @@ const [activeTab3, setActiveTab3] = useState<any>(1);
             <li className="mx-auto">
                 <button type="button"
                     className={\`\${activeTab3 === 3 ? '!border-primary !bg-primary text-white' : ''}
-                bg-white dark:bg-[#253b5c] border-[3px] border-[#f3f2ee] dark:border-[#1b2e4b] flex justify-center items-center w-16 h-16 rounded-full\`}
+                bg-white dark:bg-[#253b5c] border-[3px] border-[#f3f2ee] dark:border-black-7 flex justify-center items-center w-16 h-16 rounded-full\`}
                     onClick={() => setActiveTab3(3)}
                 >
                     <svg>...</svg>
@@ -92,7 +92,7 @@ const [activeTab3, setActiveTab3] = useState<any>(1);
                       ? "!border-primary !bg-primary text-white"
                       : ""
                   }
-                                            flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-[#f3f2ee] bg-white dark:border-[#1b2e4b] dark:bg-[#253b5c]`}
+                                            flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-[#f3f2ee] bg-white dark:border-black-7 dark:bg-[#253b5c]`}
                   onClick={() => setActiveTab3(1)}
                 >
                   <IconHome />
@@ -106,7 +106,7 @@ const [activeTab3, setActiveTab3] = useState<any>(1);
                       ? "!border-primary !bg-primary text-white"
                       : ""
                   }
-                                            flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-[#f3f2ee] bg-white dark:border-[#1b2e4b] dark:bg-[#253b5c]`}
+                                            flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-[#f3f2ee] bg-white dark:border-black-7 dark:bg-[#253b5c]`}
                   onClick={() => setActiveTab3(2)}
                 >
                   <IconUser className="h-5 w-5" />
@@ -120,7 +120,7 @@ const [activeTab3, setActiveTab3] = useState<any>(1);
                       ? "!border-primary !bg-primary text-white"
                       : ""
                   }
-                                            flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-[#f3f2ee] bg-white dark:border-[#1b2e4b] dark:bg-[#253b5c]`}
+                                            flex h-16 w-16 items-center justify-center rounded-full border-[3px] border-[#f3f2ee] bg-white dark:border-black-7 dark:bg-[#253b5c]`}
                   onClick={() => setActiveTab3(3)}
                 >
                   <IconThumbUp className="h-5 w-5" />

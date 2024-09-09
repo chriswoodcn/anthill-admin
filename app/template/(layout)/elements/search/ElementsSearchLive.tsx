@@ -134,7 +134,7 @@ useEffect(() => {
             return (
                 <div
                     key={item.email}
-                    className="bg-white dark:bg-[#1b2e4b] rounded-xl shadow-[0_0_4px_2px_rgb(31_45_61_/_10%)] p-3 flex items-center justify-between
+                    className="bg-white dark:bg-black-7 rounded-xl shadow-[0_0_4px_2px_rgb(31_45_61_/_10%)] p-3 flex items-center justify-between
                         text-gray-500 font-semibold min-w-[625px] hover:text-primary transition-all duration-300 hover:scale-[1.01]"
                 >
                     <div className="user-profile">
@@ -177,7 +177,7 @@ useEffect(() => {
                 <div
                   key={item.email}
                   className="flex min-w-[625px] items-center justify-between rounded-xl bg-white p-3 font-semibold
-                                         text-gray-500 shadow-[0_0_4px_2px_rgb(31_45_61_/_10%)] transition-all duration-300 hover:scale-[1.01] hover:text-primary dark:bg-[#1b2e4b]"
+                                         text-gray-500 shadow-[0_0_4px_2px_rgb(31_45_61_/_10%)] transition-all duration-300 hover:scale-[1.01] hover:text-primary dark:bg-black-7"
                 >
                   <div className="user-profile">
                     <Image

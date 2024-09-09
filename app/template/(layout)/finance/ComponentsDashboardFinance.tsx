@@ -400,7 +400,7 @@ const ComponentsDashboardFinance = () => {
             Dashboard
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Finance</span>
         </li>
       </ul>
@@ -582,7 +582,7 @@ const ComponentsDashboardFinance = () => {
                     <IconBitcoin />
                   </div>
                   <div className="ltr:ml-2 rtl:mr-2">
-                    <h6 className="text-dark dark:text-white-light">BTC</h6>
+                    <h6 className="text-dark dark:text-white-7">BTC</h6>
                     <p className="text-xs text-white-dark">Bitcoin</p>
                   </div>
                 </div>
@@ -611,7 +611,7 @@ const ComponentsDashboardFinance = () => {
                     <IconEthereum />
                   </div>
                   <div className="ltr:ml-2 rtl:mr-2">
-                    <h6 className="text-dark dark:text-white-light">ETH</h6>
+                    <h6 className="text-dark dark:text-white-7">ETH</h6>
                     <p className="text-xs text-white-dark">Ethereum</p>
                   </div>
                 </div>
@@ -640,7 +640,7 @@ const ComponentsDashboardFinance = () => {
                     <IconLitecoin />
                   </div>
                   <div className="ltr:ml-2 rtl:mr-2">
-                    <h6 className="text-dark dark:text-white-light">LTC</h6>
+                    <h6 className="text-dark dark:text-white-7">LTC</h6>
                     <p className="text-xs text-white-dark">Litecoin</p>
                   </div>
                 </div>
@@ -683,7 +683,7 @@ const ComponentsDashboardFinance = () => {
                     <IconBinance />
                   </div>
                   <div className="ltr:ml-2 rtl:mr-2">
-                    <h6 className="text-dark dark:text-white-light">BNB</h6>
+                    <h6 className="text-dark dark:text-white-7">BNB</h6>
                     <p className="text-xs text-white-dark">Binance</p>
                   </div>
                 </div>
@@ -712,7 +712,7 @@ const ComponentsDashboardFinance = () => {
                     <IconTether />
                   </div>
                   <div className="ltr:ml-2 rtl:mr-2">
-                    <h6 className="text-dark dark:text-white-light">USDT</h6>
+                    <h6 className="text-dark dark:text-white-7">USDT</h6>
                     <p className="text-xs text-white-dark">Tether</p>
                   </div>
                 </div>
@@ -741,7 +741,7 @@ const ComponentsDashboardFinance = () => {
                     <IconSolana />
                   </div>
                   <div className="ltr:ml-2 rtl:mr-2">
-                    <h6 className="text-dark dark:text-white-light">SOL</h6>
+                    <h6 className="text-dark dark:text-white-7">SOL</h6>
                     <p className="text-xs text-white-dark">Solana</p>
                   </div>
                 </div>

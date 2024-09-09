@@ -28,14 +28,14 @@ const ComponentsPricingTableToggle = () => {
             </span>
         </div>
         <div className="md:flex space-y-4 md:space-y-0 mt-5 md:mt-16 text-white-dark">
-            <div className="p-4 lg:p-9 border ltr:md:border-r-0 rtl:md:border-l-0 border-white-light dark:border-[#1b2e4b] rounded-md ltr:md:rounded-r-none rtl:md:rounded-l-none transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)]">
-                <h3 className="text-xl mb-5 font-semibold text-black dark:text-white-light">Cloud Hosting</h3>
+            <div className="p-4 lg:p-9 border ltr:md:border-r-0 rtl:md:border-l-0 border-white-light dark:border-black-7 rounded-md ltr:md:rounded-r-none rtl:md:rounded-l-none transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)]">
+                <h3 className="text-xl mb-5 font-semibold text-black dark:text-white-7">Cloud Hosting</h3>
                 <p>cPanel/WHM included. Intel Xeon E3 with guaranteed 2GB RAM.</p>
                 <div className="my-7 p-2.5 text-center text-lg">
-                    <strong className="text-[#3b3f5c] dark:text-white-light text-xl lg:text-3xl">$25</strong> / monthly
+                    <strong className="text-[#3b3f5c] dark:text-white-7 text-xl lg:text-3xl">$25</strong> / monthly
                 </div>
                 <div className="mb-6">
-                    <strong className="text-black dark:text-white-light text-[15px] mb-3 inline-block">Cloud Hosting Features</strong>
+                    <strong className="text-black dark:text-white-7 text-[15px] mb-3 inline-block">Cloud Hosting Features</strong>
                     <ul className="space-y-3">
                         <li>Single Domain</li>
                         <li>50 GB SSD</li>
@@ -46,15 +46,15 @@ const ComponentsPricingTableToggle = () => {
                     Buy Now
                 </button>
             </div>
-            <div className="relative p-4 pt-14 lg:p-9 border border-white-light dark:border-[#1b2e4b] transition-all duration-300 rounded-t-md">
+            <div className="relative p-4 pt-14 lg:p-9 border border-white-light dark:border-black-7 transition-all duration-300 rounded-t-md">
                 <div className="absolute top-0 md:-top-[30px] inset-x-0 bg-primary text-white h-10 flex items-center justify-center text-base rounded-t-md">Most Popular</div>
-                <h3 className="text-xl mb-5 font-semibold text-black dark:text-white-light">VPS Hosting</h3>
+                <h3 className="text-xl mb-5 font-semibold text-black dark:text-white-7">VPS Hosting</h3>
                 <p>cPanel/WHM included. Intel Xeon E5 with guaranteed 4GB RAM.</p>
                 <div className="my-7 p-2.5 text-center text-lg">
                     <strong className="text-primary text-xl lg:text-4xl">$70</strong> / monthly
                 </div>
                 <div className="mb-6">
-                    <strong className="text-black dark:text-white-light text-[15px]  mb-3 inline-block">VPS Hosting Features</strong>
+                    <strong className="text-black dark:text-white-7 text-[15px]  mb-3 inline-block">VPS Hosting Features</strong>
                     <ul className="space-y-3">
                         <li>5 Domains</li>
                         <li>100 GB SSD</li>
@@ -65,14 +65,14 @@ const ComponentsPricingTableToggle = () => {
                     Buy Now
                 </button>
             </div>
-            <div className="p-4 lg:p-9 border ltr:md:border-l-0 rtl:md:border-r-0 border-white-light dark:border-[#1b2e4b] rounded-md ltr:md:rounded-l-none rtl:md:rounded-r-none transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)]">
-                <h3 className="text-xl mb-5 font-semibold text-black dark:text-white-light">Business Hosting</h3>
+            <div className="p-4 lg:p-9 border ltr:md:border-l-0 rtl:md:border-r-0 border-white-light dark:border-black-7 rounded-md ltr:md:rounded-l-none rtl:md:rounded-r-none transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)]">
+                <h3 className="text-xl mb-5 font-semibold text-black dark:text-white-7">Business Hosting</h3>
                 <p>cPanel/WHM included. Intel Xeon E5 with guaranteed 8GB RAM.</p>
                 <div className="my-7 p-2.5 text-center text-lg">
-                    <strong className="text-[#3b3f5c] dark:text-white-light text-xl lg:text-3xl">$115</strong> / monthly
+                    <strong className="text-[#3b3f5c] dark:text-white-7 text-xl lg:text-3xl">$115</strong> / monthly
                 </div>
                 <div className="mb-6">
-                    <strong className="text-black dark:text-white-light text-[15px]  mb-3 inline-block">Business Hosting Features</strong>
+                    <strong className="text-black dark:text-white-7 text-[15px]  mb-3 inline-block">Business Hosting Features</strong>
                     <ul className="space-y-3">
                         <li>Unlimited Domains</li>
                         <li>1 TB SSD</li>
@@ -117,19 +117,19 @@ const ComponentsPricingTableToggle = () => {
             </span>
           </div>
           <div className="mt-5 space-y-4 text-white-dark md:mt-16 md:flex md:space-y-0">
-            <div className="rounded-md border border-white-light p-4 transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] dark:border-[#1b2e4b] ltr:md:rounded-r-none ltr:md:border-r-0 rtl:md:rounded-l-none rtl:md:border-l-0 lg:p-9">
-              <h3 className="mb-5 text-xl font-semibold text-black dark:text-white-light">
+            <div className="rounded-md border border-white-light p-4 transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] dark:border-black-7 ltr:md:rounded-r-none ltr:md:border-r-0 rtl:md:rounded-l-none rtl:md:border-l-0 lg:p-9">
+              <h3 className="mb-5 text-xl font-semibold text-black dark:text-white-7">
                 Cloud Hosting
               </h3>
               <p>cPanel/WHM included. Intel Xeon E3 with guaranteed 2GB RAM.</p>
               <div className="my-7 p-2.5 text-center text-lg">
-                <strong className="text-xl text-[#3b3f5c] dark:text-white-light lg:text-3xl">
+                <strong className="text-xl text-[#3b3f5c] dark:text-white-7 lg:text-3xl">
                   $25
                 </strong>{" "}
                 / monthly
               </div>
               <div className="mb-6">
-                <strong className="mb-3 inline-block text-[15px] text-black dark:text-white-light">
+                <strong className="mb-3 inline-block text-[15px] text-black dark:text-white-7">
                   Cloud Hosting Features
                 </strong>
                 <ul className="space-y-3">
@@ -142,11 +142,11 @@ const ComponentsPricingTableToggle = () => {
                 Buy Now
               </button>
             </div>
-            <div className="relative rounded-t-md border border-white-light p-4 pt-14 transition-all duration-300 dark:border-[#1b2e4b] lg:p-9">
+            <div className="relative rounded-t-md border border-white-light p-4 pt-14 transition-all duration-300 dark:border-black-7 lg:p-9">
               <div className="absolute inset-x-0 top-0 flex h-10 items-center justify-center rounded-t-md bg-primary text-base text-white md:-top-[30px]">
                 Most Popular
               </div>
-              <h3 className="mb-5 text-xl font-semibold text-black dark:text-white-light">
+              <h3 className="mb-5 text-xl font-semibold text-black dark:text-white-7">
                 VPS Hosting
               </h3>
               <p>cPanel/WHM included. Intel Xeon E5 with guaranteed 4GB RAM.</p>
@@ -157,7 +157,7 @@ const ComponentsPricingTableToggle = () => {
                 / monthly
               </div>
               <div className="mb-6">
-                <strong className="mb-3 inline-block text-[15px]  text-black dark:text-white-light">
+                <strong className="mb-3 inline-block text-[15px]  text-black dark:text-white-7">
                   VPS Hosting Features
                 </strong>
                 <ul className="space-y-3">
@@ -170,19 +170,19 @@ const ComponentsPricingTableToggle = () => {
                 Buy Now
               </button>
             </div>
-            <div className="rounded-md border border-white-light p-4 transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] dark:border-[#1b2e4b] ltr:md:rounded-l-none ltr:md:border-l-0 rtl:md:rounded-r-none rtl:md:border-r-0 lg:p-9">
-              <h3 className="mb-5 text-xl font-semibold text-black dark:text-white-light">
+            <div className="rounded-md border border-white-light p-4 transition-all duration-300 hover:shadow-[0_0_15px_1px_rgba(113,106,202,0.20)] dark:border-black-7 ltr:md:rounded-l-none ltr:md:border-l-0 rtl:md:rounded-r-none rtl:md:border-r-0 lg:p-9">
+              <h3 className="mb-5 text-xl font-semibold text-black dark:text-white-7">
                 Business Hosting
               </h3>
               <p>cPanel/WHM included. Intel Xeon E5 with guaranteed 8GB RAM.</p>
               <div className="my-7 p-2.5 text-center text-lg">
-                <strong className="text-xl text-[#3b3f5c] dark:text-white-light lg:text-3xl">
+                <strong className="text-xl text-[#3b3f5c] dark:text-white-7 lg:text-3xl">
                   $115
                 </strong>{" "}
                 / monthly
               </div>
               <div className="mb-6">
-                <strong className="mb-3 inline-block text-[15px]  text-black dark:text-white-light">
+                <strong className="mb-3 inline-block text-[15px]  text-black dark:text-white-7">
                   Business Hosting Features
                 </strong>
                 <ul className="space-y-3">

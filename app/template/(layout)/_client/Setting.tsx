@@ -35,14 +35,14 @@ const Setting = () => {
       <nav
         className={`${
           (showCustomizer && "ltr:!right-0 rtl:!left-0") || ""
-        } fixed bottom-0 top-0 z-[51] w-full max-w-[400px] bg-white p-4 pr-1 shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-[right] duration-300 ltr:-right-[400px] rtl:-left-[400px] dark:bg-black-8`}
+        } fixed bottom-0 top-0 z-[51] w-full max-w-[375px] bg-white p-4 pr-1 shadow-[5px_0_25px_0_rgba(94,92,154,0.1)] transition-[right] duration-300 ltr:-right-[375px] rtl:-left-[375px] dark:bg-black-8`}
       >
         <button
           type="button"
           className="absolute bottom-0 top-0 my-auto flex h-10 w-12 cursor-pointer items-center justify-center bg-primary text-white ltr:-left-12 ltr:rounded-bl-full ltr:rounded-tl-full rtl:-right-12 rtl:rounded-br-full rtl:rounded-tr-full"
           onClick={() => setShowCustomizer(!showCustomizer)}
         >
-          <IconSettings className="h-5 w-5 animate-[spin_3s_linear_infinite]" />
+          <IconSettings className="h-6 w-6 animate-[spin_3s_linear_infinite]" />
         </button>
 
         <PerfectScrollbar className="pr-4">
@@ -62,7 +62,7 @@ const Setting = () => {
             </p>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Color Scheme
             </h5>
@@ -111,7 +111,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Navigation Position
             </h5>
@@ -177,7 +177,7 @@ const Setting = () => {
             </div> */}
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Layout Style
             </h5>
@@ -211,7 +211,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Direction
             </h5>
@@ -245,7 +245,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Navbar Type
             </h5>
@@ -284,7 +284,7 @@ const Setting = () => {
             </div>
           </div>
 
-          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-[#1b2e4b]">
+          <div className="mb-3 rounded-md border border-dashed border-white-light p-3 dark:border-black-7">
             <h5 className="mb-1 text-base leading-none dark:text-white">
               Router Transition
             </h5>

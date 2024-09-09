@@ -598,7 +598,7 @@ const ComponentsDatatablesColumnChooser = () => {
   return (
     <div className="panel mt-6">
       <div className="mb-5 flex flex-col gap-5 md:flex-row md:items-center">
-        <h5 className="text-lg font-semibold dark:text-white-light">
+        <h5 className="text-lg font-semibold dark:text-white-7">
           Show/Hide Columns
         </h5>
         <div className="flex items-center gap-5 ltr:ml-auto rtl:mr-auto">
@@ -606,7 +606,7 @@ const ComponentsDatatablesColumnChooser = () => {
             <div className="dropdown">
               <Dropdown
                 placement={`${isRtl ? "bottom-end" : "bottom-start"}`}
-                btnClassName="!flex items-center border font-semibold border-white-5 dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-[#1b2e4b] dark:text-white-5"
+                btnClassName="!flex items-center border font-semibold border-white-5 dark:border-[#253b5c] rounded-md px-4 py-2 text-sm dark:bg-black-7 dark:text-white-5"
                 button={
                   <>
                     <span className="ltr:mr-1 rtl:ml-1">Columns</span>

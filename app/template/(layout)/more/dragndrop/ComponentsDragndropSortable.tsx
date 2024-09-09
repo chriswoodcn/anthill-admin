@@ -77,7 +77,7 @@ const ComponentsDragndropSortable = () => {
               {sortable1.map((item) => {
                 return (
                   <li key={item.id} className="mb-2.5 cursor-grab">
-                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 text-center dark:border-dark dark:bg-[#1b2e4b] md:flex-row ltr:md:text-left rtl:md:text-right">
+                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 text-center dark:border-dark dark:bg-black-7 md:flex-row ltr:md:text-left rtl:md:text-right">
                       <div className="ltr:sm:mr-4 rtl:sm:ml-4">
                         <Image
                           alt="avatar"
@@ -123,7 +123,7 @@ const ComponentsDragndropSortable = () => {
               {sortable2.map((item) => {
                 return (
                   <li key={item.id} className="mb-2.5 cursor-grab">
-                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 text-center dark:border-dark dark:bg-[#1b2e4b] md:flex-row ltr:md:text-left rtl:md:text-right">
+                    <div className="items-md-center flex flex-col rounded-md border border-white-light bg-white px-6 py-3.5 text-center dark:border-dark dark:bg-black-7 md:flex-row ltr:md:text-left rtl:md:text-right">
                       <div className="ltr:sm:mr-4 rtl:sm:ml-4">
                         <Image
                           alt="avatar"

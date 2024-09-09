@@ -16,24 +16,24 @@ const Typography = () => {
             Elements
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Typography</span>
         </li>
       </ul>
       <div className="grid grid-cols-1 gap-6 pt-5 lg:grid-cols-2">
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Heading
           </h5>
           <div className="mb-5 flex items-center justify-center">
             <div className="w-full max-w-xs overflow-hidden rounded-md border border-white-dark/20 dark:border-[#191e3a]">
               <div className="bg-white p-4 dark:bg-[#191e3a]">
-                <p className="text-4xl leading-[60px] text-[#515365] dark:text-white-light">
+                <p className="text-4xl leading-[60px] text-[#515365] dark:text-white-7">
                   The quick brown fox
                 </p>
               </div>
               <div className="border-border-white-dark/20 border-t bg-dark-light p-4 dark:border-black dark:bg-[#191e3a]">
-                <h5 className="text-base dark:text-white-light">Nunito</h5>
+                <h5 className="text-base dark:text-white-7">Nunito</h5>
                 <button className="text-[13px] text-primary">
                   Google Fonts
                 </button>
@@ -46,7 +46,7 @@ const Typography = () => {
         </div>
 
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Heading
           </h5>
           <div className="mb-5 flex items-center justify-center">
@@ -62,7 +62,7 @@ const Typography = () => {
         </div>
 
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Heading Colored
           </h5>
           <div className="mb-5 flex items-center justify-center">
@@ -78,7 +78,7 @@ const Typography = () => {
         </div>
 
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Icon List
           </h5>
           <div className="mb-5 flex items-center justify-center">
@@ -106,7 +106,7 @@ const Typography = () => {
         </div>
 
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Unordered list
           </h5>
           <div className="mb-5 flex items-center justify-center">
@@ -133,7 +133,7 @@ const Typography = () => {
         </div>
 
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Ordered list
           </h5>
           <div className="mb-5 flex items-center justify-center">
@@ -160,13 +160,13 @@ const Typography = () => {
         </div>
 
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Blockquote
           </h5>
           <div className="mb-5 flex items-center justify-center">
             <blockquote className="rounded-br-md rounded-tr-md border border-l-2 border-white-light !border-l-primary bg-white p-5 text-black shadow-md ltr:pl-3.5 rtl:pr-3.5 dark:border-[#060818] dark:bg-[#060818]">
               <div className="flex items-start">
-                <p className="m-0 text-sm not-italic text-[#515365] dark:text-white-light">
+                <p className="m-0 text-sm not-italic text-[#515365] dark:text-white-7">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Integer posuere erat a ante.
                 </p>
@@ -179,7 +179,7 @@ const Typography = () => {
         </div>
 
         <div className="panel">
-          <h5 className="mb-5 text-lg font-semibold dark:text-white-light">
+          <h5 className="mb-5 text-lg font-semibold dark:text-white-7">
             Blockquote with profile
           </h5>
           <div className="mb-5 flex items-center justify-center">
@@ -192,7 +192,7 @@ const Typography = () => {
                     className="m-auto h-14 w-14 rounded-full object-cover"
                   />
                 </div>
-                <p className="m-0 text-sm not-italic text-[#515365] dark:text-white-light">
+                <p className="m-0 text-sm not-italic text-[#515365] dark:text-white-7">
                   Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                   Integer posuere erat a ante.
                 </p>

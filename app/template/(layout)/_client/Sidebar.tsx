@@ -609,7 +609,7 @@ const Sidebar = () => {
     </Link>
   </li> */}
 
-      <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
+      <h2 className="-mx-4 mb-1 flex items-center px-7 py-3 font-extrabold uppercase">
         <IconMinus className="hidden h-5 w-4 flex-none" />
         <span>{t("tables_and_forms")}</span>
       </h2>

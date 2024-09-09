@@ -30,7 +30,7 @@ export default (props: Props) => {
       {props.skeleton}
     </div>
   ) : (
-    <div className="absolute left-0 right-0 top-0 bottom-0 rounded bg-white-5 dark:bg-black-5 animate-pulse"></div>
+    <div className="absolute left-0 right-0 top-0 bottom-0 rounded bg-white-6 dark:bg-black-7 animate-pulse"></div>
   );
   return needWithBasePath ? (
     <div className={`relative ${props.auto ? "" : "w-full h-full"}`}>

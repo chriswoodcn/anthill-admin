@@ -27,7 +27,7 @@ const ComponentsFormsInputGroupSegmentedButtons = () => {
                 <Dropdown
                     offset={[0, 5]}
                     placement={\`\${isRtl ? 'bottom-end' : 'bottom-start'}\`}
-                    btnClassName="bg-white dark:bg-[#1b2e4b] text-info flex justify-center items-center rounded-none px-3 font-semibold border border-info cursor-pointer pt-2 pb-2"
+                    btnClassName="bg-white dark:bg-black-7 text-info flex justify-center items-center rounded-none px-3 font-semibold border border-info cursor-pointer pt-2 pb-2"
                     button={
                         <svg> ... </svg>
                     }
@@ -60,7 +60,7 @@ const ComponentsFormsInputGroupSegmentedButtons = () => {
                 <Dropdown
                     offset={[0, 5]}
                     placement={\`\${isRtl ? 'bottom-end' : 'bottom-start'}\`}
-                    btnClassName="bg-white dark:bg-[#1b2e4b] text-secondary flex justify-center items-center rounded-none px-3 font-semibold border border-secondary pt-2 pb-2"
+                    btnClassName="bg-white dark:bg-black-7 text-secondary flex justify-center items-center rounded-none px-3 font-semibold border border-secondary pt-2 pb-2"
                     button={
                         <svg> ... </svg>
                     }
@@ -106,7 +106,7 @@ const ComponentsFormsInputGroupSegmentedButtons = () => {
                                 <Dropdown
                                     offset={[0, 5]}
                                     placement={`${isRtl ? 'bottom-end' : 'bottom-start'}`}
-                                    btnClassName="bg-white dark:bg-[#1b2e4b] text-info flex justify-center items-center rounded-none px-3 font-semibold border border-info cursor-pointer pt-2 pb-2"
+                                    btnClassName="bg-white dark:bg-black-7 text-info flex justify-center items-center rounded-none px-3 font-semibold border border-info cursor-pointer pt-2 pb-2"
                                     button={<IconCaretDown className="h-5 w-5" />}
                                 >
                                     <ul className="!min-w-[170px]">
@@ -137,7 +137,7 @@ const ComponentsFormsInputGroupSegmentedButtons = () => {
                                 <Dropdown
                                     offset={[0, 5]}
                                     placement={`${isRtl ? 'bottom-end' : 'bottom-start'}`}
-                                    btnClassName="bg-white dark:bg-[#1b2e4b] text-secondary flex justify-center items-center rounded-none px-3 font-semibold border border-secondary pt-2 pb-2"
+                                    btnClassName="bg-white dark:bg-black-7 text-secondary flex justify-center items-center rounded-none px-3 font-semibold border border-secondary pt-2 pb-2"
                                     button={<IconCaretDown className="h-5 w-5" />}
                                 >
                                     <ul className="!min-w-[170px]">

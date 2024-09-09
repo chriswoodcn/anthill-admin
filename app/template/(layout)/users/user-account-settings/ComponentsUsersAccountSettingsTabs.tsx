@@ -19,7 +19,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
   return (
     <div className="pt-5 text-black-7 dark:text-white-7">
       <div className="mb-5 flex items-center justify-between">
-        <h5 className="text-lg font-semibold dark:text-white-light">
+        <h5 className="text-lg font-semibold dark:text-white-7">
           Settings
         </h5>
       </div>
@@ -185,7 +185,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
             <h6 className="mb-5 text-lg font-bold">Social</h6>
             <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconLinkedin className="h-5 w-5" />
                 </div>
                 <input
@@ -195,7 +195,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 />
               </div>
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconTwitter className="h-5 w-5" />
                 </div>
                 <input
@@ -205,7 +205,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 />
               </div>
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconFacebook className="h-5 w-5" />
                 </div>
                 <input
@@ -215,7 +215,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 />
               </div>
               <div className="flex">
-                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-[#1b2e4b]">
+                <div className="flex items-center justify-center rounded bg-[#eee] px-3 font-semibold ltr:mr-2 rtl:ml-2 dark:bg-black-7">
                   <IconGithub />
                 </div>
                 <input
@@ -243,11 +243,11 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 </p>
               </div>
               <div className="mb-5">
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #1
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         2249 Caynor Circle, New Brunswick, New Jersey
                       </span>
                     </h6>
@@ -256,11 +256,11 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                   </div>
                 </div>
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #2
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         4262 Leverton Cove Road, Springfield, Massachusetts
                       </span>
                     </h6>
@@ -273,7 +273,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                   <div className="flex items-start justify-between py-3">
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Address #3
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         2692 Berkshire Circle, Knoxville, Tennessee
                       </span>
                     </h6>
@@ -296,7 +296,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                 </p>
               </div>
               <div className="mb-5">
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <div className="flex-none ltr:mr-4 rtl:ml-4">
                       <Image
@@ -306,7 +306,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Mastercard
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         XXXX XXXX XXXX 9704
                       </span>
                     </h6>
@@ -315,7 +315,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                   </div>
                 </div>
-                <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+                <div className="border-b border-[#ebedf2] dark:border-black-7">
                   <div className="flex items-start justify-between py-3">
                     <div className="flex-none ltr:mr-4 rtl:ml-4">
                       <Image
@@ -325,7 +325,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       American Express
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         XXXX XXXX XXXX 310
                       </span>
                     </h6>
@@ -344,7 +344,7 @@ const ComponentsUsersAccountSettingsTabs = () => {
                     </div>
                     <h6 className="text-[15px] font-bold text-[#515365] dark:text-white-dark">
                       Visa
-                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-light">
+                      <span className="mt-1 block text-xs font-normal text-white-dark dark:text-white-7">
                         XXXX XXXX XXXX 5264
                       </span>
                     </h6>

@@ -20,7 +20,7 @@ const [activeTab1, setActiveTab1] = useState<any>(1);
         <li>
             <div
                 className={\`\${activeTab1 === 1 ? '!bg-primary text-white' : ''}
-                flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-[#1b2e4b]\`}
+                flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-black-7\`}
                 onClick={() => setActiveTab1(1)}
             >
                 <svg>...</svg>
@@ -29,7 +29,7 @@ const [activeTab1, setActiveTab1] = useState<any>(1);
         <li>
             <div
                 className={\`\${activeTab1 === 2 ? '!bg-primary text-white' : ''}
-                flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-[#1b2e4b]\`}
+                flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-black-7\`}
                 onClick={() => setActiveTab1(2)}
             >
                 <svg>...</svg>
@@ -38,7 +38,7 @@ const [activeTab1, setActiveTab1] = useState<any>(1);
         <li>
             <div
                 className={\`\${activeTab1 === 3 ? '!bg-primary text-white' : ''}
-                flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-[#1b2e4b]\`}
+                flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-black-7\`}
                 onClick={() => setActiveTab1(3)}
             >
                 <svg>...</svg>
@@ -68,7 +68,7 @@ const [activeTab1, setActiveTab1] = useState<any>(1);
             <li>
               <div
                 className={`${activeTab1 === 1 ? "!bg-primary text-white" : ""}
-                                            flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-[#1b2e4b]`}
+                                            flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-black-7`}
                 onClick={() => setActiveTab1(1)}
               >
                 <IconHome />
@@ -77,7 +77,7 @@ const [activeTab1, setActiveTab1] = useState<any>(1);
             <li>
               <div
                 className={`${activeTab1 === 2 ? "!bg-primary text-white" : ""}
-                                            flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-[#1b2e4b]`}
+                                            flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-black-7`}
                 onClick={() => setActiveTab1(2)}
               >
                 <IconUser className="h-5 w-5" />
@@ -86,7 +86,7 @@ const [activeTab1, setActiveTab1] = useState<any>(1);
             <li>
               <div
                 className={`${activeTab1 === 3 ? "!bg-primary text-white" : ""}
-                                            flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-[#1b2e4b]`}
+                                            flex items-center justify-center rounded-full bg-[#f3f2ee] p-2.5 dark:bg-black-7`}
                 onClick={() => setActiveTab1(3)}
               >
                 <IconThumbUp className="h-5 w-5" />

@@ -1512,7 +1512,7 @@ const ComponentsAppsMailbox = () => {
                   )}
                 </Disclosure>
 
-                <div className="h-px border-b border-white-light dark:border-[#1b2e4b]"></div>
+                <div className="h-px border-b border-white-light dark:border-black-7"></div>
 
                 <button
                   type="button"
@@ -1532,7 +1532,7 @@ const ComponentsAppsMailbox = () => {
                     <div className="ltr:ml-3 rtl:mr-3">Join a meeting</div>
                   </div>
                 </button>
-                <div className="h-px border-b border-white-light dark:border-[#1b2e4b]"></div>
+                <div className="h-px border-b border-white-light dark:border-black-7"></div>
               </div>
             </PerfectScrollbar>
 
@@ -1804,7 +1804,7 @@ const ComponentsAppsMailbox = () => {
                 </div>
               </div>
 
-              <div className="h-px border-b border-white-light dark:border-[#1b2e4b]"></div>
+              <div className="h-px border-b border-white-light dark:border-black-7"></div>
 
               <div className="flex flex-col flex-wrap items-center justify-between px-4 pb-4 md:flex-row xl:w-auto">
                 <div className="mt-4 grid w-full grid-cols-2 gap-3 sm:w-auto sm:grid-cols-4">
@@ -1901,7 +1901,7 @@ const ComponentsAppsMailbox = () => {
                 </div>
               </div>
 
-              <div className="h-px border-b border-white-light dark:border-[#1b2e4b]"></div>
+              <div className="h-px border-b border-white-light dark:border-black-7"></div>
 
               {pagedMails.length ? (
                 <div className="table-responsive min-h-[400px] grow overflow-y-auto sm:min-h-[300px]">
@@ -2063,7 +2063,7 @@ const ComponentsAppsMailbox = () => {
                   </Tippy>
                 </div>
               </div>
-              <div className="h-px border-b border-white-light dark:border-[#1b2e4b]"></div>
+              <div className="h-px border-b border-white-light dark:border-black-7"></div>
               <div className="relative p-4">
                 <div className="flex flex-wrap">
                   <div className="flex-shrink-0 ltr:mr-2 rtl:ml-2">
@@ -2244,7 +2244,7 @@ const ComponentsAppsMailbox = () => {
                 {selectedMail.attachments && (
                   <div className="mt-8">
                     <div className="mb-4 text-base">Attachments</div>
-                    <div className="h-px border-b border-white-light dark:border-[#1b2e4b]"></div>
+                    <div className="h-px border-b border-white-light dark:border-black-7"></div>
                     <div className="mt-6 flex flex-wrap items-center">
                       {selectedMail.attachments.map(
                         (attachment: any, i: number) => {
@@ -2252,7 +2252,7 @@ const ComponentsAppsMailbox = () => {
                             <button
                               key={i}
                               type="button"
-                              className="group relative mb-4 flex items-center rounded-md border border-white-light px-4 py-2.5 transition-all duration-300 hover:border-primary hover:text-primary ltr:mr-4 rtl:ml-4 dark:border-[#1b2e4b]"
+                              className="group relative mb-4 flex items-center rounded-md border border-white-light px-4 py-2.5 transition-all duration-300 hover:border-primary hover:text-primary ltr:mr-4 rtl:ml-4 dark:border-black-7"
                             >
                               {attachment.type === "image" && <IconGallery />}
                               {attachment.type === "folder" && <IconFolder />}

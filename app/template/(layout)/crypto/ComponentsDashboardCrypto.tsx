@@ -796,7 +796,7 @@ const ComponentsDashboardCrypto = () => {
             Dashboard
           </Link>
         </li>
-        <li className="before:content-['/'] ltr:before:mr-2 rtl:before:ml-2">
+        <li className="before:content-['/'] dark:text-white-7 ltr:before:mr-2 rtl:before:ml-2">
           <span>Crypto</span>
         </li>
       </ul>
@@ -914,25 +914,25 @@ const ComponentsDashboardCrypto = () => {
             <ul className="mt-5 grid grid-cols-2 divide-[#ebedf2] font-semibold text-white-dark rtl:divide-x-reverse dark:divide-[#253b5c] sm:mt-0 sm:grid-cols-4 sm:divide-x ltr:md:ml-auto rtl:md:mr-auto">
               <li className="px-4 py-1">
                 Market Cap
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   ${currentCoin.marketcap}B
                 </span>
               </li>
               <li className="px-4 py-1">
                 Volume
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   ${currentCoin.volume}B
                 </span>
               </li>
               <li className="px-4 py-1">
                 Supply
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   {currentCoin.supply}M
                 </span>
               </li>
               <li className="px-4 py-1">
                 All Time High
-                <span className="mt-1.5 block text-lg text-black dark:text-white-light">
+                <span className="mt-1.5 block text-lg text-black dark:text-white-7">
                   ${currentCoin.highest}
                 </span>
               </li>
@@ -971,7 +971,7 @@ const ComponentsDashboardCrypto = () => {
                   <Dropdown
                     offset={[0, 5]}
                     placement={`${isRtl ? "bottom-start" : "bottom-end"}`}
-                    btnClassName="bg-[#f1f2f3] dark:bg-[#1b2e4b] !flex justify-center gap-1 items-center rounded-none px-3 py-2 font-semibold border dark:border-[#253b5c] ltr:rounded-r-md rtl:rounded-l-md cursor-pointer"
+                    btnClassName="bg-[#f1f2f3] dark:bg-black-7 !flex justify-center gap-1 items-center rounded-none px-3 py-2 font-semibold border dark:border-[#253b5c] ltr:rounded-r-md rtl:rounded-l-md cursor-pointer"
                     button={
                       <>
                         BTC

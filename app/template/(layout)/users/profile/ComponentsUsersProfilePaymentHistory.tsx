@@ -13,16 +13,16 @@ const ComponentsUsersProfilePaymentHistory = () => {
   return (
     <div className="panel">
       <div className="mb-5 flex items-center justify-between">
-        <h5 className="text-lg font-semibold dark:text-white-light">
+        <h5 className="text-lg font-semibold dark:text-white-7">
           Payment History
         </h5>
       </div>
       <div>
-        <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+        <div className="border-b border-[#ebedf2] dark:border-black-7">
           <div className="flex items-center justify-between py-2">
             <h6 className="font-semibold text-[#515365] dark:text-white-dark">
               March
-              <span className="block text-white-dark dark:text-white-light">
+              <span className="block text-white-dark dark:text-white-7">
                 Pro Membership
               </span>
             </h6>
@@ -50,11 +50,11 @@ const ComponentsUsersProfilePaymentHistory = () => {
             </div>
           </div>
         </div>
-        <div className="border-b border-[#ebedf2] dark:border-[#1b2e4b]">
+        <div className="border-b border-[#ebedf2] dark:border-black-7">
           <div className="flex items-center justify-between py-2">
             <h6 className="font-semibold text-[#515365] dark:text-white-dark">
               February
-              <span className="block text-white-dark dark:text-white-light">
+              <span className="block text-white-dark dark:text-white-7">
                 Pro Membership
               </span>
             </h6>
@@ -85,7 +85,7 @@ const ComponentsUsersProfilePaymentHistory = () => {
           <div className="flex items-center justify-between py-2">
             <h6 className="font-semibold text-[#515365] dark:text-white-dark">
               January
-              <span className="block text-white-dark dark:text-white-light">
+              <span className="block text-white-dark dark:text-white-7">
                 Pro Membership
               </span>
             </h6>

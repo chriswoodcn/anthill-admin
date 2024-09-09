@@ -42,7 +42,7 @@ const ComponentsDragndropNewsFeed = () => {
             {newsFeed.map((item) => {
               return (
                 <div className="mb-2.5" key={item.id}>
-                  <div className="rounded-md border border-white-light bg-white px-6 py-3.5 dark:border-dark dark:bg-[#1b2e4b]">
+                  <div className="rounded-md border border-white-light bg-white px-6 py-3.5 dark:border-dark dark:bg-black-7">
                     <div className="py-sm-2.5 items-md-center block text-center sm:flex ltr:md:text-left rtl:md:text-right">
                       <div className="ltr:sm:mr-4 rtl:sm:ml-4">
                         <Image

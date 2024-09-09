@@ -150,7 +150,7 @@ const MySwal = withReactContent(Swal);
     };
 
 <div className="mb-5">
-    <h6 className="font-semibold text-base dark:text-white-light mb-3 text-center">Top Position</h6>
+    <h6 className="font-semibold text-base dark:text-white-7 mb-3 text-center">Top Position</h6>
     <div className="flex items-center justify-center mb-10 gap-2">
         <button type="button" className="btn btn-success" onClick={showMessage1}>
             Top Left
@@ -162,7 +162,7 @@ const MySwal = withReactContent(Swal);
             Top Right
         </button>
     </div>
-    <h6 className="font-semibold text-base dark:text-white-light mb-3 text-center">Bottom Position</h6>
+    <h6 className="font-semibold text-base dark:text-white-7 mb-3 text-center">Bottom Position</h6>
     <div className="flex items-center justify-center gap-2">
         <button type="button" className="btn btn-dark" onClick={showMessage4}>
             Bottom Left
@@ -177,7 +177,7 @@ const MySwal = withReactContent(Swal);
 </div>`}
     >
       <div className="mb-5">
-        <h6 className="mb-3 text-center text-base font-semibold dark:text-white-light">
+        <h6 className="mb-3 text-center text-base font-semibold dark:text-white-7">
           Top Position
         </h6>
         <div className="mb-10 flex items-center justify-center gap-2">
@@ -199,7 +199,7 @@ const MySwal = withReactContent(Swal);
             Top Right
           </button>
         </div>
-        <h6 className="mb-3 text-center text-base font-semibold dark:text-white-light">
+        <h6 className="mb-3 text-center text-base font-semibold dark:text-white-7">
           Bottom Position
         </h6>
         <div className="flex items-center justify-center gap-2">

@@ -570,7 +570,7 @@ const ComponentsDatatablesMultiColumn = () => {
   return (
     <div className="panel mt-6">
       <div className="mb-5 flex flex-col gap-5 md:flex-row md:items-center">
-        <h5 className="text-lg font-semibold dark:text-white-light">
+        <h5 className="text-lg font-semibold dark:text-white-7">
           Multicolumn
         </h5>
         <div className="ltr:ml-auto rtl:mr-auto">
