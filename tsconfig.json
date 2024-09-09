@@ -26,6 +26,6 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "*.ts"
-, "i18n/I18nProvider.jsx"  ],
+, "i18n/I18nProvider.jsx", "components/icon/menu/icon-menu-analyticstsx"  ],
   "exclude": ["node_modules"]
 }

@@ -925,7 +925,7 @@ const Header = () => {
                 className="shrink-0 group-hover:!text-primary"
               />
             )}
-            <span className=" ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5 group-hover:!text-primary">
+            <span className="ltr:pl-3 rtl:pr-3 dark:group-hover:text-white-5 group-hover:!text-primary">
               {t(menu.menuKey)}
             </span>
           </div>
@@ -968,7 +968,7 @@ const Header = () => {
                   className="shrink-0 group-hover:!text-primary"
                 />
               )}
-              <span className="flex-1 ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5 group-hover:!text-primary">
+              <span className="flex-1 ltr:pl-3 rtl:pr-3  dark:group-hover:text-white-5 group-hover:!text-primary text-sm">
                 {t(menu.menuKey)}
               </span>
             </div>

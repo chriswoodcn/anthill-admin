@@ -17,6 +17,10 @@ import IconMenuForms from "../menu/icon-menu-forms";
 import IconMenuUsers from "../menu/icon-menu-users";
 import IconMenuPages from "../menu/icon-menu-pages";
 import IconMenuAuthentication from "../menu/icon-menu-authentication";
+import IconMenuCrypto from "../menu/icon-menu-crypto";
+import IconMenuFinance from "../menu/icon-menu-finance";
+import IconMenuAnalytics from "../menu/icon-menu-analytics";
+import IconMenuSales from "../menu/icon-menu-sales";
 
 interface MenuProps {
   className?: string;
@@ -45,6 +49,10 @@ const MenuTemplateMap: Record<string, FC<MenuProps>> = {
   "menu-template-users": IconMenuUsers,
   "menu-template-pages": IconMenuPages,
   "menu-template-authentication": IconMenuAuthentication,
+  "menu-template-crypto": IconMenuCrypto,
+  "menu-template-finance": IconMenuFinance,
+  "menu-template-analytics": IconMenuAnalytics,
+  "menu-template-sales": IconMenuSales,
 };
 const switchIcon = (
   name: string,
