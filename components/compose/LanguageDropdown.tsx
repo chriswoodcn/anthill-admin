@@ -84,15 +84,15 @@ const LanguageDropdown = ({
           button={renderButton()}
         >
           <PerfectScrollbar className="max-h-[300px] overflow-y-scroll">
-            <ul className="grid w-[160px] grid-cols-1 gap-2 font-semibold">
+            <ul className="grid w-[160px] grid-cols-1 space-y-2 font-semibold !p-2">
               {adminSetting.languageList.map((item: any) => {
                 return (
-                  <li key={item.code}>
+                  <li key={item.code} className="group">
                     <button
                       type="button"
-                      className={`flex w-full p-2 rounded-md hover:text-primary ${
+                      className={`flex w-full p-2 rounded-md  ${
                         i18n.language === item.code
-                          ? "bg-primary/10 text-primary"
+                          ? "dark:bg-primary/50 bg-white-8 text-primary"
                           : ""
                       }`}
                       onClick={() => {
@@ -107,7 +107,13 @@ const LanguageDropdown = ({
                         alt="flag"
                         className="h-5 w-5 rounded-full object-cover"
                       />
-                      <span className="ltr:ml-3 rtl:mr-3">{item.name}</span>
+                      <span
+                        className={`ltr:ml-3 rtl:mr-3 group-hover:!text-primary ${
+                          i18n.language === item.code ? "text-primary" : ""
+                        }`}
+                      >
+                        {item.name}
+                      </span>
                     </button>
                   </li>
                 );

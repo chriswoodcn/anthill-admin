@@ -15,11 +15,11 @@ const DropdownPortal = (props: any, forwardedRef: any) => {
   }, []);
   useEffectOnce(() => {
     if (pathname !== memPathname.current) {
-      // logger.debug("DropdownPortal watch pathname", pathname);
       memPathname.current = pathname;
       setOpened(false);
     }
   }, [pathname]);
+
   return (
     <Popover
       width={200}
@@ -27,13 +27,16 @@ const DropdownPortal = (props: any, forwardedRef: any) => {
       shadow="lg"
       offset={1}
       // clickOutsideEvents={["mouseup", "touchend"]}
+      // closeOnClickOutside={false}
       opened={opened}
       onChange={setOpened}
     >
       <Popover.Target>
-        {cloneElement(props.button, {
-          onClick: () => setOpened((o) => !o),
-        })}
+        {!props.onClick
+          ? cloneElement(props.button, {
+              onClick: () => setOpened((o) => !o),
+            })
+          : props.button}
       </Popover.Target>
       <Popover.Dropdown>{props.children}</Popover.Dropdown>
     </Popover>

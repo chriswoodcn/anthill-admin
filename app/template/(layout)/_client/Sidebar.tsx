@@ -112,12 +112,12 @@ const Sidebar = () => {
         setCurrentMenuList([...parentKeys, templateMenu.menuKey]);
       }
     }
-  }, []);
+  }, [pathname]);
   useEffectOnce(() => {
     logger.debug("currentMenuList", currentMenuList);
     if (isBrowser() && initMenuBar && currentMenuList.length > 0) {
       const selector = document.querySelector(
-        '.sidebar ul a[href="' + window.location.pathname + '"]'
+        '.sidebar a[href="' + window.location.pathname + '"]'
       );
       logger.debug("scrollIntoView");
       setTimeout(() => {
@@ -135,17 +135,17 @@ const Sidebar = () => {
   }, [pathname]);
 
   const setActiveRoute = () => {
-    let allLinks = document.querySelectorAll(".sidebar ul a.active");
+    let allLinks = document.querySelectorAll(".sidebar a.active");
     for (let i = 0; i < allLinks.length; i++) {
       const element = allLinks[i];
       element?.classList.remove("active");
     }
     const selector = document.querySelector(
-      '.sidebar ul a[href="' + window.location.pathname + '"]'
+      '.sidebar a[href="' + window.location.pathname + '"]'
     );
     selector?.classList.add("active");
   };
-  const originSidebarMenuTree = () => (
+  const OriginSidebarMenuTree = () => (
     <ul className="relative space-y-0.5 p-2 py-0 pr-3 pb-24 font-semibold">
       <li className="menu nav-item">
         <button
@@ -1029,6 +1029,30 @@ const Sidebar = () => {
   </li> */}
     </ul>
   );
+
+  /**
+   * 生成分类和下级
+   */
+  const generateSidebarMenuTree_Category = (menu: Menu) => {
+    if (menu.type == "C") return null;
+    //必需字段判空
+    if (!menu.dialect) {
+      logger.debug("M type menu dialect is blank - ", menu);
+      return null;
+    }
+    return (
+      <div key={menu.dialect}>
+        <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
+          <IconMinus className="hidden h-5 w-4 flex-none" />
+          <span>{t(menu.dialect)}</span>
+        </h2>
+        {menu.children && menu.children?.length > 0
+          ? menu.children.map((c) => generateSidebarMenuTree_All(c))
+          : null}
+      </div>
+    );
+  };
+
   /**
    * 生成菜单和下级
    */
@@ -1040,7 +1064,7 @@ const Sidebar = () => {
       return null;
     }
     return (
-      <li className="nav-item" key={menu.menuKey}>
+      <div className="nav-item" key={menu.menuKey}>
         {menu.children && menu.children.length > 0 ? (
           // 有子级 是button和下拉
           <>
@@ -1102,28 +1126,6 @@ const Sidebar = () => {
             </div>
           </Link>
         )}
-      </li>
-    );
-  };
-  /**
-   * 生成分类和下级
-   */
-  const generateSidebarMenuTree_Category = (menu: Menu) => {
-    if (menu.type == "C") return null;
-    //必需字段判空
-    if (!menu.dialect) {
-      logger.debug("M type menu dialect is blank - ", menu);
-      return null;
-    }
-    return (
-      <div key={menu.dialect}>
-        <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
-          <IconMinus className="hidden h-5 w-4 flex-none" />
-          <span>{t(menu.dialect)}</span>
-        </h2>
-        {menu.children && menu.children?.length > 0
-          ? menu.children.map((c) => generateSidebarMenuTree_All(c))
-          : null}
       </div>
     );
   };
@@ -1137,9 +1139,9 @@ const Sidebar = () => {
   };
   const generateSidebarMenuTree = () => {
     return (
-      <ul className='relative space-y-0.5 p-2 py-0 pr-3 pb-24 font-semibold"'>
+      <div className='relative space-y-0.5 p-2 py-0 pr-3 pb-24 font-semibold"'>
         {TemplateMenuTree.map((menu) => generateSidebarMenuTree_All(menu))}
-      </ul>
+      </div>
     );
   };
 
@@ -1170,9 +1172,9 @@ const Sidebar = () => {
               <IconCaretsDown className="m-auto rotate-90" />
             </button>
           </div>
-          <PerfectScrollbar className="relative h-[calc(100vh-80px)]">
+          <div className="relative h-[calc(100vh-56px)] overflow-x-hidden overflow-y-scroll">
             {generateSidebarMenuTree()}
-          </PerfectScrollbar>
+          </div>
         </div>
       </nav>
     </div>
