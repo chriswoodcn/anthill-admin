@@ -20,7 +20,7 @@
 @layer components {
   /* #region 滚动条美化*/
   ::-webkit-scrollbar {
-    @apply w-2 h-2;
+    @apply w-1 h-1;
   }
 
   ::-webkit-scrollbar-track,
@@ -34,7 +34,7 @@
     /* react-perfect-scrollbar 统一滚动条滑块颜色*/
   .ps__thumb-x,
   .ps__thumb-y {
-    @apply !bg-white-5 rounded-full dark:!bg-black-5;
+    @apply !bg-white-6 rounded-full dark:!bg-black-6;
   }
 
   html {
@@ -188,10 +188,10 @@ hover:text-primary hover:before:!bg-primary ltr:before:mr-2 rtl:before:ml-2 dark
     @apply bg-[#000]/[0.08] text-primary dark:bg-[#181f32] dark:text-white-5;
   }
   .horizontal-menu.sub-menu {
-    @apply w-full min-w-[180px] max-h-[300px] overflow-y-scroll;
+    @apply w-full min-w-[180px] max-h-[300px] py-2 overflow-y-scroll;
   }
   .horizontal-menu.sub-menu li {
-    @apply flex w-full items-center justify-between px-4 py-1 hover:bg-gray-100 hover:text-primary dark:hover:bg-primary/10;
+    @apply flex w-full items-center justify-between px-4 py-2 hover:bg-gray-100 hover:text-primary dark:hover:bg-primary/10;
   }
   .horizontal-menu.sub-menu li button,
   .horizontal-menu.sub-menu li a {

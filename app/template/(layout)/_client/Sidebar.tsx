@@ -145,7 +145,7 @@ const Sidebar = () => {
     );
     selector?.classList.add("active");
   };
-  const originSidebarMenuTree = () => (
+  const OriginSidebarMenuTree = () => (
     <ul className="relative space-y-0.5 p-2 py-0 pr-3 pb-24 font-semibold">
       <li className="menu nav-item">
         <button
@@ -1029,6 +1029,25 @@ const Sidebar = () => {
   </li> */}
     </ul>
   );
+
+  /**
+   * 生成分类和下级
+   */
+  const generateSidebarMenuTree_Category = (menu: Menu) => {
+    if (menu.type == "C") return null;
+    //必需字段判空
+    if (!menu.dialect) {
+      logger.debug("M type menu dialect is blank - ", menu);
+      return null;
+    }
+    return (
+      <li className="menu-item">
+        {menu.children && menu.children?.length > 0
+          ? menu.children.map((c) => generateSidebarMenuTree_All(c))
+          : null}
+      </li>
+    );
+  };
   /**
    * 生成菜单和下级
    */
@@ -1106,28 +1125,6 @@ const Sidebar = () => {
     );
   };
   /**
-   * 生成分类和下级
-   */
-  const generateSidebarMenuTree_Category = (menu: Menu) => {
-    if (menu.type == "C") return null;
-    //必需字段判空
-    if (!menu.dialect) {
-      logger.debug("M type menu dialect is blank - ", menu);
-      return null;
-    }
-    return (
-      <div key={menu.dialect}>
-        <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
-          <IconMinus className="hidden h-5 w-4 flex-none" />
-          <span>{t(menu.dialect)}</span>
-        </h2>
-        {menu.children && menu.children?.length > 0
-          ? menu.children.map((c) => generateSidebarMenuTree_All(c))
-          : null}
-      </div>
-    );
-  };
-  /**
    * 根据 Menu 生成所有的本级菜单和子级菜单
    */
   const generateSidebarMenuTree_All = (menu: Menu) => {
@@ -1170,9 +1167,9 @@ const Sidebar = () => {
               <IconCaretsDown className="m-auto rotate-90" />
             </button>
           </div>
-          <PerfectScrollbar className="relative h-[calc(100vh-80px)]">
+          <div className="relative h-[calc(100vh-56px)] overflow-x-hidden overflow-y-scroll">
             {generateSidebarMenuTree()}
-          </PerfectScrollbar>
+          </div>
         </div>
       </nav>
     </div>
