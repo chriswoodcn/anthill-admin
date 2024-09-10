@@ -1,12 +1,25 @@
+import { getAuthorizationInfoClient } from '@/lib/jwt'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import Cookies from 'js-cookie'
+
 interface UserState {
   userInfo?: Record<string, any>,
   token?: string
 }
+/**
+ * 每当初始化一次页面的时候都需要从nextjs的cookie中解析出用户信息，再存到redux中，这样刷新浏览器页面不会丢失redux中的用户信息
+ * 这里不使用本地存储以防篡改本地信息
+ */
+const getUserInfo = () => {
+  const payload = getAuthorizationInfoClient();
+  if (payload) {
+    return payload
+  } else {
+    return undefined
+  }
+}
 const initialState: UserState = {
-  userInfo: {},
-  token: Cookies.get('authorization') || ''
+  userInfo: getUserInfo() == undefined ? {} : (getUserInfo() as any).userInfo,
+  token: getUserInfo() == undefined ? {} : (getUserInfo() as any).token,
 }
 
 const userSlice = createSlice({

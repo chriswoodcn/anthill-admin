@@ -1,6 +1,5 @@
 "use client";
 
-import PerfectScrollbar from "react-perfect-scrollbar";
 import Link from "next/link";
 import AnimateHeight from "react-animate-height";
 import { useState, useEffect } from "react";

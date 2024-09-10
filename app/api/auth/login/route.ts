@@ -21,7 +21,8 @@ export const POST = ApiHandler(
           userId: res.data.info.id,
           token: res.data.token,
           permissions: res.data.permissions,
-          roles: res.data.roles
+          roles: res.data.roles,
+          userInfo: res.data.info,
         })
         //仅返回用户信息
         return ResponseHandler({ code: res.code, data: res.data.info, message: res.msg })

@@ -4,6 +4,9 @@ import { fallbackLng } from '@/i18n/settings';
 import { store } from "@/store"
 import { i18next } from '@/i18n/client';
 
+/**
+ * 向本地node服务器请求，即 next api router
+ */
 export const nextFetcher = async (options: Record<string, any>) => {
   logger.debug("nextFetcher");
   logger.debug("options", options);
@@ -25,6 +28,10 @@ export const nextFetcher = async (options: Record<string, any>) => {
     return res.data
   });
 }
+/**
+ * 向远程服务器请求，即 remote api 接口
+ * 需要配置好 NEXT_PUBLIC_ADMIN_API_BASE_URL
+ */
 export const fetcher = async (options: Record<string, any>) => {
   logger.debug("fetcher");
   logger.debug("options", options);
