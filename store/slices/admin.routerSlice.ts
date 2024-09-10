@@ -7,9 +7,10 @@ export interface RouterState {
   userRouterList: Menu[],
   userRouterMD5: string | undefined,
 }
+const initialRouter: Menu[] = [{ type: 'C', path: '/admin/index', menuKey: 'admin_home', icon: 'menu-template-dashboard' }];
 const initialState: RouterState = {
-  userRouterTree: [],
-  userRouterList: [],
+  userRouterTree: initialRouter,
+  userRouterList: initialRouter,
   userRouterMD5: undefined
 };
 const routerSlice = createSlice({
@@ -21,14 +22,20 @@ const routerSlice = createSlice({
         const nowMD5 = CryptoJS.MD5(JSON.stringify(action.payload)).toString();
         if (nowMD5 != state.userRouterMD5) {
           state.userRouterMD5 = nowMD5
-          state.userRouterTree = action.payload
-          state.userRouterTree = flatMenuTree2MenuList(action.payload)
+          const menus = [...initialRouter, ...action.payload]
+          state.userRouterTree = menus;
+          state.userRouterList = flatMenuTree2MenuList(menus)
         }
       }
     },
+    clearUserRouter: (state) => {
+      state.userRouterMD5 = undefined
+      state.userRouterTree = initialRouter;
+      state.userRouterList = initialRouter;
+    }
   }
 });
 
-export const { } = routerSlice.actions
+export const { setUserRouter, clearUserRouter } = routerSlice.actions
 
 export default routerSlice.reducer;

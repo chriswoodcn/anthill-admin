@@ -39,7 +39,7 @@ export const adminFetcher = async (options: Record<string, any>) => {
     method: options.method ? options.method : "GET",
     headers: {
       "Content-Type": "application/json;charset=utf-8",
-      token: store.getState().adminUser.token,
+      token: "Bearer " + store.getState().adminUser.token,
       language: i18next.language || fallbackLng,
     },
   }).then((res) => {
