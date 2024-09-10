@@ -172,8 +172,9 @@
     @apply flex items-center rounded-lg p-2 hover:bg-[#000]/[0.08] hover:text-primary dark:hover:bg-primary/50 dark:hover:text-white-5 xl:px-4;
   }
   .nav-link.active,
-  .nav-link.active span,
-  .nav-link.active svg {
+  .nav-link.active > div > span,
+  .nav-link.active > a > div > span,
+  .nav-link.active > div > svg {
     @apply !text-primary;
   }
   /* #endregion */

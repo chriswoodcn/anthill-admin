@@ -3,11 +3,15 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useTranslation } from "react-i18next";
+import AnimateHeight from "react-animate-height";
 
 import { RootState, useAppDispatch, useAppSelector } from "@/store";
 import { toggleRTL, toggleSidebar, toggleTheme } from "@/store/slices/admin";
-import { TemplateMenuTree, TemplateMenuList, Menu } from "./menu";
+import { TemplateMenuTree, TemplateMenuList } from "./menu";
 import logger from "@/lib/logger";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import { isBrowser } from "@/lib";
+import { Menu } from "@/lib/menu";
 
 import Image from "@/components/core/Image";
 import IconMenu from "@/components/icon/template/icon-menu";
@@ -41,9 +45,6 @@ import Dropdown from "@/components/core/Dropdown";
 import DropdownPortal from "@/components/core/DropdownPortal";
 import LanguageDropdown from "@/components/compose/LanguageDropdown";
 import Logo from "@/components/compose/Logo";
-import AnimateHeight from "react-animate-height";
-import useEffectOnce from "@/lib/hooks/useEffectOnce";
-import { isBrowser } from "@/lib";
 
 const Header = () => {
   const pathname = usePathname();
@@ -866,37 +867,39 @@ const Header = () => {
       return null;
     }
     return (
-      <DropdownPortal
-        placement="bottom-start"
-        button={
-          <div
-            className="nav-link cursor-pointer"
+      <div key={"horizontal-" + menu.dialect}>
+        <DropdownPortal
+          placement="bottom-start"
+          button={
+            <div
+              className="nav-link cursor-pointer"
+              key={"horizontal-" + menu.dialect}
+            >
+              <div className="flex items-center w-full group min-w-20">
+                {menu.icon && (
+                  <IconMenu
+                    name={menu.icon!!}
+                    className="shrink-0 group-hover:!text-primary"
+                  />
+                )}
+                <span className="px-1">{t(menu.dialect)}</span>
+              </div>
+              <div className="right_arrow">
+                <IconCaretDown />
+              </div>
+            </div>
+          }
+        >
+          <ul
+            className="bg-white dark:bg-black-7 shadow-lg rounded-lg min-w-20"
             key={"horizontal-" + menu.dialect}
           >
-            <div className="flex items-center w-full group min-w-20">
-              {menu.icon && (
-                <IconMenu
-                  name={menu.icon!!}
-                  className="shrink-0 group-hover:!text-primary"
-                />
-              )}
-              <span className="px-1">{t(menu.dialect)}</span>
-            </div>
-            <div className="right_arrow">
-              <IconCaretDown />
-            </div>
-          </div>
-        }
-      >
-        <ul
-          className="bg-white dark:bg-black-7 shadow-lg rounded-lg min-w-20"
-          key={"horizontal-" + menu.dialect}
-        >
-          {menu.children && menu.children?.length > 0
-            ? menu.children.map((c) => generateHorizontalMenuTree_All(c))
-            : null}
-        </ul>
-      </DropdownPortal>
+            {menu.children && menu.children?.length > 0
+              ? menu.children.map((c) => generateHorizontalMenuTree_All(c))
+              : null}
+          </ul>
+        </DropdownPortal>
+      </div>
     );
   };
   /**
@@ -953,7 +956,10 @@ const Header = () => {
                 duration={300}
                 height={currentMenuList.includes(menu.menuKey) ? "auto" : 0}
               >
-                <ul className="sub-menu text-gray-500 py-2">
+                <ul
+                  className="sub-menu text-gray-500 py-2"
+                  key={"horizontal-" + menu.menuKey}
+                >
                   {menu.children.map((c) => generateHorizontalMenuTree_Menu(c))}
                 </ul>
               </AnimateHeight>
@@ -961,7 +967,7 @@ const Header = () => {
           </>
         ) : (
           menu.path && (
-            <Link className="nav-link w-full" href={menu.path}>
+            <Link className="w-full" href={menu.path}>
               <div className="flex items-center group">
                 {menu.icon && (
                   <IconMenu

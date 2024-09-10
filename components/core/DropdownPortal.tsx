@@ -30,6 +30,7 @@ const DropdownPortal = (props: any, forwardedRef: any) => {
       // closeOnClickOutside={false}
       opened={opened}
       onChange={setOpened}
+      keepMounted
     >
       <Popover.Target>
         {!props.onClick

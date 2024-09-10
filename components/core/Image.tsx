@@ -8,7 +8,7 @@ interface Props extends Record<string, any> {
   basePath?: boolean;
   src: string;
   showSkeleton?: boolean;
-  autosize?: boolean;
+  autosize?: string;
   skeleton?: ReactElement;
 }
 export default (props: Props) => {

@@ -22,6 +22,7 @@ import {
 import { useState } from "react";
 import dayjs from "dayjs";
 import Toast from "@/lib/toast";
+import useAdminUserLogin from "@/lib/hooks/admin/userAdminUserLogin";
 
 interface LoginForm {
   username: string | undefined;
@@ -90,22 +91,13 @@ export default () => {
       setLoginAction(true);
     },
   });
-  const { data, error, isLoading } = useSWR(
-    loginAction
-      ? {
-          url: withBasePath("/api/auth/login"),
-          method: "POST",
-          params: {
-            t: dayjs().valueOf(),
-          },
-          data: {
-            username: formik.values.username,
-            password: formik.values.password,
-            device: "WEB",
-          },
-        }
-      : null,
-    nextFetcher,
+  const { isLoading } = useAdminUserLogin(
+    loginAction,
+    {
+      username: formik.values.username,
+      password: formik.values.password,
+      device: "WEB",
+    },
     {
       onSuccess: (data) => {
         logger.debug("onSuccess data", data);

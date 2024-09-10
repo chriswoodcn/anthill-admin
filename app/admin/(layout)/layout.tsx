@@ -1,12 +1,12 @@
-import ContentAnimation from "./_client/ContentAnimation";
-import Header from "./_client/Header";
-import Footer from "./_client/Footer";
-import MainContainer from "./_client/MainContainer";
-import Overlay from "./_client/Overlay";
 import Sidebar from "./_client/Sidebar";
 import Portals from "./_client/Portals";
 import Setting from "./_client/Setting";
 import ScrollToTop from "./_client/ScrollToTop";
+import Overlay from './_client/Overlay';
+import MainContainer from './_client/MainContainer';
+import Header from './_client/Header';
+import ContentAnimation from './_client/ContentAnimation';
+import Footer from './_client/Footer';
 
 export default function DefaultLayout({
   children,

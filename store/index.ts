@@ -5,11 +5,8 @@ import { rememberReducer, rememberEnhancer } from 'redux-remember';
 import adminSettingSlice from "@/store/slices/admin.settingSlice";
 import adminUserSlice from "@/store/slices/admin.userSlice";
 import adminRouterSlice from './slices/admin.routerSlice';
+import { isBrowser } from '@/lib';
 
-// const rootReducer = combineReducers({
-//   adminSetting: adminSettingSlice,
-//   adminUser: adminUserSlice,
-// });
 const rootReducer = {
   adminSetting: adminSettingSlice,
   adminUser: adminUserSlice,

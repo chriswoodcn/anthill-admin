@@ -32,7 +32,7 @@ export const nextFetcher = async (options: Record<string, any>) => {
  * 向远程服务器请求，即 remote api 接口
  * 需要配置好 NEXT_PUBLIC_ADMIN_API_BASE_URL
  */
-export const fetcher = async (options: Record<string, any>) => {
+export const adminFetcher = async (options: Record<string, any>) => {
   logger.debug("fetcher");
   logger.debug("options", options);
   return axios({
