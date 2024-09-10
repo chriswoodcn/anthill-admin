@@ -1326,7 +1326,7 @@ const Header = () => {
                   <li>
                     <div className="flex items-center">
                       <Image
-                        auto
+                        autosize="true"
                         className="h-10 w-10 rounded-md object-cover"
                         src="/assets/images/profile/profile-1.jpeg"
                         alt="userProfile"

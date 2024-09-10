@@ -22,9 +22,6 @@ export const nextFetcher = async (options: Record<string, any>) => {
     },
   }).then((res) => {
     logger.debug("res.data", res.data);
-    if (options.showTip) {
-
-    }
     return res.data
   });
 }
@@ -47,9 +44,6 @@ export const adminFetcher = async (options: Record<string, any>) => {
     },
   }).then((res) => {
     logger.debug("res.data", res.data);
-    if (options.showTip) {
-
-    }
     return res.data
   });
 }

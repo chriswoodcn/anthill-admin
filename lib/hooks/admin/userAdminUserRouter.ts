@@ -1,13 +1,12 @@
-import useSWR from 'swr'
+import useSWR, { SWRConfiguration } from 'swr'
 import dayjs from 'dayjs'
-import { withBasePath } from '@/lib'
 import { adminFetcher } from '@/lib/fetcher'
 
-export default function useAdminUserLogin(doAction: boolean, params: Record<string, any>) {
+export default function useAdminUserRouter(doAction: boolean, params: Record<string, any>, config: SWRConfiguration) {
   const { data, error, isLoading } = useSWR(
     doAction
       ? {
-        url: withBasePath("/api/auth/login"),
+        url: "/backend/menu/list",
         method: "POST",
         params: {
           t: dayjs().valueOf(),
@@ -15,7 +14,8 @@ export default function useAdminUserLogin(doAction: boolean, params: Record<stri
         data: params,
       }
       : null,
-    adminFetcher, {})
+    adminFetcher,
+    config)
 
   return {
     user: data,

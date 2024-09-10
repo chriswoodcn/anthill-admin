@@ -133,5 +133,7 @@
   "coming_soon_boxed": "盒型即将推出",
   "coming_soon_cover": "封面型即将推出",
   "contact_us_boxed": "盒型联系我们",
-  "contact_us_cover": "封面型联系我们"
+  "contact_us_cover": "封面型联系我们",
+  "fetch_success": "操作成功",
+  "fetch_error": "出错了"
 }

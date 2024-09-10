@@ -15,7 +15,8 @@ export default function useAdminUserLogin(doAction: boolean, params: Record<stri
         data: params,
       }
       : null,
-    nextFetcher, config)
+    nextFetcher,
+    config)
 
   return {
     user: data,
