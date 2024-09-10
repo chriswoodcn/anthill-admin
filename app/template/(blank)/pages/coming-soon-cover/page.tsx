@@ -21,25 +21,25 @@ const ComingSoonCover = () => {
       </div>
       <div className="relative flex min-h-screen items-center justify-center bg-bg_map bg-cover bg-center bg-no-repeat px-6 py-10 dark:bg-[#060818] sm:px-16">
       <Image
-          auto
+          autosize={true}
           src="/assets/images/template/auth/coming-soon-object1.png"
           alt="image"
           className="absolute left-0 top-1/2 h-full max-h-[893px] -translate-y-1/2"
         />
         <Image
-          auto
+          autosize={true}
           src="/assets/images/template/auth/coming-soon-object2.png"
           alt="image"
           className="absolute left-24 top-0 h-40 md:left-[30%]"
         />
         <Image
-          auto
+          autosize={true}
           src="/assets/images/template/auth/coming-soon-object3.png"
           alt="image"
           className="absolute right-0 top-0 h-[300px]"
         />
         <Image
-          auto
+          autosize={true}
           src="/assets/images/template/auth/polygon-object.svg"
           alt="image"
           className="absolute bottom-0 end-[28%]"
