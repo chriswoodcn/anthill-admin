@@ -5,10 +5,9 @@
  *    顶级菜单显示icon，为保证UI美观需要有icon字段映射IconMenu
  */
 interface MenuOptions {
-  type: 'M' | 'C', //类型 目录 菜单
+  menuType: 'M' | 'C', //类型 目录 菜单
   parentKey?: string, //父级键
-  menuKey?: string, //唯一键
-  dialect?: string, //名称或国际化别名
+  menuKey?: string, //唯一键  也用作i18n名称或国际化别名
   path?: string,
   icon?: string,
   layout?: 'default' | 'blank' //布局 默认布局 空白布局

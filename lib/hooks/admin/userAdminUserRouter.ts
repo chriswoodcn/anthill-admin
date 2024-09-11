@@ -6,8 +6,8 @@ export default function useAdminUserRouter(doAction: boolean, params: Record<str
   const { data, error, isLoading } = useSWR(
     doAction
       ? {
-        url: "/backend/menu/list",
-        method: "POST",
+        url: "/backend/menu/userRouter",
+        method: "GET",
         params: {
           t: dayjs().valueOf(),
         },

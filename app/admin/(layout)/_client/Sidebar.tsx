@@ -49,7 +49,9 @@ const Sidebar = () => {
   const isDarkMode = useAppSelector(
     (state: RootState) => state.adminSetting.isDarkMode
   );
-  const menu = useAppSelector((state: RootState) => state.adminSetting.menu);
+  const userRouterTree = useAppSelector(
+    (state: RootState) => state.adminRouter.userRouterTree
+  );
   const toggleMenu = (value: string) => {
     setCurrentMenu((oldValue) => {
       return oldValue === value ? "" : value;
@@ -1033,20 +1035,20 @@ const Sidebar = () => {
    * 生成分类和下级
    */
   const generateSidebarMenuTree_Category = (menu: Menu) => {
-    if (menu.type == "C") return null;
+    if (menu.menuType == "C") return null;
     //必需字段判空
-    if (!menu.dialect) {
-      logger.debug("M type menu dialect is blank - ", menu);
+    if (!menu.menuKey) {
+      logger.debug("M type menu menuKey is blank - ", menu);
       return null;
     }
     return (
-      <div key={menu.dialect}>
+      <div key={menu.menuKey}>
         <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
           <IconMinus className="hidden h-5 w-4 flex-none" />
-          <span>{t(menu.dialect)}</span>
+          <span>{t(menu.menuKey)}</span>
         </h2>
         {menu.children && menu.children?.length > 0
-          ? menu.children.map((c) => generateSidebarMenuTree_All(c))
+          ? menu.children.map((c: Menu) => generateSidebarMenuTree_All(c))
           : null}
       </div>
     );
@@ -1056,7 +1058,7 @@ const Sidebar = () => {
    * 生成菜单和下级
    */
   const generateSidebarMenuTree_Menu = (menu: Menu) => {
-    if (menu.type == "M") return null;
+    if (menu.menuType == "M") return null;
     //必需字段判空
     if (!menu.menuKey) {
       logger.debug("C type menu menuKey is blank - ", menu);
@@ -1102,7 +1104,7 @@ const Sidebar = () => {
               height={currentMenuList.includes(menu.menuKey) ? "auto" : 0}
             >
               <ul className="sub-menu text-gray-500">
-                {menu.children.map((c) => generateSidebarMenuTree_All(c))}
+                {menu.children.map((c: Menu) => generateSidebarMenuTree_All(c))}
               </ul>
             </AnimateHeight>
           </>
@@ -1132,14 +1134,15 @@ const Sidebar = () => {
    * 根据 Menu 生成所有的本级菜单和子级菜单
    */
   const generateSidebarMenuTree_All = (menu: Menu) => {
-    if (menu.type == "M") return generateSidebarMenuTree_Category(menu);
-    if (menu.type == "C") return generateSidebarMenuTree_Menu(menu);
+    if (menu.menuType == "M") return generateSidebarMenuTree_Category(menu);
+    if (menu.menuType == "C") return generateSidebarMenuTree_Menu(menu);
     return null;
   };
   const generateSidebarMenuTree = () => {
+    logger.debug("generateSidebarMenuTree ", userRouterTree);
     return (
       <div className='relative space-y-0.5 p-2 py-0 pr-3 pb-24 font-semibold"'>
-        {TemplateMenuTree.map((menu) => generateSidebarMenuTree_All(menu))}
+        {userRouterTree.map((menu) => generateSidebarMenuTree_All(menu))}
       </div>
     );
   };

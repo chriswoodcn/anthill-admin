@@ -862,19 +862,16 @@ const Header = () => {
   const generateHorizontalMenuTree_Category = (menu: Menu) => {
     if (menu.type == "C") return null;
     //必需字段判空
-    if (!menu.dialect) {
-      logger.debug("M type menu dialect is blank - ", menu);
+    if (!menu.menuKey) {
+      logger.debug("M type menu menuKey is blank - ", menu);
       return null;
     }
     return (
-      <div key={"horizontal-" + menu.dialect}>
+      <div key={"horizontal-" + menu.menuKey}>
         <DropdownPortal
           placement="bottom-start"
           button={
-            <div
-              className="nav-link cursor-pointer"
-              key={"horizontal-" + menu.dialect}
-            >
+            <div className="nav-link cursor-pointer">
               <div className="flex items-center w-full group min-w-20">
                 {menu.icon && (
                   <IconMenu
@@ -882,7 +879,7 @@ const Header = () => {
                     className="shrink-0 group-hover:!text-primary"
                   />
                 )}
-                <span className="px-1">{t(menu.dialect)}</span>
+                <span className="px-1">{t(menu.menuKey)}</span>
               </div>
               <div className="right_arrow">
                 <IconCaretDown />
@@ -890,10 +887,7 @@ const Header = () => {
             </div>
           }
         >
-          <ul
-            className="bg-white dark:bg-black-7 shadow-lg rounded-lg min-w-20"
-            key={"horizontal-" + menu.dialect}
-          >
+          <ul className="bg-white dark:bg-black-7 shadow-lg rounded-lg min-w-20">
             {menu.children && menu.children?.length > 0
               ? menu.children.map((c) => generateHorizontalMenuTree_All(c))
               : null}

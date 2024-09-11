@@ -1036,15 +1036,15 @@ const Sidebar = () => {
   const generateSidebarMenuTree_Category = (menu: Menu) => {
     if (menu.type == "C") return null;
     //必需字段判空
-    if (!menu.dialect) {
-      logger.debug("M type menu dialect is blank - ", menu);
+    if (!menu.menuKey) {
+      logger.debug("M type menu menuKey is blank - ", menu);
       return null;
     }
     return (
-      <div key={menu.dialect}>
+      <div key={menu.menuKey}>
         <h2 className="-mx-4 mb-1 flex items-center bg-white-light/30 px-7 py-3 font-extrabold uppercase dark:bg-dark dark:bg-opacity-[0.08]">
           <IconMinus className="hidden h-5 w-4 flex-none" />
-          <span>{t(menu.dialect)}</span>
+          <span>{t(menu.menuKey)}</span>
         </h2>
         {menu.children && menu.children?.length > 0
           ? menu.children.map((c) => generateSidebarMenuTree_All(c))
