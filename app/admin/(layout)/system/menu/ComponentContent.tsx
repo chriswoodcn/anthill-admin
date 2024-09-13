@@ -3,15 +3,15 @@
 import { useTranslation } from "react-i18next";
 import { WithPermissions } from "@/components/compose/WithPermissions";
 import useAdminFetch from "@/lib/hooks/admin/userAdminFetch";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { SystemMenu } from "@/lib/hooks/admin/adminApi";
-import { Loader } from "@mantine/core";
 import {
   DataTable,
   DataTableColumn,
   DataTableRowExpansionProps,
 } from "mantine-datatable";
+import { translate } from "@/lib/client";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
@@ -36,23 +36,29 @@ export default function () {
   // nested datatable -- PageDataTableColumns
   const NestedDataTableColumns: DataTableColumn<any>[] = [
     {
-      accessor: "status",
-      title: "status",
+      accessor: "menuNameJson",
+      title: t("menu_name"),
+      width: 300,
       textAlign: "center",
+      render: (row: any) => {
+        return <div>{translate(row.menuNameJson)}</div>;
+      },
     },
     {
-      accessor: "superFlag",
-      title: "superFlag",
+      accessor: "menuKey",
+      title: t("menu_key"),
+      width: 150,
       textAlign: "center",
     },
     {
       accessor: "path",
-      title: "path",
+      title: t("menu_path"),
+      width: 200,
       textAlign: "center",
     },
     {
       accessor: "actions",
-      title: "caozuo",
+      title: t("actions"),
       textAlign: "center",
       render: (row: any) => {
         return row.id ? (
@@ -76,6 +82,7 @@ export default function () {
       if (parentMenu.record.children && parentMenu.record.children.length > 0)
         return (
           <DataTable
+            key={parentMenu.record.menuKey}
             noHeader
             idAccessor="menuId"
             className="table-hover"
@@ -111,7 +118,7 @@ export default function () {
           rowExpansion={NestedDataTableRowExpansion}
           defaultColumnRender={(row, _, accessor) => {
             const data = row[accessor as keyof typeof row];
-            if (!data) return "--";
+            if (data == undefined || data == null) return "--";
             if (typeof data === "string" || typeof data === "number")
               return data;
           }}

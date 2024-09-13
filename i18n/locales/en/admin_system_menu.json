@@ -1,6 +1,10 @@
 {
   "add": "Add",
   "update": "Update",
-  "remove": "Remove",
-  "export": "Export"
+  "delete": "Delete",
+  "export": "Export",
+  "menu_name": "Menu Name",
+  "menu_key": "Menu Key",
+  "menu_path": "Menu Path",
+  "actions": "Operations"
 }

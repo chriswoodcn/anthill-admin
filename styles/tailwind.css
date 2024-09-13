@@ -470,11 +470,11 @@
   .mantine-datatable tfoot tr {
     @apply border-b-0 !bg-white-8  dark:!bg-black-6;
   }
-  .mantine-datatable thead tr th,
+  /* .mantine-datatable thead tr th,
   .mantine-datatable tfoot tr th,
   .mantine-datatable tbody tr td {
     @apply px-4 py-3 ltr:text-left rtl:text-right;
-  }
+  } */
   .mantine-datatable thead tr th,
   .mantine-datatable tfoot tr th {
     @apply font-semibold;
