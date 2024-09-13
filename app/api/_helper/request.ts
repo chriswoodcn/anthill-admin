@@ -29,8 +29,8 @@ request.interceptors.request.use(
 );
 request.interceptors.response.use(
   (res) => {
-    logger.debug("request response status", res.status)
-    logger.debug("request response data", res.data)
+    // logger.debug("request response status", res.status)
+    // logger.debug("request response data", res.data)
     return res.data
   }, (error) => {
     return Promise.reject(error);

@@ -135,5 +135,22 @@
   "contact_us_boxed": "Contact Us Boxed",
   "contact_us_cover": "Contact Us Cover",
   "fetch_success": "Operate Success",
-  "fetch_error": "Error"
+  "fetch_error": "Error",
+  "admin-home": "Home",
+  "system": "Sys Manage",
+  "system-menu": "Sys Menu",
+  "system-dict": "Sys Dict",
+  "system-param": "Sys Param",
+  "system-config": "Sys Config",
+  "sysuser": "Sys User",
+  "sysuser-list": "User List",
+  "sysuser-role": "User Role",
+  "sysmonitor": "Sys Monitor",
+  "sysmonitor-online": "Online",
+  "sysmonitor-loginLog": "Login Log",
+  "sysmonitor-operLog": "Oper Log",
+  "systool": "Sys Tool",
+  "systool-genCode": "Gen Code",
+  "systool-genForm": "Gen Form",
+  "systool-job": "Job"
 }

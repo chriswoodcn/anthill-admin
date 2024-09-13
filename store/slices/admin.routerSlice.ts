@@ -7,7 +7,7 @@ export interface RouterState {
   userRouterList: Menu[],
   userRouterMD5: string | undefined,
 }
-const initialRouter: Menu[] = [{ type: 'C', path: '/admin/index', menuKey: 'admin_home', icon: 'menu-template-dashboard' }];
+const initialRouter: Menu[] = [{ menuType: 'C', path: '/admin/index', menuKey: 'admin-home', icon: 'admin-home' }];
 const initialState: RouterState = {
   userRouterTree: initialRouter,
   userRouterList: initialRouter,

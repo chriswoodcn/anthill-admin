@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 import { RootState, useAppDispatch, useAppSelector } from "@/store";
 import { toggleSidebar } from "@/store/slices/admin";
-import { TemplateMenuTree, TemplateMenuList, Menu } from "./menu";
+import { TemplateMenuTree, TemplateMenuList } from "./menu";
 
 import Logo from "@/components/compose/Logo";
 import IconCaretsDown from "@/components/icon/icon-carets-down";
@@ -37,6 +37,7 @@ import { isBrowser } from "@/lib";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
 import IconMenu from "@/components/icon/template/icon-menu";
+import { Menu } from '@/lib/menu';
 
 const Sidebar = () => {
   const dispatch = useAppDispatch();

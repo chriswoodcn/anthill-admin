@@ -98,6 +98,9 @@ const config: Config = {
         bg_login: `url('${withBasePath(
           "/assets/images/background/bg-login.jpg"
         )}')`,
+        bg_home: `url('${withBasePath(
+          "/assets/images/background/bg-home-dolphin.jpg"
+        )}')`,
         bg_map: `url('${withBasePath(
           "/assets/images/background/bg-map.png"
         )}')`,

@@ -135,5 +135,22 @@
   "contact_us_boxed": "盒型联系我们",
   "contact_us_cover": "封面型联系我们",
   "fetch_success": "操作成功",
-  "fetch_error": "出错了"
+  "fetch_error": "出错了",
+  "admin-home": "首页",
+  "system": "系统管理",
+  "system-menu": "系统菜单",
+  "system-dict": "系统字典",
+  "system-param": "系统参数",
+  "system-config": "系统配置",
+  "sysuser": "系统用户",
+  "sysuser-list": "用户列表",
+  "sysuser-role": "用户角色",
+  "sysmonitor": "系统监控",
+  "sysmonitor-online": "在线用户",
+  "sysmonitor-loginLog": "登录日志",
+  "sysmonitor-operLog": "操作日志",
+  "systool": "系统工具",
+  "systool-genCode": "代码生成",
+  "systool-genForm": "表单构建",
+  "systool-job": "任务中心"
 }
