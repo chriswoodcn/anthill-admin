@@ -468,7 +468,7 @@
   }
   .mantine-datatable thead tr,
   .mantine-datatable tfoot tr {
-    @apply border-b-0 !bg-white-8  dark:!bg-black-8;
+    @apply border-b-0 !bg-white-8  dark:!bg-black-6;
   }
   .mantine-datatable thead tr th,
   .mantine-datatable tfoot tr th,
@@ -480,7 +480,7 @@
     @apply font-semibold;
   }
   .mantine-datatable tbody tr {
-    @apply border-b !border-white-8/40 dark:border-black-8/40;
+    @apply border-b !border-white-8/20 dark:border-black-8/20;
   }
   .mantine-datatable.table-hover tbody tr {
     @apply hover:!bg-white-8/20 dark:hover:!border-black-8/20;
@@ -490,7 +490,7 @@
   }
   .mantine-datatable.table-bordered table thead tr th,
   .mantine-datatable.table-bordered table tbody tr td {
-    @apply !border !border-solid !border-[#f6f7fa] dark:!border-[#191e3a];
+    @apply !border !border-solid !border-white-6 dark:!border-black-6;
   }
 
   .mantine-datatable.table-compact table thead tr th,

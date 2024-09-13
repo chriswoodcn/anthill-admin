@@ -2,8 +2,10 @@ import { getAuthorizationInfoClient } from '@/lib/jwt'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface UserState {
-  userInfo?: Record<string, any>,
-  token?: string
+  userInfo: Record<string, any>,
+  token: string
+  permissions: string[]
+  roles: string[]
 }
 /**
  * 每当初始化一次页面的时候都需要从nextjs的cookie中解析出用户信息，再存到redux中，这样刷新浏览器页面不会丢失redux中的用户信息
@@ -19,7 +21,9 @@ const getUserInfo = () => {
 }
 const initialState: UserState = {
   userInfo: getUserInfo() == undefined ? {} : (getUserInfo() as any).userInfo,
-  token: getUserInfo() == undefined ? {} : (getUserInfo() as any).token,
+  token: getUserInfo() == undefined ? '' : (getUserInfo() as any).token,
+  permissions: getUserInfo() == undefined ? [] : (getUserInfo() as any).permissions,
+  roles: getUserInfo() == undefined ? [] : (getUserInfo() as any).roles,
 }
 
 const userSlice = createSlice({
