@@ -25,6 +25,8 @@ export const mixBlack = (color, ratio) => {
 };
 const configuraton = {
   AppName: "Anthill-Admin",
+  Version: "1.0.0",
+  VersionCode: "Dolphin",
   BasePath: "/bmm-dev",
   PathAlias: {
     Admin: {

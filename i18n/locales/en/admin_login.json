@@ -6,6 +6,5 @@
   "remember": "Remember Account&Password",
   "login": "LOGIN",
   "placeholder_input": "Please input ",
-  "placeholder_invalid": "Pattern Invalid",
-  "toast_success_login": "Login Success"
+  "placeholder_invalid": "Pattern Invalid"
 }

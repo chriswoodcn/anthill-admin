@@ -136,6 +136,7 @@
   "contact_us_cover": "封面型联系我们",
   "fetch_success": "操作成功",
   "fetch_error": "出错了",
+  "toast_success_login": "登录成功",
   "admin-home": "首页",
   "system": "系统管理",
   "system-menu": "系统菜单",

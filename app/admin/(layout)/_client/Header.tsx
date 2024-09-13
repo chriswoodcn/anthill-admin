@@ -11,6 +11,7 @@ import logger from "@/lib/logger";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { isBrowser } from "@/lib";
 import { Menu } from "@/lib/menu";
+import useAdminUserLogout from "@/lib/hooks/admin/userAdminUserLogout";
 
 import Image from "@/components/core/Image";
 import IconMenu from "@/components/icon/admin/icon-menu";
@@ -172,9 +173,7 @@ const Header = () => {
     if (isBrowser()) {
       logger.debug("初始化菜单栏");
       //标记 初始化菜单栏
-      const templateMenu = userRouterList.find(
-        (item) => item.path == pathname
-      );
+      const templateMenu = userRouterList.find((item) => item.path == pathname);
       if (templateMenu && templateMenu.menuKey) {
         const parentKeys = findMenuAllParentKey(templateMenu.menuKey);
         setCurrentMenuList([...parentKeys, templateMenu.menuKey]);
@@ -317,6 +316,11 @@ const Header = () => {
       </ul>
     );
   };
+
+  const [doLogout, setDologout] = useState(false);
+  const { data, error, isLoading } = useAdminUserLogout(doLogout, () =>
+    setDologout(false)
+  );
 
   return (
     <header
@@ -694,14 +698,14 @@ const Header = () => {
                       Lock Screen
                     </Link>
                   </li>
-                  <li className="border-t border-white-light dark:border-white-light/10">
-                    <Link
-                      href="/auth/boxed-signin"
+                  <li className="border-t border-white-light dark:border-white-light/10 cursor-pointer">
+                    <div
                       className="!py-3 text-danger flex justify-start items-center"
+                      onClick={() => setDologout(true)}
                     >
                       <IconLogout className="h-4.5 w-4.5 shrink-0 rotate-90 ltr:mr-2 rtl:ml-2" />
                       Sign Out
-                    </Link>
+                    </div>
                   </li>
                 </ul>
               </Dropdown>

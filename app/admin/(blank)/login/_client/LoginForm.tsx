@@ -3,67 +3,20 @@
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 // custom
 import logger from "@/lib/logger";
-import { aesDecrypt, aesEncrypt, isBrowser, withBasePath } from "@/lib";
 import { IconUser, IconX, IconEyeClosed, IconEye } from "@tabler/icons-react";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
-import { useAppDispatch } from "@/store";
-import useSWR from "swr";
-import { nextFetcher } from "@/lib/fetcher";
 import { getAuthorizationInfoClient } from "@/lib/jwt";
-import configuraton from "@/configuration.mjs";
-import {
-  clearAdminUserState,
-  setToken,
-  setUserInfo,
-} from "@/store/slices/admin";
 import { useState } from "react";
-import dayjs from "dayjs";
-import Toast from "@/lib/toast";
-import useAdminUserLogin from "@/lib/hooks/admin/userAdminUserLogin";
-
-interface LoginForm {
-  username: string | undefined;
-  password: string | undefined;
-  remember: boolean;
-}
-
-const getStorageLoginForm = () => {
-  const emptyForm: LoginForm = {
-    username: undefined,
-    password: undefined,
-    remember: false,
-  };
-  if (typeof window != "undefined") {
-    let jsonStr = window.localStorage.getItem("__admin_login_form__");
-    if (!jsonStr) return emptyForm;
-    let target = JSON.parse(jsonStr);
-    if (!target.remember) return emptyForm;
-    if (target.password) target.password = aesDecrypt(target.password);
-    return target as LoginForm;
-  }
-  return emptyForm;
-};
-const setStorageLoginForm = ({ username, password, remember }: LoginForm) => {
-  let target = {};
-  if (remember == true && username && password) {
-    target = { username: username, password: aesEncrypt(password), remember };
-  } else {
-    target = { remember: false };
-  }
-  if (isBrowser()) {
-    if (password)
-      window.localStorage.setItem("__admin_unlock_pwd__", aesEncrypt(password));
-    window.localStorage.setItem("__admin_login_form__", JSON.stringify(target));
-  }
-};
+import useAdminUserLogin, {
+  LoginForm,
+  getStorageLoginForm,
+} from "@/lib/hooks/admin/userAdminUserLogin";
 
 export default () => {
   const { t } = useTranslation("admin_login");
-  const router = useRouter();
-  const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
 
   const [loginAction, setLoginAction] = useState(false);
@@ -96,46 +49,11 @@ export default () => {
     {
       username: formik.values.username,
       password: formik.values.password,
+      remember: formik.values.remember,
       device: "WEB",
     },
-    {
-      onSuccess: (data) => {
-        logger.debug("onSuccess data", data);
-        const authorizationInfo = getAuthorizationInfoClient();
-        if (data) {
-          if (data.code == 200) {
-            Toast.fireSuccessAction({
-              html: (
-                <p className="text-black-7 dark:text-white-7 text-xl">
-                  {t("toast_success_login")}
-                </p>
-              ),
-              callback: () => {
-                if (searchParams.get("redirect")) {
-                  router.replace(searchParams.get("redirect")!!);
-                } else {
-                  router.replace(configuraton.PathAlias.Admin.Root);
-                }
-              },
-            });
-            setStorageLoginForm(formik.values);
-            dispatch(setToken(authorizationInfo?.token));
-            dispatch(setUserInfo(data.data));
-          } else {
-            Toast.fireErrorAction({
-              html: <p className="text-2xl font-bold">{data.message}</p>,
-              timer: 0,
-            });
-            dispatch(clearAdminUserState());
-          }
-        }
-        setLoginAction(false);
-      },
-      onError: (error) => {
-        logger.debug("onError error", error);
-        dispatch(clearAdminUserState());
-        setLoginAction(false);
-      },
+    () => {
+      setLoginAction(false);
     }
   );
 

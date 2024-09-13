@@ -6,6 +6,7 @@
 
 ### 目录结构
 
+```text
 |-- project
     |-- app nextjs app 目录
     |-- components 组件目录
@@ -14,3 +15,4 @@
     |-- public 公共资源目录
     |-- store redux 目录
     |-- styles CSS 样式目录
+```
