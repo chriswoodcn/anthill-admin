@@ -138,6 +138,7 @@
   "fetch_error": "Error",
   "toast_success_login": "Login Success",
   "admin-home": "Home",
+  "admin-home-welcome": "Welcome to use Anthill Admin backend",
   "system": "Sys Manage",
   "system-menu": "Sys Menu",
   "system-dict": "Sys Dict",
