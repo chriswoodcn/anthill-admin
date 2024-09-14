@@ -34,7 +34,7 @@ const withNextJsObfuscator = createNextJsObfuscator(
 import configuration from "./configuration.mjs";
 const nextConfig = {
   reactStrictMode: true,
-  pageExtensions: ["md", "mdx", "tsx"],
+  pageExtensions: ["md", "mdx", "tsx", "ts"],
   basePath: configuration.BasePath,
   swcMinify: true,
   eslint: {

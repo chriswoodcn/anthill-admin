@@ -8,9 +8,6 @@ export default function useAdminUserRouter(doAction: boolean, params: Record<str
       ? {
         url: "/backend/menu/userRouter",
         method: "GET",
-        params: {
-          t: dayjs().valueOf(),
-        },
         data: params,
       }
       : null,

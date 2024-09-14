@@ -3,8 +3,8 @@
   "update": "Update",
   "delete": "Delete",
   "export": "Export",
-  "menu_name": "Menu Name",
-  "menu_key": "Menu Key",
-  "menu_path": "Menu Path",
-  "actions": "Operations"
+  "name": "Name",
+  "key": "Key",
+  "path": "Menu Path",
+  "actions": "Actions"
 }

@@ -9,7 +9,7 @@ import { i18next } from '@/i18n/client';
  */
 export const nextFetcher = async (options: Record<string, any>) => {
   logger.debug("nextFetcher");
-  logger.debug("options", options);
+  logger.debug("nextFetcher options", options);
   return axios({
     ...options,
     baseURL: "",
@@ -30,8 +30,9 @@ export const nextFetcher = async (options: Record<string, any>) => {
  * 需要配置好 NEXT_PUBLIC_ADMIN_API_BASE_URL
  */
 export const adminFetcher = async (options: Record<string, any>) => {
-  logger.debug("fetcher");
-  logger.debug("options", options);
+  logger.debug("adminFetcher");
+  logger.debug("adminFetcher options", options);
+  logger.debug("adminFetcher token", store.getState().adminUser.token);
   return axios({
     ...options,
     baseURL: process.env.NEXT_PUBLIC_ADMIN_API_BASE_URL,

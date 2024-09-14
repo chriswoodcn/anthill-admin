@@ -26,12 +26,10 @@ const MainContainer = ({ children }: { children: React.ReactNode }) => {
       } else {
         dispatch(clearUserRouter());
       }
-      setDoFetchMenuTree(false);
     },
     onError(err, key, config) {
       logger.debug("useAdminUserRouter error", err);
       dispatch(clearUserRouter());
-      setDoFetchMenuTree(false);
     },
   });
   return (

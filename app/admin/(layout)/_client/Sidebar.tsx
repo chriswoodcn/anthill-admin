@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import AnimateHeight from "react-animate-height";
+import PerfectScrollbar from "react-perfect-scrollbar"
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useTranslation } from "react-i18next";
@@ -275,9 +276,9 @@ const Sidebar = () => {
               <IconCaretsDown className="m-auto rotate-90" />
             </button>
           </div>
-          <div className="relative h-[calc(100vh-56px)] overflow-x-hidden overflow-y-scroll">
+          <PerfectScrollbar className="relative h-[calc(100vh-56px)]">
             {generateSidebarMenuTree()}
-          </div>
+          </PerfectScrollbar>
         </div>
       </nav>
     </div>

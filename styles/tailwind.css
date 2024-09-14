@@ -199,6 +199,9 @@
   .btn {
     @apply relative flex items-center justify-center rounded-md border font-semibold shadow-lg outline-none transition duration-300 hover:shadow-none px-3 sm:px-5 py-1 sm:py-2 text-sm;
   }
+  .btn-click:active {
+    @apply opacity-50;
+  }
   button[disabled] {
     @apply cursor-not-allowed opacity-60;
   }
@@ -207,6 +210,9 @@
   }
   .btn-sm {
     @apply px-2.5 py-1.5 text-xs;
+  }
+  .btn-xs{
+    @apply px-1 py-1 text-xs;
   }
   .btn-click:active {
     @apply opacity-60;
@@ -470,11 +476,14 @@
   .mantine-datatable tfoot tr {
     @apply border-b-0 !bg-white-8  dark:!bg-black-6;
   }
-  /* .mantine-datatable thead tr th,
-  .mantine-datatable tfoot tr th,
-  .mantine-datatable tbody tr td {
+  .mantine-datatable .mantine-Table-thead.mantine-datatable-text-align-center,
+  .mantine-datatable .mantine-Table-td.mantine-datatable-text-align-center {
+    @apply text-center;
+  }
+  .mantine-datatable .mantine-Table-thead,
+  .mantine-datatable .mantine-Table-td {
     @apply px-4 py-3 ltr:text-left rtl:text-right;
-  } */
+  }
   .mantine-datatable thead tr th,
   .mantine-datatable tfoot tr th {
     @apply font-semibold;
@@ -483,7 +492,7 @@
     @apply border-b !border-white-8/20 dark:border-black-8/20;
   }
   .mantine-datatable.table-hover tbody tr {
-    @apply hover:!bg-white-8/20 dark:hover:!border-black-8/20;
+    @apply hover:!bg-white-8/20 dark:hover:!bg-black-6/20;
   }
   .mantine-datatable.table-striped tbody tr:nth-child(odd) {
     @apply !bg-white-8/10 dark:!border-black-8/10;

@@ -12,6 +12,9 @@ import {
   DataTableRowExpansionProps,
 } from "mantine-datatable";
 import { translate } from "@/lib/client";
+import Icon from "@/components/icon/index";
+import logger from "@/lib/logger";
+import { Anybody } from "next/font/google";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
@@ -37,23 +40,61 @@ export default function () {
   const NestedDataTableColumns: DataTableColumn<any>[] = [
     {
       accessor: "menuNameJson",
-      title: t("menu_name"),
-      width: 300,
+      title: t("name"),
+      width: 200,
       textAlign: "center",
       render: (row: any) => {
-        return <div>{translate(row.menuNameJson)}</div>;
+        return (
+          <div className="flex justify-start items-center">
+            {row.children && row.children.length > 0 && (
+              <Icon
+                name="arrow-right"
+                className={`w-4 h-4 transition-all duration-300 mr-4 rtl:ml-4 ${
+                  expandedMenuIds.includes(row.id)
+                    ? "rotate-90 rtl:rotate-90"
+                    : "rtl:rotate-180"
+                }`}
+              />
+            )}
+            <span>{translate(row.menuNameJson)}</span>
+          </div>
+        );
       },
     },
     {
       accessor: "menuKey",
-      title: t("menu_key"),
-      width: 150,
+      title: t("key"),
+      width: 100,
+      textAlign: "center",
+    },
+    {
+      accessor: "menuType",
+      title: t("type"),
+      width: 100,
       textAlign: "center",
     },
     {
       accessor: "path",
-      title: t("menu_path"),
+      title: t("path"),
       width: 200,
+      textAlign: "center",
+    },
+    {
+      accessor: "status",
+      title: t("status"),
+      width: 100,
+      textAlign: "center",
+    },
+    {
+      accessor: "menuVersion",
+      title: t("version"),
+      width: 100,
+      textAlign: "center",
+    },
+    {
+      accessor: "affiliateFlag",
+      title: t("affiliate"),
+      width: 100,
       textAlign: "center",
     },
     {
@@ -62,8 +103,46 @@ export default function () {
       textAlign: "center",
       render: (row: any) => {
         return row.id ? (
-          <div className="flex justify-center space-x-4" key={row.id}>
-            caozuo
+          <div className="flex justify-center items-center gap-2" key={row.id}>
+            <WithPermissions permissions={["sys:menu:update"]}>
+              <button
+                type="button"
+                className="btn btn-xs btn-outline-primary"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <Icon name="pencil-paper" className="w-4 h-4 fill-primary-4" />
+                {t("update")}
+              </button>
+            </WithPermissions>
+            <WithPermissions permissions={["sys:menu:add"]}>
+              <button
+                type="button"
+                className="btn btn-xs btn-outline-success"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <Icon name="plus" className="w-4 h-4 fill-success-light" />
+                {t("add")}
+              </button>
+            </WithPermissions>
+            <WithPermissions permissions={["sys:menu:delete"]}>
+              <button
+                type="button"
+                className="btn btn-xs btn-outline-danger"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                <Icon
+                  name="trash-lines"
+                  className="w-4 h-4 fill-danger-light"
+                />
+                {t("delete")}
+              </button>
+            </WithPermissions>
           </div>
         ) : (
           "--"
@@ -79,18 +158,30 @@ export default function () {
       onRecordIdsChange: setExpandedMenuIds,
     },
     content: (parentMenu: any) => {
-      if (parentMenu.record.children && parentMenu.record.children.length > 0)
+      if (parentMenu.record.children && parentMenu.record.children.length > 0) {
+        const children = parentMenu.record.children;
+        const needRowExpansion = children.some(
+          (item: any) => item.children && item.children.length > 0
+        );
         return (
           <DataTable
             key={parentMenu.record.menuKey}
             noHeader
-            idAccessor="menuId"
             className="table-hover"
             records={parentMenu.record.children}
             columns={NestedDataTableColumns}
-            rowExpansion={NestedDataTableRowExpansion}
+            rowExpansion={
+              needRowExpansion ? NestedDataTableRowExpansion : undefined
+            }
+            defaultColumnRender={(row, _, accessor) => {
+              const data = row[accessor as keyof typeof row];
+              logger.debug("row", row);
+              if (data == undefined || data == null || data == "") return "--";
+              return data;
+            }}
           />
         );
+      }
       return null;
     },
   };
@@ -100,6 +191,7 @@ export default function () {
       <div className="flex flex-wrap gap-2 mb-4 print:hidden">
         <WithPermissions permissions={["sys:menu:add"]}>
           <button type="button" className="btn btn-outline-primary">
+            <Icon name="plus" className="fill-success-light" />
             {t("add")}
           </button>
         </WithPermissions>
@@ -118,9 +210,9 @@ export default function () {
           rowExpansion={NestedDataTableRowExpansion}
           defaultColumnRender={(row, _, accessor) => {
             const data = row[accessor as keyof typeof row];
-            if (data == undefined || data == null) return "--";
-            if (typeof data === "string" || typeof data === "number")
-              return data;
+            logger.debug("row", row);
+            if (data == undefined || data == null || data == "") return "--";
+            return data;
           }}
           minHeight={300}
         />
