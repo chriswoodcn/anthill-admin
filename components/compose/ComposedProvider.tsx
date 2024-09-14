@@ -4,7 +4,7 @@ import { AppStore, makeStore } from "@/store";
 import { Provider } from "react-redux";
 import React, { PropsWithChildren, Suspense, useRef } from "react";
 import ProgressBarProvider from "./ProgressBarProvider";
-import AxiosDefaultProvider from "./AxiosDefaultProvider";
+import SWRDefaultProvider from "./SWRDefaultProvider";
 
 import Loading from "../core/Loading";
 import App from "./App";
@@ -30,9 +30,9 @@ export default ({ children }: PropsWithChildren) => {
     <Provider store={storeRef.current}>
       <Suspense fallback={<Loading />}>
         <ProgressBarProvider>
-          <AxiosDefaultProvider>
+          <SWRDefaultProvider>
             <App>{children}</App>
-          </AxiosDefaultProvider>
+          </SWRDefaultProvider>
         </ProgressBarProvider>
       </Suspense>
     </Provider>

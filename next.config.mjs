@@ -1,4 +1,18 @@
 import createNextJsObfuscator from "nextjs-obfuscator";
+import nextMdx from "@next/mdx";
+
+const withMdx = nextMdx({
+  // By default only the `.mdx` extension is supported.
+  extension: /\.mdx?$/,
+  // Optionally provide remark and rehype plugins
+  options: {
+    // If you use remark-gfm, you'll need to use next.config.mjs
+    // as the package is ESM only
+    // https://github.com/remarkjs/remark-gfm#install
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+});
 
 const obfuscatorOptions = {};
 const pluginOptions = {
@@ -19,6 +33,8 @@ const withNextJsObfuscator = createNextJsObfuscator(
 /** @type {import('next').NextConfig} */
 import configuration from "./configuration.mjs";
 const nextConfig = {
+  reactStrictMode: true,
+  pageExtensions: ["md", "mdx", "tsx"],
   basePath: configuration.BasePath,
   swcMinify: true,
   eslint: {
@@ -57,7 +73,7 @@ const nextConfig = {
 
 const finalNextConfig =
   process.env.NODE_ENV == "production"
-    ? withNextJsObfuscator(nextConfig)
-    : nextConfig;
+    ? withNextJsObfuscator(withMdx(nextConfig))
+    : withMdx(nextConfig);
 
 export default finalNextConfig;
