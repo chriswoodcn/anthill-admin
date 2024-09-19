@@ -1,5 +1,4 @@
 import useSWR, { SWRConfiguration } from 'swr'
-import dayjs from 'dayjs'
 import { adminFetcher } from '@/lib/fetcher'
 
 export default function useAdminUserRouter(doAction: boolean, params: Record<string, any> = {}, config: SWRConfiguration) {

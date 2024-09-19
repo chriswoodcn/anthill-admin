@@ -5,6 +5,10 @@ import IconArrowRight from "./icon-arrow-right";
 import IconPencilPaper from "./icon-pencil-paper";
 import IconTrashLines from "./icon-trash-lines";
 import IconPlus from "./icon-plus";
+import IconPlusCircle from "./icon-plus-circle";
+import IconXCircle from "./icon-x-circle";
+import IconCaretsDown from "./icon-carets-down";
+import IconCaretDown from "./icon-caret-down";
 
 interface BaseIconProps {
   className?: string;
@@ -22,7 +26,11 @@ const TemplateMap: Record<string, FC<IconOptions>> = {
   "arrow-right": IconArrowRight,
   "pencil-paper": IconPencilPaper,
   "trash-lines": IconTrashLines,
-  "plus": IconPlus,
+  plus: IconPlus,
+  "plus-circle": IconPlusCircle,
+  "x-circle": IconXCircle,
+  "carets-down": IconCaretsDown,
+  "caret-down": IconCaretDown,
 };
 const switchIcon = (
   name: string,

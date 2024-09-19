@@ -13,7 +13,7 @@ import { useState } from "react";
 import useAdminUserLogin, {
   LoginForm,
   getStorageLoginForm,
-} from "@/lib/hooks/admin/userAdminUserLogin";
+} from "@/lib/hooks/admin/useAdminUserLogin";
 
 export default () => {
   const { t } = useTranslation("admin_login");

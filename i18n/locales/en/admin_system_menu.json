@@ -3,8 +3,12 @@
   "update": "Update",
   "delete": "Delete",
   "export": "Export",
+  "actions": "Actions",
   "name": "Name",
+  "type": "Type",
+  "status": "Status",
+  "affiliate": "Affiliate",
+  "version": "Support Version",
   "key": "Key",
-  "path": "Menu Path",
-  "actions": "Actions"
+  "path": "Menu Path"
 }

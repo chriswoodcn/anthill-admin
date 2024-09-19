@@ -2,10 +2,10 @@
 
 import { useTranslation } from "react-i18next";
 import { WithPermissions } from "@/components/compose/WithPermissions";
-import useAdminFetch from "@/lib/hooks/admin/userAdminFetch";
+import useAdminFetch from "@/lib/hooks/admin/useAdminFetch";
 import { useState } from "react";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
-import { SystemMenu } from "@/lib/hooks/admin/adminApi";
+import { SystemMenuApi } from "@/lib/hooks/admin/adminApi";
 import {
   DataTable,
   DataTableColumn,
@@ -14,20 +14,13 @@ import {
 import { translate } from "@/lib/client";
 import Icon from "@/components/icon/index";
 import logger from "@/lib/logger";
-import { Anybody } from "next/font/google";
+import datatableColumnText from "@/lib/support/datatableColumnText";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
-  const [doFetchMenuList, setDoFetchMenuList] = useState(false);
-  useEffectOnce(() => {
-    setDoFetchMenuList(true);
-  }, []);
   const [menuDataList, setMenuDataList] = useState<any[]>([]);
-  const { data, error, isLoading } = useAdminFetch(
-    doFetchMenuList,
-    false,
-    SystemMenu.list()
-  );
+  const [fetchListParams, setFetchListParams] = useState<any>({});
+  const { data, error, isLoading } = SystemMenuApi.useList(fetchListParams);
   useEffectOnce(() => {
     if (data && data.code == 200) {
       setMenuDataList(data.data);
@@ -64,8 +57,9 @@ export default function () {
     {
       accessor: "menuKey",
       title: t("key"),
-      width: 100,
+      width: 120,
       textAlign: "center",
+      render: (row: any) => datatableColumnText(row, "menuKey"),
     },
     {
       accessor: "menuType",
@@ -78,6 +72,7 @@ export default function () {
       title: t("path"),
       width: 200,
       textAlign: "center",
+      render: (row: any) => datatableColumnText(row, "path"),
     },
     {
       accessor: "status",
@@ -116,29 +111,34 @@ export default function () {
                 {t("update")}
               </button>
             </WithPermissions>
-            <WithPermissions permissions={["sys:menu:add"]}>
-              <button
-                type="button"
-                className="btn btn-xs btn-outline-success"
-                onClick={(e) => {
-                  e.stopPropagation();
-                }}
-              >
-                <Icon name="plus" className="w-4 h-4 fill-success-light" />
-                {t("add")}
-              </button>
-            </WithPermissions>
+            {row.menuType != "F" && (
+              <WithPermissions permissions={["sys:menu:add"]}>
+                <button
+                  type="button"
+                  className="btn btn-xs btn-outline-success"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
+                >
+                  <Icon
+                    name="plus-circle"
+                    className="w-4 h-4 mr-1 fill-success-light"
+                  />
+                  {t("add")}
+                </button>
+              </WithPermissions>
+            )}
             <WithPermissions permissions={["sys:menu:delete"]}>
               <button
                 type="button"
-                className="btn btn-xs btn-outline-danger"
+                className="btn btn-xs mr-1 btn-outline-danger"
                 onClick={(e) => {
                   e.stopPropagation();
                 }}
               >
                 <Icon
                   name="trash-lines"
-                  className="w-4 h-4 fill-danger-light"
+                  className="w-4 h-4 mr-1 fill-danger-light"
                 />
                 {t("delete")}
               </button>
@@ -191,7 +191,7 @@ export default function () {
       <div className="flex flex-wrap gap-2 mb-4 print:hidden">
         <WithPermissions permissions={["sys:menu:add"]}>
           <button type="button" className="btn btn-outline-primary">
-            <Icon name="plus" className="fill-success-light" />
+            <Icon name="plus-circle" className="fill-success-light mr-1" />
             {t("add")}
           </button>
         </WithPermissions>

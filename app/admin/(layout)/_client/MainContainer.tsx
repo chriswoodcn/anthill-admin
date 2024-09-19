@@ -1,5 +1,5 @@
 "use client";
-import useAdminUserRouter from "@/lib/hooks/admin/userAdminUserRouter";
+import useAdminUserRouter from "@/lib/hooks/admin/useAdminUserRouter";
 import { clearUserRouter, setUserRouter } from "@/store/slices/admin";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";

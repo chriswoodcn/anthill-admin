@@ -1,9 +1,9 @@
-import ComponentContent from "./ComponentContent";
+import Content from "./Content";
 
-export default function () {
+export default function SystemMenu() {
   return (
     <div className="min-h-[calc(100vh-10rem)]">
-      <ComponentContent />
+      <Content />
     </div>
   );
 }

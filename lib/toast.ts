@@ -76,7 +76,6 @@ const Toast = {
       options.callback && options.callback()
     })
   }
-
 }
 
 export default Toast

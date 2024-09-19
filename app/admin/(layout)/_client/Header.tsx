@@ -11,7 +11,7 @@ import logger from "@/lib/logger";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { isBrowser } from "@/lib";
 import { Menu } from "@/lib/menu";
-import useAdminUserLogout from "@/lib/hooks/admin/userAdminUserLogout";
+import useAdminUserLogout from "@/lib/hooks/admin/useAdminUserLogout";
 
 import Image from "@/components/core/Image";
 import IconMenu from "@/components/icon/admin/icon-menu";
