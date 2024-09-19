@@ -14,7 +14,7 @@ import {
 import { translate } from "@/lib/client";
 import Icon from "@/components/icon/index";
 import logger from "@/lib/logger";
-import datatableColumnText from "@/lib/support/datatableColumnText";
+import { datatableColumnText } from "@/lib/support/datatableSupport";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");

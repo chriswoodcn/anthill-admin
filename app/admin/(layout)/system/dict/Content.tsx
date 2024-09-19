@@ -11,14 +11,20 @@ import { useImmer } from "use-immer";
 import QueryCondition from "./QueryCondition";
 import useAdminFetch from "@/lib/hooks/admin/useAdminFetch";
 import { SystemDictTypeApi } from "@/lib/hooks/admin/adminApi";
+import { DataTable } from "mantine-datatable";
+import { WithPermissions } from "@/components/compose/WithPermissions";
+import {
+  datatableColumnText,
+  datatableColumnTranslateText,
+} from "@/lib/support/datatableSupport";
 
 export default function () {
   const { t } = useTranslation("admin_system_dict");
   const [page, setPage] = useState(1);
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
-  // const [data, setData] = useState<any>([]);
   const [total, setTotal] = useState(0);
+  const [records, setRecords] = useState<any[]>([]);
   const [fetching, setFetching] = useState(false);
   const initQueryParams = {
     dictName: undefined,
@@ -63,6 +69,10 @@ export default function () {
   const { data, error, isLoading } = SystemDictTypeApi.usePage(pageParams);
   useEffectOnce(() => {
     logger.debug("useAdminFetch data: ", data);
+    if (data && data.code == 200) {
+      setRecords(data.data.list);
+      setTotal(data.data.totalCount);
+    }
   }, [data]);
   return (
     <div>
@@ -124,6 +134,115 @@ export default function () {
           </div>
         </form>
       </QueryCondition>
+      <div className="relative panel overflow-hidden min-h-96">
+        <DataTable
+          fetching={isLoading}
+          loaderType="dots"
+          loaderSize="xl"
+          loaderBackgroundBlur={2}
+          highlightOnHover
+          border={1}
+          className="table-hover whitespace-nowrap"
+          columns={[
+            {
+              accessor: "id",
+              title: t("id"),
+              textAlign: "center",
+            },
+            {
+              accessor: "dictNameJson",
+              title: t("col_label_1"),
+              textAlign: "center",
+              render: (row: any) =>
+                datatableColumnTranslateText(row, "dictNameJson"),
+            },
+            {
+              accessor: "dictType",
+              title: t("col_label_2"),
+              textAlign: "center",
+              render: (row: any) => (
+                <a className="w-full underline cursor-pointer text-center text-primary">
+                  {row.dictType}
+                </a>
+              ),
+            },
+            {
+              accessor: "status",
+              title: t("col_label_3"),
+              textAlign: "center",
+              // render: (row: any) => dictVal2Label('sysStatus', row.status),
+            },
+            {
+              accessor: "remarkJson",
+              title: t("remark"),
+              textAlign: "center",
+              render: (row: any) =>
+                datatableColumnTranslateText(row, "remarkJson"),
+            },
+            {
+              accessor: "actions",
+              title: t("actions"),
+              textAlign: "center",
+              render: (row: any) => {
+                return row.dictId ? (
+                  <div
+                    className="flex justify-center space-x-4"
+                    key={row.dictId}
+                  >
+                    <WithPermissions permissions={["system:dict:edit"]}>
+                      <button
+                        type="button"
+                        className="btn btn-xs btn-outline-primary"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <Icon
+                          name="pencil-paper"
+                          className="w-4 h-4 fill-primary-4"
+                        />
+                        {t("update")}
+                      </button>
+                    </WithPermissions>
+                    <WithPermissions permissions={["system:dict:remove"]}>
+                      <button
+                        type="button"
+                        className="btn btn-xs mr-1 btn-outline-danger"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                        }}
+                      >
+                        <Icon
+                          name="trash-lines"
+                          className="w-4 h-4 mr-1 fill-danger-light"
+                        />
+                        {t("delete")}
+                      </button>
+                    </WithPermissions>
+                  </div>
+                ) : (
+                  "--"
+                );
+              },
+            },
+          ]}
+          defaultColumnRender={(row, _, accessor) => {
+            const data = row[accessor as keyof typeof row];
+            logger.debug("row", row);
+            if (data == undefined || data == null || data == "") return "--";
+            return data;
+          }}
+          records={records}
+          totalRecords={total}
+          recordsPerPageLabel={t("records_per_page")}
+          recordsPerPage={pageSize}
+          page={page}
+          onPageChange={(p) => setPage(p)}
+          recordsPerPageOptions={PAGE_SIZES}
+          onRecordsPerPageChange={setPageSize}
+          minHeight={300}
+        />
+      </div>
     </div>
   );
 }

@@ -4,9 +4,15 @@
   "delete": "删除",
   "export": "导出",
   "actions": "操作",
+  "id": "主键",
+  "remark": "备注",
+  "records_per_page": "每页记录",
   "placeholder_input": "请输入",
   "placeholder_select": "请选择",
   "form_label_1": "字典名称",
   "form_label_2": "字典类型",
-  "form_label_3": "状态"
+  "form_label_3": "状态",
+  "col_label_1": "字典名称",
+  "col_label_2": "字典类型",
+  "col_label_3": "状态"
 }
