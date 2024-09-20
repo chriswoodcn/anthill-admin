@@ -8,24 +8,22 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
-import QueryCondition from "./QueryCondition";
-import useAdminFetch from "@/lib/hooks/admin/useAdminFetch";
-import { SystemDictTypeApi } from "@/lib/hooks/admin/adminApi";
+
+import { SystemDictTypeApi, SystemDictApi } from "@/lib/hooks/admin/adminApi";
 import { DataTable } from "mantine-datatable";
 import { WithPermissions } from "@/components/compose/WithPermissions";
 import {
   datatableColumnText,
   datatableColumnTranslateText,
 } from "@/lib/support/datatableSupport";
+import QueryCondition from "../../_component/QueryCondition";
+import { dictVal2Label } from "@/lib";
 
 export default function () {
   const { t } = useTranslation("admin_system_dict");
   const [page, setPage] = useState(1);
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
-  const [total, setTotal] = useState(0);
-  const [records, setRecords] = useState<any[]>([]);
-  const [fetching, setFetching] = useState(false);
   const initQueryParams = {
     dictName: undefined,
     dictType: undefined,
@@ -38,27 +36,24 @@ export default function () {
     setPage(1);
   }, [pageSize]);
   useEffectOnce(() => {
-    // fetchTableData();
+    setPageParams({
+      pageNum: page,
+      pageSize,
+      ...queryParams,
+    });
   }, [page, pageSize, queryParams]);
   const formikQuery = useFormik({
     initialValues: initQueryParams,
     onSubmit: (values) => {
       logger.debug("onSubmit values=", values);
+      updateQueryParams((e) => (e = values));
       setPage(1);
-      setPageParams({
-        pageNum: page,
-        pageSize,
-        ...values,
-      });
     },
     onReset: (values) => {
       logger.debug("onReset values=", values);
       formikQuery.setValues(initQueryParams);
+      updateQueryParams((e) => (e = initQueryParams));
       setPage(1);
-      setPageParams({
-        pageNum: page,
-        pageSize,
-      });
     },
   });
   const [pageParams, setPageParams] = useState<any>({
@@ -66,14 +61,10 @@ export default function () {
     pageSize,
     ...initQueryParams,
   });
-  const { data, error, isLoading } = SystemDictTypeApi.usePage(pageParams);
-  useEffectOnce(() => {
-    logger.debug("useAdminFetch data: ", data);
-    if (data && data.code == 200) {
-      setRecords(data.data.list);
-      setTotal(data.data.totalCount);
-    }
-  }, [data]);
+  const { data: pageData, isLoading } = SystemDictTypeApi.usePage(pageParams);
+  const { data: remoteDictSysStatus } = SystemDictApi.useDict({
+    type: "sys_status",
+  });
   return (
     <div>
       <QueryCondition
@@ -114,7 +105,7 @@ export default function () {
               label={t("form_label_3")}
               placeholder={t("placeholder_select") + t("form_label_3")}
               value={formikQuery.values.status || null}
-              data={[]}
+              data={remoteDictSysStatus}
               renderOption={({ option, checked }) => {
                 return (
                   <div
@@ -170,7 +161,8 @@ export default function () {
               accessor: "status",
               title: t("col_label_3"),
               textAlign: "center",
-              // render: (row: any) => dictVal2Label('sysStatus', row.status),
+              render: (row: any) =>
+                dictVal2Label(remoteDictSysStatus, row.status),
             },
             {
               accessor: "remarkJson",
@@ -184,7 +176,7 @@ export default function () {
               title: t("actions"),
               textAlign: "center",
               render: (row: any) => {
-                return row.dictId ? (
+                return row.id && row.status !== "3" ? (
                   <div
                     className="flex justify-center space-x-4"
                     key={row.dictId}
@@ -228,12 +220,11 @@ export default function () {
           ]}
           defaultColumnRender={(row, _, accessor) => {
             const data = row[accessor as keyof typeof row];
-            logger.debug("row", row);
             if (data == undefined || data == null || data == "") return "--";
             return data;
           }}
-          records={records}
-          totalRecords={total}
+          records={pageData?.list || []}
+          totalRecords={pageData?.totalCount || 0}
           recordsPerPageLabel={t("records_per_page")}
           recordsPerPage={pageSize}
           page={page}

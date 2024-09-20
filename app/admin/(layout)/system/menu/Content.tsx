@@ -5,7 +5,7 @@ import { WithPermissions } from "@/components/compose/WithPermissions";
 import useAdminFetch from "@/lib/hooks/admin/useAdminFetch";
 import { useState } from "react";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
-import { SystemMenuApi } from "@/lib/hooks/admin/adminApi";
+import { SystemDictApi, SystemMenuApi } from "@/lib/hooks/admin/adminApi";
 import {
   DataTable,
   DataTableColumn,
@@ -15,12 +15,16 @@ import { translate } from "@/lib/client";
 import Icon from "@/components/icon/index";
 import logger from "@/lib/logger";
 import { datatableColumnText } from "@/lib/support/datatableSupport";
+import { dictVal2Label } from "@/lib";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
   const [menuDataList, setMenuDataList] = useState<any[]>([]);
   const [fetchListParams, setFetchListParams] = useState<any>({});
   const { data, error, isLoading } = SystemMenuApi.useList(fetchListParams);
+  const { data: remoteDictSysStatus } = SystemDictApi.useDict({
+    type: "sys_status",
+  });
   useEffectOnce(() => {
     if (data && data.code == 200) {
       setMenuDataList(data.data);
@@ -79,6 +83,7 @@ export default function () {
       title: t("status"),
       width: 100,
       textAlign: "center",
+      render: (row: any) => dictVal2Label(remoteDictSysStatus, row.status),
     },
     {
       accessor: "menuVersion",
@@ -97,7 +102,7 @@ export default function () {
       title: t("actions"),
       textAlign: "center",
       render: (row: any) => {
-        return row.id ? (
+        return row.id && row.status !== "3" ? (
           <div className="flex justify-center items-center gap-2" key={row.id}>
             <WithPermissions permissions={["sys:menu:update"]}>
               <button
@@ -204,7 +209,7 @@ export default function () {
           loaderBackgroundBlur={2}
           highlightOnHover
           border={1}
-          className="table-hover whitespace-nowrap"
+          className="table-hover"
           records={menuDataList}
           columns={NestedDataTableColumns}
           rowExpansion={NestedDataTableRowExpansion}
