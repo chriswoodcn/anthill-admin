@@ -75,7 +75,36 @@ const Toast = {
     }).then(() => {
       options.callback && options.callback()
     })
-  }
+  },
+  fireLoader: (callback?: Function) => {
+    Swal.close()
+    const toast = Swal.mixin({
+      toast: true,
+      position: 'top',
+      showConfirmButton: false,
+    });
+    toast.fire({
+      html: `<div class="fire_loader_container">
+        <div class="fire_loader"></div>
+        <div class="fire_loader_text">
+        <span class="fire_loader_text_dot">L</span>
+        <span class="fire_loader_text_dot">O</span>
+        <span class="fire_loader_text_dot">A</span>
+        <span class="fire_loader_text_dot">D</span>
+        <span class="fire_loader_text_dot">I</span>
+        <span class="fire_loader_text_dot">N</span>
+        <span class="fire_loader_text_dot">G</span>
+        <span class="fire_loader_text_dot">.</span>
+        <span class="fire_loader_text_dot">.</span>
+        <span class="fire_loader_text_dot">.</span>
+        </div>
+        </div>`,
+      background: isDark() ? "#172741" : "#ffffff",
+      customClass: { htmlContainer: 'fire_loader_html_container' }
+    })
+    callback && callback(Swal.close)
+  },
+  close: () => Swal.close()
 }
 
 export default Toast

@@ -211,7 +211,7 @@
   .btn-sm {
     @apply px-2.5 py-1.5 text-xs;
   }
-  .btn-xs{
+  .btn-xs {
     @apply px-1 py-1 text-xs;
   }
   .btn-click:active {
@@ -579,4 +579,26 @@
 
 .mantine-Popover-dropdown {
   @apply !p-0;
+}
+
+/* fire_loader */
+.swal2-popup .swal2-html-container.fire_loader_html_container {
+  @apply py-2;
+}
+.fire_loader_html_container .fire_loader_container {
+  @apply flex justify-center items-end font-bold text-center text-black dark:text-white;
+}
+.fire_loader_html_container .fire_loader_container .fire_loader {
+  @apply animate-spin border-2 border-primary border-l-transparent rounded-full w-6 sm:w-8 h-6 sm:h-8 inline-block align-middle mx-6;
+}
+.fire_loader_html_container .fire_loader_container .fire_loader_text {
+  @apply flex-1 flex justify-between ml-2 sm:ml-4;
+}
+.fire_loader_html_container .fire_loader_container .fire_loader_text_dot {
+  @apply block animate-bounce mr-1;
+}
+.fire_loader_html_container
+  .fire_loader_container
+  .fire_loader_text_dot:nth-child(odd) {
+  animation-delay: 200ms;
 }

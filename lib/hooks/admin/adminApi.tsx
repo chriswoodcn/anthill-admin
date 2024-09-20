@@ -2,9 +2,11 @@ import { translate } from "@/lib/client";
 import useEffectOnce from "../useEffectOnce";
 import useAdminFetch from "./useAdminFetch";
 import { useState } from "react";
-import { RootState, useAppSelector } from "@/store";
 import logger from "@/lib/logger";
 import { useTranslation } from "react-i18next";
+import { adminFetcher } from "@/lib/fetcher";
+import Toast from "@/lib/toast";
+import { i18next } from '@/i18n/client';
 
 /**
  * 系统菜单
@@ -37,7 +39,10 @@ function filterDict(records: any[]) {
  * 系统字典
  */
 export const SystemDictApi = {
-  useDict: (params: Record<string, any> = {}) => {
+  useDict: (
+    params: Record<string, any> = {},
+    config: Record<string, any> = {}
+  ) => {
     const { i18n } = useTranslation();
     const [result, setResult] = useState<any[]>([]);
     const { data, isLoading } = useAdminFetch(true, undefined, {
@@ -47,8 +52,8 @@ export const SystemDictApi = {
     });
     useEffectOnce(() => {
       if (data && data.code == 200) {
-        const res = filterDict(data.data);
-        res.forEach((d) => {
+        const res = config.filter ? config.filter(data.data) : [data.data];
+        res.forEach((d: any) => {
           d.value = d.dictValue;
           d.label = translate(d.dictLabelJson);
         });
@@ -67,7 +72,11 @@ export const SystemDictApi = {
 export const SystemDictTypeApi = {
   usePage: (data: Record<string, any> = {}) => {
     const [result, setResult] = useState<any>(undefined);
-    const { data: fetchData, isLoading } = useAdminFetch(true, undefined, {
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
       url: "/backend/dict/type/page",
       method: "POST",
       data,
@@ -80,7 +89,24 @@ export const SystemDictTypeApi = {
     return {
       data: result,
       isLoading,
+      mutate,
     };
+  },
+  getById: async (id: string | number) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/type/getById/" + id,
+      method: "GET",
+    });
+    if (res.code == 200) {
+      return res.data;
+    } else {
+      Toast.fireErrorAction({
+        html: (
+          <p className="text-2xl font-bold">{res.msg || i18next.t("fetch_error")}</p>
+        ),
+        timer: 0,
+      });
+    }
   },
   useAdd: (data: Record<string, any> = {}) =>
     useAdminFetch(

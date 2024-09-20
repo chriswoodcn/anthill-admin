@@ -17,6 +17,7 @@ import useAdminUserLogin, {
 
 export default () => {
   const { t } = useTranslation("admin_login");
+  const { t: ct } = useTranslation("admin_common");
   const searchParams = useSearchParams();
 
   const [loginAction, setLoginAction] = useState(false);
@@ -33,11 +34,11 @@ export default () => {
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
       username: Yup.string()
-        .matches(/^\w{5,}$/gi, `${t("account")}  ${t("placeholder_invalid")}`)
-        .required(t("placeholder_input") + t("account")),
+        .matches(/^\w{5,}$/gi, `${t("account")}  ${ct("validation_error.field_invalid")}`)
+        .required(`${t("account")}  ${ct("validation_error.field_required")}`),
       password: Yup.string()
-        .matches(/^\S{5,}$/gi, `${t("password")}  ${t("placeholder_invalid")}`)
-        .required(t("placeholder_input") + t("password")),
+        .matches(/^\S{5,}$/gi, `${t("password")}  ${ct("validation_error.field_invalid")}`)
+        .required(`${t("password")}  ${ct("validation_error.field_required")}`),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
@@ -67,7 +68,7 @@ export default () => {
               name="username"
               type="text"
               id="username"
-              placeholder={t("placeholder_input") + t("account")}
+              placeholder={ct("placeholder_input") + t("account")}
               className="form-input pr-10 ps-10 placeholder:text-white-dark"
               onChange={(e) => {
                 formik.setFieldError("username", undefined);
@@ -107,7 +108,7 @@ export default () => {
               name="password"
               type={inputType}
               id="password"
-              placeholder={t("placeholder_input") + t("password")}
+              placeholder={ct("placeholder_input") + t("password")}
               className="form-input pr-10 ps-10 placeholder:text-white-dark"
               onChange={(e) => {
                 formik.setFieldError("password", undefined);

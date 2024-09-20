@@ -9,6 +9,10 @@ import IconPlusCircle from "./icon-plus-circle";
 import IconXCircle from "./icon-x-circle";
 import IconCaretsDown from "./icon-carets-down";
 import IconCaretDown from "./icon-caret-down";
+import IconLogout from "./icon-logout";
+import IconRefresh from "./icon-refresh";
+import IconClipboardText from "./icon-clipboard-text";
+import { IconCheck } from "@tabler/icons-react";
 
 interface BaseIconProps {
   className?: string;
@@ -20,7 +24,7 @@ interface IconOptions extends IconProps {
   defaultValue?: ReactNode;
 }
 const TemplateMap: Record<string, FC<IconOptions>> = {
-  default: IconArrowForward,
+  default: IconArrowRight,
   airplay: IconAirplay,
   "arrow-forward": IconArrowForward,
   "arrow-right": IconArrowRight,
@@ -31,6 +35,10 @@ const TemplateMap: Record<string, FC<IconOptions>> = {
   "x-circle": IconXCircle,
   "carets-down": IconCaretsDown,
   "caret-down": IconCaretDown,
+  export: IconLogout,
+  refresh: IconRefresh,
+  view: IconClipboardText,
+  check: IconCheck,
 };
 const switchIcon = (
   name: string,
@@ -43,7 +51,7 @@ const switchIcon = (
   ) : defaultValue ? (
     defaultValue
   ) : (
-    <IconArrowForward {...props} />
+    <IconArrowRight {...props} />
   );
 };
 const Icon = (options: IconOptions) => {

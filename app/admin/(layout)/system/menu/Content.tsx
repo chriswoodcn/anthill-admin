@@ -46,7 +46,7 @@ export default function () {
             {row.children && row.children.length > 0 && (
               <Icon
                 name="arrow-right"
-                className={`w-4 h-4 transition-all duration-300 mr-4 rtl:ml-4 ${
+                className={`w-5 h-5 transition-all duration-300 mr-4 rtl:ml-4 ${
                   expandedMenuIds.includes(row.id)
                     ? "rotate-90 rtl:rotate-90"
                     : "rtl:rotate-180"
@@ -112,7 +112,7 @@ export default function () {
                   e.stopPropagation();
                 }}
               >
-                <Icon name="pencil-paper" className="w-4 h-4 fill-primary-4" />
+                <Icon name="pencil-paper" className="w-5 h-5 fill-primary-4" />
                 {t("update")}
               </button>
             </WithPermissions>
@@ -127,7 +127,7 @@ export default function () {
                 >
                   <Icon
                     name="plus-circle"
-                    className="w-4 h-4 mr-1 fill-success-light"
+                    className="w-5 h-5 mr-1 fill-success-light"
                   />
                   {t("add")}
                 </button>
@@ -143,7 +143,7 @@ export default function () {
               >
                 <Icon
                   name="trash-lines"
-                  className="w-4 h-4 mr-1 fill-danger-light"
+                  className="w-5 h-5 mr-1 fill-danger-light"
                 />
                 {t("delete")}
               </button>

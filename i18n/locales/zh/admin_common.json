@@ -1,5 +1,28 @@
 {
   "query_title": "查询条件",
   "submit": "提交",
-  "reset": "重置"
+  "reset": "重置",
+  "cancel": "取消",
+  "detail": "详情",
+  "outline": "概要",
+  "add": "新增",
+  "update": "修改",
+  "delete": "删除",
+  "export": "导出",
+  "actions": "操作",
+  "id": "主键",
+  "remark": "备注",
+  "refresh": "刷新缓存",
+  "records_per_page": "每页记录",
+  "placeholder_input": "请输入",
+  "placeholder_select": "请选择",
+  "description_json_input": "格式为对应语言的键值对,示例'{\"zh\":\"菜单名称\"}',系统支持的语言种类有: zh(中文), en(英文)",
+  "validation_error": {
+    "field_required": "字段不能为空",
+    "field_invalid": "字段不合法",
+    "field_length_invalid": "字段长度不合法",
+    "field_json_invalid": "JSON格式不合法",
+    "same_old_new_password": "新旧密码一致",
+    "differ_new_comfirm_password": "两次密码不一致"
+  }
 }

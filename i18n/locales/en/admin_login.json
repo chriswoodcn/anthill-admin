@@ -4,7 +4,5 @@
   "account": "Account",
   "password": "Password",
   "remember": "Remember Account&Password",
-  "login": "LOGIN",
-  "placeholder_input": "Please input ",
-  "placeholder_invalid": "Pattern Invalid"
+  "login": "LOGIN"
 }

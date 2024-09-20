@@ -97,7 +97,7 @@ export default function useAdminFetch(
     config
   );
 
-  const { data, error, isLoading } = useSWR(
+  const { data, error, isLoading, mutate } = useSWR(
     doAction ? params : null,
     adminFetcher,
     combineConfig
@@ -107,5 +107,6 @@ export default function useAdminFetch(
     data: data,
     error: error,
     isLoading,
+    mutate,
   };
 }

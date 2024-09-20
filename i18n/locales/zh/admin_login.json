@@ -4,7 +4,5 @@
   "account": "账号",
   "password": "密码",
   "remember": "记住账号&密码",
-  "login": "登 录",
-  "placeholder_input": "请输入",
-  "placeholder_invalid": "格式错误"
+  "login": "登 录"
 }
