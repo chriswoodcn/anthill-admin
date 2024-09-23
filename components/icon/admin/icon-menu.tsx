@@ -2,12 +2,12 @@ import { FC, ReactNode } from "react";
 import IconMenuSystemMenu from "./icon-menu-system-menu";
 import IconMenuSystemDict from "./icon-menu-system-dict";
 import IconMenuSystemParam from "./icon-menu-system-param";
-import IconMenuSystemConfig from "./icon-menu-system-param";
+import IconMenuSystemConfig from "./icon-menu-system-config";
 import IconMenuSysuserList from "./icon-menu-sysuser-list";
 import IconMenuSysuserRole from "./icon-menu-sysuser-role";
 import IconMenuSystoolJob from "./icon-menu-systool-job";
 import IconMenuSysmonitorOnline from "./icon-menu-sysmonitor-online";
-import IconMenuList from "./icon-menu-list";
+import IconMenuLog from "./icon-menu-log";
 import IconMenuDashboard from '../menu/icon-menu-dashboard';
 
 interface MenuProps {
@@ -28,8 +28,8 @@ const MenuTemplateMap: Record<string, FC<MenuProps>> = {
   "sysuser-role": IconMenuSysuserRole,
   "systool-job": IconMenuSystoolJob,
   "sysmonitor-online": IconMenuSysmonitorOnline,
-  "sysmonitor-loginLog": IconMenuList,
-  "sysmonitor-operLog": IconMenuList
+  "sysmonitor-loginLog": IconMenuLog,
+  "sysmonitor-operLog": IconMenuLog
 };
 const switchIcon = (
   name: string,
