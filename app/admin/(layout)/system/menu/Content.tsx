@@ -21,10 +21,26 @@ export default function () {
   const { t: ct } = useTranslation("admin_common");
   const [menuDataList, setMenuDataList] = useState<any[]>([]);
   const [fetchListParams, setFetchListParams] = useState<any>({});
-  const { data, error, isLoading } = SystemMenuApi.useList(fetchListParams);
-  const { data: remoteDictSysStatus } = SystemDictApi.useDict({
-    type: "sys_status",
-  });
+  const {
+    data,
+    isLoading,
+    mutate: pageDataMutate,
+  } = SystemMenuApi.useList(fetchListParams);
+  const { data: remoteDictSysStatus } = SystemDictApi.useDict(
+    {
+      type: "sys_status",
+    },
+    {
+      filter: (records: any[]) => {
+        if (records.length > 0) {
+          if (records[0].dictType == "sys_status") {
+            return records.filter((r) => r.dictValue != "2");
+          }
+        }
+        return records;
+      },
+    }
+  );
   useEffectOnce(() => {
     if (data && data.code == 200) {
       setMenuDataList(data.data);
@@ -32,6 +48,7 @@ export default function () {
       setMenuDataList([]);
     }
   }, [data]);
+
   const [expandedMenuIds, setExpandedMenuIds] = useState<number[]>([]);
   // nested datatable -- PageDataTableColumns
   const NestedDataTableColumns: DataTableColumn<any>[] = [
@@ -210,12 +227,11 @@ export default function () {
           highlightOnHover
           border={1}
           className="table-hover"
-          records={menuDataList}
+          records={data}
           columns={NestedDataTableColumns}
           rowExpansion={NestedDataTableRowExpansion}
           defaultColumnRender={(row, _, accessor) => {
             const data = row[accessor as keyof typeof row];
-            logger.debug("row", row);
             if (data == undefined || data == null || data == "") return "--";
             return data;
           }}

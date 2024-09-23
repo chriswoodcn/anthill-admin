@@ -41,16 +41,59 @@ const handleOperateResponse = (res: any, ot = OperateType.GET) => {
  * 系统菜单
  */
 export const SystemMenuApi = {
-  useList: (data: Record<string, any> = {}) =>
-    useAdminFetch(true, undefined, {
+  useList: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
       url: "/backend/menu/list",
       method: "POST",
       data,
-    }),
-  page: () => ({ url: "", method: "GET", params: {} }),
-  add: () => ({ url: "", method: "POST", data: {} }),
-  update: () => ({ url: "", method: "POST", params: {} }),
-  delete: () => ({ url: "", method: "GET", params: {} }),
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
+  select: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/menu/select",
+      method: "GET",
+      params: data,
+    });
+    return handleOperateResponse(res, OperateType.GET);
+  },
+  add: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/menu/add",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.ADD);
+  },
+  update: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/menu/update",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.UPDATE);
+  },
+  delete: async (ids: (string | number)[]) => {
+    const res = await adminFetcher({
+      url: "/backend/menu/deleteLogic/" + ids,
+      method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
 };
 /**
  *  筛选系统字典方法
