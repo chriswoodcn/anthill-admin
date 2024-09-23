@@ -209,7 +209,7 @@ export const SystemDictDataApi = {
     });
     return handleOperateResponse(res, OperateType.UPDATE);
   },
-  delete: async (ids: string | number[]) => {
+  delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
       url: "/backend/dict/data/deleteLogic" + ids,
       method: "GET",

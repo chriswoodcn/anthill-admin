@@ -1,17 +1,24 @@
 "use client";
 
-import { JsonInput, Select, TextInput } from "@mantine/core";
+import { useSearchParams } from "next/navigation";
+import { JsonInput, Select, TextInput, NumberInput } from "@mantine/core";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
-import Link from "next/link";
 
 import { dictVal2Label } from "@/lib";
-import { SystemDictApi, SystemDictTypeApi } from "@/lib/hooks/admin/adminApi";
+import {
+  SystemDictApi,
+  SystemDictDataApi,
+  SystemDictTypeApi,
+} from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
-import { datatableColumnTranslateText } from "@/lib/support/datatableSupport";
+import {
+  datatableColumnText,
+  datatableColumnTranslateText,
+} from "@/lib/support/datatableSupport";
 import Yup from "@/lib/validation";
 import { DataTable } from "mantine-datatable";
 
@@ -22,7 +29,8 @@ import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 
 export default function () {
-  const { t } = useTranslation("admin_system_dict");
+  const searchParams = useSearchParams();
+  const { t } = useTranslation("admin_system_dict_data");
   const { t: ct } = useTranslation("admin_common");
 
   //#region query
@@ -30,8 +38,8 @@ export default function () {
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
   const initQueryParams = {
-    dictName: undefined,
-    dictType: undefined,
+    dictType: searchParams.get("dict_type"),
+    dictValue: undefined,
     status: undefined,
   };
   const [queryParams, updateQueryParams] =
@@ -60,7 +68,7 @@ export default function () {
     data: pageData,
     isLoading,
     mutate: pageDataMutate,
-  } = SystemDictTypeApi.usePage({
+  } = SystemDictDataApi.usePage({
     pageNum: page,
     pageSize,
     ...queryParams,
@@ -86,9 +94,11 @@ export default function () {
   const [show, setShow] = useState(false);
   const initialForm = {
     id: undefined,
-    dictNameJson: undefined,
-    dictType: undefined,
+    dictLabelJson: undefined,
+    dictType: searchParams.get("dict_type"),
     status: "0",
+    dictValue: undefined,
+    dictSort: 0,
     remarkJson: undefined,
     version: 0,
   };
@@ -96,7 +106,7 @@ export default function () {
   const formikDialog = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      dictNameJson: Yup.string()
+      dictLabelJson: Yup.string()
         .required()
         .test({
           name: "json",
@@ -112,6 +122,7 @@ export default function () {
           },
         }),
       dictType: Yup.string().required(),
+      dictValue: Yup.string().required(),
       remarkJson: Yup.string()
         .nullable()
         .test({
@@ -141,10 +152,10 @@ export default function () {
     let result;
     switch (dialogType) {
       case 3:
-        result = await SystemDictTypeApi.add(formikDialog.values);
+        result = await SystemDictDataApi.add(formikDialog.values);
         break;
       case 4:
-        result = await SystemDictTypeApi.update(formikDialog.values);
+        result = await SystemDictDataApi.update(formikDialog.values);
         break;
     }
     if (result) {
@@ -179,7 +190,7 @@ export default function () {
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SystemDictTypeApi.getById(formId);
+    const r0 = await SystemDictDataApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -205,7 +216,7 @@ export default function () {
         <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
           <div
             className={`${
-              formikDialog.errors.dictNameJson ? "has-error" : ""
+              formikDialog.errors.dictLabelJson ? "has-error" : ""
             } min-w-60`}
           >
             <JsonInput
@@ -213,24 +224,24 @@ export default function () {
               label={t("col_label_1")}
               placeholder={ct("placeholder_input") + t("col_label_1")}
               description={ct("description_json_input")}
-              value={formikDialog.values.dictNameJson || ""}
+              value={formikDialog.values.dictLabelJson || ""}
               onChange={(val) => {
-                formikDialog.setFieldError("dictNameJson", undefined);
-                formikDialog.setFieldValue("dictNameJson", val, false);
+                formikDialog.setFieldError("dictLabelJson", undefined);
+                formikDialog.setFieldValue("dictLabelJson", val, false);
               }}
               error={
-                formikDialog.errors.dictNameJson
-                  ? (formikDialog.errors.dictNameJson as string)
+                formikDialog.errors.dictLabelJson
+                  ? (formikDialog.errors.dictLabelJson as string)
                   : ""
               }
               rightSection={
-                formikDialog.values.dictNameJson && (
+                formikDialog.values.dictLabelJson && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
                       formikDialog.setFieldValue(
-                        "dictNameJson",
+                        "dictLabelJson",
                         undefined,
                         false
                       )
@@ -248,34 +259,8 @@ export default function () {
             } min-w-60`}
           >
             <TextInput
-              withAsterisk
               label={t("col_label_2")}
-              placeholder={ct("placeholder_input") + t("col_label_2")}
-              value={formikDialog.values.dictType}
-              onChange={(e) => {
-                formikDialog.setFieldError("dictType", undefined);
-                formikDialog.setFieldValue(
-                  "dictType",
-                  e.currentTarget.value,
-                  false
-                );
-              }}
-              error={
-                formikDialog.errors.dictType
-                  ? (formikDialog.errors.dictType as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.dictType && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("dictType", undefined, false)
-                    }
-                  />
-                )
-              }
+              defaultValue={formikDialog.values.dictType || ""}
             />
           </div>
           <div className="min-w-60">
@@ -301,6 +286,50 @@ export default function () {
                 );
               })}
             </div>
+          </div>
+          <div className="min-w-60">
+            <TextInput
+              withAsterisk
+              label={t("col_label_4")}
+              placeholder={ct("placeholder_input") + ct("col_label_4")}
+              value={formikDialog.values.dictValue}
+              onChange={(e) => {
+                formikDialog.setFieldError("dictValue", undefined);
+                formikDialog.setFieldValue(
+                  "dictValue",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.dictValue
+                  ? (formikDialog.errors.dictValue as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.dictValue && (
+                  <Icon
+                    name="x-circle"
+                    size={{ w: 18, h: 18 }}
+                    fill={true}
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("dictValue", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div className="min-w-60">
+            <NumberInput
+              label={t("col_label_5")}
+              value={formikDialog.values.dictSort}
+              onChange={(val) =>
+                formikDialog.setFieldValue("dictSort", val || 0, false)
+              }
+              min={0}
+              max={9999}
+            />
           </div>
           <div
             className={`${
@@ -372,7 +401,7 @@ export default function () {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id")}</p>,
       callback: async () => {
-        const res = await SystemDictTypeApi.delete([id]);
+        const res = await SystemDictDataApi.delete([id]);
         if (res) pageDataMutate();
       },
     });
@@ -380,7 +409,8 @@ export default function () {
   const handleEditRow = async (id: string | number) => {
     openDialog(4, id);
   };
-  const handleRefreshCache = async () => await SystemDictTypeApi.refresh();
+  const handleRefreshCache = async (key: string) =>
+    await SystemDictTypeApi.refresh({ key });
 
   return (
     <>
@@ -394,27 +424,6 @@ export default function () {
               label={t("form_label_2")}
               placeholder={ct("placeholder_input") + t("form_label_2")}
               value={formikQuery.values.dictType || ""}
-              onChange={(e) =>
-                formikQuery.setFieldValue(
-                  "dictType",
-                  e.currentTarget.value,
-                  false
-                )
-              }
-              onKeyUp={(e: any) => {
-                if (e.keyCode == 13) pageDataMutate();
-              }}
-              rightSection={
-                formikQuery.values.dictType && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikQuery.setFieldValue("dictType", undefined, false)
-                    }
-                  />
-                )
-              }
             />
           </div>
           <div className="min-w-60">
@@ -449,33 +458,25 @@ export default function () {
       </QueryCondition>
       <div className="relative panel overflow-hidden min-h-96">
         <div className="flex flex-wrap gap-2 mb-4 print:hidden">
-          <WithPermissions permissions={["sys:dict:add"]}>
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              onClick={() => openDialog(3)}
-            >
-              <Icon
-                name="plus-circle"
-                className="w-5 h-5 fill-primary-light mr-1"
-              />
-              {ct("add")}
-            </button>
-          </WithPermissions>
+          {searchParams.get("status") && searchParams.get("status") == "0" && (
+            <WithPermissions permissions={["sys:dict:add"]}>
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => openDialog(3)}
+              >
+                <Icon
+                  name="plus-circle"
+                  className="w-5 h-5 fill-primary-light mr-1"
+                />
+                {ct("add")}
+              </button>
+            </WithPermissions>
+          )}
           <WithPermissions permissions={["sys:dict:export"]}>
             <button type="button" className="btn btn-outline-success">
               <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
               {ct("export")}
-            </button>
-          </WithPermissions>
-          <WithPermissions permissions={["sys:dict:refresh"]}>
-            <button
-              type="button"
-              className="btn btn-outline-danger"
-              onClick={() => handleRefreshCache()}
-            >
-              <Icon name="refresh" className="w-5 h-5 fill-danger-light mr-1" />
-              {ct("refresh")}
             </button>
           </WithPermissions>
         </div>
@@ -490,31 +491,21 @@ export default function () {
           columns={[
             {
               accessor: "id",
-              title: t("id"),
+              title: ct("id"),
               textAlign: "center",
             },
             {
-              accessor: "dictNameJson",
+              accessor: "dictLabelJson",
               title: t("col_label_1"),
               textAlign: "center",
               render: (row: any) =>
-                datatableColumnTranslateText(row, "dictNameJson"),
+                datatableColumnTranslateText(row, "dictLabelJson"),
             },
             {
               accessor: "dictType",
               title: t("col_label_2"),
               textAlign: "center",
-              render: (row: any) => (
-                <Link
-                  href={{
-                    pathname: "/admin/system/dict_data",
-                    query: { dict_type: row.dictType, status: row.status },
-                  }}
-                  className="w-full underline cursor-pointer text-center text-primary"
-                >
-                  {row.dictType}
-                </Link>
-              ),
+              render: (row: any) => datatableColumnText(row, "dictType"),
             },
             {
               accessor: "status",
@@ -524,15 +515,26 @@ export default function () {
                 dictVal2Label(remoteDictSysStatus, row.status),
             },
             {
+              accessor: "dictValue",
+              title: t("col_label_4"),
+              textAlign: "center",
+              render: (row: any) => datatableColumnText(row, "dictValue"),
+            },
+            {
+              accessor: "dictSort",
+              title: t("col_label_5"),
+              textAlign: "center",
+            },
+            {
               accessor: "remarkJson",
-              title: t("remark"),
+              title: ct("remark"),
               textAlign: "center",
               render: (row: any) =>
                 datatableColumnTranslateText(row, "remarkJson"),
             },
             {
               accessor: "actions",
-              title: t("actions"),
+              title: ct("actions"),
               textAlign: "center",
               render: (row: any) => {
                 return row.id ? (
@@ -601,6 +603,7 @@ export default function () {
           ]}
           defaultColumnRender={(row, _, accessor) => {
             const data = row[accessor as keyof typeof row];
+            if (data == 0) return 0;
             if (data == undefined || data == null || data == "") return "--";
             return data;
           }}
