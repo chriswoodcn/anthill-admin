@@ -19,6 +19,7 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
+import { Exo_2 } from "next/font/google";
 
 export default function () {
   const { t } = useTranslation("admin_system_dict");
@@ -89,6 +90,7 @@ export default function () {
     dictType: undefined,
     status: "0",
     remarkJson: undefined,
+    version: 0,
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
   const formikDialog = useFormik({
@@ -127,7 +129,7 @@ export default function () {
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values", values);
-      formikDialog.setSubmitting(false);
+      await handleSubmitDialog();
     },
     onReset: async (values) => {
       formikDialog.setErrors({});
@@ -135,6 +137,23 @@ export default function () {
       updateForm((form) => (form = initialForm));
     },
   });
+  const handleSubmitDialog = async () => {
+    let result;
+    switch (dialogType) {
+      case 3:
+        result = await SystemDictTypeApi.add(formikDialog.values);
+        break;
+      case 4:
+        result = await SystemDictTypeApi.update(formikDialog.values);
+        break;
+    }
+    if (result) {
+      closeDialog();
+      pageDataMutate();
+    }
+    formikDialog.setSubmitting(false);
+  };
+
   const [dialogType, setDialogType] = useState(-1);
   const dialogType2Title = () => {
     switch (dialogType) {
@@ -346,6 +365,23 @@ export default function () {
   );
   //#endregion
 
+  const handleDetailRow = async (id: string | number) => {
+    openDialog(2, id);
+  };
+  const handleDeleteRow = async (id: string | number) => {
+    Toast.fireWarnConfirmModel({
+      html: <p>{ct("desc_delete_id")}</p>,
+      callback: async () => {
+        const res = await SystemDictTypeApi.delete([id]);
+        if (res) pageDataMutate();
+      },
+    });
+  };
+  const handleEditRow = async (id: string | number) => {
+    openDialog(4, id);
+  };
+  const handleRefreshCache = async () => await SystemDictTypeApi.refresh();
+
   return (
     <>
       <QueryCondition
@@ -423,19 +459,23 @@ export default function () {
                 name="plus-circle"
                 className="w-5 h-5 fill-primary-light mr-1"
               />
-              {t("add")}
+              {ct("add")}
             </button>
           </WithPermissions>
           <WithPermissions permissions={["sys:dict:export"]}>
             <button type="button" className="btn btn-outline-success">
               <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
-              {t("export")}
+              {ct("export")}
             </button>
           </WithPermissions>
           <WithPermissions permissions={["sys:dict:refresh"]}>
-            <button type="button" className="btn btn-outline-danger">
+            <button
+              type="button"
+              className="btn btn-outline-danger"
+              onClick={() => handleRefreshCache()}
+            >
               <Icon name="refresh" className="w-5 h-5 fill-danger-light mr-1" />
-              {t("refresh")}
+              {ct("refresh")}
             </button>
           </WithPermissions>
         </div>
@@ -500,7 +540,7 @@ export default function () {
                         className="btn btn-xs mr-1 btn-outline-secondary"
                         onClick={(e) => {
                           e.stopPropagation();
-                          openDialog(2, row.id);
+                          handleDetailRow(row.id);
                         }}
                       >
                         <Icon
@@ -518,6 +558,7 @@ export default function () {
                             className="btn btn-xs btn-outline-primary"
                             onClick={(e) => {
                               e.stopPropagation();
+                              handleEditRow(row.id);
                             }}
                           >
                             <Icon
@@ -533,6 +574,7 @@ export default function () {
                             className="btn btn-xs mr-1 btn-outline-danger"
                             onClick={(e) => {
                               e.stopPropagation();
+                              handleDeleteRow(row.id);
                             }}
                           >
                             <Icon
@@ -558,7 +600,7 @@ export default function () {
           }}
           records={pageData?.list || []}
           totalRecords={pageData?.totalCount || 0}
-          recordsPerPageLabel={t("records_per_page")}
+          recordsPerPageLabel={ct("records_per_page")}
           recordsPerPage={pageSize}
           page={page}
           onPageChange={(p) => setPage(p)}

@@ -1,9 +1,4 @@
 {
-  "add": "新增",
-  "update": "修改",
-  "delete": "删除",
-  "export": "导出",
-  "actions": "操作",
   "name": "名称",
   "type": "类型",
   "status": "状态",

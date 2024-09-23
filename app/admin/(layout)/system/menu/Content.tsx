@@ -2,7 +2,6 @@
 
 import { useTranslation } from "react-i18next";
 import { WithPermissions } from "@/components/compose/WithPermissions";
-import useAdminFetch from "@/lib/hooks/admin/useAdminFetch";
 import { useState } from "react";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { SystemDictApi, SystemMenuApi } from "@/lib/hooks/admin/adminApi";
@@ -19,6 +18,7 @@ import { dictVal2Label } from "@/lib";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
+  const { t: ct } = useTranslation("admin_common");
   const [menuDataList, setMenuDataList] = useState<any[]>([]);
   const [fetchListParams, setFetchListParams] = useState<any>({});
   const { data, error, isLoading } = SystemMenuApi.useList(fetchListParams);
@@ -99,7 +99,7 @@ export default function () {
     },
     {
       accessor: "actions",
-      title: t("actions"),
+      title: ct("actions"),
       textAlign: "center",
       render: (row: any) => {
         return row.id && row.status !== "3" ? (
@@ -113,7 +113,7 @@ export default function () {
                 }}
               >
                 <Icon name="pencil-paper" className="w-5 h-5 fill-primary-4" />
-                {t("update")}
+                {ct("update")}
               </button>
             </WithPermissions>
             {row.menuType != "F" && (
@@ -129,7 +129,7 @@ export default function () {
                     name="plus-circle"
                     className="w-5 h-5 mr-1 fill-success-light"
                   />
-                  {t("add")}
+                  {ct("add")}
                 </button>
               </WithPermissions>
             )}
@@ -145,7 +145,7 @@ export default function () {
                   name="trash-lines"
                   className="w-5 h-5 mr-1 fill-danger-light"
                 />
-                {t("delete")}
+                {ct("delete")}
               </button>
             </WithPermissions>
           </div>
@@ -197,7 +197,7 @@ export default function () {
         <WithPermissions permissions={["sys:menu:add"]}>
           <button type="button" className="btn btn-outline-primary">
             <Icon name="plus-circle" className="fill-success-light mr-1" />
-            {t("add")}
+            {ct("add")}
           </button>
         </WithPermissions>
       </div>

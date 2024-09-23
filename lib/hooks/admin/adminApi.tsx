@@ -6,8 +6,37 @@ import logger from "@/lib/logger";
 import { useTranslation } from "react-i18next";
 import { adminFetcher } from "@/lib/fetcher";
 import Toast from "@/lib/toast";
-import { i18next } from '@/i18n/client';
-
+import { i18next } from "@/i18n/client";
+enum OperateType {
+  GET,
+  ADD,
+  UPDATE,
+  DELETE,
+  CLEAR,
+}
+const handleOperateResponse = (res: any, ot = OperateType.GET) => {
+  if (res.code == 200) {
+    if (ot == OperateType.GET) {
+      return res.data;
+    }
+    Toast.fireSuccessAction({
+      html: (
+        <p className="text-2xl font-bold">{i18next.t("operate_success")}</p>
+      ),
+    });
+    return true;
+  } else {
+    Toast.fireErrorAction({
+      html: (
+        <p className="text-2xl font-bold">
+          {res.msg || i18next.t("operate_error")}
+        </p>
+      ),
+      timer: 0,
+    });
+    return false;
+  }
+};
 /**
  * 系统菜单
  */
@@ -97,104 +126,94 @@ export const SystemDictTypeApi = {
       url: "/backend/dict/type/getById/" + id,
       method: "GET",
     });
-    if (res.code == 200) {
-      return res.data;
-    } else {
-      Toast.fireErrorAction({
-        html: (
-          <p className="text-2xl font-bold">{res.msg || i18next.t("fetch_error")}</p>
-        ),
-        timer: 0,
-      });
-    }
+    return handleOperateResponse(res);
   },
-  useAdd: (data: Record<string, any> = {}) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/type/add",
-        method: "POST",
-        data,
-      }
-    ),
-  useUpdate: (data: Record<string, any> = {}) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/type/update",
-        method: "POST",
-        data,
-      }
-    ),
-  useDelete: (ids: string | number[]) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/type/deleteLogic" + ids,
-        method: "GET",
-      }
-    ),
-  useRefresh: (params: Record<string, any> = {}) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/type/refresh",
-        method: "GET",
-        params,
-      }
-    ),
+  add: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/type/add",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.ADD);
+  },
+  update: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/type/update",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.UPDATE);
+  },
+  delete: async (ids: (string | number)[]) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/type/deleteLogic/" + ids,
+      method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
+  refresh: async (params: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/type/refresh",
+      method: "GET",
+      params,
+    });
+    return handleOperateResponse(res, OperateType.CLEAR);
+  },
 };
 /**
  * 系统字典数据
  */
 export const SystemDictDataApi = {
-  usePage: (data: Record<string, any> = {}) =>
-    useAdminFetch(true, undefined, {
+  usePage: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
       url: "/backend/dict/data/page",
       method: "POST",
       data,
-    }),
-  useAdd: (data: Record<string, any> = {}) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/data/add",
-        method: "POST",
-        data,
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
       }
-    ),
-  useUpdate: (data: Record<string, any> = {}) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/data/update",
-        method: "POST",
-        data,
-      }
-    ),
-  useDelete: (ids: string | number[]) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/data/deleteLogic" + ids,
-        method: "GET",
-      }
-    ),
-  useRefresh: (params: Record<string, any> = {}) =>
-    useAdminFetch(
-      true,
-      { show: true, type: "O" },
-      {
-        url: "/backend/dict/data/refresh",
-        method: "GET",
-        params,
-      }
-    ),
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
+  getById: async (id: string | number) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/data/getById/" + id,
+      method: "GET",
+    });
+    return handleOperateResponse(res);
+  },
+  add: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/data/add",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.ADD);
+  },
+  update: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/data/update",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.UPDATE);
+  },
+  delete: async (ids: string | number[]) => {
+    const res = await adminFetcher({
+      url: "/backend/dict/data/deleteLogic" + ids,
+      method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
 };

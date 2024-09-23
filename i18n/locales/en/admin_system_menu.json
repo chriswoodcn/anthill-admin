@@ -1,9 +1,4 @@
 {
-  "add": "Add",
-  "update": "Update",
-  "delete": "Delete",
-  "export": "Export",
-  "actions": "Actions",
   "name": "Name",
   "type": "Type",
   "status": "Status",

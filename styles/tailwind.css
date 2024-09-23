@@ -582,6 +582,9 @@
 }
 
 /* fire_loader */
+.swal2-popup {
+  @apply !bg-white !text-black-7 dark:!bg-black-7 dark:!text-white-7;
+}
 .swal2-popup .swal2-html-container.fire_loader_html_container {
   @apply py-2;
 }
