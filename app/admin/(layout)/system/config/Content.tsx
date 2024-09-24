@@ -1,23 +1,23 @@
 "use client";
 
-import { useSearchParams } from "next/navigation";
-import { JsonInput, Select, TextInput, NumberInput } from "@mantine/core";
+import { JsonInput, Select, TextInput } from "@mantine/core";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
+import Link from "next/link";
 
 import { dictVal2Label } from "@/lib";
 import {
   SystemDictApi,
-  SystemDictDataApi,
   SystemDictTypeApi,
+  SystemConfigApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
 import {
-  datatableColumnText,
   datatableColumnTranslateText,
+  datatableColumnText,
 } from "@/lib/support/datatableSupport";
 import Yup from "@/lib/validation";
 import { DataTable } from "mantine-datatable";
@@ -29,8 +29,7 @@ import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 
 export default function () {
-  const searchParams = useSearchParams();
-  const { t } = useTranslation("admin_system_dict_data");
+  const { t } = useTranslation("admin_system_config");
   const { t: ct } = useTranslation("admin_common");
 
   //#region query
@@ -38,8 +37,7 @@ export default function () {
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
   const initQueryParams = {
-    dictType: searchParams.get("dict_type"),
-    dictValue: undefined,
+    configKey: undefined,
     status: undefined,
   };
   const [queryParams, updateQueryParams] =
@@ -68,7 +66,7 @@ export default function () {
     data: pageData,
     isLoading,
     mutate: pageDataMutate,
-  } = SystemDictDataApi.usePage({
+  } = SystemConfigApi.usePage({
     pageNum: page,
     pageSize,
     ...queryParams,
@@ -94,11 +92,10 @@ export default function () {
   const [show, setShow] = useState(false);
   const initialForm = {
     id: undefined,
-    dictLabelJson: undefined,
-    dictType: searchParams.get("dict_type"),
+    configNameJson: undefined,
+    configKey: undefined,
     status: "0",
-    dictValue: undefined,
-    dictSort: 0,
+    configValue: undefined,
     remarkJson: undefined,
     version: 0,
   };
@@ -106,7 +103,7 @@ export default function () {
   const formikDialog = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      dictLabelJson: Yup.string()
+      configNameJson: Yup.string()
         .required()
         .test({
           name: "json",
@@ -121,8 +118,8 @@ export default function () {
             }
           },
         }),
-      dictType: Yup.string().required(),
-      dictValue: Yup.string().required(),
+      configKey: Yup.string().required(),
+      configValue: Yup.string().required(),
       remarkJson: Yup.string()
         .nullable()
         .test({
@@ -152,10 +149,10 @@ export default function () {
     let result;
     switch (dialogType) {
       case 3:
-        result = await SystemDictDataApi.add(formikDialog.values);
+        result = await SystemConfigApi.add(formikDialog.values);
         break;
       case 4:
-        result = await SystemDictDataApi.update(formikDialog.values);
+        result = await SystemConfigApi.update(formikDialog.values);
         break;
     }
     if (result) {
@@ -190,7 +187,7 @@ export default function () {
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SystemDictDataApi.getById(formId);
+    const r0 = await SystemConfigApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -216,7 +213,7 @@ export default function () {
         <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
           <div
             className={`${
-              formikDialog.errors.dictLabelJson ? "has-error" : ""
+              formikDialog.errors.configNameJson ? "has-error" : ""
             } min-w-60`}
           >
             <JsonInput
@@ -224,24 +221,24 @@ export default function () {
               label={t("col_label_1")}
               placeholder={ct("placeholder_input") + t("col_label_1")}
               description={ct("description_json_input")}
-              value={formikDialog.values.dictLabelJson || ""}
+              value={formikDialog.values.configNameJson || ""}
               onChange={(val) => {
-                formikDialog.setFieldError("dictLabelJson", undefined);
-                formikDialog.setFieldValue("dictLabelJson", val, false);
+                formikDialog.setFieldError("configNameJson", undefined);
+                formikDialog.setFieldValue("configNameJson", val, false);
               }}
               error={
-                formikDialog.errors.dictLabelJson
-                  ? (formikDialog.errors.dictLabelJson as string)
+                formikDialog.errors.configNameJson
+                  ? (formikDialog.errors.configNameJson as string)
                   : ""
               }
               rightSection={
-                formikDialog.values.dictLabelJson && (
+                formikDialog.values.configNameJson && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
                       formikDialog.setFieldValue(
-                        "dictLabelJson",
+                        "configNameJson",
                         undefined,
                         false
                       )
@@ -255,12 +252,78 @@ export default function () {
           </div>
           <div
             className={`${
-              formikDialog.errors.dictType ? "has-error" : ""
+              formikDialog.errors.configKey ? "has-error" : ""
             } min-w-60`}
           >
             <TextInput
+              withAsterisk
               label={t("col_label_2")}
-              defaultValue={formikDialog.values.dictType || ""}
+              placeholder={ct("placeholder_input") + t("col_label_2")}
+              value={formikDialog.values.configKey}
+              onChange={(e) => {
+                formikDialog.setFieldError("configKey", undefined);
+                formikDialog.setFieldValue(
+                  "configKey",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.configKey
+                  ? (formikDialog.errors.configKey as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.configKey && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("configKey", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.configValue ? "has-error" : ""
+            } min-w-60`}
+          >
+            <TextInput
+              withAsterisk
+              label={t("col_label_4")}
+              placeholder={ct("placeholder_input") + t("col_label_4")}
+              value={formikDialog.values.configValue}
+              onChange={(e) => {
+                formikDialog.setFieldError("configValue", undefined);
+                formikDialog.setFieldValue(
+                  "configValue",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.configValue
+                  ? (formikDialog.errors.configValue as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.configValue && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue(
+                        "configValue",
+                        undefined,
+                        false
+                      )
+                    }
+                  />
+                )
+              }
             />
           </div>
           <div className="min-w-60">
@@ -286,50 +349,6 @@ export default function () {
                 );
               })}
             </div>
-          </div>
-          <div className="min-w-60">
-            <TextInput
-              withAsterisk
-              label={t("col_label_4")}
-              placeholder={ct("placeholder_input") + ct("col_label_4")}
-              value={formikDialog.values.dictValue}
-              onChange={(e) => {
-                formikDialog.setFieldError("dictValue", undefined);
-                formikDialog.setFieldValue(
-                  "dictValue",
-                  e.currentTarget.value,
-                  false
-                );
-              }}
-              error={
-                formikDialog.errors.dictValue
-                  ? (formikDialog.errors.dictValue as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.dictValue && (
-                  <Icon
-                    name="x-circle"
-                    size={{ w: 18, h: 18 }}
-                    fill={true}
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("dictValue", undefined, false)
-                    }
-                  />
-                )
-              }
-            />
-          </div>
-          <div className="min-w-60">
-            <NumberInput
-              label={t("col_label_5")}
-              value={formikDialog.values.dictSort}
-              onChange={(val) =>
-                formikDialog.setFieldValue("dictSort", val || 0, false)
-              }
-              min={0}
-              max={9999}
-            />
           </div>
           <div
             className={`${
@@ -401,7 +420,7 @@ export default function () {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id") + id}</p>,
       callback: async () => {
-        const res = await SystemDictDataApi.delete([id]);
+        const res = await SystemConfigApi.delete([id]);
         if (res) pageDataMutate();
       },
     });
@@ -409,6 +428,138 @@ export default function () {
   const handleEditRow = async (id: string | number) => {
     openDialog(4, id);
   };
+  const handleRefreshCache = async () => await SystemConfigApi.refresh();
+
+  //#region table
+  const PageTable = (
+    <DataTable
+      fetching={isLoading}
+      loaderType="dots"
+      loaderSize="xl"
+      loaderBackgroundBlur={2}
+      highlightOnHover
+      border={1}
+      className="table-hover whitespace-nowrap"
+      columns={[
+        {
+          accessor: "id",
+          title: ct("id"),
+          textAlign: "center",
+        },
+        {
+          accessor: "configNameJson",
+          title: t("col_label_1"),
+          textAlign: "center",
+          render: (row: any) =>
+            datatableColumnTranslateText(row, "configNameJson"),
+        },
+        {
+          accessor: "configKey",
+          title: t("col_label_2"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "configKey"),
+        },
+        {
+          accessor: "status",
+          title: t("col_label_3"),
+          textAlign: "center",
+          render: (row: any) => dictVal2Label(remoteDictSysStatus, row.status),
+        },
+        {
+          accessor: "configValue",
+          title: t("col_label_4"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "configValue"),
+        },
+        {
+          accessor: "remarkJson",
+          title: ct("remark"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
+        },
+        {
+          accessor: "actions",
+          title: ct("actions"),
+          textAlign: "center",
+          render: (row: any) => {
+            return row.id ? (
+              <div className="flex justify-center space-x-4" key={row.dictId}>
+                <WithPermissions permissions={["system:dict:list"]}>
+                  <button
+                    type="button"
+                    className="btn btn-xs mr-1 btn-outline-secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDetailRow(row.id);
+                    }}
+                  >
+                    <Icon
+                      name="view"
+                      className="w-5 h-5 mr-1 fill-secondary-light"
+                    />
+                    {ct("detail")}
+                  </button>
+                </WithPermissions>
+                {row.status != "3" && (
+                  <>
+                    <WithPermissions permissions={["system:dict:edit"]}>
+                      <button
+                        type="button"
+                        className="btn btn-xs btn-outline-primary"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditRow(row.id);
+                        }}
+                      >
+                        <Icon
+                          name="pencil-paper"
+                          className="w-5 h-5 fill-primary-4"
+                        />
+                        {ct("update")}
+                      </button>
+                    </WithPermissions>
+                    <WithPermissions permissions={["system:dict:remove"]}>
+                      <button
+                        type="button"
+                        className="btn btn-xs mr-1 btn-outline-danger"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteRow(row.id);
+                        }}
+                      >
+                        <Icon
+                          name="trash-lines"
+                          className="w-5 h-5 mr-1 fill-danger-light"
+                        />
+                        {ct("delete")}
+                      </button>
+                    </WithPermissions>
+                  </>
+                )}
+              </div>
+            ) : (
+              "--"
+            );
+          },
+        },
+      ]}
+      defaultColumnRender={(row, _, accessor) => {
+        const data = row[accessor as keyof typeof row];
+        if (data == undefined || data == null || data == "") return "--";
+        return data;
+      }}
+      records={pageData?.list || []}
+      totalRecords={pageData?.totalCount || 0}
+      recordsPerPageLabel={ct("records_per_page")}
+      recordsPerPage={pageSize}
+      page={page}
+      onPageChange={(p) => setPage(p)}
+      recordsPerPageOptions={PAGE_SIZES}
+      onRecordsPerPageChange={setPageSize}
+      minHeight={300}
+    />
+  );
+  //#endregion
 
   return (
     <>
@@ -421,7 +572,28 @@ export default function () {
             <TextInput
               label={t("col_label_2")}
               placeholder={ct("placeholder_input") + t("col_label_2")}
-              value={formikQuery.values.dictType || ""}
+              value={formikQuery.values.configKey || ""}
+              onChange={(e) =>
+                formikQuery.setFieldValue(
+                  "configKey",
+                  e.currentTarget.value,
+                  false
+                )
+              }
+              onKeyUp={(e: any) => {
+                if (e.keyCode == 13) pageDataMutate();
+              }}
+              rightSection={
+                formikQuery.values.configKey && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikQuery.setFieldValue("configKey", undefined, false)
+                    }
+                  />
+                )
+              }
             />
           </div>
           <div className="min-w-60">
@@ -456,165 +628,37 @@ export default function () {
       </QueryCondition>
       <div className="relative panel overflow-hidden min-h-96">
         <div className="flex flex-wrap gap-2 mb-4 print:hidden">
-          {searchParams.get("status") && searchParams.get("status") == "0" && (
-            <WithPermissions permissions={["sys:dict:add"]}>
-              <button
-                type="button"
-                className="btn btn-outline-primary"
-                onClick={() => openDialog(3)}
-              >
-                <Icon
-                  name="plus-circle"
-                  className="w-5 h-5 fill-primary-light mr-1"
-                />
-                {ct("add")}
-              </button>
-            </WithPermissions>
-          )}
+          <WithPermissions permissions={["sys:dict:add"]}>
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={() => openDialog(3)}
+            >
+              <Icon
+                name="plus-circle"
+                className="w-5 h-5 fill-primary-light mr-1"
+              />
+              {ct("add")}
+            </button>
+          </WithPermissions>
           <WithPermissions permissions={["sys:dict:export"]}>
             <button type="button" className="btn btn-outline-success">
               <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
               {ct("export")}
             </button>
           </WithPermissions>
+          <WithPermissions permissions={["sys:dict:refresh"]}>
+            <button
+              type="button"
+              className="btn btn-outline-danger"
+              onClick={() => handleRefreshCache()}
+            >
+              <Icon name="refresh" className="w-5 h-5 fill-danger-light mr-1" />
+              {ct("refresh")}
+            </button>
+          </WithPermissions>
         </div>
-        <DataTable
-          fetching={isLoading}
-          loaderType="dots"
-          loaderSize="xl"
-          loaderBackgroundBlur={2}
-          highlightOnHover
-          border={1}
-          className="table-hover whitespace-nowrap"
-          columns={[
-            {
-              accessor: "id",
-              title: ct("id"),
-              textAlign: "center",
-            },
-            {
-              accessor: "dictLabelJson",
-              title: t("col_label_1"),
-              textAlign: "center",
-              render: (row: any) =>
-                datatableColumnTranslateText(row, "dictLabelJson"),
-            },
-            {
-              accessor: "dictType",
-              title: t("col_label_2"),
-              textAlign: "center",
-              render: (row: any) => datatableColumnText(row, "dictType"),
-            },
-            {
-              accessor: "status",
-              title: t("col_label_3"),
-              textAlign: "center",
-              render: (row: any) =>
-                dictVal2Label(remoteDictSysStatus, row.status),
-            },
-            {
-              accessor: "dictValue",
-              title: t("col_label_4"),
-              textAlign: "center",
-              render: (row: any) => datatableColumnText(row, "dictValue"),
-            },
-            {
-              accessor: "dictSort",
-              title: t("col_label_5"),
-              textAlign: "center",
-            },
-            {
-              accessor: "remarkJson",
-              title: ct("remark"),
-              textAlign: "center",
-              render: (row: any) =>
-                datatableColumnTranslateText(row, "remarkJson"),
-            },
-            {
-              accessor: "actions",
-              title: ct("actions"),
-              textAlign: "center",
-              render: (row: any) => {
-                return row.id ? (
-                  <div
-                    className="flex justify-center space-x-4"
-                    key={row.dictId}
-                  >
-                    <WithPermissions permissions={["system:dict:list"]}>
-                      <button
-                        type="button"
-                        className="btn btn-xs mr-1 btn-outline-secondary"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDetailRow(row.id);
-                        }}
-                      >
-                        <Icon
-                          name="view"
-                          className="w-5 h-5 mr-1 fill-secondary-light"
-                        />
-                        {ct("detail")}
-                      </button>
-                    </WithPermissions>
-                    {row.status != "3" && (
-                      <>
-                        <WithPermissions permissions={["system:dict:edit"]}>
-                          <button
-                            type="button"
-                            className="btn btn-xs btn-outline-primary"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleEditRow(row.id);
-                            }}
-                          >
-                            <Icon
-                              name="pencil-paper"
-                              className="w-5 h-5 fill-primary-4"
-                            />
-                            {ct("update")}
-                          </button>
-                        </WithPermissions>
-                        <WithPermissions permissions={["system:dict:remove"]}>
-                          <button
-                            type="button"
-                            className="btn btn-xs mr-1 btn-outline-danger"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteRow(row.id);
-                            }}
-                          >
-                            <Icon
-                              name="trash-lines"
-                              className="w-5 h-5 mr-1 fill-danger-light"
-                            />
-                            {ct("delete")}
-                          </button>
-                        </WithPermissions>
-                      </>
-                    )}
-                  </div>
-                ) : (
-                  "--"
-                );
-              },
-            },
-          ]}
-          defaultColumnRender={(row, _, accessor) => {
-            const data = row[accessor as keyof typeof row];
-            if (data == 0) return 0;
-            if (data == undefined || data == null || data == "") return "--";
-            return data;
-          }}
-          records={pageData?.list || []}
-          totalRecords={pageData?.totalCount || 0}
-          recordsPerPageLabel={ct("records_per_page")}
-          recordsPerPage={pageSize}
-          page={page}
-          onPageChange={(p) => setPage(p)}
-          recordsPerPageOptions={PAGE_SIZES}
-          onRecordsPerPageChange={setPageSize}
-          minHeight={300}
-        />
+        {PageTable}
       </div>
       <EditDialog show={show} close={closeDialog}>
         {PageDialog}
