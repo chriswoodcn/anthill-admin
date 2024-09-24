@@ -24,7 +24,6 @@ import Yup from "@/lib/validation";
 import { useImmer } from "use-immer";
 import { JsonInput, NumberInput, TextInput } from "@mantine/core";
 import TreeSelect from "../../_component/TreeSelect";
-import useEffectOnce from "@/lib/hooks/useEffectOnce";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
@@ -66,8 +65,8 @@ export default function () {
     parentId: undefined,
     orderNum: 0,
     path: undefined,
-    menuKey: 0,
-    type: "M",
+    menuKey: undefined,
+    menuType: "M",
     status: "0",
     perms: undefined,
     icon: undefined,
@@ -166,7 +165,7 @@ export default function () {
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SystemDictDataApi.getById(formId);
+    const r0 = await SystemMenuApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -190,6 +189,7 @@ export default function () {
       <div className="p-4 sm:p-6 lg:p-10">
         {/* form */}
         <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
+          {/* 上级菜单 */}
           <div
             className={`${
               formikDialog.errors.parentId ? "has-error" : ""
@@ -216,6 +216,7 @@ export default function () {
               }
             />
           </div>
+          {/* 菜单类型 */}
           <div className="min-w-60">
             <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
               {t("type")}
@@ -228,9 +229,9 @@ export default function () {
                       type="radio"
                       name="type"
                       className="form-radio"
-                      checked={item.value == formikDialog.values.type}
+                      checked={item.value == formikDialog.values.menuType}
                       onChange={() =>
-                        formikDialog.setFieldValue("type", item.value, false)
+                        formikDialog.setFieldValue("menuType", item.value, false)
                       }
                     />
                     <span>{item.label}</span>
@@ -239,6 +240,7 @@ export default function () {
               })}
             </div>
           </div>
+          {/* 名称 */}
           <div
             className={`${
               formikDialog.errors.menuNameJson ? "has-error" : ""
@@ -278,104 +280,188 @@ export default function () {
               formatOnBlur
             />
           </div>
-          <div
-            className={`${
-              formikDialog.errors.perms ? "has-error" : ""
-            } min-w-60`}
-          >
-            <TextInput
-              label={t("perms")}
-              placeholder={ct("placeholder_input") + t("perms")}
-              value={formikDialog.values.perms || ""}
-              onChange={(e) => {
-                formikDialog.setFieldError("perms", undefined);
-                formikDialog.setFieldValue(
-                  "perms",
-                  e.currentTarget.value,
-                  false
-                );
-              }}
-              error={
-                formikDialog.errors.perms
-                  ? (formikDialog.errors.perms as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.perms && (
-                  <Icon
-                    name="x-circle"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("perms", undefined, false)
-                    }
-                  />
-                )
-              }
-            />
-          </div>
-          <div
-            className={`${
-              formikDialog.errors.path ? "has-error" : ""
-            } min-w-60`}
-          >
-            <TextInput
-              withAsterisk
-              label={t("path")}
-              placeholder={ct("placeholder_input") + ct("path")}
-              value={formikDialog.values.path}
-              onChange={(e) => {
-                formikDialog.setFieldError("path", undefined);
-                formikDialog.setFieldValue(
-                  "path",
-                  e.currentTarget.value,
-                  false
-                );
-              }}
-              error={
-                formikDialog.errors.path
-                  ? (formikDialog.errors.path as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.path && (
-                  <Icon
-                    name="x-circle"
-                    size={{ w: 18, h: 18 }}
-                    fill={true}
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("path", undefined, false)
-                    }
-                  />
-                )
-              }
-            />
-          </div>
-          <div className="min-w-60">
-            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-              {t("frame_flag")}
-            </label>
-            <div className="text-sm">
-              {remoteDictSysYesNo.map((item: any) => {
-                return (
-                  <label className="inline-flex mr-4" key={item.value}>
-                    <input
-                      type="radio"
-                      name="frameFlag"
-                      className="form-radio"
-                      checked={item.value == formikDialog.values.frameFlag}
-                      onChange={() =>
-                        formikDialog.setFieldValue(
-                          "frameFlag",
-                          item.value,
-                          false
-                        )
+          {/* 键 */}
+          {formikDialog.values.menuType != "F" && (
+            <div
+              className={`${
+                formikDialog.errors.menuKey ? "has-error" : ""
+              } min-w-60`}
+            >
+              <TextInput
+                withAsterisk
+                label={t("key")}
+                placeholder={ct("placeholder_input") + t("key")}
+                value={formikDialog.values.menuKey}
+                onChange={(e) => {
+                  formikDialog.setFieldError("menuKey", undefined);
+                  formikDialog.setFieldValue(
+                    "menuKey",
+                    e.currentTarget.value,
+                    false
+                  );
+                }}
+                error={
+                  formikDialog.errors.menuKey
+                    ? (formikDialog.errors.menuKey as string)
+                    : ""
+                }
+                rightSection={
+                  formikDialog.values.menuKey && (
+                    <Icon
+                      name="x-circle"
+                      onClick={(e) =>
+                        formikDialog.setFieldValue("menuKey", undefined, false)
                       }
                     />
-                    <span>{item.label}</span>
-                  </label>
-                );
-              })}
+                  )
+                }
+              />
             </div>
-          </div>
+          )}
+          {/* 权限标识 */}
+          {formikDialog.values.menuType != "M" && (
+            <div
+              className={`${
+                formikDialog.errors.perms ? "has-error" : ""
+              } min-w-60`}
+            >
+              <TextInput
+                withAsterisk
+                label={t("perms")}
+                placeholder={ct("placeholder_input") + t("perms")}
+                value={formikDialog.values.perms || ""}
+                onChange={(e) => {
+                  formikDialog.setFieldError("perms", undefined);
+                  formikDialog.setFieldValue(
+                    "perms",
+                    e.currentTarget.value,
+                    false
+                  );
+                }}
+                error={
+                  formikDialog.errors.perms
+                    ? (formikDialog.errors.perms as string)
+                    : ""
+                }
+                rightSection={
+                  formikDialog.values.perms && (
+                    <Icon
+                      name="x-circle"
+                      onClick={(e) =>
+                        formikDialog.setFieldValue("perms", undefined, false)
+                      }
+                    />
+                  )
+                }
+              />
+            </div>
+          )}
+          {/* 路径 */}
+          {formikDialog.values.menuType == "C" && (
+            <div
+              className={`${
+                formikDialog.errors.path ? "has-error" : ""
+              } min-w-60`}
+            >
+              <TextInput
+                withAsterisk
+                label={t("path")}
+                placeholder={ct("placeholder_input") + t("path")}
+                value={formikDialog.values.path}
+                onChange={(e) => {
+                  formikDialog.setFieldError("path", undefined);
+                  formikDialog.setFieldValue(
+                    "path",
+                    e.currentTarget.value,
+                    false
+                  );
+                }}
+                error={
+                  formikDialog.errors.path
+                    ? (formikDialog.errors.path as string)
+                    : ""
+                }
+                rightSection={
+                  formikDialog.values.path && (
+                    <Icon
+                      name="x-circle"
+                      onClick={(e) =>
+                        formikDialog.setFieldValue("path", undefined, false)
+                      }
+                    />
+                  )
+                }
+              />
+            </div>
+          )}
+          {/* 图标 */}
+          {formikDialog.values.menuType == "C" && (
+            <div
+              className={`${
+                formikDialog.errors.icon ? "has-error" : ""
+              } min-w-60`}
+            >
+              <TextInput
+                label={t("icon")}
+                placeholder={ct("placeholder_input") + t("icon")}
+                value={formikDialog.values.icon}
+                onChange={(e) => {
+                  formikDialog.setFieldError("icon", undefined);
+                  formikDialog.setFieldValue(
+                    "icon",
+                    e.currentTarget.value,
+                    false
+                  );
+                }}
+                error={
+                  formikDialog.errors.icon
+                    ? (formikDialog.errors.icon as string)
+                    : ""
+                }
+                rightSection={
+                  formikDialog.values.icon && (
+                    <Icon
+                      name="x-circle"
+                      onClick={(e) =>
+                        formikDialog.setFieldValue("icon", undefined, false)
+                      }
+                    />
+                  )
+                }
+              />
+            </div>
+          )}
+          {/* 是否链接 */}
+          {formikDialog.values.menuType == "C" && (
+            <div className="min-w-60">
+              <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+                {t("frame_flag")}
+              </label>
+              <div className="text-sm">
+                {remoteDictSysYesNo.map((item: any) => {
+                  return (
+                    <label className="inline-flex mr-4" key={item.value}>
+                      <input
+                        type="radio"
+                        name="frameFlag"
+                        className="form-radio"
+                        checked={item.value == formikDialog.values.frameFlag}
+                        onChange={() =>
+                          formikDialog.setFieldValue(
+                            "frameFlag",
+                            item.value,
+                            false
+                          )
+                        }
+                      />
+                      <span>{item.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {/* 排序 */}
           <div className="min-w-60">
             <NumberInput
               label={t("sort")}
@@ -387,101 +473,114 @@ export default function () {
               max={9999}
             />
           </div>
-          <div
-            className={`${
-              formikDialog.errors.remarkJson ? "has-error" : ""
-            } min-w-60`}
-          >
-            <JsonInput
-              label={ct("remark")}
-              placeholder={ct("placeholder_input") + ct("remark")}
-              description={ct("description_json_input")}
-              value={formikDialog.values.remarkJson || ""}
-              onChange={(val) => {
-                formikDialog.setFieldError("remarkJson", undefined);
-                formikDialog.setFieldValue("remarkJson", val, false);
-              }}
-              error={
-                formikDialog.errors.remarkJson
-                  ? (formikDialog.errors.remarkJson as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.remarkJson && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("remarkJson", undefined, false)
-                    }
-                  />
-                )
-              }
-              autosize
-              formatOnBlur
-            />
-          </div>
-          <div className="min-w-60">
-            <TextInput
-              label={t("version")}
-              placeholder={ct("placeholder_input") + t("version")}
-              value={formikDialog.values.menuVersion}
-              onChange={(e) => {
-                formikDialog.setFieldError("menuVersion", undefined);
-                formikDialog.setFieldValue(
-                  "menuVersion",
-                  e.currentTarget.value,
-                  false
-                );
-              }}
-              error={
-                formikDialog.errors.menuVersion
-                  ? (formikDialog.errors.menuVersion as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.path && (
-                  <Icon
-                    name="x-circle"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue(
-                        "menuVersion",
-                        undefined,
-                        false
-                      )
-                    }
-                  />
-                )
-              }
-            />
-          </div>
-          <div className="min-w-60">
-            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-              {t("hidden_flag")}
-            </label>
-            <div className="text-sm">
-              {remoteDictSysYesNo.map((item: any) => {
-                return (
-                  <label className="inline-flex mr-4" key={item.value}>
-                    <input
-                      type="radio"
-                      name="hiddenFlag"
-                      className="form-radio"
-                      checked={item.value == formikDialog.values.hiddenFlag}
-                      onChange={() =>
+          {/* 备注 */}
+          {formikDialog.values.menuType !== "F" && (
+            <div
+              className={`${
+                formikDialog.errors.remarkJson ? "has-error" : ""
+              } min-w-60`}
+            >
+              <JsonInput
+                label={ct("remark")}
+                placeholder={ct("placeholder_input") + ct("remark")}
+                description={ct("description_json_input")}
+                value={formikDialog.values.remarkJson || ""}
+                onChange={(val) => {
+                  formikDialog.setFieldError("remarkJson", undefined);
+                  formikDialog.setFieldValue("remarkJson", val, false);
+                }}
+                error={
+                  formikDialog.errors.remarkJson
+                    ? (formikDialog.errors.remarkJson as string)
+                    : ""
+                }
+                rightSection={
+                  formikDialog.values.remarkJson && (
+                    <Icon
+                      name="x-circle"
+                      className="w-5 h-5"
+                      onClick={(e) =>
                         formikDialog.setFieldValue(
-                          "hiddenFlag",
-                          item.value,
+                          "remarkJson",
+                          undefined,
                           false
                         )
                       }
                     />
-                    <span>{item.label}</span>
-                  </label>
-                );
-              })}
+                  )
+                }
+                autosize
+                formatOnBlur
+              />
             </div>
-          </div>
+          )}
+          {/* 支持版本 */}
+          {formikDialog.values.menuType !== "F" && (
+            <div className="min-w-60">
+              <TextInput
+                label={t("version")}
+                placeholder={ct("placeholder_input") + t("version")}
+                value={formikDialog.values.menuVersion}
+                onChange={(e) => {
+                  formikDialog.setFieldError("menuVersion", undefined);
+                  formikDialog.setFieldValue(
+                    "menuVersion",
+                    e.currentTarget.value,
+                    false
+                  );
+                }}
+                error={
+                  formikDialog.errors.menuVersion
+                    ? (formikDialog.errors.menuVersion as string)
+                    : ""
+                }
+                rightSection={
+                  formikDialog.values.path && (
+                    <Icon
+                      name="x-circle"
+                      onClick={(e) =>
+                        formikDialog.setFieldValue(
+                          "menuVersion",
+                          undefined,
+                          false
+                        )
+                      }
+                    />
+                  )
+                }
+              />
+            </div>
+          )}
+          {/* 是否隐藏 */}
+          {formikDialog.values.menuType !== "F" && (
+            <div className="min-w-60">
+              <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+                {t("hidden_flag")}
+              </label>
+              <div className="text-sm">
+                {remoteDictSysYesNo.map((item: any) => {
+                  return (
+                    <label className="inline-flex mr-4" key={item.value}>
+                      <input
+                        type="radio"
+                        name="hiddenFlag"
+                        className="form-radio"
+                        checked={item.value == formikDialog.values.hiddenFlag}
+                        onChange={() =>
+                          formikDialog.setFieldValue(
+                            "hiddenFlag",
+                            item.value,
+                            false
+                          )
+                        }
+                      />
+                      <span>{item.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          )}
           <div className="min-w-60">
             <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
               {t("status")}
@@ -621,6 +720,7 @@ export default function () {
                 className="btn btn-xs btn-outline-primary"
                 onClick={(e) => {
                   e.stopPropagation();
+                  openDialog(4, row.id);
                 }}
               >
                 <Icon name="pencil-paper" className="w-5 h-5 fill-primary-4" />
