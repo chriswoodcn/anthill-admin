@@ -14,9 +14,9 @@ const Icon = (props: IconProps) => {
       <path
         d="M9 5L15 12L9 19"
         stroke="currentColor"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

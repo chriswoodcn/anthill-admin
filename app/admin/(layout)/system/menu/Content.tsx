@@ -3,8 +3,11 @@
 import { useTranslation } from "react-i18next";
 import { WithPermissions } from "@/components/compose/WithPermissions";
 import { useState } from "react";
-import useEffectOnce from "@/lib/hooks/useEffectOnce";
-import { SystemDictApi, SystemMenuApi } from "@/lib/hooks/admin/adminApi";
+import {
+  SystemDictApi,
+  SystemMenuApi,
+  SystemDictDataApi,
+} from "@/lib/hooks/admin/adminApi";
 import {
   DataTable,
   DataTableColumn,
@@ -15,17 +18,18 @@ import Icon from "@/components/icon/index";
 import logger from "@/lib/logger";
 import { datatableColumnText } from "@/lib/support/datatableSupport";
 import { dictVal2Label } from "@/lib";
+import EditDialog from "../../_component/EditDialog";
+import { useFormik } from "formik";
+import Yup from "@/lib/validation";
+import { useImmer } from "use-immer";
+import { JsonInput, NumberInput, TextInput } from "@mantine/core";
+import TreeSelect from "../../_component/TreeSelect";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
   const { t: ct } = useTranslation("admin_common");
-  const [menuDataList, setMenuDataList] = useState<any[]>([]);
-  const [fetchListParams, setFetchListParams] = useState<any>({});
-  const {
-    data,
-    isLoading,
-    mutate: pageDataMutate,
-  } = SystemMenuApi.useList(fetchListParams);
+
   const { data: remoteDictSysStatus } = SystemDictApi.useDict(
     {
       type: "sys_status",
@@ -41,14 +45,502 @@ export default function () {
       },
     }
   );
-  useEffectOnce(() => {
-    if (data && data.code == 200) {
-      setMenuDataList(data.data);
-    } else {
-      setMenuDataList([]);
-    }
-  }, [data]);
+  const { data: remoteDictSysAffiliate } = SystemDictApi.useDict({
+    type: "sys_affiliate",
+  });
+  const { data: remoteDictSysYesNo } = SystemDictApi.useDict({
+    type: "sys_yes_no",
+  });
+  const { data: remoteDictSysMenuType } = SystemDictApi.useDict({
+    type: "sys_menu_type",
+  });
+  const { data: treeSelectData } = SystemMenuApi.useSelect({
+    root: "1",
+  });
 
+  //#region dialog
+  const [show, setShow] = useState(false);
+  const initialForm = {
+    id: undefined,
+    menuNameJson: undefined,
+    parentId: undefined,
+    orderNum: 0,
+    path: undefined,
+    menuKey: 0,
+    type: "M",
+    status: "0",
+    perms: undefined,
+    icon: undefined,
+    remarkJson: undefined,
+    menuVersion: undefined,
+    hiddenFlag: "0",
+    frameFlag: "0",
+    affiliateFlag: "0",
+    version: undefined,
+  };
+  const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
+  const formikDialog = useFormik({
+    initialValues: initialForm,
+    validationSchema: Yup.object().shape({
+      dictLabelJson: Yup.string()
+        .required()
+        .test({
+          name: "json",
+          message: t("validation_error.field_json_invalid"),
+          test: (val) => {
+            try {
+              if (!val || val.replace(/\s/g, "") == "{}") return false;
+              JSON.parse(val);
+              return true;
+            } catch (error) {
+              return false;
+            }
+          },
+        }),
+      dictType: Yup.string().required(),
+      dictValue: Yup.string().required(),
+      remarkJson: Yup.string()
+        .nullable()
+        .test({
+          name: "json",
+          message: t("validation_error.field_json_invalid"),
+          test: (val) => {
+            try {
+              if (val) JSON.parse(val);
+              return true;
+            } catch (error) {
+              return false;
+            }
+          },
+        }),
+    }),
+    onSubmit: async (values) => {
+      logger.debug("onSubmit values", values);
+      await handleSubmitDialog();
+    },
+    onReset: async (values) => {
+      formikDialog.setErrors({});
+      formikDialog.setValues(initialForm, false);
+      updateForm((form) => (form = initialForm));
+    },
+  });
+  const handleSubmitDialog = async () => {
+    let result;
+    switch (dialogType) {
+      case 3:
+        result = await SystemDictDataApi.add(formikDialog.values);
+        break;
+      case 4:
+        result = await SystemDictDataApi.update(formikDialog.values);
+        break;
+    }
+    if (result) {
+      closeDialog();
+      pageDataMutate();
+    }
+    formikDialog.setSubmitting(false);
+  };
+
+  const [dialogType, setDialogType] = useState(-1);
+  const dialogType2Title = () => {
+    switch (dialogType) {
+      case 1:
+        return ct("outline");
+      case 2:
+        return ct("detail");
+      case 3:
+        return ct("add");
+      case 4:
+        return ct("update");
+      default:
+        return null;
+    }
+  };
+  const openDialog = async (
+    type: number | undefined = 0,
+    formId: number | string | undefined = undefined
+  ) => {
+    setDialogType(type);
+    if (type == 3) {
+      setShow(true);
+      return;
+    }
+    if (formId == undefined) return;
+    const r0 = await SystemDictDataApi.getById(formId);
+    if (r0) {
+      for (const key in initialForm) {
+        if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
+          formikDialog.setFieldValue(key, r0[key], false);
+        }
+      }
+    }
+    setShow(true);
+  };
+  const closeDialog = () => {
+    formikDialog.resetForm();
+    updateForm((form) => (form = initialForm));
+    setShow(false);
+  };
+  const PageDialog = (
+    <>
+      {/* title */}
+      <div className="flex bg-white-9 dark:bg-black-8 items-center justify-center px-5 py-3">
+        <h5 className="font-bold text-lg text-center">{dialogType2Title()}</h5>
+      </div>
+      <div className="p-4 sm:p-6 lg:p-10">
+        {/* form */}
+        <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
+          <div
+            className={`${
+              formikDialog.errors.parentId ? "has-error" : ""
+            } min-w-60`}
+          >
+            <TreeSelect
+              withAsterisk
+              label={t("parent_menu")}
+              placeholder={ct("placeholder_select") + t("parent_menu")}
+              data={treeSelectData}
+              valueAlias="id"
+              nameAlias="menuNameJson"
+              trans="true"
+              parentValueAlias="parentId"
+              value={formikDialog.values.parentId || 0}
+              onChange={(val) => {
+                formikDialog.setFieldError("parentId", undefined);
+                formikDialog.setFieldValue("parentId", val, false);
+              }}
+              error={
+                formikDialog.errors.parentId
+                  ? (formikDialog.errors.parentId as string)
+                  : ""
+              }
+            />
+          </div>
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("type")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysMenuType.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="type"
+                      className="form-radio"
+                      checked={item.value == formikDialog.values.type}
+                      onChange={() =>
+                        formikDialog.setFieldValue("type", item.value, false)
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.menuNameJson ? "has-error" : ""
+            } min-w-60`}
+          >
+            <JsonInput
+              withAsterisk
+              label={t("name")}
+              placeholder={ct("placeholder_input") + t("name")}
+              description={ct("description_json_input")}
+              value={formikDialog.values.menuNameJson || ""}
+              onChange={(val) => {
+                formikDialog.setFieldError("menuNameJson", undefined);
+                formikDialog.setFieldValue("menuNameJson", val, false);
+              }}
+              error={
+                formikDialog.errors.menuNameJson
+                  ? (formikDialog.errors.menuNameJson as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.menuNameJson && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue(
+                        "menuNameJson",
+                        undefined,
+                        false
+                      )
+                    }
+                  />
+                )
+              }
+              autosize
+              formatOnBlur
+            />
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.perms ? "has-error" : ""
+            } min-w-60`}
+          >
+            <TextInput
+              label={t("perms")}
+              placeholder={ct("placeholder_input") + t("perms")}
+              value={formikDialog.values.perms || ""}
+              onChange={(e) => {
+                formikDialog.setFieldError("perms", undefined);
+                formikDialog.setFieldValue(
+                  "perms",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.perms
+                  ? (formikDialog.errors.perms as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.perms && (
+                  <Icon
+                    name="x-circle"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("perms", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.path ? "has-error" : ""
+            } min-w-60`}
+          >
+            <TextInput
+              withAsterisk
+              label={t("path")}
+              placeholder={ct("placeholder_input") + ct("path")}
+              value={formikDialog.values.path}
+              onChange={(e) => {
+                formikDialog.setFieldError("path", undefined);
+                formikDialog.setFieldValue(
+                  "path",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.path
+                  ? (formikDialog.errors.path as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.path && (
+                  <Icon
+                    name="x-circle"
+                    size={{ w: 18, h: 18 }}
+                    fill={true}
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("path", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("frame_flag")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysYesNo.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="frameFlag"
+                      className="form-radio"
+                      checked={item.value == formikDialog.values.frameFlag}
+                      onChange={() =>
+                        formikDialog.setFieldValue(
+                          "frameFlag",
+                          item.value,
+                          false
+                        )
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+          <div className="min-w-60">
+            <NumberInput
+              label={t("sort")}
+              value={formikDialog.values.orderNum}
+              onChange={(val) =>
+                formikDialog.setFieldValue("orderNum", val || 0, false)
+              }
+              min={0}
+              max={9999}
+            />
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.remarkJson ? "has-error" : ""
+            } min-w-60`}
+          >
+            <JsonInput
+              label={ct("remark")}
+              placeholder={ct("placeholder_input") + ct("remark")}
+              description={ct("description_json_input")}
+              value={formikDialog.values.remarkJson || ""}
+              onChange={(val) => {
+                formikDialog.setFieldError("remarkJson", undefined);
+                formikDialog.setFieldValue("remarkJson", val, false);
+              }}
+              error={
+                formikDialog.errors.remarkJson
+                  ? (formikDialog.errors.remarkJson as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.remarkJson && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("remarkJson", undefined, false)
+                    }
+                  />
+                )
+              }
+              autosize
+              formatOnBlur
+            />
+          </div>
+          <div className="min-w-60">
+            <TextInput
+              label={t("version")}
+              placeholder={ct("placeholder_input") + t("version")}
+              value={formikDialog.values.menuVersion}
+              onChange={(e) => {
+                formikDialog.setFieldError("menuVersion", undefined);
+                formikDialog.setFieldValue(
+                  "menuVersion",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.menuVersion
+                  ? (formikDialog.errors.menuVersion as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.path && (
+                  <Icon
+                    name="x-circle"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue(
+                        "menuVersion",
+                        undefined,
+                        false
+                      )
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("hidden_flag")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysYesNo.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="hiddenFlag"
+                      className="form-radio"
+                      checked={item.value == formikDialog.values.hiddenFlag}
+                      onChange={() =>
+                        formikDialog.setFieldValue(
+                          "hiddenFlag",
+                          item.value,
+                          false
+                        )
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("status")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysStatus.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="status"
+                      className="form-radio"
+                      disabled={item.value == "3"}
+                      checked={item.value == formikDialog.values.status}
+                      onChange={() =>
+                        formikDialog.setFieldValue("status", item.value, false)
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+        </form>
+        {/* button */}
+
+        <div className="flex justify-end items-center mt-8 space-x-2">
+          <button
+            type="button"
+            className="btn btn-outline-danger"
+            onClick={() => closeDialog()}
+          >
+            {ct("cancel")}
+          </button>
+          {dialogType >= 3 && (
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={() => formikDialog.submitForm()}
+            >
+              {formikDialog.isSubmitting && (
+                <span className="animate-spin border-[2px] border-white border-l-transparent rounded-full w-5 h-5 inline-block align-middle m-auto mr-2"></span>
+              )}
+              {ct("submit")}
+            </button>
+          )}
+        </div>
+      </div>
+    </>
+  );
+  //#endregion
+
+  //#region table
+  const {
+    data: pageData,
+    isLoading,
+    mutate: pageDataMutate,
+  } = SystemMenuApi.useList({});
   const [expandedMenuIds, setExpandedMenuIds] = useState<number[]>([]);
   // nested datatable -- PageDataTableColumns
   const NestedDataTableColumns: DataTableColumn<any>[] = [
@@ -113,6 +605,8 @@ export default function () {
       title: t("affiliate"),
       width: 100,
       textAlign: "center",
+      render: (row: any) =>
+        dictVal2Label(remoteDictSysAffiliate, row.affiliateFlag),
     },
     {
       accessor: "actions",
@@ -207,37 +701,48 @@ export default function () {
       return null;
     },
   };
+  const PageTable = (
+    <DataTable
+      fetching={isLoading}
+      loaderType="dots"
+      loaderSize="xl"
+      loaderBackgroundBlur={2}
+      highlightOnHover
+      border={1}
+      className="table-hover"
+      records={pageData}
+      columns={NestedDataTableColumns}
+      rowExpansion={NestedDataTableRowExpansion}
+      defaultColumnRender={(row, _, accessor) => {
+        const data = row[accessor as keyof typeof row];
+        if (data == undefined || data == null || data == "") return "--";
+        return data;
+      }}
+      minHeight={300}
+    />
+  );
+  //#endregion
 
   return (
-    <div className="panel min-h-full">
-      <div className="flex flex-wrap gap-2 mb-4 print:hidden">
-        <WithPermissions permissions={["sys:menu:add"]}>
-          <button type="button" className="btn btn-outline-primary">
-            <Icon name="plus-circle" className="fill-success-light mr-1" />
-            {ct("add")}
-          </button>
-        </WithPermissions>
+    <>
+      <div className="relative panel overflow-hidden min-h-96">
+        <div className="flex flex-wrap gap-2 mb-4 print:hidden">
+          <WithPermissions permissions={["sys:menu:add"]}>
+            <button
+              type="button"
+              className="btn btn-outline-primary"
+              onClick={() => openDialog(3)}
+            >
+              <Icon name="plus-circle" className="fill-success-light mr-1" />
+              {ct("add")}
+            </button>
+          </WithPermissions>
+        </div>
+        <div className="relative overflow-hidden min-h-96">{PageTable}</div>
       </div>
-      <div className="relative overflow-hidden min-h-96">
-        <DataTable
-          fetching={isLoading}
-          loaderType="dots"
-          loaderSize="xl"
-          loaderBackgroundBlur={2}
-          highlightOnHover
-          border={1}
-          className="table-hover"
-          records={data}
-          columns={NestedDataTableColumns}
-          rowExpansion={NestedDataTableRowExpansion}
-          defaultColumnRender={(row, _, accessor) => {
-            const data = row[accessor as keyof typeof row];
-            if (data == undefined || data == null || data == "") return "--";
-            return data;
-          }}
-          minHeight={300}
-        />
-      </div>
-    </div>
+      <EditDialog show={show} close={closeDialog}>
+        {PageDialog}
+      </EditDialog>
+    </>
   );
 }

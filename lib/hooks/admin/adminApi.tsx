@@ -63,13 +63,27 @@ export const SystemMenuApi = {
       mutate,
     };
   },
-  select: async (data: Record<string, any> = {}) => {
-    const res = await adminFetcher({
+  useSelect: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
       url: "/backend/menu/select",
       method: "GET",
       params: data,
     });
-    return handleOperateResponse(res, OperateType.GET);
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
   },
   add: async (data: Record<string, any> = {}) => {
     const res = await adminFetcher({
@@ -124,7 +138,7 @@ export const SystemDictApi = {
     });
     useEffectOnce(() => {
       if (data && data.code == 200) {
-        const res = config.filter ? config.filter(data.data) : [data.data];
+        const res = config.filter ? config.filter(data.data) : [...data.data];
         res.forEach((d: any) => {
           d.value = d.dictValue;
           d.label = translate(d.dictLabelJson);

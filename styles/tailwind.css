@@ -577,10 +577,6 @@
   }
 }
 
-.mantine-Popover-dropdown {
-  @apply !p-0;
-}
-
 /* fire_loader */
 .swal2-popup {
   @apply !bg-white !text-black-7 dark:!bg-black-7 dark:!text-white-7;
@@ -604,4 +600,9 @@
   .fire_loader_container
   .fire_loader_text_dot:nth-child(odd) {
   animation-delay: 200ms;
+}
+
+/* mantine */
+.mantine-Combobox-option {
+  @apply data-[combobox-active]:bg-primary/30;
 }

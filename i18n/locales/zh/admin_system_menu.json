@@ -5,5 +5,11 @@
   "affiliate": "归属",
   "version": "支持版本",
   "key": "键",
-  "path": "菜单路径"
+  "path": "菜单路径",
+  "parent_menu": "上级菜单",
+  "icon": "图标",
+  "sort": "排序",
+  "frame_flag": "是否链接",
+  "hidden_flag": "是否隐藏",
+  "perms": "权限标识"
 }

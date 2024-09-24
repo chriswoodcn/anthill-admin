@@ -410,6 +410,141 @@ export default function () {
     openDialog(4, id);
   };
 
+  const PageTable = (
+    <DataTable
+      fetching={isLoading}
+      loaderType="dots"
+      loaderSize="xl"
+      loaderBackgroundBlur={2}
+      highlightOnHover
+      border={1}
+      className="table-hover whitespace-nowrap"
+      columns={[
+        {
+          accessor: "id",
+          title: ct("id"),
+          textAlign: "center",
+        },
+        {
+          accessor: "dictLabelJson",
+          title: t("col_label_1"),
+          textAlign: "center",
+          render: (row: any) =>
+            datatableColumnTranslateText(row, "dictLabelJson"),
+        },
+        {
+          accessor: "dictType",
+          title: t("col_label_2"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "dictType"),
+        },
+        {
+          accessor: "status",
+          title: t("col_label_3"),
+          textAlign: "center",
+          render: (row: any) => dictVal2Label(remoteDictSysStatus, row.status),
+        },
+        {
+          accessor: "dictValue",
+          title: t("col_label_4"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "dictValue"),
+        },
+        {
+          accessor: "dictSort",
+          title: t("col_label_5"),
+          textAlign: "center",
+        },
+        {
+          accessor: "remarkJson",
+          title: ct("remark"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
+        },
+        {
+          accessor: "actions",
+          title: ct("actions"),
+          textAlign: "center",
+          render: (row: any) => {
+            return row.id ? (
+              <div className="flex justify-center space-x-4" key={row.dictId}>
+                <WithPermissions permissions={["system:dict:list"]}>
+                  <button
+                    type="button"
+                    className="btn btn-xs mr-1 btn-outline-secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDetailRow(row.id);
+                    }}
+                  >
+                    <Icon
+                      name="view"
+                      className="w-5 h-5 mr-1 fill-secondary-light"
+                    />
+                    {ct("detail")}
+                  </button>
+                </WithPermissions>
+                {row.status != "3" && (
+                  <>
+                    <WithPermissions permissions={["system:dict:edit"]}>
+                      <button
+                        type="button"
+                        className="btn btn-xs btn-outline-primary"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleEditRow(row.id);
+                        }}
+                      >
+                        <Icon
+                          name="pencil-paper"
+                          className="w-5 h-5 fill-primary-4"
+                        />
+                        {ct("update")}
+                      </button>
+                    </WithPermissions>
+                    <WithPermissions permissions={["system:dict:remove"]}>
+                      <button
+                        type="button"
+                        className="btn btn-xs mr-1 btn-outline-danger"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteRow(row.id);
+                        }}
+                      >
+                        <Icon
+                          name="trash-lines"
+                          className="w-5 h-5 mr-1 fill-danger-light"
+                        />
+                        {ct("delete")}
+                      </button>
+                    </WithPermissions>
+                  </>
+                )}
+              </div>
+            ) : (
+              "--"
+            );
+          },
+        },
+      ]}
+      defaultColumnRender={(row, _, accessor) => {
+        const data = row[accessor as keyof typeof row];
+        if (data == 0) return 0;
+        if (data == undefined || data == null || data == "") return "--";
+        return data;
+      }}
+      records={pageData?.list || []}
+      totalRecords={pageData?.totalCount || 0}
+      recordsPerPageLabel={ct("records_per_page")}
+      recordsPerPage={pageSize}
+      page={page}
+      onPageChange={(p) => setPage(p)}
+      recordsPerPageOptions={PAGE_SIZES}
+      onRecordsPerPageChange={setPageSize}
+      minHeight={300}
+    />
+  );
+
   return (
     <>
       <QueryCondition
@@ -478,143 +613,7 @@ export default function () {
             </button>
           </WithPermissions>
         </div>
-        <DataTable
-          fetching={isLoading}
-          loaderType="dots"
-          loaderSize="xl"
-          loaderBackgroundBlur={2}
-          highlightOnHover
-          border={1}
-          className="table-hover whitespace-nowrap"
-          columns={[
-            {
-              accessor: "id",
-              title: ct("id"),
-              textAlign: "center",
-            },
-            {
-              accessor: "dictLabelJson",
-              title: t("col_label_1"),
-              textAlign: "center",
-              render: (row: any) =>
-                datatableColumnTranslateText(row, "dictLabelJson"),
-            },
-            {
-              accessor: "dictType",
-              title: t("col_label_2"),
-              textAlign: "center",
-              render: (row: any) => datatableColumnText(row, "dictType"),
-            },
-            {
-              accessor: "status",
-              title: t("col_label_3"),
-              textAlign: "center",
-              render: (row: any) =>
-                dictVal2Label(remoteDictSysStatus, row.status),
-            },
-            {
-              accessor: "dictValue",
-              title: t("col_label_4"),
-              textAlign: "center",
-              render: (row: any) => datatableColumnText(row, "dictValue"),
-            },
-            {
-              accessor: "dictSort",
-              title: t("col_label_5"),
-              textAlign: "center",
-            },
-            {
-              accessor: "remarkJson",
-              title: ct("remark"),
-              textAlign: "center",
-              render: (row: any) =>
-                datatableColumnTranslateText(row, "remarkJson"),
-            },
-            {
-              accessor: "actions",
-              title: ct("actions"),
-              textAlign: "center",
-              render: (row: any) => {
-                return row.id ? (
-                  <div
-                    className="flex justify-center space-x-4"
-                    key={row.dictId}
-                  >
-                    <WithPermissions permissions={["system:dict:list"]}>
-                      <button
-                        type="button"
-                        className="btn btn-xs mr-1 btn-outline-secondary"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDetailRow(row.id);
-                        }}
-                      >
-                        <Icon
-                          name="view"
-                          className="w-5 h-5 mr-1 fill-secondary-light"
-                        />
-                        {ct("detail")}
-                      </button>
-                    </WithPermissions>
-                    {row.status != "3" && (
-                      <>
-                        <WithPermissions permissions={["system:dict:edit"]}>
-                          <button
-                            type="button"
-                            className="btn btn-xs btn-outline-primary"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleEditRow(row.id);
-                            }}
-                          >
-                            <Icon
-                              name="pencil-paper"
-                              className="w-5 h-5 fill-primary-4"
-                            />
-                            {ct("update")}
-                          </button>
-                        </WithPermissions>
-                        <WithPermissions permissions={["system:dict:remove"]}>
-                          <button
-                            type="button"
-                            className="btn btn-xs mr-1 btn-outline-danger"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleDeleteRow(row.id);
-                            }}
-                          >
-                            <Icon
-                              name="trash-lines"
-                              className="w-5 h-5 mr-1 fill-danger-light"
-                            />
-                            {ct("delete")}
-                          </button>
-                        </WithPermissions>
-                      </>
-                    )}
-                  </div>
-                ) : (
-                  "--"
-                );
-              },
-            },
-          ]}
-          defaultColumnRender={(row, _, accessor) => {
-            const data = row[accessor as keyof typeof row];
-            if (data == 0) return 0;
-            if (data == undefined || data == null || data == "") return "--";
-            return data;
-          }}
-          records={pageData?.list || []}
-          totalRecords={pageData?.totalCount || 0}
-          recordsPerPageLabel={ct("records_per_page")}
-          recordsPerPage={pageSize}
-          page={page}
-          onPageChange={(p) => setPage(p)}
-          recordsPerPageOptions={PAGE_SIZES}
-          onRecordsPerPageChange={setPageSize}
-          minHeight={300}
-        />
+        {PageTable}
       </div>
       <EditDialog show={show} close={closeDialog}>
         {PageDialog}

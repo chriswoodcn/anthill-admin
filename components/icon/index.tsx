@@ -12,6 +12,8 @@ import IconCaretDown from "./icon-caret-down";
 import IconLogout from "./icon-logout";
 import IconRefresh from "./icon-refresh";
 import IconClipboardText from "./icon-clipboard-text";
+import IconFolder from "./icon-folder";
+import IconBox from "./icon-box";
 import { IconCheck } from "@tabler/icons-react";
 
 interface BaseIconProps {
@@ -39,6 +41,8 @@ const TemplateMap: Record<string, FC<IconOptions>> = {
   refresh: IconRefresh,
   view: IconClipboardText,
   check: IconCheck,
+  folder: IconFolder,
+  box: IconBox,
 };
 const switchIcon = (
   name: string,
