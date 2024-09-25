@@ -410,6 +410,7 @@ export default function () {
     openDialog(4, id);
   };
 
+  //#region table
   const PageTable = (
     <DataTable
       fetching={isLoading}
@@ -544,6 +545,7 @@ export default function () {
       minHeight={300}
     />
   );
+  //#endregion
 
   return (
     <>

@@ -24,6 +24,8 @@ import Yup from "@/lib/validation";
 import { useImmer } from "use-immer";
 import { JsonInput, NumberInput, TextInput } from "@mantine/core";
 import TreeSelect from "../../_component/TreeSelect";
+import Toast from "@/lib/toast";
+import useEffectOnce from "@/lib/hooks/useEffectOnce";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
@@ -61,15 +63,15 @@ export default function () {
   const [show, setShow] = useState(false);
   const initialForm = {
     id: undefined,
+    menuType: "M",
     menuNameJson: undefined,
     parentId: undefined,
     orderNum: 0,
     path: undefined,
     menuKey: undefined,
-    menuType: "M",
     status: "0",
     perms: undefined,
-    icon: undefined,
+    icon: "#",
     remarkJson: undefined,
     menuVersion: undefined,
     hiddenFlag: "0",
@@ -81,7 +83,7 @@ export default function () {
   const formikDialog = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      dictLabelJson: Yup.string()
+      menuNameJson: Yup.string()
         .required()
         .test({
           name: "json",
@@ -96,8 +98,7 @@ export default function () {
             }
           },
         }),
-      dictType: Yup.string().required(),
-      dictValue: Yup.string().required(),
+      parentId: Yup.number().required(),
       remarkJson: Yup.string()
         .nullable()
         .test({
@@ -112,6 +113,62 @@ export default function () {
             }
           },
         }),
+      path: Yup.string()
+        .nullable()
+        .test({
+          name: "required",
+          message: ct("validation_error.field_required"),
+          test: (val, ctx) => {
+            const menuType = ctx.parent.menuType;
+            console.log(ctx.parent);
+            if (menuType == "C") {
+              return !!val;
+            }
+            return true;
+          },
+        })
+        .test({
+          name: "invalid",
+          message: ct("validation_error.field_invalid"),
+          test: (val, ctx) => {
+            const menuType = ctx.parent.menuType;
+            if (menuType != "C") return true;
+            const frameFlag = ctx.parent.frameFlag;
+            if (!val) return false;
+            if (frameFlag == "1" && val) {
+              return /^https?:\/\/(([a-zA-Z0-9_-])+(\.)?)*(:\d+)?(\/((\.)?(\?)?=?&?[a-zA-Z0-9_-](\?)?)*)*$/i.test(
+                val
+              );
+            }
+            return true;
+          },
+        }),
+      menuKey: Yup.string()
+        .nullable()
+        .test({
+          name: "required",
+          message: ct("validation_error.field_required"),
+          test: (val, ctx) => {
+            const menuType = ctx.parent.menuType;
+            if (menuType != "F") {
+              return !!val;
+            }
+            return true;
+          },
+        }),
+      perms: Yup.string()
+        .nullable()
+        .test({
+          name: "required",
+          message: ct("validation_error.field_required"),
+          test: (val, ctx) => {
+            const menuType = ctx.parent.menuType;
+            if (menuType != "M") {
+              return !!val;
+            }
+            return true;
+          },
+        }),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values", values);
@@ -123,14 +180,17 @@ export default function () {
       updateForm((form) => (form = initialForm));
     },
   });
+  useEffectOnce(() => {
+    formikDialog.setErrors({});
+  }, [formikDialog.values.menuType]);
   const handleSubmitDialog = async () => {
     let result;
     switch (dialogType) {
       case 3:
-        result = await SystemDictDataApi.add(formikDialog.values);
+        result = await SystemMenuApi.add(formikDialog.values);
         break;
       case 4:
-        result = await SystemDictDataApi.update(formikDialog.values);
+        result = await SystemMenuApi.update(formikDialog.values);
         break;
     }
     if (result) {
@@ -231,7 +291,11 @@ export default function () {
                       className="form-radio"
                       checked={item.value == formikDialog.values.menuType}
                       onChange={() =>
-                        formikDialog.setFieldValue("menuType", item.value, false)
+                        formikDialog.setFieldValue(
+                          "menuType",
+                          item.value,
+                          false
+                        )
                       }
                     />
                     <span>{item.label}</span>
@@ -356,7 +420,37 @@ export default function () {
               />
             </div>
           )}
-          {/* 路径 */}
+          {/* 是否链接 */}
+          {formikDialog.values.menuType == "C" && (
+            <div className="min-w-60">
+              <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+                {t("frame_flag")}
+              </label>
+              <div className="text-sm">
+                {remoteDictSysYesNo.map((item: any) => {
+                  return (
+                    <label className="inline-flex mr-4" key={item.value}>
+                      <input
+                        type="radio"
+                        name="frameFlag"
+                        className="form-radio"
+                        checked={item.value == formikDialog.values.frameFlag}
+                        onChange={() =>
+                          formikDialog.setFieldValue(
+                            "frameFlag",
+                            item.value,
+                            false
+                          )
+                        }
+                      />
+                      <span>{item.label}</span>
+                    </label>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {/* 菜单路径 */}
           {formikDialog.values.menuType == "C" && (
             <div
               className={`${
@@ -431,36 +525,6 @@ export default function () {
               />
             </div>
           )}
-          {/* 是否链接 */}
-          {formikDialog.values.menuType == "C" && (
-            <div className="min-w-60">
-              <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-                {t("frame_flag")}
-              </label>
-              <div className="text-sm">
-                {remoteDictSysYesNo.map((item: any) => {
-                  return (
-                    <label className="inline-flex mr-4" key={item.value}>
-                      <input
-                        type="radio"
-                        name="frameFlag"
-                        className="form-radio"
-                        checked={item.value == formikDialog.values.frameFlag}
-                        onChange={() =>
-                          formikDialog.setFieldValue(
-                            "frameFlag",
-                            item.value,
-                            false
-                          )
-                        }
-                      />
-                      <span>{item.label}</span>
-                    </label>
-                  );
-                })}
-              </div>
-            </div>
-          )}
           {/* 排序 */}
           <div className="min-w-60">
             <NumberInput
@@ -515,42 +579,40 @@ export default function () {
             </div>
           )}
           {/* 支持版本 */}
-          {formikDialog.values.menuType !== "F" && (
-            <div className="min-w-60">
-              <TextInput
-                label={t("version")}
-                placeholder={ct("placeholder_input") + t("version")}
-                value={formikDialog.values.menuVersion}
-                onChange={(e) => {
-                  formikDialog.setFieldError("menuVersion", undefined);
-                  formikDialog.setFieldValue(
-                    "menuVersion",
-                    e.currentTarget.value,
-                    false
-                  );
-                }}
-                error={
-                  formikDialog.errors.menuVersion
-                    ? (formikDialog.errors.menuVersion as string)
-                    : ""
-                }
-                rightSection={
-                  formikDialog.values.path && (
-                    <Icon
-                      name="x-circle"
-                      onClick={(e) =>
-                        formikDialog.setFieldValue(
-                          "menuVersion",
-                          undefined,
-                          false
-                        )
-                      }
-                    />
-                  )
-                }
-              />
-            </div>
-          )}
+          <div className="min-w-60">
+            <TextInput
+              label={t("version")}
+              placeholder={ct("placeholder_input") + t("version")}
+              value={formikDialog.values.menuVersion}
+              onChange={(e) => {
+                formikDialog.setFieldError("menuVersion", undefined);
+                formikDialog.setFieldValue(
+                  "menuVersion",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.menuVersion
+                  ? (formikDialog.errors.menuVersion as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.path && (
+                  <Icon
+                    name="x-circle"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue(
+                        "menuVersion",
+                        undefined,
+                        false
+                      )
+                    }
+                  />
+                )
+              }
+            />
+          </div>
           {/* 是否隐藏 */}
           {formikDialog.values.menuType !== "F" && (
             <div className="min-w-60">
@@ -605,6 +667,34 @@ export default function () {
               })}
             </div>
           </div>
+          {/* 归属 */}
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("affiliate")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysAffiliate.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="affiliate"
+                      className="form-radio"
+                      checked={item.value == formikDialog.values.affiliateFlag}
+                      onChange={() =>
+                        formikDialog.setFieldValue(
+                          "affiliateFlag",
+                          item.value,
+                          false
+                        )
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
         </form>
         {/* button */}
 
@@ -620,7 +710,12 @@ export default function () {
             <button
               type="submit"
               className="btn btn-primary"
-              onClick={() => formikDialog.submitForm()}
+              onClick={() => {
+                if (!formikDialog.isValid) {
+                  logger.debug("formikDialog errors", formikDialog.errors);
+                }
+                formikDialog.submitForm();
+              }}
             >
               {formikDialog.isSubmitting && (
                 <span className="animate-spin border-[2px] border-white border-l-transparent rounded-full w-5 h-5 inline-block align-middle m-auto mr-2"></span>
@@ -633,6 +728,19 @@ export default function () {
     </>
   );
   //#endregion
+
+  const handleDeleteRow = async (id: string | number) => {
+    Toast.fireWarnConfirmModel({
+      html: <p>{ct("desc_delete_id") + id}</p>,
+      callback: async () => {
+        const res = await SystemDictDataApi.delete([id]);
+        if (res) pageDataMutate();
+      },
+    });
+  };
+  const handleEditRow = async (id: string | number) => {
+    openDialog(4, id);
+  };
 
   //#region table
   const {
@@ -720,7 +828,7 @@ export default function () {
                 className="btn btn-xs btn-outline-primary"
                 onClick={(e) => {
                   e.stopPropagation();
-                  openDialog(4, row.id);
+                  handleEditRow(row.id);
                 }}
               >
                 <Icon name="pencil-paper" className="w-5 h-5 fill-primary-4" />
@@ -734,6 +842,8 @@ export default function () {
                   className="btn btn-xs btn-outline-success"
                   onClick={(e) => {
                     e.stopPropagation();
+                    formikDialog.setFieldValue("parentId", row.id, false);
+                    openDialog(3);
                   }}
                 >
                   <Icon
@@ -750,6 +860,7 @@ export default function () {
                 className="btn btn-xs mr-1 btn-outline-danger"
                 onClick={(e) => {
                   e.stopPropagation();
+                  handleDeleteRow(row.id);
                 }}
               >
                 <Icon
@@ -791,7 +902,6 @@ export default function () {
             }
             defaultColumnRender={(row, _, accessor) => {
               const data = row[accessor as keyof typeof row];
-              logger.debug("row", row);
               if (data == undefined || data == null || data == "") return "--";
               return data;
             }}
