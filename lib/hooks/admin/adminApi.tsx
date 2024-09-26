@@ -85,6 +85,14 @@ export const SystemMenuApi = {
       mutate,
     };
   },
+  all: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/menu/list",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res);
+  },
   getById: async (id: string | number) => {
     const res = await adminFetcher({
       url: "/backend/menu/getById/" + id,

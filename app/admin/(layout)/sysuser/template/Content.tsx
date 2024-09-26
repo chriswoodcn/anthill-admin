@@ -5,13 +5,13 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
-import Link from "next/link";
 
 import { dictVal2Label } from "@/lib";
 import {
   SystemDictApi,
   SystemDictTypeApi,
   SysUserRoleApi,
+  SystemMenuApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
@@ -27,6 +27,7 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
+import RcTreeCheckbox from "../../_component/RcTreeCheckbox";
 
 export default function () {
   const { t } = useTranslation("admin_sysuser_template");
@@ -102,9 +103,10 @@ export default function () {
     status: "0",
     remarkJson: undefined,
     roleSort: 0,
-    affiliateFlag: "T",
+    affiliateFlag: "2",
     comId: undefined,
     version: 0,
+    menuIds: [],
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
   const formikDialog = useFormik({
@@ -183,12 +185,29 @@ export default function () {
         return null;
     }
   };
+  // 获取所有的菜单
+  const [allMenus, setAllMenus] = useState<any[]>([]);
+  const fetchAllMenus = async () => {
+    const r0 = await SystemMenuApi.all({
+      affiliateFlag: formikDialog.values.affiliateFlag,
+    });
+    if (r0) {
+      setAllMenus(r0);
+    }
+  };
+  useEffectOnce(() => {
+    fetchAllMenus();
+  }, [formikDialog.values.affiliateFlag]);
+  // 获取模板拥有的菜单
+  const [checkedMenuIds, setCheckedMenuIds] = useState<any[]>([]);
+  const fetchMenuIdsByRoleId = async () => {};
   const openDialog = async (
     type: number | undefined = 0,
     formId: number | string | undefined = undefined
   ) => {
     setDialogType(type);
     if (type == 3) {
+      await fetchAllMenus();
       setShow(true);
       return;
     }
@@ -201,6 +220,8 @@ export default function () {
         }
       }
     }
+    await fetchAllMenus();
+    await fetchMenuIdsByRoleId();
     setShow(true);
   };
   const closeDialog = () => {
@@ -277,6 +298,34 @@ export default function () {
               })}
             </div>
           </div>
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("affiliate")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysAffiliate.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="affiliateFlag"
+                      className="form-radio"
+                      disabled={item.value == "3"}
+                      checked={item.value == formikDialog.values.affiliateFlag}
+                      onChange={() =>
+                        formikDialog.setFieldValue(
+                          "affiliateFlag",
+                          item.value,
+                          false
+                        )
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
           <div
             className={`${
               formikDialog.errors.remarkJson ? "has-error" : ""
@@ -309,6 +358,35 @@ export default function () {
               }
               autosize
               formatOnBlur
+            />
+          </div>
+          {/* 模板菜单&权限 */}
+          <div
+            className={`${
+              formikDialog.errors.menuIds ? "has-error" : ""
+            } mt-2 min-w-60`}
+          >
+            <RcTreeCheckbox
+              fieldNames={{
+                children: "children",
+                title: "menuNameJson",
+                key: "id",
+              }}
+              withAsterisk
+              label={t("template_page.label_3")}
+              checkModel="all"
+              data={allMenus}
+              value={checkedMenuIds}
+              onChange={(checked) => {
+                console.log("TreeCheckbox onChange", checked);
+                formikDialog.setFieldError("menuIds", undefined);
+                formikDialog.setFieldValue("menuIds", checked, false);
+              }}
+              error={
+                formikDialog.errors.menuIds
+                  ? (formikDialog.errors.menuIds as string)
+                  : ""
+              }
             />
           </div>
         </form>
