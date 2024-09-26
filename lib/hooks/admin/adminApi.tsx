@@ -346,3 +346,60 @@ export const SystemConfigApi = {
     return handleOperateResponse(res, OperateType.CLEAR);
   },
 };
+/**
+ * 系统角色
+ */
+export const SysUserRoleApi = {
+  usePage: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
+      url: "/backend/role/page",
+      method: "POST",
+      data,
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
+  getById: async (id: string | number) => {
+    const res = await adminFetcher({
+      url: "/backend/role/getById/" + id,
+      method: "GET",
+    });
+    return handleOperateResponse(res);
+  },
+  add: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/role/add",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.ADD);
+  },
+  update: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/role/update",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.UPDATE);
+  },
+  delete: async (ids: (string | number)[]) => {
+    const res = await adminFetcher({
+      url: "/backend/role/deleteLogic/" + ids,
+      method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
+};

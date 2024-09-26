@@ -1,7 +1,7 @@
 {
-  "col_label_1": "标签",
-  "col_label_2": "字典类型",
-  "col_label_3": "状态",
-  "col_label_4": "值",
-  "col_label_5": "排序"
+  "label": "标签",
+  "type": "字典类型",
+  "status": "状态",
+  "value": "值",
+  "sort": "排序"
 }

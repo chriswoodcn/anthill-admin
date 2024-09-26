@@ -221,8 +221,8 @@ export default function () {
           >
             <JsonInput
               withAsterisk
-              label={t("col_label_1")}
-              placeholder={ct("placeholder_input") + t("col_label_1")}
+              label={t("label")}
+              placeholder={ct("placeholder_input") + t("label")}
               description={ct("description_json_input")}
               value={formikDialog.values.dictLabelJson || ""}
               onChange={(val) => {
@@ -259,13 +259,13 @@ export default function () {
             } min-w-60`}
           >
             <TextInput
-              label={t("col_label_2")}
+              label={t("type")}
               defaultValue={formikDialog.values.dictType || ""}
             />
           </div>
           <div className="min-w-60">
             <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-              {t("col_label_3")}
+              {t("status")}
             </label>
             <div className="text-sm">
               {remoteDictSysStatus.map((item: any) => {
@@ -290,8 +290,8 @@ export default function () {
           <div className="min-w-60">
             <TextInput
               withAsterisk
-              label={t("col_label_4")}
-              placeholder={ct("placeholder_input") + ct("col_label_4")}
+              label={t("value")}
+              placeholder={ct("placeholder_input") + ct("value")}
               value={formikDialog.values.dictValue}
               onChange={(e) => {
                 formikDialog.setFieldError("dictValue", undefined);
@@ -322,7 +322,7 @@ export default function () {
           </div>
           <div className="min-w-60">
             <NumberInput
-              label={t("col_label_5")}
+              label={t("sort")}
               value={formikDialog.values.dictSort}
               onChange={(val) =>
                 formikDialog.setFieldValue("dictSort", val || 0, false)
@@ -428,32 +428,32 @@ export default function () {
         },
         {
           accessor: "dictLabelJson",
-          title: t("col_label_1"),
+          title: t("label"),
           textAlign: "center",
           render: (row: any) =>
             datatableColumnTranslateText(row, "dictLabelJson"),
         },
         {
           accessor: "dictType",
-          title: t("col_label_2"),
+          title: t("type"),
           textAlign: "center",
           render: (row: any) => datatableColumnText(row, "dictType"),
         },
         {
           accessor: "status",
-          title: t("col_label_3"),
+          title: t("status"),
           textAlign: "center",
           render: (row: any) => dictVal2Label(remoteDictSysStatus, row.status),
         },
         {
           accessor: "dictValue",
-          title: t("col_label_4"),
+          title: t("value"),
           textAlign: "center",
           render: (row: any) => datatableColumnText(row, "dictValue"),
         },
         {
           accessor: "dictSort",
-          title: t("col_label_5"),
+          title: t("sort"),
           textAlign: "center",
         },
         {
@@ -556,15 +556,15 @@ export default function () {
         <form className="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2">
           <div className="min-w-60">
             <TextInput
-              label={t("col_label_2")}
-              placeholder={ct("placeholder_input") + t("col_label_2")}
+              label={t("type")}
+              placeholder={ct("placeholder_input") + t("type")}
               value={formikQuery.values.dictType || ""}
             />
           </div>
           <div className="min-w-60">
             <Select
-              label={t("col_label_3")}
-              placeholder={ct("placeholder_select") + t("col_label_3")}
+              label={t("status")}
+              placeholder={ct("placeholder_select") + t("status")}
               value={formikQuery.values.status || null}
               data={remoteDictSysStatus}
               renderOption={({ option, checked }) => {

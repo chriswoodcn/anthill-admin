@@ -1,5 +1,5 @@
 {
-  "col_label_1": "字典名称",
-  "col_label_2": "字典类型",
-  "col_label_3": "状态"
+  "name": "字典名称",
+  "type": "字典类型",
+  "status": "状态"
 }

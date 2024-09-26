@@ -1,5 +1,5 @@
 {
-  "col_label_1": "Dict Name",
-  "col_label_2": "Dict Type",
-  "col_label_3": "Status"
+  "name": "Dict Name",
+  "type": "Dict Type",
+  "status": "Status"
 }

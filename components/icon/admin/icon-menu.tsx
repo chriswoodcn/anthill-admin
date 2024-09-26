@@ -8,7 +8,9 @@ import IconMenuSysuserRole from "./icon-menu-sysuser-role";
 import IconMenuSystoolJob from "./icon-menu-systool-job";
 import IconMenuSysmonitorOnline from "./icon-menu-sysmonitor-online";
 import IconMenuLog from "./icon-menu-log";
-import IconMenuDashboard from '../menu/icon-menu-dashboard';
+import IconMenuDashboard from "../menu/icon-menu-dashboard";
+import IconMenuSysuserTemplate from "./icon-menu-sysuser-template";
+import IconMenuSysuserCompany from "./icon-menu-sysuser-company";
 
 interface MenuProps {
   className?: string;
@@ -26,10 +28,12 @@ const MenuTemplateMap: Record<string, FC<MenuProps>> = {
   "system-config": IconMenuSystemConfig,
   "sysuser-list": IconMenuSysuserList,
   "sysuser-role": IconMenuSysuserRole,
+  "sysuser-template": IconMenuSysuserTemplate,
+  "sysuser-company": IconMenuSysuserCompany,
   "systool-job": IconMenuSystoolJob,
   "sysmonitor-online": IconMenuSysmonitorOnline,
   "sysmonitor-loginLog": IconMenuLog,
-  "sysmonitor-operLog": IconMenuLog
+  "sysmonitor-operLog": IconMenuLog,
 };
 const switchIcon = (
   name: string,

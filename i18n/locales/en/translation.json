@@ -149,6 +149,8 @@
   "sysuser": "Sys User",
   "sysuser-list": "User List",
   "sysuser-role": "User Role",
+  "sysuser-template": "User Template",
+  "sysuser-company": "Company List",
   "sysmonitor": "Sys Monitor",
   "sysmonitor-online": "Online",
   "sysmonitor-loginLog": "Login Log",

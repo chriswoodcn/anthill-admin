@@ -8,10 +8,17 @@ import { useImmer } from "use-immer";
 import Link from "next/link";
 
 import { dictVal2Label } from "@/lib";
-import { SystemDictApi, SystemDictTypeApi } from "@/lib/hooks/admin/adminApi";
+import {
+  SystemDictApi,
+  SystemDictTypeApi,
+  SysUserRoleApi,
+} from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
-import { datatableColumnTranslateText } from "@/lib/support/datatableSupport";
+import {
+  datatableColumnText,
+  datatableColumnTranslateText,
+} from "@/lib/support/datatableSupport";
 import Yup from "@/lib/validation";
 import { DataTable } from "mantine-datatable";
 
@@ -22,7 +29,7 @@ import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 
 export default function () {
-  const { t } = useTranslation("admin_system_dict");
+  const { t } = useTranslation("admin_sysuser_role");
   const { t: ct } = useTranslation("admin_common");
 
   //#region query
@@ -30,8 +37,10 @@ export default function () {
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
   const initQueryParams = {
-    dictType: undefined,
+    roleKey: undefined,
     status: undefined,
+    affiliateFlag: undefined,
+    templateFlag: "0",
   };
   const [queryParams, updateQueryParams] =
     useImmer<Record<string, any>>(initQueryParams);
@@ -59,7 +68,7 @@ export default function () {
     data: pageData,
     isLoading,
     mutate: pageDataMutate,
-  } = SystemDictTypeApi.usePage({
+  } = SysUserRoleApi.usePage({
     pageNum: page,
     pageSize,
     ...queryParams,
@@ -79,16 +88,23 @@ export default function () {
       },
     }
   );
+  const { data: remoteDictSysAffiliate } = SystemDictApi.useDict({
+    type: "sys_affiliate",
+  });
+
   //#endregion
 
   //#region dialog
   const [show, setShow] = useState(false);
   const initialForm = {
     id: undefined,
-    dictNameJson: undefined,
-    dictType: undefined,
+    roleNameJson: undefined,
+    roleKey: undefined,
     status: "0",
     remarkJson: undefined,
+    roleSort: 0,
+    affiliateFlag: "0",
+    comId: undefined,
     version: 0,
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
@@ -178,7 +194,7 @@ export default function () {
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SystemDictTypeApi.getById(formId);
+    const r0 = await SysUserRoleApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -204,32 +220,32 @@ export default function () {
         <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
           <div
             className={`${
-              formikDialog.errors.dictNameJson ? "has-error" : ""
+              formikDialog.errors.roleNameJson ? "has-error" : ""
             } min-w-60`}
           >
             <JsonInput
               withAsterisk
-              label={t("name")}
-              placeholder={ct("placeholder_input") + t("name")}
+              label={t("role_name")}
+              placeholder={ct("placeholder_input") + t("role_name")}
               description={ct("description_json_input")}
-              value={formikDialog.values.dictNameJson || ""}
+              value={formikDialog.values.roleNameJson || ""}
               onChange={(val) => {
-                formikDialog.setFieldError("dictNameJson", undefined);
-                formikDialog.setFieldValue("dictNameJson", val, false);
+                formikDialog.setFieldError("roleNameJson", undefined);
+                formikDialog.setFieldValue("roleNameJson", val, false);
               }}
               error={
-                formikDialog.errors.dictNameJson
-                  ? (formikDialog.errors.dictNameJson as string)
+                formikDialog.errors.roleNameJson
+                  ? (formikDialog.errors.roleNameJson as string)
                   : ""
               }
               rightSection={
-                formikDialog.values.dictNameJson && (
+                formikDialog.values.roleNameJson && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
                       formikDialog.setFieldValue(
-                        "dictNameJson",
+                        "roleNameJson",
                         undefined,
                         false
                       )
@@ -243,34 +259,34 @@ export default function () {
           </div>
           <div
             className={`${
-              formikDialog.errors.dictType ? "has-error" : ""
+              formikDialog.errors.roleKey ? "has-error" : ""
             } min-w-60`}
           >
             <TextInput
               withAsterisk
-              label={t("type")}
-              placeholder={ct("placeholder_input") + t("type")}
-              value={formikDialog.values.dictType}
+              label={t("role_key")}
+              placeholder={ct("placeholder_input") + t("role_key")}
+              value={formikDialog.values.roleKey}
               onChange={(e) => {
-                formikDialog.setFieldError("dictType", undefined);
+                formikDialog.setFieldError("roleKey", undefined);
                 formikDialog.setFieldValue(
-                  "dictType",
+                  "roleKey",
                   e.currentTarget.value,
                   false
                 );
               }}
               error={
-                formikDialog.errors.dictType
-                  ? (formikDialog.errors.dictType as string)
+                formikDialog.errors.roleKey
+                  ? (formikDialog.errors.roleKey as string)
                   : ""
               }
               rightSection={
-                formikDialog.values.dictType && (
+                formikDialog.values.roleKey && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
-                      formikDialog.setFieldValue("dictType", undefined, false)
+                      formikDialog.setFieldValue("roleKey", undefined, false)
                     }
                   />
                 )
@@ -293,6 +309,34 @@ export default function () {
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
+          </div>
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("affiliate")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysAffiliate.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="affiliateFlag"
+                      className="form-radio"
+                      disabled={item.value == "3"}
+                      checked={item.value == formikDialog.values.affiliateFlag}
+                      onChange={() =>
+                        formikDialog.setFieldValue(
+                          "affiliateFlag",
+                          item.value,
+                          false
+                        )
                       }
                     />
                     <span>{item.label}</span>
@@ -379,7 +423,6 @@ export default function () {
   const handleEditRow = async (id: string | number) => {
     openDialog(4, id);
   };
-  const handleRefreshCache = async () => await SystemDictTypeApi.refresh();
 
   //#region table
   const PageTable = (
@@ -398,27 +441,17 @@ export default function () {
           textAlign: "center",
         },
         {
-          accessor: "dictNameJson",
-          title: t("name"),
+          accessor: "roleNameJson",
+          title: t("role_name"),
           textAlign: "center",
           render: (row: any) =>
-            datatableColumnTranslateText(row, "dictNameJson"),
+            datatableColumnTranslateText(row, "roleNameJson"),
         },
         {
-          accessor: "dictType",
-          title: t("type"),
+          accessor: "roleKey",
+          title: t("role_key"),
           textAlign: "center",
-          render: (row: any) => (
-            <Link
-              href={{
-                pathname: "/admin/system/dict_data",
-                query: { dict_type: row.dictType, status: row.status },
-              }}
-              className="w-full underline cursor-pointer text-center text-primary"
-            >
-              {row.dictType}
-            </Link>
-          ),
+          render: (row: any) => datatableColumnText(row, "roleKey"),
         },
         {
           accessor: "status",
@@ -431,6 +464,14 @@ export default function () {
           title: ct("remark"),
           textAlign: "center",
           render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
+        },
+        {
+          accessor: "affiliateFlag",
+          title: t("affiliate"),
+          width: 100,
+          textAlign: "center",
+          render: (row: any) =>
+            dictVal2Label(remoteDictSysAffiliate, row.affiliateFlag),
         },
         {
           accessor: "actions",
@@ -524,12 +565,12 @@ export default function () {
         <form className="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2">
           <div className="min-w-60">
             <TextInput
-              label={t("type")}
-              placeholder={ct("placeholder_input") + t("type")}
-              value={formikQuery.values.dictType || ""}
+              label={t("role_key")}
+              placeholder={ct("placeholder_input") + t("role_key")}
+              value={formikQuery.values.roleKey || ""}
               onChange={(e) =>
                 formikQuery.setFieldValue(
-                  "dictType",
+                  "roleKey",
                   e.currentTarget.value,
                   false
                 )
@@ -538,12 +579,12 @@ export default function () {
                 if (e.keyCode == 13) pageDataMutate();
               }}
               rightSection={
-                formikQuery.values.dictType && (
+                formikQuery.values.roleKey && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
-                      formikQuery.setFieldValue("dictType", undefined, false)
+                      formikQuery.setFieldValue("roleKey", undefined, false)
                     }
                   />
                 )
@@ -578,6 +619,38 @@ export default function () {
               allowDeselect
             />
           </div>
+          <div className="min-w-60">
+            <Select
+              label={t("status")}
+              placeholder={ct("placeholder_select") + t("affiliate")}
+              value={formikQuery.values.affiliateFlag || null}
+              data={remoteDictSysAffiliate}
+              renderOption={({ option, checked }) => {
+                return (
+                  <div
+                    className="flex-1 flex justify-between py-0.5"
+                    key={option.value}
+                  >
+                    {option.label}
+                    {checked && (
+                      <Icon
+                        name="check"
+                        className="w-5 h-5 text-white-5 dark:text-black-5"
+                      />
+                    )}
+                  </div>
+                );
+              }}
+              onChange={(val, option) =>
+                formikQuery.setFieldValue(
+                  "affiliateFlag",
+                  val || undefined,
+                  false
+                )
+              }
+              allowDeselect
+            />
+          </div>
         </form>
       </QueryCondition>
       <div className="relative panel overflow-hidden min-h-96">
@@ -599,16 +672,6 @@ export default function () {
             <button type="button" className="btn btn-outline-success">
               <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
               {ct("export")}
-            </button>
-          </WithPermissions>
-          <WithPermissions permissions={["sys:dict:refresh"]}>
-            <button
-              type="button"
-              className="btn btn-outline-danger"
-              onClick={() => handleRefreshCache()}
-            >
-              <Icon name="refresh" className="w-5 h-5 fill-danger-light mr-1" />
-              {ct("refresh")}
             </button>
           </WithPermissions>
         </div>

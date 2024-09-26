@@ -218,8 +218,8 @@ export default function () {
           >
             <JsonInput
               withAsterisk
-              label={t("col_label_1")}
-              placeholder={ct("placeholder_input") + t("col_label_1")}
+              label={t("name")}
+              placeholder={ct("placeholder_input") + t("name")}
               description={ct("description_json_input")}
               value={formikDialog.values.configNameJson || ""}
               onChange={(val) => {
@@ -257,8 +257,8 @@ export default function () {
           >
             <TextInput
               withAsterisk
-              label={t("col_label_2")}
-              placeholder={ct("placeholder_input") + t("col_label_2")}
+              label={t("key")}
+              placeholder={ct("placeholder_input") + t("key")}
               value={formikDialog.values.configKey}
               onChange={(e) => {
                 formikDialog.setFieldError("configKey", undefined);
@@ -293,8 +293,8 @@ export default function () {
           >
             <TextInput
               withAsterisk
-              label={t("col_label_4")}
-              placeholder={ct("placeholder_input") + t("col_label_4")}
+              label={t("value")}
+              placeholder={ct("placeholder_input") + t("value")}
               value={formikDialog.values.configValue}
               onChange={(e) => {
                 formikDialog.setFieldError("configValue", undefined);
@@ -328,7 +328,7 @@ export default function () {
           </div>
           <div className="min-w-60">
             <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-              {t("col_label_3")}
+              {t("status")}
             </label>
             <div className="text-sm">
               {remoteDictSysStatus.map((item: any) => {
@@ -448,26 +448,26 @@ export default function () {
         },
         {
           accessor: "configNameJson",
-          title: t("col_label_1"),
+          title: t("name"),
           textAlign: "center",
           render: (row: any) =>
             datatableColumnTranslateText(row, "configNameJson"),
         },
         {
           accessor: "configKey",
-          title: t("col_label_2"),
+          title: t("key"),
           textAlign: "center",
           render: (row: any) => datatableColumnText(row, "configKey"),
         },
         {
           accessor: "status",
-          title: t("col_label_3"),
+          title: t("status"),
           textAlign: "center",
           render: (row: any) => dictVal2Label(remoteDictSysStatus, row.status),
         },
         {
           accessor: "configValue",
-          title: t("col_label_4"),
+          title: t("value"),
           textAlign: "center",
           render: (row: any) => datatableColumnText(row, "configValue"),
         },
@@ -570,8 +570,8 @@ export default function () {
         <form className="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2">
           <div className="min-w-60">
             <TextInput
-              label={t("col_label_2")}
-              placeholder={ct("placeholder_input") + t("col_label_2")}
+              label={t("key")}
+              placeholder={ct("placeholder_input") + t("key")}
               value={formikQuery.values.configKey || ""}
               onChange={(e) =>
                 formikQuery.setFieldValue(
@@ -598,8 +598,8 @@ export default function () {
           </div>
           <div className="min-w-60">
             <Select
-              label={t("col_label_3")}
-              placeholder={ct("placeholder_select") + t("col_label_3")}
+              label={t("status")}
+              placeholder={ct("placeholder_select") + t("status")}
               value={formikQuery.values.status || null}
               data={remoteDictSysStatus}
               renderOption={({ option, checked }) => {

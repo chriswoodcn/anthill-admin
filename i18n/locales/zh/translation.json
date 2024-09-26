@@ -149,6 +149,8 @@
   "sysuser": "系统用户",
   "sysuser-list": "用户列表",
   "sysuser-role": "用户角色",
+  "sysuser-template": "用户模板",
+  "sysuser-company": "客户列表",
   "sysmonitor": "系统监控",
   "sysmonitor-online": "在线用户",
   "sysmonitor-loginLog": "登录日志",
