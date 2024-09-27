@@ -69,6 +69,7 @@ const RcTreeCheckbox = (props: RcTreeCheckboxProps) => {
         <NoData />
       ) : (
         <Tree
+          fieldNames={finalFieldNames}
           checkable
           checkStrictly
           selectable={false}
@@ -79,6 +80,7 @@ const RcTreeCheckbox = (props: RcTreeCheckboxProps) => {
             logger.debug(expandedKeys);
           }}
           defaultCheckedKeys={value}
+          // checkedKeys={value}
           onCheck={(checkedKeys, info) => {
             const keys = checkedKeys as any;
             logger.debug("checkedKeys", keys);

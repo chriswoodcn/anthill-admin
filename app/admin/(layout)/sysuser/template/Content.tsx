@@ -107,32 +107,18 @@ export default function () {
     comId: undefined,
     version: 0,
     menuIds: [],
+    templateFlag: "1",
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
   const formikDialog = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      dictNameJson: Yup.string()
-        .required()
-        .test({
-          name: "json",
-          message: t("validation_error.field_json_invalid"),
-          test: (val) => {
-            try {
-              if (!val || val.replace(/\s/g, "") == "{}") return false;
-              JSON.parse(val);
-              return true;
-            } catch (error) {
-              return false;
-            }
-          },
-        }),
-      dictType: Yup.string().required(),
+      roleKey: Yup.string().required(),
       remarkJson: Yup.string()
         .nullable()
         .test({
           name: "json",
-          message: t("validation_error.field_json_invalid"),
+          message: ct("validation_error.field_json_invalid"),
           test: (val) => {
             try {
               if (val) JSON.parse(val);
@@ -142,6 +128,7 @@ export default function () {
             }
           },
         }),
+      menuIds: Yup.array().min(1, ct("validation_error.field_required")),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values", values);
@@ -157,10 +144,10 @@ export default function () {
     let result;
     switch (dialogType) {
       case 3:
-        result = await SystemDictTypeApi.add(formikDialog.values);
+        result = await SysUserRoleApi.add(formikDialog.values);
         break;
       case 4:
-        result = await SystemDictTypeApi.update(formikDialog.values);
+        result = await SysUserRoleApi.update(formikDialog.values);
         break;
     }
     if (result) {
@@ -343,7 +330,7 @@ export default function () {
               label={t("menu_permissions")}
               checkModel="all"
               data={allMenus}
-              value={checkedMenuIds}
+              value={formikDialog.values.menuIds || []}
               onChange={(checked) => {
                 console.log("TreeCheckbox onChange", checked);
                 formikDialog.setFieldError("menuIds", undefined);
@@ -405,7 +392,12 @@ export default function () {
             <button
               type="submit"
               className="btn btn-primary"
-              onClick={() => formikDialog.submitForm()}
+              onClick={() => {
+                if (!formikDialog.isValid) {
+                  logger.debug("errors", formikDialog.errors);
+                }
+                formikDialog.submitForm();
+              }}
             >
               {formikDialog.isSubmitting && (
                 <span className="animate-spin border-[2px] border-white border-l-transparent rounded-full w-5 h-5 inline-block align-middle m-auto mr-2"></span>
