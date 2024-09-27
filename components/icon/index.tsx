@@ -14,6 +14,7 @@ import IconRefresh from "./icon-refresh";
 import IconClipboardText from "./icon-clipboard-text";
 import IconFolder from "./icon-folder";
 import IconBox from "./icon-box";
+import IconNodata from "./icon-nodata";
 import { IconCheck } from "@tabler/icons-react";
 
 interface BaseIconProps {
@@ -43,6 +44,7 @@ const TemplateMap: Record<string, FC<IconOptions>> = {
   check: IconCheck,
   folder: IconFolder,
   box: IconBox,
+  nodata: IconNodata,
 };
 const switchIcon = (
   name: string,

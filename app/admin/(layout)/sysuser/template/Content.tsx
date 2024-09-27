@@ -326,6 +326,36 @@ export default function () {
               })}
             </div>
           </div>
+          {/* 模板菜单&权限 */}
+          <div
+            className={`${
+              formikDialog.errors.menuIds ? "has-error" : ""
+            } mt-2 min-w-60`}
+          >
+            <RcTreeCheckbox
+              fieldNames={{
+                children: "children",
+                title: "menuNameJson",
+                key: "id",
+              }}
+              trans="true"
+              withAsterisk
+              label={t("menu_permissions")}
+              checkModel="all"
+              data={allMenus}
+              value={checkedMenuIds}
+              onChange={(checked) => {
+                console.log("TreeCheckbox onChange", checked);
+                formikDialog.setFieldError("menuIds", undefined);
+                formikDialog.setFieldValue("menuIds", checked, false);
+              }}
+              error={
+                formikDialog.errors.menuIds
+                  ? (formikDialog.errors.menuIds as string)
+                  : ""
+              }
+            />
+          </div>
           <div
             className={`${
               formikDialog.errors.remarkJson ? "has-error" : ""
@@ -358,35 +388,6 @@ export default function () {
               }
               autosize
               formatOnBlur
-            />
-          </div>
-          {/* 模板菜单&权限 */}
-          <div
-            className={`${
-              formikDialog.errors.menuIds ? "has-error" : ""
-            } mt-2 min-w-60`}
-          >
-            <RcTreeCheckbox
-              fieldNames={{
-                children: "children",
-                title: "menuNameJson",
-                key: "id",
-              }}
-              withAsterisk
-              label={t("template_page.label_3")}
-              checkModel="all"
-              data={allMenus}
-              value={checkedMenuIds}
-              onChange={(checked) => {
-                console.log("TreeCheckbox onChange", checked);
-                formikDialog.setFieldError("menuIds", undefined);
-                formikDialog.setFieldValue("menuIds", checked, false);
-              }}
-              error={
-                formikDialog.errors.menuIds
-                  ? (formikDialog.errors.menuIds as string)
-                  : ""
-              }
             />
           </div>
         </form>

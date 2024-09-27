@@ -1,10 +1,11 @@
 import { ReactNode, useState } from "react";
-import Tree, { TreeNode } from "rc-tree";
+import Tree from "rc-tree";
 import { IconChevronDown } from "@tabler/icons-react";
 import "./rc.css";
 import logger from "@/lib/logger";
 import { FieldNames } from "rc-tree/lib/interface";
 import { translate } from "@/lib/client";
+import NoData from "./NoData";
 
 interface RcTreeCheckboxProps {
   label?: string;
@@ -46,43 +47,12 @@ const RcTreeCheckbox = (props: RcTreeCheckboxProps) => {
       />
     );
   };
-
-  const renderTitle = (title: any) => (trans ? translate(title) : title);
-  const groupList = (list: any[], targetVar: any) => {
-    const obj: any = {};
-    list.forEach((item) => {
-      if (!obj[item.fieldType]) {
-        obj[item.fieldType] = [];
-      }
-      const disabled = item.is_key === 1 || item.ti === targetVar;
-      obj[item.fieldType].push({
-        ...item,
-        disabled,
-      });
-    });
-    return (
-      Object.keys(obj)
-        .map((key) => ({
-          title: key,
-          key,
-          children: obj[key],
-        }))
-        .filter(({ children }) => children.length) || []
-    );
+  const getRealTitle = (item: any) => {
+    const title = item[finalFieldNames.title!!];
+    if (!title) return "--";
+    if (trans) return translate(title);
+    return title;
   };
-
-  function getTreeData() {
-    return groupList(
-      data.map((item) => ({
-        title: () => renderTitle(item.fieldName),
-        key: item.fieldName,
-        checkable: true,
-        ...item,
-      })),
-      "id",
-      []
-    );
-  }
 
   return (
     <>
@@ -95,24 +65,30 @@ const RcTreeCheckbox = (props: RcTreeCheckboxProps) => {
           {label}
         </label>
       )}
-      <Tree
-        fieldNames={finalFieldNames}
-        checkable
-        checkStrictly
-        selectable={false}
-        switcherIcon={switcherIcon}
-        onExpand={(expandedKeys) => {
-          logger.debug(expandedKeys);
-        }}
-        defaultCheckedKeys={value}
-        onCheck={(checkedKeys, info) => {
-          const keys = checkedKeys as any;
-          logger.debug("checkedKeys", keys);
-          onChange && onChange(keys.checked);
-        }}
-        treeData={data}
-        showIcon={false}
-      />
+      {!data || data.length == 0 ? (
+        <NoData />
+      ) : (
+        <Tree
+          checkable
+          checkStrictly
+          selectable={false}
+          switcherIcon={switcherIcon}
+          defaultExpandParent
+          autoExpandParent
+          onExpand={(expandedKeys) => {
+            logger.debug(expandedKeys);
+          }}
+          defaultCheckedKeys={value}
+          onCheck={(checkedKeys, info) => {
+            const keys = checkedKeys as any;
+            logger.debug("checkedKeys", keys);
+            onChange && onChange(keys.checked);
+          }}
+          treeData={data}
+          titleRender={(node) => getRealTitle(node)}
+          showIcon={false}
+        ></Tree>
+      )}
       {error && <div className="text-danger text-xs mt-1">{error}</div>}
     </>
   );
