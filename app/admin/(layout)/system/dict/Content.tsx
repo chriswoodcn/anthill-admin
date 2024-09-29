@@ -20,10 +20,12 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
+import useRole from '@/lib/hooks/admin/useRole';
 
 export default function () {
   const { t } = useTranslation("admin_system_dict");
   const { t: ct } = useTranslation("admin_common");
+  const { isRoleSuperAdmin } = useRole();
 
   //#region query
   const [page, setPage] = useState(1);
@@ -289,11 +291,11 @@ export default function () {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"}
+                      disabled={item.value == "3" && !isRoleSuperAdmin}
                       checked={item.value == formikDialog.values.status}
-                      onChange={() =>
-                        formikDialog.setFieldValue("status", item.value, false)
-                      }
+                      onChange={() => {
+                        formikDialog.setFieldValue("status", item.value, false);
+                      }}
                     />
                     <span>{item.label}</span>
                   </label>
@@ -455,7 +457,7 @@ export default function () {
                     {ct("detail")}
                   </button>
                 </WithPermissions>
-                {row.status != "3" && (
+                {(row.status != "3" || isRoleSuperAdmin) && (
                   <>
                     <WithPermissions permissions={["system:dict:edit"]}>
                       <button

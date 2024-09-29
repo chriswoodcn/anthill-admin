@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
-import Link from "next/link";
 
 import { dictVal2Label } from "@/lib";
 import {
@@ -20,8 +19,9 @@ import {
   datatableColumnText,
 } from "@/lib/support/datatableSupport";
 import Yup from "@/lib/validation";
-import { DataTable } from "mantine-datatable";
+import useRole from "@/lib/hooks/admin/useRole";
 
+import { DataTable } from "mantine-datatable";
 import { WithPermissions } from "@/components/compose/WithPermissions";
 import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
@@ -31,6 +31,7 @@ import Toast from "@/lib/toast";
 export default function () {
   const { t } = useTranslation("admin_system_config");
   const { t: ct } = useTranslation("admin_common");
+  const { isRoleSuperAdmin } = useRole();
 
   //#region query
   const [page, setPage] = useState(1);
@@ -338,7 +339,7 @@ export default function () {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"}
+                      disabled={item.value == "3" && !isRoleSuperAdmin}
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)
@@ -500,7 +501,7 @@ export default function () {
                     {ct("detail")}
                   </button>
                 </WithPermissions>
-                {row.status != "3" && (
+                {(row.status != "3" || isRoleSuperAdmin) && (
                   <>
                     <WithPermissions permissions={["system:dict:edit"]}>
                       <button
