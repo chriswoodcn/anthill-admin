@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { JsonInput, Select, TextInput } from "@mantine/core";
 import { useFormik } from "formik";
 import { useState } from "react";
@@ -11,7 +12,7 @@ import {
   SystemDictApi,
   SystemDictTypeApi,
   SysUserRoleApi,
-  SystemMenuApi,
+  SysCompanyApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
@@ -27,23 +28,21 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
-import RcTreeCheckbox from "../../_component/RcTreeCheckbox";
-import useRole from "@/lib/hooks/admin/useRole";
+import { IconUserSearch } from "@tabler/icons-react";
 
-export default function () {
-  const { t } = useTranslation("admin_sysuser_template");
+export default function PanelRegularUser() {
+  const { t } = useTranslation("admin_sysuser_company");
   const { t: ct } = useTranslation("admin_common");
-  const { isRoleSuperAdmin } = useRole();
+  const router = useRouter();
 
   //#region query
   const [page, setPage] = useState(1);
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
   const initQueryParams = {
-    roleKey: undefined,
+    id: undefined,
     status: undefined,
-    affiliateFlag: undefined,
-    templateFlag: "1",
+    templateId: undefined,
   };
   const [queryParams, updateQueryParams] =
     useImmer<Record<string, any>>(initQueryParams);
@@ -71,7 +70,7 @@ export default function () {
     data: pageData,
     isLoading,
     mutate: pageDataMutate,
-  } = SysUserRoleApi.usePage({
+  } = SysCompanyApi.usePage({
     pageNum: page,
     pageSize,
     ...queryParams,
@@ -91,9 +90,6 @@ export default function () {
       },
     }
   );
-  const { data: remoteDictSysAffiliate } = SystemDictApi.useDict({
-    type: "sys_affiliate",
-  });
 
   //#endregion
 
@@ -105,22 +101,35 @@ export default function () {
     status: "0",
     remarkJson: undefined,
     roleSort: 0,
-    affiliateFlag: "2",
+    affiliateFlag: "T",
     comId: undefined,
     version: 0,
-    menuIds: [],
-    templateFlag: "1",
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
   const formikDialog = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      roleKey: Yup.string().required(),
+      dictNameJson: Yup.string()
+        .required()
+        .test({
+          name: "json",
+          message: t("validation_error.field_json_invalid"),
+          test: (val) => {
+            try {
+              if (!val || val.replace(/\s/g, "") == "{}") return false;
+              JSON.parse(val);
+              return true;
+            } catch (error) {
+              return false;
+            }
+          },
+        }),
+      dictType: Yup.string().required(),
       remarkJson: Yup.string()
         .nullable()
         .test({
           name: "json",
-          message: ct("validation_error.field_json_invalid"),
+          message: t("validation_error.field_json_invalid"),
           test: (val) => {
             try {
               if (val) JSON.parse(val);
@@ -130,7 +139,6 @@ export default function () {
             }
           },
         }),
-      menuIds: Yup.array().min(1, ct("validation_error.field_required")),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values", values);
@@ -146,10 +154,10 @@ export default function () {
     let result;
     switch (dialogType) {
       case 3:
-        result = await SysUserRoleApi.add(formikDialog.values);
+        result = await SystemDictTypeApi.add(formikDialog.values);
         break;
       case 4:
-        result = await SysUserRoleApi.update(formikDialog.values);
+        result = await SystemDictTypeApi.update(formikDialog.values);
         break;
     }
     if (result) {
@@ -174,29 +182,12 @@ export default function () {
         return null;
     }
   };
-  // 获取所有的菜单
-  const [allMenus, setAllMenus] = useState<any[]>([]);
-  const fetchAllMenus = async () => {
-    const r0 = await SystemMenuApi.all({
-      affiliateFlag: formikDialog.values.affiliateFlag,
-    });
-    if (r0) {
-      setAllMenus(r0);
-    }
-  };
-  useEffectOnce(() => {
-    fetchAllMenus();
-  }, [formikDialog.values.affiliateFlag]);
-  // 获取模板拥有的菜单
-  const [checkedMenuIds, setCheckedMenuIds] = useState<any[]>([]);
-  const fetchMenuIdsByRoleId = async () => {};
   const openDialog = async (
     type: number | undefined = 0,
     formId: number | string | undefined = undefined
   ) => {
     setDialogType(type);
     if (type == 3) {
-      await fetchAllMenus();
       setShow(true);
       return;
     }
@@ -209,8 +200,6 @@ export default function () {
         }
       }
     }
-    await fetchAllMenus();
-    await fetchMenuIdsByRoleId();
     setShow(true);
   };
   const closeDialog = () => {
@@ -275,7 +264,7 @@ export default function () {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"&&!isRoleSuperAdmin}
+                      disabled={item.value == "3"}
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)
@@ -286,64 +275,6 @@ export default function () {
                 );
               })}
             </div>
-          </div>
-          <div className="min-w-60">
-            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-              {t("affiliate")}
-            </label>
-            <div className="text-sm">
-              {remoteDictSysAffiliate.map((item: any) => {
-                return (
-                  <label className="inline-flex mr-4" key={item.value}>
-                    <input
-                      type="radio"
-                      name="affiliateFlag"
-                      className="form-radio"
-                      disabled={item.value == "3"}
-                      checked={item.value == formikDialog.values.affiliateFlag}
-                      onChange={() =>
-                        formikDialog.setFieldValue(
-                          "affiliateFlag",
-                          item.value,
-                          false
-                        )
-                      }
-                    />
-                    <span>{item.label}</span>
-                  </label>
-                );
-              })}
-            </div>
-          </div>
-          {/* 模板菜单&权限 */}
-          <div
-            className={`${
-              formikDialog.errors.menuIds ? "has-error" : ""
-            } mt-2 min-w-60`}
-          >
-            <RcTreeCheckbox
-              fieldNames={{
-                children: "children",
-                title: "menuNameJson",
-                key: "id",
-              }}
-              trans="true"
-              withAsterisk
-              label={t("menu_permissions")}
-              checkModel="all"
-              data={allMenus}
-              value={formikDialog.values.menuIds || []}
-              onChange={(checked) => {
-                console.log("TreeCheckbox onChange", checked);
-                formikDialog.setFieldError("menuIds", undefined);
-                formikDialog.setFieldValue("menuIds", checked, false);
-              }}
-              error={
-                formikDialog.errors.menuIds
-                  ? (formikDialog.errors.menuIds as string)
-                  : ""
-              }
-            />
           </div>
           <div
             className={`${
@@ -394,12 +325,7 @@ export default function () {
             <button
               type="submit"
               className="btn btn-primary"
-              onClick={() => {
-                if (!formikDialog.isValid) {
-                  logger.debug("errors", formikDialog.errors);
-                }
-                formikDialog.submitForm();
-              }}
+              onClick={() => formikDialog.submitForm()}
             >
               {formikDialog.isSubmitting && (
                 <span className="animate-spin border-[2px] border-white border-l-transparent rounded-full w-5 h-5 inline-block align-middle m-auto mr-2"></span>
@@ -446,10 +372,11 @@ export default function () {
           textAlign: "center",
         },
         {
-          accessor: "roleKey",
-          title: t("template_key"),
+          accessor: "companyNameJson",
+          title: t("company_name"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "roleKey"),
+          render: (row: any) =>
+            datatableColumnTranslateText(row, "companyNameJson"),
         },
         {
           accessor: "status",
@@ -464,12 +391,16 @@ export default function () {
           render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
         },
         {
-          accessor: "affiliateFlag",
-          title: t("affiliate"),
-          width: 100,
+          accessor: "templateKey",
+          title: t("template_key"),
           textAlign: "center",
-          render: (row: any) =>
-            dictVal2Label(remoteDictSysAffiliate, row.affiliateFlag),
+          render: (row: any) => datatableColumnText(row, "templateKey"),
+        },
+        {
+          accessor: "activeTime",
+          title: t("active_time"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "activeTime"),
         },
         {
           accessor: "actions",
@@ -494,7 +425,7 @@ export default function () {
                     {ct("detail")}
                   </button>
                 </WithPermissions>
-                {(row.status != "3" || isRoleSuperAdmin) && (
+                {row.status != "3" && (
                   <>
                     <WithPermissions permissions={["system:dict:edit"]}>
                       <button
@@ -528,6 +459,19 @@ export default function () {
                         {ct("delete")}
                       </button>
                     </WithPermissions>
+                    <button
+                      type="button"
+                      className="btn btn-xs mr-1 btn-outline-secondary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(
+                          `/admin/sysuser/company-users?comId=${row.id}`
+                        );
+                      }}
+                    >
+                      <IconUserSearch className="w-5 h-5 mr-1 fill-secondary" />
+                      {ct("users")}
+                    </button>
                   </>
                 )}
               </div>
@@ -561,34 +505,6 @@ export default function () {
         reset={() => formikQuery.resetForm()}
       >
         <form className="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2">
-          <div className="min-w-60">
-            <TextInput
-              label={t("template_key")}
-              placeholder={ct("placeholder_input") + t("template_key")}
-              value={formikQuery.values.roleKey || ""}
-              onChange={(e) =>
-                formikQuery.setFieldValue(
-                  "roleKey",
-                  e.currentTarget.value,
-                  false
-                )
-              }
-              onKeyUp={(e: any) => {
-                if (e.keyCode == 13) pageDataMutate();
-              }}
-              rightSection={
-                formikQuery.values.roleKey && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikQuery.setFieldValue("roleKey", undefined, false)
-                    }
-                  />
-                )
-              }
-            />
-          </div>
           <div className="min-w-60">
             <Select
               label={t("status")}

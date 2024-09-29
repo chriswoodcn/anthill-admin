@@ -410,4 +410,47 @@ export const SysUserRoleApi = {
     });
     return handleOperateResponse(res, OperateType.DELETE);
   },
+  roleSelect: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/role/select",
+      method: "GET",
+      params: data,
+    });
+    return handleOperateResponse(res, OperateType.GET);
+  },
+  templateSelect: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/role/templateSelect",
+      method: "GET",
+      params: data,
+    });
+    return handleOperateResponse(res, OperateType.GET);
+  },
+};
+/**
+ * 客户
+ */
+export const SysCompanyApi = {
+  usePage: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
+      url: "/backend/company/page",
+      method: "POST",
+      data,
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
 };

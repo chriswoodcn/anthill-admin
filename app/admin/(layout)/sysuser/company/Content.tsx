@@ -1,17 +1,18 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { JsonInput, Select, TextInput } from "@mantine/core";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
-import Link from "next/link";
 
 import { dictVal2Label } from "@/lib";
 import {
   SystemDictApi,
   SystemDictTypeApi,
   SysUserRoleApi,
+  SysCompanyApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
@@ -27,19 +28,21 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
+import { IconUserSearch } from "@tabler/icons-react";
 
-export default function () {
-  const { t } = useTranslation("admin_sysuser_template");
+export default function SysuserCompanyContent() {
+  const { t } = useTranslation("admin_sysuser_company");
   const { t: ct } = useTranslation("admin_common");
+  const router = useRouter();
 
   //#region query
   const [page, setPage] = useState(1);
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
   const initQueryParams = {
-    roleKey: undefined,
+    id: undefined,
     status: undefined,
-    templateFlag: "1",
+    templateId: undefined,
   };
   const [queryParams, updateQueryParams] =
     useImmer<Record<string, any>>(initQueryParams);
@@ -67,7 +70,7 @@ export default function () {
     data: pageData,
     isLoading,
     mutate: pageDataMutate,
-  } = SysUserRoleApi.usePage({
+  } = SysCompanyApi.usePage({
     pageNum: page,
     pageSize,
     ...queryParams,
@@ -369,10 +372,11 @@ export default function () {
           textAlign: "center",
         },
         {
-          accessor: "roleKey",
-          title: t("template_key"),
+          accessor: "companyNameJson",
+          title: t("company_name"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "roleKey"),
+          render: (row: any) =>
+            datatableColumnTranslateText(row, "companyNameJson"),
         },
         {
           accessor: "status",
@@ -385,6 +389,18 @@ export default function () {
           title: ct("remark"),
           textAlign: "center",
           render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
+        },
+        {
+          accessor: "templateKey",
+          title: t("template_key"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "templateKey"),
+        },
+        {
+          accessor: "activeTime",
+          title: t("active_time"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "activeTime"),
         },
         {
           accessor: "actions",
@@ -443,6 +459,19 @@ export default function () {
                         {ct("delete")}
                       </button>
                     </WithPermissions>
+                    <button
+                      type="button"
+                      className="btn btn-xs mr-1 btn-outline-secondary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(
+                          `/admin/sysuser/company-users?comId=${row.id}`
+                        );
+                      }}
+                    >
+                      <IconUserSearch className="w-5 h-5 mr-1 fill-secondary" />
+                      {ct("users")}
+                    </button>
                   </>
                 )}
               </div>
@@ -476,34 +505,6 @@ export default function () {
         reset={() => formikQuery.resetForm()}
       >
         <form className="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2">
-          <div className="min-w-60">
-            <TextInput
-              label={t("template_key")}
-              placeholder={ct("placeholder_input") + t("template_key")}
-              value={formikQuery.values.roleKey || ""}
-              onChange={(e) =>
-                formikQuery.setFieldValue(
-                  "roleKey",
-                  e.currentTarget.value,
-                  false
-                )
-              }
-              onKeyUp={(e: any) => {
-                if (e.keyCode == 13) pageDataMutate();
-              }}
-              rightSection={
-                formikQuery.values.roleKey && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikQuery.setFieldValue("roleKey", undefined, false)
-                    }
-                  />
-                )
-              }
-            />
-          </div>
           <div className="min-w-60">
             <Select
               label={t("status")}
