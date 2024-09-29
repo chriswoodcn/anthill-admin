@@ -1,0 +1,7 @@
+{
+  "company_name": "客户名称",
+  "status": "状态",
+  "template_key": "管理员模板",
+  "active_time": "到期时间",
+  "invalid_com_id": "无效的客户ID"
+}

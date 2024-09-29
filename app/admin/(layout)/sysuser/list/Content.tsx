@@ -1,22 +1,42 @@
 "use client";
 
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
-import PanelAdminUser from "./PanelAdminUser";
-import PanelRegularUser from "./PanelRegularUser";
+
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
 import NoData from "../../_component/NoData";
+import PanelAdminUser from "../company-users/PanelAdminUser";
 
 const categories = [
   {
-    name: "管理员",
-    key: "admin",
+    name: "超管账号管理员",
+    key: "super-admin",
     panel: (comId: string) => <PanelAdminUser comId={comId} />,
   },
   {
-    name: "普通用户",
-    key: "regular",
-    panel: (comId: string) => <PanelRegularUser comId={comId} />,
+    name: "超管账号普通用户",
+    key: "super-regular",
+    panel: (comId: string) => <PanelAdminUser comId={comId} />,
+  },
+  {
+    name: "维护账号管理员",
+    key: "maintain-admin",
+    panel: (comId: string) => <PanelAdminUser comId={comId} />,
+  },
+  {
+    name: "维护账号普通用户",
+    key: "maintain-regular",
+    panel: (comId: string) => <PanelAdminUser comId={comId} />,
+  },
+  {
+    name: "系统账号管理员",
+    key: "sysuser-admin",
+    panel: (comId: string) => <PanelAdminUser comId={comId} />,
+  },
+  {
+    name: "系统账号普通用户",
+    key: "sysuser-regular",
+    panel: (comId: string) => <PanelAdminUser comId={comId} />,
   },
 ];
 

@@ -30,7 +30,7 @@ import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 import { IconUserSearch } from "@tabler/icons-react";
 
-export default function PanelRegularUser() {
+export default function PanelRegularUser(props: Record<string, any>) {
   const { t } = useTranslation("admin_sysuser_company");
   const { t: ct } = useTranslation("admin_common");
   const router = useRouter();
@@ -459,19 +459,6 @@ export default function PanelRegularUser() {
                         {ct("delete")}
                       </button>
                     </WithPermissions>
-                    <button
-                      type="button"
-                      className="btn btn-xs mr-1 btn-outline-secondary"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(
-                          `/admin/sysuser/company-users?comId=${row.id}`
-                        );
-                      }}
-                    >
-                      <IconUserSearch className="w-5 h-5 mr-1 fill-secondary" />
-                      {ct("users")}
-                    </button>
                   </>
                 )}
               </div>
