@@ -1,1 +1,9 @@
-{}
+{
+  "nick_name": "用户昵称",
+  "email": "邮箱",
+  "mobile": "电话",
+  "gender": "性别",
+  "avatar": "头像",
+  "status": "状态",
+  "com_id": "客户ID"
+}

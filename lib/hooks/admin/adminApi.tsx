@@ -454,3 +454,57 @@ export const SysCompanyApi = {
     };
   },
 };
+export const SystemUserApi = {
+  usePage: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
+      url: "/backend/user/page",
+      method: "POST",
+      data,
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
+  getById: async (id: string | number) => {
+    const res = await adminFetcher({
+      url: "/backend/user/getById/" + id,
+      method: "GET",
+    });
+    return handleOperateResponse(res);
+  },
+  add: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/user/add",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.ADD);
+  },
+  update: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/user/update",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.UPDATE);
+  },
+  delete: async (ids: (string | number)[]) => {
+    const res = await adminFetcher({
+      url: "/backend/user/deleteLogic/" + ids,
+      method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
+};

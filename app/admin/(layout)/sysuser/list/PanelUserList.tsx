@@ -13,6 +13,7 @@ import {
   SystemDictTypeApi,
   SysUserRoleApi,
   SysCompanyApi,
+  SystemUserApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
@@ -29,7 +30,16 @@ import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 
-export default function PanelAdminUser(props: Record<string, any>) {
+export enum UserType {
+  SuperAdmin,
+  SuperUser,
+  MaintaineAdmin,
+  MaintainUser,
+  SystemAdmin,
+  SystemUser,
+}
+
+export default function PanelUserList(props: Record<string, any>) {
   const { t } = useTranslation("admin_sysuser_company");
   const { t: ct } = useTranslation("admin_common");
   const router = useRouter();
@@ -39,9 +49,9 @@ export default function PanelAdminUser(props: Record<string, any>) {
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
   const initQueryParams = {
-    id: undefined,
     status: undefined,
-    templateId: undefined,
+    affiliateFlag: undefined,
+    adminFlag: undefined,
   };
   const [queryParams, updateQueryParams] =
     useImmer<Record<string, any>>(initQueryParams);
@@ -65,14 +75,32 @@ export default function PanelAdminUser(props: Record<string, any>) {
       setPage(1);
     },
   });
+  const combineTypeParams = () => {
+    switch (props.type) {
+      case UserType.SuperAdmin:
+        return { ...queryParams, affiliateFlag: "0", adminFlag: "1" };
+      case UserType.SuperUser:
+        return { ...queryParams, affiliateFlag: "0", adminFlag: "0" };
+      case UserType.MaintaineAdmin:
+        return { ...queryParams, affiliateFlag: "1", adminFlag: "1" };
+      case UserType.MaintainUser:
+        return { ...queryParams, affiliateFlag: "1", adminFlag: "0" };
+      case UserType.SystemAdmin:
+        return { ...queryParams, affiliateFlag: "2", adminFlag: "1" };
+      case UserType.SystemUser:
+        return { ...queryParams, affiliateFlag: "2", adminFlag: "0" };
+      default:
+        return queryParams;
+    }
+  };
   const {
     data: pageData,
     isLoading,
     mutate: pageDataMutate,
-  } = SysCompanyApi.usePage({
+  } = SystemUserApi.usePage({
     pageNum: page,
     pageSize,
-    ...queryParams,
+    ...combineTypeParams(),
   });
   const { data: remoteDictSysStatus } = SystemDictApi.useDict(
     {
