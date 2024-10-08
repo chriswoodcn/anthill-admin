@@ -1,9 +1,11 @@
 {
-  "nick_name": "Nick Name",
+  "username": "Username",
+  "nickname": "Nickname",
   "email": "Email",
   "mobile": "Mobile",
   "gender": "Gender",
   "avatar": "Avatar",
   "status": "Status",
-  "com_id": "ComId"
+  "com_id": "ComId",
+  "template_key": "Admin Template"
 }

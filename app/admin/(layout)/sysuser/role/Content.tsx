@@ -621,7 +621,7 @@ export default function () {
           </div>
           <div className="min-w-60">
             <Select
-              label={t("status")}
+              label={t("affiliate")}
               placeholder={ct("placeholder_select") + t("affiliate")}
               value={formikQuery.values.affiliateFlag || null}
               data={remoteDictSysAffiliate}

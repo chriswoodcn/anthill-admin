@@ -40,7 +40,7 @@ export enum UserType {
 }
 
 export default function PanelUserList(props: Record<string, any>) {
-  const { t } = useTranslation("admin_sysuser_company");
+  const { t } = useTranslation("admin_sysuser_list");
   const { t: ct } = useTranslation("admin_common");
   const router = useRouter();
 
@@ -93,6 +93,24 @@ export default function PanelUserList(props: Record<string, any>) {
         return queryParams;
     }
   };
+  const templateSelectParams = () => {
+    switch (props.type) {
+      case UserType.SuperAdmin:
+        return { flag: "0" };
+      case UserType.SuperUser:
+        return { flag: "0" };
+      case UserType.MaintaineAdmin:
+        return { flag: "1" };
+      case UserType.MaintainUser:
+        return { flag: "1" };
+      case UserType.SystemAdmin:
+        return { flag: "2" };
+      case UserType.SystemUser:
+        return { flag: "2" };
+      default:
+        return {};
+    }
+  };
   const {
     data: pageData,
     isLoading,
@@ -118,17 +136,23 @@ export default function PanelUserList(props: Record<string, any>) {
     }
   );
 
+  const { data: remoteDictSysSex } = SystemDictApi.useDict({
+    type: "sys_sex",
+  });
+
   //#endregion
 
   //#region dialog
   const [show, setShow] = useState(false);
+  const [templateSelect, setTemplateSelect] = useState<any[]>();
   const initialForm = {
     id: undefined,
-    roleKey: undefined,
+    username: undefined,
+    nickname: undefined,
+    email: undefined,
+    mobile: undefined,
+    sex: "2",
     status: "0",
-    remarkJson: undefined,
-    roleSort: 0,
-    affiliateFlag: "T",
     comId: undefined,
     version: 0,
   };
@@ -214,12 +238,22 @@ export default function PanelUserList(props: Record<string, any>) {
     formId: number | string | undefined = undefined
   ) => {
     setDialogType(type);
+    const r = await SysUserRoleApi.templateSelect(templateSelectParams());
+
+    if (r) {
+      const dataArr = [...r];
+      dataArr.forEach((item: any) => {
+        item.label = item.roleKey;
+        item.value = item.roleKey;
+      });
+      setTemplateSelect(dataArr);
+    }
     if (type == 3) {
       setShow(true);
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SysUserRoleApi.getById(formId);
+    const r0 = await SystemUserApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -245,39 +279,168 @@ export default function PanelUserList(props: Record<string, any>) {
         <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
           <div
             className={`${
-              formikDialog.errors.roleKey ? "has-error" : ""
+              formikDialog.errors.username ? "has-error" : ""
             } min-w-60`}
           >
             <TextInput
               withAsterisk
-              label={t("template_key")}
-              placeholder={ct("placeholder_input") + t("template_key")}
-              value={formikDialog.values.roleKey}
+              label={t("username")}
+              placeholder={ct("placeholder_input") + t("username")}
+              value={formikDialog.values.username}
               onChange={(e) => {
-                formikDialog.setFieldError("roleKey", undefined);
+                formikDialog.setFieldError("username", undefined);
                 formikDialog.setFieldValue(
-                  "roleKey",
+                  "username",
                   e.currentTarget.value,
                   false
                 );
               }}
               error={
-                formikDialog.errors.roleKey
-                  ? (formikDialog.errors.roleKey as string)
+                formikDialog.errors.username
+                  ? (formikDialog.errors.username as string)
                   : ""
               }
               rightSection={
-                formikDialog.values.roleKey && (
+                formikDialog.values.username && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
-                      formikDialog.setFieldValue("roleKey", undefined, false)
+                      formikDialog.setFieldValue("username", undefined, false)
                     }
                   />
                 )
               }
             />
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.nickname ? "has-error" : ""
+            } min-w-60`}
+          >
+            <TextInput
+              withAsterisk
+              label={t("nickname")}
+              placeholder={ct("placeholder_input") + t("nickname")}
+              value={formikDialog.values.nickname}
+              onChange={(e) => {
+                formikDialog.setFieldError("nickname", undefined);
+                formikDialog.setFieldValue(
+                  "nickname",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.nickname
+                  ? (formikDialog.errors.nickname as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.nickname && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("nickname", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.email ? "has-error" : ""
+            } min-w-60`}
+          >
+            <TextInput
+              label={t("email")}
+              placeholder={ct("placeholder_input") + t("email")}
+              value={formikDialog.values.email}
+              onChange={(e) => {
+                formikDialog.setFieldError("email", undefined);
+                formikDialog.setFieldValue(
+                  "email",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.email
+                  ? (formikDialog.errors.email as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.email && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("email", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div
+            className={`${
+              formikDialog.errors.mobile ? "has-error" : ""
+            } min-w-60`}
+          >
+            <TextInput
+              label={t("mobile")}
+              placeholder={ct("placeholder_input") + t("mobile")}
+              value={formikDialog.values.mobile}
+              onChange={(e) => {
+                formikDialog.setFieldError("mobile", undefined);
+                formikDialog.setFieldValue(
+                  "mobile",
+                  e.currentTarget.value,
+                  false
+                );
+              }}
+              error={
+                formikDialog.errors.mobile
+                  ? (formikDialog.errors.mobile as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.mobile && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue("mobile", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div className="min-w-60">
+            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
+              {t("gender")}
+            </label>
+            <div className="text-sm">
+              {remoteDictSysSex.map((item: any) => {
+                return (
+                  <label className="inline-flex mr-4" key={item.value}>
+                    <input
+                      type="radio"
+                      name="gender"
+                      className="form-radio"
+                      checked={item.value == formikDialog.values.sex}
+                      onChange={() =>
+                        formikDialog.setFieldValue("sex", item.value, false)
+                      }
+                    />
+                    <span>{item.label}</span>
+                  </label>
+                );
+              })}
+            </div>
           </div>
           <div className="min-w-60">
             <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
@@ -302,40 +465,6 @@ export default function PanelUserList(props: Record<string, any>) {
                 );
               })}
             </div>
-          </div>
-          <div
-            className={`${
-              formikDialog.errors.remarkJson ? "has-error" : ""
-            } min-w-60`}
-          >
-            <JsonInput
-              label={ct("remark")}
-              placeholder={ct("placeholder_input") + ct("remark")}
-              description={ct("description_json_input")}
-              value={formikDialog.values.remarkJson || ""}
-              onChange={(val) => {
-                formikDialog.setFieldError("remarkJson", undefined);
-                formikDialog.setFieldValue("remarkJson", val, false);
-              }}
-              error={
-                formikDialog.errors.remarkJson
-                  ? (formikDialog.errors.remarkJson as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.remarkJson && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("remarkJson", undefined, false)
-                    }
-                  />
-                )
-              }
-              autosize
-              formatOnBlur
-            />
           </div>
         </form>
         {/* button */}
@@ -399,11 +528,16 @@ export default function PanelUserList(props: Record<string, any>) {
           textAlign: "center",
         },
         {
-          accessor: "companyNameJson",
-          title: t("company_name"),
+          accessor: "nickname",
+          title: t("nickname"),
           textAlign: "center",
-          render: (row: any) =>
-            datatableColumnTranslateText(row, "companyNameJson"),
+          render: (row: any) => datatableColumnText(row, "nickname"),
+        },
+        {
+          accessor: "email",
+          title: t("email"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "email"),
         },
         {
           accessor: "status",
@@ -416,18 +550,6 @@ export default function PanelUserList(props: Record<string, any>) {
           title: ct("remark"),
           textAlign: "center",
           render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
-        },
-        {
-          accessor: "templateKey",
-          title: t("template_key"),
-          textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "templateKey"),
-        },
-        {
-          accessor: "activeTime",
-          title: t("active_time"),
-          textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "activeTime"),
         },
         {
           accessor: "actions",

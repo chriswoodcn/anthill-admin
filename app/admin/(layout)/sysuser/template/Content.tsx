@@ -275,7 +275,7 @@ export default function () {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"&&!isRoleSuperAdmin}
+                      disabled={item.value == "3" && !isRoleSuperAdmin}
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)
@@ -613,6 +613,38 @@ export default function () {
               }}
               onChange={(val, option) =>
                 formikQuery.setFieldValue("status", val || undefined, false)
+              }
+              allowDeselect
+            />
+          </div>
+          <div className="min-w-60">
+            <Select
+              label={t("affiliate")}
+              placeholder={ct("placeholder_select") + t("affiliate")}
+              value={formikQuery.values.affiliateFlag || null}
+              data={remoteDictSysAffiliate}
+              renderOption={({ option, checked }) => {
+                return (
+                  <div
+                    className="flex-1 flex justify-between py-0.5"
+                    key={option.value}
+                  >
+                    {option.label}
+                    {checked && (
+                      <Icon
+                        name="check"
+                        className="w-5 h-5 text-white-5 dark:text-black-5"
+                      />
+                    )}
+                  </div>
+                );
+              }}
+              onChange={(val, option) =>
+                formikQuery.setFieldValue(
+                  "affiliateFlag",
+                  val || undefined,
+                  false
+                )
               }
               allowDeselect
             />
