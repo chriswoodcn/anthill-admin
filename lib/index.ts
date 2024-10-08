@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import configuration from "../configuration.mjs"
 const basePath = configuration.BasePath
 import CryptoJS from 'crypto-js';
@@ -63,4 +64,8 @@ export const isBrowser = () => typeof window !== "undefined"
 export const dictVal2Label = (source: any[], val: string, defaultLabel: any = '--') => {
   const find = source.find(s => s.value == val)
   return find ? find.label : defaultLabel
+}
+export const formatDate = (timeStamp: number) => {
+  if (!timeStamp) return '--'
+  return dayjs(timeStamp).format("YYYY-MM-DD")
 }

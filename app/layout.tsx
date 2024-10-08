@@ -11,11 +11,6 @@ import { I18nProvider } from "@/i18n/client";
 // custom
 import { withBasePath } from "@/lib";
 import ComposedProvider from "@/components/compose/ComposedProvider";
-import configuraton, {
-  PrimaryColors,
-  BlackColors,
-  WhiteColors,
-} from "@/configuration.mjs";
 
 const nunito = Nunito({
   weight: ["400", "500", "600", "700", "800"],
@@ -45,21 +40,7 @@ export default async function RootLayout({
       </head>
       <body className={nunito.variable}>
         <I18nProvider language={lng}>
-          <MantineProvider
-            theme={{
-              primaryColor: "anthill-primary",
-              black: "anthill-black",
-              // white: "anthill-white",
-              fontFamily: "var(--font-nunito)",
-              colors: {
-                "anthill-primary": PrimaryColors as any,
-                "anthill-black": BlackColors as any,
-                "anthill-white": WhiteColors as any,
-              },
-            }}
-          >
-            <ComposedProvider>{children}</ComposedProvider>
-          </MantineProvider>
+          <ComposedProvider>{children}</ComposedProvider>
         </I18nProvider>
       </body>
     </html>

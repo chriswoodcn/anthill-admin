@@ -606,6 +606,12 @@
 .mantine-Combobox-option {
   @apply data-[combobox-active]:bg-primary/30;
 }
+.mantine-Popover-dropdown {
+  @apply !z-[1099];
+}
+.mantine-Select-dropdown {
+  @apply !z-[1099];
+}
 
 /* rc-tree */
 .rc-tree-checkbox {

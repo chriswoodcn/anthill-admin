@@ -286,7 +286,7 @@ export default function PanelUserList(props: Record<string, any>) {
               withAsterisk
               label={t("username")}
               placeholder={ct("placeholder_input") + t("username")}
-              value={formikDialog.values.username}
+              value={formikDialog.values.username || ""}
               onChange={(e) => {
                 formikDialog.setFieldError("username", undefined);
                 formikDialog.setFieldValue(
@@ -322,7 +322,7 @@ export default function PanelUserList(props: Record<string, any>) {
               withAsterisk
               label={t("nickname")}
               placeholder={ct("placeholder_input") + t("nickname")}
-              value={formikDialog.values.nickname}
+              value={formikDialog.values.nickname || ""}
               onChange={(e) => {
                 formikDialog.setFieldError("nickname", undefined);
                 formikDialog.setFieldValue(
@@ -357,7 +357,7 @@ export default function PanelUserList(props: Record<string, any>) {
             <TextInput
               label={t("email")}
               placeholder={ct("placeholder_input") + t("email")}
-              value={formikDialog.values.email}
+              value={formikDialog.values.email || ""}
               onChange={(e) => {
                 formikDialog.setFieldError("email", undefined);
                 formikDialog.setFieldValue(
@@ -376,9 +376,10 @@ export default function PanelUserList(props: Record<string, any>) {
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("email", undefined, false)
-                    }
+                    onClick={(e) => {
+                      console.log("x-circle click");
+                      formikDialog.setFieldValue("email", undefined, false);
+                    }}
                   />
                 )
               }
@@ -392,7 +393,7 @@ export default function PanelUserList(props: Record<string, any>) {
             <TextInput
               label={t("mobile")}
               placeholder={ct("placeholder_input") + t("mobile")}
-              value={formikDialog.values.mobile}
+              value={formikDialog.values.mobile || ""}
               onChange={(e) => {
                 formikDialog.setFieldError("mobile", undefined);
                 formikDialog.setFieldValue(

@@ -418,6 +418,32 @@ export const SysUserRoleApi = {
     });
     return handleOperateResponse(res, OperateType.GET);
   },
+  useTemplateSelect: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any[]>([]);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
+      url: "/backend/role/templateSelect",
+      method: "GET",
+      params: data,
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        fetchData.data.forEach((item: any) => {
+          item.label = item.roleKey;
+          item.value = item.id + "";
+        });
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
   templateSelect: async (data: Record<string, any> = {}) => {
     const res = await adminFetcher({
       url: "/backend/role/templateSelect",
@@ -452,6 +478,13 @@ export const SysCompanyApi = {
       isLoading,
       mutate,
     };
+  },
+  getById: async (id: string | number) => {
+    const res = await adminFetcher({
+      url: "/backend/company/getById/" + id,
+      method: "GET",
+    });
+    return handleOperateResponse(res);
   },
 };
 export const SystemUserApi = {

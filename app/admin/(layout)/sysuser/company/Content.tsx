@@ -2,12 +2,13 @@
 
 import { useRouter } from "next/navigation";
 import { JsonInput, Select, TextInput } from "@mantine/core";
+import { DatePickerInput } from "@mantine/dates";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
 
-import { dictVal2Label } from "@/lib";
+import { dictVal2Label, formatDate } from "@/lib";
 import {
   SystemDictApi,
   SystemDictTypeApi,
@@ -29,9 +30,10 @@ import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 import { IconUserSearch } from "@tabler/icons-react";
+import dayjs from "dayjs";
 
 export default function SysuserCompanyContent() {
-  const { t } = useTranslation("admin_sysuser_company");
+  const { t, i18n } = useTranslation("admin_sysuser_company");
   const { t: ct } = useTranslation("admin_common");
   const router = useRouter();
 
@@ -90,6 +92,9 @@ export default function SysuserCompanyContent() {
       },
     }
   );
+  const { data: remoteTemplateSelect } = SysUserRoleApi.useTemplateSelect({
+    flag: "2",
+  });
 
   //#endregion
 
@@ -97,12 +102,10 @@ export default function SysuserCompanyContent() {
   const [show, setShow] = useState(false);
   const initialForm = {
     id: undefined,
-    roleKey: undefined,
+    companyNameJson: undefined,
     status: "0",
-    remarkJson: undefined,
-    roleSort: 0,
-    affiliateFlag: "T",
-    comId: undefined,
+    activeTime: undefined,
+    templateId: undefined,
     version: 0,
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
@@ -192,7 +195,7 @@ export default function SysuserCompanyContent() {
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SysUserRoleApi.getById(formId);
+    const r0 = await SysCompanyApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -217,41 +220,107 @@ export default function SysuserCompanyContent() {
         {/* form */}
         <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
           <div
-            className={`${
-              formikDialog.errors.roleKey ? "has-error" : ""
-            } min-w-60`}
+            className={`${formikDialog.errors.id ? "has-error" : ""} min-w-60`}
           >
             <TextInput
               withAsterisk
-              label={t("template_key")}
-              placeholder={ct("placeholder_input") + t("template_key")}
-              value={formikDialog.values.roleKey}
+              label={ct("id")}
+              placeholder={ct("placeholder_input") + ct("id")}
+              value={formikDialog.values.id}
               onChange={(e) => {
-                formikDialog.setFieldError("roleKey", undefined);
-                formikDialog.setFieldValue(
-                  "roleKey",
-                  e.currentTarget.value,
-                  false
-                );
+                if (dialogType != 3) return;
+                formikDialog.setFieldError("id", undefined);
+                formikDialog.setFieldValue("id", e.currentTarget.value, false);
               }}
               error={
-                formikDialog.errors.roleKey
-                  ? (formikDialog.errors.roleKey as string)
-                  : ""
+                formikDialog.errors.id ? (formikDialog.errors.id as string) : ""
               }
               rightSection={
-                formikDialog.values.roleKey && (
+                formikDialog.values.id &&
+                dialogType == 3 && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
-                      formikDialog.setFieldValue("roleKey", undefined, false)
+                      formikDialog.setFieldValue("id", undefined, false)
                     }
                   />
                 )
               }
             />
           </div>
+          <div
+            className={`${
+              formikDialog.errors.companyNameJson ? "has-error" : ""
+            } min-w-60`}
+          >
+            <JsonInput
+              label={t("company_name")}
+              placeholder={ct("placeholder_input") + t("company_name")}
+              description={ct("description_json_input")}
+              value={formikDialog.values.companyNameJson || ""}
+              onChange={(val) => {
+                formikDialog.setFieldError("companyNameJson", undefined);
+                formikDialog.setFieldValue("companyNameJson", val, false);
+              }}
+              error={
+                formikDialog.errors.companyNameJson
+                  ? (formikDialog.errors.companyNameJson as string)
+                  : ""
+              }
+              rightSection={
+                formikDialog.values.companyNameJson && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikDialog.setFieldValue(
+                        "companyNameJson",
+                        undefined,
+                        false
+                      )
+                    }
+                  />
+                )
+              }
+              autosize
+              formatOnBlur
+            />
+          </div>
+          {remoteTemplateSelect.length > 0 && (
+            <div className="min-w-60">
+              <Select
+                label={t("template_key")}
+                placeholder={ct("placeholder_select") + t("template_key")}
+                value={formikDialog.values.templateId + "" || null}
+                data={remoteTemplateSelect}
+                renderOption={({ option, checked }) => {
+                  return (
+                    <div
+                      className="flex-1 flex justify-between py-0.5"
+                      key={option.value}
+                    >
+                      {option.label}
+                      {checked && (
+                        <Icon
+                          name="check"
+                          className="w-5 h-5 text-white-5 dark:text-black-5"
+                        />
+                      )}
+                    </div>
+                  );
+                }}
+                onChange={(val, option) =>
+                  formikDialog.setFieldValue(
+                    "templateId",
+                    val || undefined,
+                    false
+                  )
+                }
+                allowDeselect
+              />
+            </div>
+          )}
           <div className="min-w-60">
             <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
               {t("status")}
@@ -276,38 +345,31 @@ export default function SysuserCompanyContent() {
               })}
             </div>
           </div>
-          <div
-            className={`${
-              formikDialog.errors.remarkJson ? "has-error" : ""
-            } min-w-60`}
-          >
-            <JsonInput
-              label={ct("remark")}
-              placeholder={ct("placeholder_input") + ct("remark")}
-              description={ct("description_json_input")}
-              value={formikDialog.values.remarkJson || ""}
-              onChange={(val) => {
-                formikDialog.setFieldError("remarkJson", undefined);
-                formikDialog.setFieldValue("remarkJson", val, false);
-              }}
-              error={
-                formikDialog.errors.remarkJson
-                  ? (formikDialog.errors.remarkJson as string)
-                  : ""
+          <div className="min-w-60">
+            <DatePickerInput
+              locale={i18n.language}
+              label={t("active_time")}
+              valueFormat="YYYY-MM-DD"
+              placeholder={ct("placeholder_select") + t("active_time")}
+              defaultDate={
+                formikDialog.values.activeTime
+                  ? dayjs(formikDialog.values.activeTime).toDate()
+                  : new Date()
               }
-              rightSection={
-                formikDialog.values.remarkJson && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("remarkJson", undefined, false)
-                    }
-                  />
+              value={
+                formikDialog.values.activeTime
+                  ? dayjs(formikDialog.values.activeTime).toDate()
+                  : null
+              }
+              onChange={(val: any) =>
+                formikDialog.setFieldValue(
+                  "activeTime",
+                  val ? dayjs(val).valueOf() : undefined,
+                  false
                 )
               }
-              autosize
-              formatOnBlur
+              allowDeselect
+              clearable
             />
           </div>
         </form>
@@ -400,7 +462,7 @@ export default function SysuserCompanyContent() {
           accessor: "activeTime",
           title: t("active_time"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "activeTime"),
+          render: (row: any) => formatDate(row.activeTime),
         },
         {
           accessor: "actions",
