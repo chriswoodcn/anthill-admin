@@ -489,40 +489,40 @@ export default function () {
                   </button>
                 </WithPermissions>
                 {(row.status != "3" || isRoleSuperAdmin) && (
-                  <>
-                    <WithPermissions permissions={["system:dict:edit"]}>
-                      <button
-                        type="button"
-                        className="btn btn-xs btn-outline-primary"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditRow(row.id);
-                        }}
-                      >
-                        <Icon
-                          name="pencil-paper"
-                          className="w-5 h-5 fill-primary-4"
-                        />
-                        {ct("update")}
-                      </button>
-                    </WithPermissions>
-                    <WithPermissions permissions={["system:dict:remove"]}>
-                      <button
-                        type="button"
-                        className="btn btn-xs mr-1 btn-outline-danger"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteRow(row.id);
-                        }}
-                      >
-                        <Icon
-                          name="trash-lines"
-                          className="w-5 h-5 mr-1 fill-danger-light"
-                        />
-                        {ct("delete")}
-                      </button>
-                    </WithPermissions>
-                  </>
+                  <WithPermissions permissions={["system:dict:edit"]}>
+                    <button
+                      type="button"
+                      className="btn btn-xs btn-outline-primary"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleEditRow(row.id);
+                      }}
+                    >
+                      <Icon
+                        name="pencil-paper"
+                        className="w-5 h-5 fill-primary-4"
+                      />
+                      {ct("update")}
+                    </button>
+                  </WithPermissions>
+                )}
+                {row.status != "3" && (
+                  <WithPermissions permissions={["system:dict:remove"]}>
+                    <button
+                      type="button"
+                      className="btn btn-xs mr-1 btn-outline-danger"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleDeleteRow(row.id);
+                      }}
+                    >
+                      <Icon
+                        name="trash-lines"
+                        className="w-5 h-5 mr-1 fill-danger-light"
+                      />
+                      {ct("delete")}
+                    </button>
+                  </WithPermissions>
                 )}
               </div>
             ) : (

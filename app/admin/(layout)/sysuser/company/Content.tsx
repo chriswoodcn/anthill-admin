@@ -112,7 +112,7 @@ export default function SysuserCompanyContent() {
   const formikDialog = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      dictNameJson: Yup.string()
+      companyNameJson: Yup.string()
         .required()
         .test({
           name: "json",
@@ -127,21 +127,8 @@ export default function SysuserCompanyContent() {
             }
           },
         }),
-      dictType: Yup.string().required(),
-      remarkJson: Yup.string()
-        .nullable()
-        .test({
-          name: "json",
-          message: t("validation_error.field_json_invalid"),
-          test: (val) => {
-            try {
-              if (val) JSON.parse(val);
-              return true;
-            } catch (error) {
-              return false;
-            }
-          },
-        }),
+      templateId: Yup.number().required(),
+      activeTime: Yup.number().nullable(),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values", values);
@@ -157,10 +144,10 @@ export default function SysuserCompanyContent() {
     let result;
     switch (dialogType) {
       case 3:
-        result = await SystemDictTypeApi.add(formikDialog.values);
+        result = await SysCompanyApi.add(formikDialog.values);
         break;
       case 4:
-        result = await SystemDictTypeApi.update(formikDialog.values);
+        result = await SysCompanyApi.update(formikDialog.values);
         break;
     }
     if (result) {
@@ -387,7 +374,12 @@ export default function SysuserCompanyContent() {
             <button
               type="submit"
               className="btn btn-primary"
-              onClick={() => formikDialog.submitForm()}
+              onClick={() => {
+                if (!formikDialog.isValid) {
+                  logger.debug(formikDialog.errors);
+                }
+                formikDialog.submitForm();
+              }}
             >
               {formikDialog.isSubmitting && (
                 <span className="animate-spin border-[2px] border-white border-l-transparent rounded-full w-5 h-5 inline-block align-middle m-auto mr-2"></span>
@@ -408,7 +400,7 @@ export default function SysuserCompanyContent() {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id") + id}</p>,
       callback: async () => {
-        const res = await SystemDictTypeApi.delete([id]);
+        const res = await SysCompanyApi.delete([id]);
         if (res) pageDataMutate();
       },
     });

@@ -820,7 +820,7 @@ export default function () {
       title: ct("actions"),
       textAlign: "center",
       render: (row: any) => {
-        return row.id && row.status !== "3" ? (
+        return row.id ? (
           <div className="flex justify-center items-center gap-2" key={row.id}>
             <WithPermissions permissions={["sys:menu:update"]}>
               <button
@@ -854,22 +854,24 @@ export default function () {
                 </button>
               </WithPermissions>
             )}
-            <WithPermissions permissions={["sys:menu:delete"]}>
-              <button
-                type="button"
-                className="btn btn-xs mr-1 btn-outline-danger"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteRow(row.id);
-                }}
-              >
-                <Icon
-                  name="trash-lines"
-                  className="w-5 h-5 mr-1 fill-danger-light"
-                />
-                {ct("delete")}
-              </button>
-            </WithPermissions>
+            {row.status !== "3" && (
+              <WithPermissions permissions={["sys:menu:delete"]}>
+                <button
+                  type="button"
+                  className="btn btn-xs mr-1 btn-outline-danger"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteRow(row.id);
+                  }}
+                >
+                  <Icon
+                    name="trash-lines"
+                    className="w-5 h-5 mr-1 fill-danger-light"
+                  />
+                  {ct("delete")}
+                </button>
+              </WithPermissions>
+            )}
           </div>
         ) : (
           "--"

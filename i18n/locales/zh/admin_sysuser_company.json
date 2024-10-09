@@ -1,6 +1,11 @@
 {
-  "company_name": "客户名称",
+  "username": "账号",
+  "nickname": "用户昵称",
+  "email": "邮箱",
+  "mobile": "电话",
+  "gender": "性别",
+  "avatar": "头像",
   "status": "状态",
-  "template_key": "管理员模板",
-  "active_time": "到期时间"
+  "com_id": "客户ID",
+  "admin_flag": "是否管理员"
 }

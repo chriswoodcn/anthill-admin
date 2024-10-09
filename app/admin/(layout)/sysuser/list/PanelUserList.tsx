@@ -529,6 +529,12 @@ export default function PanelUserList(props: Record<string, any>) {
           textAlign: "center",
         },
         {
+          accessor: "username",
+          title: t("username"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "username"),
+        },
+        {
           accessor: "nickname",
           title: t("nickname"),
           textAlign: "center",
@@ -541,16 +547,25 @@ export default function PanelUserList(props: Record<string, any>) {
           render: (row: any) => datatableColumnText(row, "email"),
         },
         {
+          accessor: "mobile",
+          title: t("mobile"),
+          textAlign: "center",
+          render: (row: any) => datatableColumnText(row, "mobile"),
+        },
+        {
           accessor: "status",
           title: t("status"),
           textAlign: "center",
           render: (row: any) => dictVal2Label(remoteDictSysStatus, row.status),
         },
         {
-          accessor: "remarkJson",
-          title: ct("remark"),
+          accessor: "comId",
+          title: t("com_id"),
           textAlign: "center",
-          render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
+          render: (row: any) => datatableColumnText(row, "comId"),
+          hidden:
+            props.type !== UserType.SystemAdmin &&
+            props.type !== UserType.SystemUser,
         },
         {
           accessor: "actions",
@@ -674,19 +689,23 @@ export default function PanelUserList(props: Record<string, any>) {
       </QueryCondition>
       <div className="relative panel overflow-hidden min-h-96">
         <div className="flex flex-wrap gap-2 mb-4 print:hidden">
-          <WithPermissions permissions={["sys:dict:add"]}>
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              onClick={() => openDialog(3)}
-            >
-              <Icon
-                name="plus-circle"
-                className="w-5 h-5 fill-primary-light mr-1"
-              />
-              {ct("add")}
-            </button>
-          </WithPermissions>
+          {(props.type == UserType.MaintaineAdmin ||
+            props.type == UserType.SuperAdmin ||
+            props.type == UserType.SystemAdmin) && (
+            <WithPermissions permissions={["sys:dict:add"]}>
+              <button
+                type="button"
+                className="btn btn-outline-primary"
+                onClick={() => openDialog(3)}
+              >
+                <Icon
+                  name="plus-circle"
+                  className="w-5 h-5 fill-primary-light mr-1"
+                />
+                {ct("add")}
+              </button>
+            </WithPermissions>
+          )}
           <WithPermissions permissions={["sys:dict:export"]}>
             <button type="button" className="btn btn-outline-success">
               <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />

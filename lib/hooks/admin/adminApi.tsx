@@ -486,6 +486,29 @@ export const SysCompanyApi = {
     });
     return handleOperateResponse(res);
   },
+  add: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/company/add",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.ADD);
+  },
+  update: async (data: Record<string, any> = {}) => {
+    const res = await adminFetcher({
+      url: "/backend/company/update",
+      method: "POST",
+      data,
+    });
+    return handleOperateResponse(res, OperateType.UPDATE);
+  },
+  delete: async (ids: (string | number)[]) => {
+    const res = await adminFetcher({
+      url: "/backend/company/deleteLogic/" + ids,
+      method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
 };
 export const SystemUserApi = {
   usePage: (data: Record<string, any> = {}) => {

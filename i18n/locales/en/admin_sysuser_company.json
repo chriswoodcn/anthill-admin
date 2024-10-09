@@ -1,6 +1,11 @@
 {
-  "company_name": "Company Name",
+  "username": "Username",
+  "nickname": "Nickname",
+  "email": "Email",
+  "mobile": "Mobile",
+  "gender": "Gender",
+  "avatar": "Avatar",
   "status": "Status",
-  "template_key": "Admin Template",
-  "active_time": "Expire Time"
+  "com_id": "ComId",
+  "admin_flag": "Admin"
 }
