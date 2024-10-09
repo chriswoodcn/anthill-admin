@@ -334,7 +334,7 @@ export default function () {
               data={allMenus}
               value={formikDialog.values.menuIds || []}
               onChange={(checked) => {
-                console.log("TreeCheckbox onChange", checked);
+                logger.debug("TreeCheckbox onChange", checked);
                 formikDialog.setFieldError("menuIds", undefined);
                 formikDialog.setFieldValue("menuIds", checked, false);
               }}

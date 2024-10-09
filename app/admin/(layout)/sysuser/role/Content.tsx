@@ -11,6 +11,7 @@ import { dictVal2Label } from "@/lib";
 import {
   SystemDictApi,
   SystemDictTypeApi,
+  SystemMenuApi,
   SysUserRoleApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
@@ -27,6 +28,7 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
+import RcTreeCheckbox from "../../_component/RcTreeCheckbox";
 
 export default function () {
   const { t } = useTranslation("admin_sysuser_role");
@@ -106,32 +108,31 @@ export default function () {
     affiliateFlag: "0",
     comId: undefined,
     version: 0,
+    menuIds: [],
+    templateFlag: "0",
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
   const formikDialog = useFormik({
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
-      dictNameJson: Yup.string()
-        .required()
-        .test({
-          name: "json",
-          message: t("validation_error.field_json_invalid"),
-          test: (val) => {
-            try {
-              if (!val || val.replace(/\s/g, "") == "{}") return false;
-              JSON.parse(val);
-              return true;
-            } catch (error) {
-              return false;
-            }
-          },
-        }),
-      dictType: Yup.string().required(),
+      roleKey: Yup.string().required(),
+      roleNameJson: Yup.string().test({
+        name: "json",
+        message: ct("validation_error.field_json_invalid"),
+        test: (val) => {
+          try {
+            if (val) JSON.parse(val);
+            return true;
+          } catch (error) {
+            return false;
+          }
+        },
+      }),
       remarkJson: Yup.string()
         .nullable()
         .test({
           name: "json",
-          message: t("validation_error.field_json_invalid"),
+          message: ct("validation_error.field_json_invalid"),
           test: (val) => {
             try {
               if (val) JSON.parse(val);
@@ -141,6 +142,7 @@ export default function () {
             }
           },
         }),
+      menuIds: Yup.array().min(0, ct("validation_error.field_required")),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values", values);
@@ -156,10 +158,10 @@ export default function () {
     let result;
     switch (dialogType) {
       case 3:
-        result = await SystemDictTypeApi.add(formikDialog.values);
+        result = await SysUserRoleApi.add(formikDialog.values);
         break;
       case 4:
-        result = await SystemDictTypeApi.update(formikDialog.values);
+        result = await SysUserRoleApi.update(formikDialog.values);
         break;
     }
     if (result) {
@@ -184,6 +186,22 @@ export default function () {
         return null;
     }
   };
+  // 获取所有的菜单
+  const [allMenus, setAllMenus] = useState<any[]>([]);
+  const fetchAllMenus = async () => {
+    const r0 = await SystemMenuApi.all({
+      affiliateFlag: formikDialog.values.affiliateFlag,
+    });
+    if (r0) {
+      setAllMenus(r0);
+    }
+  };
+  useEffectOnce(() => {
+    fetchAllMenus();
+  }, [formikDialog.values.affiliateFlag]);
+  // 获取模板拥有的菜单
+  const [checkedMenuIds, setCheckedMenuIds] = useState<any[]>([]);
+  const fetchMenuIdsByRoleId = async () => {};
   const openDialog = async (
     type: number | undefined = 0,
     formId: number | string | undefined = undefined
@@ -345,6 +363,36 @@ export default function () {
               })}
             </div>
           </div>
+          {/* 模板菜单&权限 */}
+          <div
+            className={`${
+              formikDialog.errors.menuIds ? "has-error" : ""
+            } mt-2 min-w-60`}
+          >
+            <RcTreeCheckbox
+              fieldNames={{
+                children: "children",
+                title: "menuNameJson",
+                key: "id",
+              }}
+              trans="true"
+              withAsterisk
+              label={t("menu_permissions")}
+              checkModel="all"
+              data={allMenus}
+              value={formikDialog.values.menuIds || []}
+              onChange={(checked) => {
+                logger.debug("TreeCheckbox onChange", checked);
+                formikDialog.setFieldError("menuIds", undefined);
+                formikDialog.setFieldValue("menuIds", checked, false);
+              }}
+              error={
+                formikDialog.errors.menuIds
+                  ? (formikDialog.errors.menuIds as string)
+                  : ""
+              }
+            />
+          </div>
           <div
             className={`${
               formikDialog.errors.remarkJson ? "has-error" : ""
@@ -415,7 +463,7 @@ export default function () {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id") + id}</p>,
       callback: async () => {
-        const res = await SystemDictTypeApi.delete([id]);
+        const res = await SysUserRoleApi.delete([id]);
         if (res) pageDataMutate();
       },
     });
