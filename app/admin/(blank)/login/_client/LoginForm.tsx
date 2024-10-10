@@ -3,24 +3,72 @@
 import { useTranslation } from "react-i18next";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 // custom
 import logger from "@/lib/logger";
 import { IconUser, IconX, IconEyeClosed, IconEye } from "@tabler/icons-react";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { getAuthorizationInfoClient } from "@/lib/jwt";
 import { useState } from "react";
-import useAdminUserLogin, {
-  LoginForm,
-  getStorageLoginForm,
-} from "@/lib/hooks/admin/useAdminUserLogin";
+import { SysLoginApi } from "@/lib/hooks/admin/adminApi";
+import Toast from "@/lib/toast";
+import { useAppDispatch } from "@/store";
+import { aesDecrypt, aesEncrypt, isBrowser } from "@/lib";
+import configuraton from "@/configuration.mjs";
+import {
+  clearAdminUserState,
+  setToken,
+  setUserInfo,
+} from "@/store/slices/admin.userSlice";
+
+export interface LoginForm {
+  username: string | undefined;
+  password: string | undefined;
+  remember: boolean;
+}
+
+export const getStorageLoginForm = () => {
+  const emptyForm: LoginForm = {
+    username: undefined,
+    password: undefined,
+    remember: false,
+  };
+  if (typeof window != "undefined") {
+    let jsonStr = window.localStorage.getItem("__admin_login_form__");
+    if (!jsonStr) return emptyForm;
+    let target = JSON.parse(jsonStr);
+    if (!target.remember) return emptyForm;
+    if (target.password) target.password = aesDecrypt(target.password);
+    return target as LoginForm;
+  }
+  return emptyForm;
+};
+
+export const setStorageLoginForm = ({
+  username,
+  password,
+  remember,
+}: LoginForm) => {
+  let target = {};
+  if (remember == true && username && password) {
+    target = { username: username, password: aesEncrypt(password), remember };
+  } else {
+    target = { remember: false };
+  }
+  if (isBrowser()) {
+    if (password)
+      window.localStorage.setItem("__admin_unlock_pwd__", aesEncrypt(password));
+    window.localStorage.setItem("__admin_login_form__", JSON.stringify(target));
+  }
+};
 
 export default () => {
   const { t } = useTranslation("admin_login");
   const { t: ct } = useTranslation("admin_common");
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const dispatch = useAppDispatch();
 
-  const [loginAction, setLoginAction] = useState(false);
   const [inputType, setInputType] = useState<"password" | "text">("password");
 
   useEffectOnce(() => {
@@ -34,29 +82,60 @@ export default () => {
     initialValues: initialForm,
     validationSchema: Yup.object().shape({
       username: Yup.string()
-        .matches(/^\w{5,}$/gi, `${t("account")}  ${ct("validation_error.field_invalid")}`)
+        .matches(
+          /^\w{5,}$/gi,
+          `${t("account")}  ${ct("validation_error.field_invalid")}`
+        )
         .required(`${t("account")}  ${ct("validation_error.field_required")}`),
       password: Yup.string()
-        .matches(/^\S{5,}$/gi, `${t("password")}  ${ct("validation_error.field_invalid")}`)
+        .matches(
+          /^\S{5,}$/gi,
+          `${t("password")}  ${ct("validation_error.field_invalid")}`
+        )
         .required(`${t("password")}  ${ct("validation_error.field_required")}`),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values=", values);
-      setLoginAction(true);
+      const res = await SysLoginApi.login({
+        username: formik.values.username,
+        password: formik.values.password,
+        remember: formik.values.remember,
+        device: "WEB",
+      });
+      logger.debug("res", res);
+      if (res.code == 200) {
+        const authorizationInfo = getAuthorizationInfoClient();
+        Toast.fireSuccessAction({
+          html: (
+            <p className="text-black-7 dark:text-white-7 text-xl">
+              {t("toast_success_login")}
+            </p>
+          ),
+          callback: () => {
+            if (searchParams.get("redirect")) {
+              router.replace(searchParams.get("redirect")!!);
+            } else {
+              router.replace(configuraton.PathAlias.Admin.Root);
+            }
+          },
+        });
+        setStorageLoginForm({
+          username: formik.values.username,
+          password: formik.values.password,
+          remember: formik.values.remember,
+        });
+        dispatch(setToken(authorizationInfo?.token));
+        dispatch(setUserInfo(res.data));
+      } else {
+        Toast.fireErrorAction({
+          html: <p className="text-2xl font-bold">{res.message}</p>,
+          timer: 0,
+        });
+        dispatch(clearAdminUserState());
+      }
+      formik.setSubmitting(false);
     },
   });
-  const { isLoading } = useAdminUserLogin(
-    loginAction,
-    {
-      username: formik.values.username,
-      password: formik.values.password,
-      remember: formik.values.remember,
-      device: "WEB",
-    },
-    () => {
-      setLoginAction(false);
-    }
-  );
 
   return (
     <>
@@ -179,7 +258,7 @@ export default () => {
         disabled={formik.isSubmitting}
         onClick={() => formik.submitForm()}
       >
-        {isLoading && (
+        {formik.isSubmitting && (
           <span className="animate-spin border-2 border-white border-l-transparent rounded-full w-5 h-5 ltr:mr-4 rtl:ml-4 inline-block align-middle"></span>
         )}
         {t("login")}

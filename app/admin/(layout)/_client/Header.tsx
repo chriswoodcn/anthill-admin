@@ -6,12 +6,16 @@ import { useTranslation } from "react-i18next";
 import AnimateHeight from "react-animate-height";
 
 import { RootState, useAppDispatch, useAppSelector } from "@/store";
-import { toggleRTL, toggleSidebar, toggleTheme } from "@/store/slices/admin";
+import {
+  clearAdminUserState,
+  toggleRTL,
+  toggleSidebar,
+  toggleTheme,
+} from "@/store/slices/admin";
 import logger from "@/lib/logger";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import { isBrowser } from "@/lib";
 import { Menu } from "@/lib/menu";
-import useAdminUserLogout from "@/lib/hooks/admin/useAdminUserLogout";
 
 import Image from "@/components/core/Image";
 import IconMenu from "@/components/icon/admin/icon-menu";
@@ -37,6 +41,9 @@ import Dropdown from "@/components/core/Dropdown";
 import DropdownPortal from "@/components/core/DropdownPortal";
 import LanguageDropdown from "@/components/compose/LanguageDropdown";
 import Logo from "@/components/compose/Logo";
+import { SysLoginApi } from "@/lib/hooks/admin/adminApi";
+import configuraton from "@/configuration.mjs";
+import Toast from "@/lib/toast";
 
 const Header = () => {
   const pathname = usePathname();
@@ -317,10 +324,22 @@ const Header = () => {
     );
   };
 
-  const [doLogout, setDologout] = useState(false);
-  const { data, error, isLoading } = useAdminUserLogout(doLogout, () =>
-    setDologout(false)
-  );
+  const doLogout = async () => {
+    const res = await SysLoginApi.logout();
+    if (res.code == 200) {
+      dispatch(clearAdminUserState());
+      router.replace(configuraton.PathAlias.Admin.Login);
+    } else {
+      Toast.fireErrorAction({
+        html: (
+          <p className="text-2xl font-bold">
+            {res.message || t("fetch_error")}
+          </p>
+        ),
+        timer: 0,
+      });
+    }
+  };
 
   return (
     <header
@@ -701,7 +720,7 @@ const Header = () => {
                   <li className="border-t border-white-light dark:border-white-light/10 cursor-pointer">
                     <div
                       className="!py-3 text-danger flex justify-start items-center"
-                      onClick={() => setDologout(true)}
+                      onClick={() => doLogout()}
                     >
                       <IconLogout className="h-4.5 w-4.5 shrink-0 rotate-90 ltr:mr-2 rtl:ml-2" />
                       Sign Out

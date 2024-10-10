@@ -4,9 +4,11 @@ import useAdminFetch from "./useAdminFetch";
 import { useState } from "react";
 import logger from "@/lib/logger";
 import { useTranslation } from "react-i18next";
-import { adminFetcher } from "@/lib/fetcher";
+import { adminFetcher, nextFetcher } from "@/lib/fetcher";
 import Toast from "@/lib/toast";
 import { i18next } from "@/i18n/client";
+import { aesDecrypt, aesEncrypt, isBrowser, withBasePath } from "@/lib";
+
 enum OperateType {
   GET,
   ADD,
@@ -136,6 +138,62 @@ function filterDict(records: any[]) {
   }
   return records;
 }
+
+export interface LoginForm {
+  username: string | undefined;
+  password: string | undefined;
+  remember: boolean;
+}
+
+export const getStorageLoginForm = () => {
+  const emptyForm: LoginForm = {
+    username: undefined,
+    password: undefined,
+    remember: false,
+  };
+  if (typeof window != "undefined") {
+    let jsonStr = window.localStorage.getItem("__admin_login_form__");
+    if (!jsonStr) return emptyForm;
+    let target = JSON.parse(jsonStr);
+    if (!target.remember) return emptyForm;
+    if (target.password) target.password = aesDecrypt(target.password);
+    return target as LoginForm;
+  }
+  return emptyForm;
+};
+
+export const setStorageLoginForm = ({
+  username,
+  password,
+  remember,
+}: LoginForm) => {
+  let target = {};
+  if (remember == true && username && password) {
+    target = { username: username, password: aesEncrypt(password), remember };
+  } else {
+    target = { remember: false };
+  }
+  if (isBrowser()) {
+    if (password)
+      window.localStorage.setItem("__admin_unlock_pwd__", aesEncrypt(password));
+    window.localStorage.setItem("__admin_login_form__", JSON.stringify(target));
+  }
+};
+export const SysLoginApi = {
+  login: async (data: LoginForm & Record<string, any>) => {
+    return await nextFetcher({
+      url: withBasePath("/api/auth/login"),
+      method: "POST",
+      data: data,
+    });
+  },
+  logout: async () => {
+    return await nextFetcher({
+      url: withBasePath("/api/auth/logout"),
+      method: "GET",
+    });
+  },
+};
 /**
  * 系统字典
  */
@@ -510,6 +568,9 @@ export const SysCompanyApi = {
     return handleOperateResponse(res, OperateType.DELETE);
   },
 };
+/**
+ * 系统用户
+ */
 export const SystemUserApi = {
   usePage: (data: Record<string, any> = {}) => {
     const [result, setResult] = useState<any>(undefined);
@@ -560,6 +621,94 @@ export const SystemUserApi = {
     const res = await adminFetcher({
       url: "/backend/user/deleteLogic/" + ids,
       method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
+};
+/**
+ * 系统登录日志
+ */
+export const SysLoginInfoApi = {
+  usePage: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
+      url: "/backend/record/login/page",
+      method: "POST",
+      data,
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
+  getById: async (id: string | number) => {
+    const res = await adminFetcher({
+      url: "/backend/record/login/getById/" + id,
+      method: "GET",
+    });
+    return handleOperateResponse(res);
+  },
+  clear: async (ids: (string | number)[]) => {
+    const res = await adminFetcher({
+      url: "/backend/record/login/clear",
+      method: "GET",
+      params: {
+        ids,
+      },
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
+};
+/**
+ * 系统操作日志
+ */
+export const SysOperLogApi = {
+  usePage: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
+      url: "/backend/record/operate/operate",
+      method: "POST",
+      data,
+    });
+    useEffectOnce(() => {
+      if (fetchData && fetchData.code == 200) {
+        setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
+  getById: async (id: string | number) => {
+    const res = await adminFetcher({
+      url: "/backend/record/operate/getById/" + id,
+      method: "GET",
+    });
+    return handleOperateResponse(res);
+  },
+  clear: async (ids: (string | number)[]) => {
+    const res = await adminFetcher({
+      url: "/backend/record/operate/clear",
+      method: "GET",
+      params: {
+        ids,
+      },
     });
     return handleOperateResponse(res, OperateType.DELETE);
   },

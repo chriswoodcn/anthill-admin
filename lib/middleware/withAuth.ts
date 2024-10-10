@@ -1,9 +1,11 @@
 import { NextFetchEvent, NextRequest, NextResponse } from 'next/server';
-import logger from '../logger';
+import logger, { Logger } from '../logger';
 import { MiddlewareFactory } from './stackMiddlewares';
 import configuration from '@/configuration.mjs';
 import { withBasePath } from '..';
 import { cookies } from 'next/headers'
+
+logger.setLevel(Logger.Levels.INFO)
 
 export const withAuth: MiddlewareFactory = (next) => {
   return async (request: NextRequest, _next: NextFetchEvent) => {
