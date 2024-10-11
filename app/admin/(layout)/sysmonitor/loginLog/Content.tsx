@@ -14,7 +14,7 @@ import {
   SystemDictTypeApi,
   SysUserRoleApi,
   SysCompanyApi,
-  SysLoginInfoApi
+  SysLoginInfoApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
@@ -34,7 +34,7 @@ import { IconUserSearch } from "@tabler/icons-react";
 import dayjs from "dayjs";
 
 export default function SysuserCompanyContent() {
-  const { t, i18n } = useTranslation("admin_sysuser_company");
+  const { t, i18n } = useTranslation("admin_sysmonitor_login");
   const { t: ct } = useTranslation("admin_common");
   const router = useRouter();
 
@@ -92,6 +92,9 @@ export default function SysuserCompanyContent() {
       },
     }
   );
+  const { data: remoteDictSysYesNo } = SystemDictApi.useDict({
+    type: "sys_yes_no",
+  });
   const { data: remoteTemplateSelect } = SysUserRoleApi.useTemplateSelect({
     flag: "2",
   });
@@ -400,13 +403,10 @@ export default function SysuserCompanyContent() {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id") + id}</p>,
       callback: async () => {
-        const res = await SysCompanyApi.delete([id]);
+        const res = await SysLoginInfoApi.clear([id]);
         if (res) pageDataMutate();
       },
     });
-  };
-  const handleEditRow = async (id: string | number) => {
-    openDialog(4, id);
   };
 
   //#region table
@@ -426,35 +426,40 @@ export default function SysuserCompanyContent() {
           textAlign: "center",
         },
         {
-          accessor: "companyNameJson",
-          title: t("company_name"),
+          accessor: "account",
+          title: t("account"),
           textAlign: "center",
-          render: (row: any) =>
-            datatableColumnTranslateText(row, "companyNameJson"),
+          render: (row: any) => datatableColumnText(row, "account"),
         },
         {
-          accessor: "status",
-          title: t("status"),
+          accessor: "ipaddr",
+          title: t("ipaddr"),
           textAlign: "center",
-          render: (row: any) => dictVal2Label(remoteDictSysStatus, row.status),
+          render: (row: any) => datatableColumnText(row, "ipaddr"),
         },
         {
-          accessor: "remarkJson",
-          title: ct("remark"),
+          accessor: "loginLocation",
+          title: t("login_location"),
           textAlign: "center",
-          render: (row: any) => datatableColumnTranslateText(row, "remarkJson"),
+          render: (row: any) => datatableColumnText(row, "loginLocation"),
         },
         {
-          accessor: "templateKey",
-          title: t("template_key"),
+          accessor: "browser",
+          title: t("browser"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "templateKey"),
+          render: (row: any) => datatableColumnText(row, "browser"),
         },
         {
-          accessor: "activeTime",
-          title: t("active_time"),
+          accessor: "os",
+          title: t("os"),
           textAlign: "center",
-          render: (row: any) => formatDate(row.activeTime),
+          render: (row: any) => datatableColumnText(row, "os"),
+        },
+        {
+          accessor: "success",
+          title: t("success"),
+          textAlign: "center",
+          render: (row: any) => dictVal2Label(remoteDictSysYesNo, row.success),
         },
         {
           accessor: "actions",
@@ -463,71 +468,22 @@ export default function SysuserCompanyContent() {
           render: (row: any) => {
             return row.id ? (
               <div className="flex justify-center space-x-4" key={row.dictId}>
-                <WithPermissions permissions={["system:dict:list"]}>
+                <WithPermissions permissions={["system:dict:remove"]}>
                   <button
                     type="button"
-                    className="btn btn-xs mr-1 btn-outline-secondary"
+                    className="btn btn-xs mr-1 btn-outline-danger"
                     onClick={(e) => {
                       e.stopPropagation();
-                      handleDetailRow(row.id);
+                      handleDeleteRow(row.id);
                     }}
                   >
                     <Icon
-                      name="view"
-                      className="w-5 h-5 mr-1 fill-secondary-light"
+                      name="trash-lines"
+                      className="w-5 h-5 mr-1 fill-danger-light"
                     />
-                    {ct("detail")}
+                    {ct("delete")}
                   </button>
                 </WithPermissions>
-                {row.status != "3" && (
-                  <>
-                    <WithPermissions permissions={["system:dict:edit"]}>
-                      <button
-                        type="button"
-                        className="btn btn-xs btn-outline-primary"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleEditRow(row.id);
-                        }}
-                      >
-                        <Icon
-                          name="pencil-paper"
-                          className="w-5 h-5 fill-primary-4"
-                        />
-                        {ct("update")}
-                      </button>
-                    </WithPermissions>
-                    <WithPermissions permissions={["system:dict:remove"]}>
-                      <button
-                        type="button"
-                        className="btn btn-xs mr-1 btn-outline-danger"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteRow(row.id);
-                        }}
-                      >
-                        <Icon
-                          name="trash-lines"
-                          className="w-5 h-5 mr-1 fill-danger-light"
-                        />
-                        {ct("delete")}
-                      </button>
-                    </WithPermissions>
-                    <button
-                      type="button"
-                      className="btn btn-xs mr-1 btn-outline-secondary"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        router.push(
-                          `/admin/sysuser/company-users?comId=${row.id}`
-                        );
-                      }}
-                    >
-                      <IconUserSearch className="w-5 h-5 mr-1 fill-secondary" />
-                      {ct("users")}
-                    </button>
-                  </>
-                )}
               </div>
             ) : (
               "--"
@@ -560,11 +516,39 @@ export default function SysuserCompanyContent() {
       >
         <form className="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2">
           <div className="min-w-60">
+            <TextInput
+              label={t("account")}
+              placeholder={ct("placeholder_input") + t("account")}
+              value={formikQuery.values.account || ""}
+              onChange={(e) =>
+                formikQuery.setFieldValue(
+                  "account",
+                  e.currentTarget.value,
+                  false
+                )
+              }
+              onKeyUp={(e: any) => {
+                if (e.keyCode == 13) pageDataMutate();
+              }}
+              rightSection={
+                formikQuery.values.account && (
+                  <Icon
+                    name="x-circle"
+                    className="w-5 h-5"
+                    onClick={(e) =>
+                      formikQuery.setFieldValue("account", undefined, false)
+                    }
+                  />
+                )
+              }
+            />
+          </div>
+          <div className="min-w-60">
             <Select
-              label={t("status")}
-              placeholder={ct("placeholder_select") + t("status")}
-              value={formikQuery.values.status || null}
-              data={remoteDictSysStatus}
+              label={t("success")}
+              placeholder={ct("placeholder_select") + t("success")}
+              value={formikQuery.values.success || null}
+              data={remoteDictSysYesNo}
               renderOption={({ option, checked }) => {
                 return (
                   <div
@@ -582,7 +566,7 @@ export default function SysuserCompanyContent() {
                 );
               }}
               onChange={(val, option) =>
-                formikQuery.setFieldValue("status", val || undefined, false)
+                formikQuery.setFieldValue("success", val || undefined, false)
               }
               allowDeselect
             />
@@ -619,4 +603,3 @@ export default function SysuserCompanyContent() {
     </>
   );
 }
-

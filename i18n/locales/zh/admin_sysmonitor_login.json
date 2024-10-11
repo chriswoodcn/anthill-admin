@@ -1,0 +1,8 @@
+{
+  "account": "账户",
+  "ipaddr": "IP地址",
+  "login_location": "登录地址",
+  "browser": "浏览器",
+  "os": "操作系统",
+  "success": "登录成功"
+}

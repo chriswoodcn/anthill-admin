@@ -8,6 +8,7 @@ import { setAuthorizationInfo } from '@/lib/jwt'
 export const POST = ApiHandler(
   async (req) => {
     const body = await req.json()
+    logger.debug("req.headers", req.headers)
     logger.debug("POST /api/auth/login", body)
     const res: any = await request("/backend/login", {
       method: "POST",

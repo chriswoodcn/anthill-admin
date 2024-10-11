@@ -1,3 +1,9 @@
-export default function SystemDict() {
-  return <div className="min-h-[calc(100vh-10rem)]">sysmonitor operLog</div>;
+import Content from "./Content";
+
+export default function SysMonitorOperLog() {
+  return (
+    <div className="min-h-[calc(100vh-10rem)]">
+      <Content />
+    </div>
+  );
 }
