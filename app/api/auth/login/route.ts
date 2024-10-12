@@ -8,11 +8,17 @@ import { setAuthorizationInfo } from '@/lib/jwt'
 export const POST = ApiHandler(
   async (req) => {
     const body = await req.json()
-    logger.debug("req.headers", req.headers)
+    const combineHeaders: Record<any, any> = {}
+    req.headers.forEach((value, key) => {
+      console.log(`${key} ==> ${value}`);
+      combineHeaders[key] = value
+    });
     logger.debug("POST /api/auth/login", body)
+    logger.debug("combineHeaders", combineHeaders)
     const res: any = await request("/backend/login", {
       method: "POST",
-      data: body
+      data: body,
+      headers: combineHeaders
     })
     logger.debug("res", res)
     if (res.code == 200) {

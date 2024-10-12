@@ -680,7 +680,7 @@ export const SysOperLogApi = {
       isLoading,
       mutate,
     } = useAdminFetch(true, undefined, {
-      url: "/backend/record/operate/operate",
+      url: "/backend/record/operate/page",
       method: "POST",
       data,
     });

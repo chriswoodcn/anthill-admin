@@ -4,5 +4,6 @@
   "login_location": "登录地址",
   "browser": "浏览器",
   "os": "操作系统",
+  "login_time": "登录时间",
   "success": "登录成功"
 }

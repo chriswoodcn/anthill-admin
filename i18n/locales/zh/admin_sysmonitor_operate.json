@@ -1,0 +1,15 @@
+{
+  "title": "操作标题",
+  "business_type": "操作类型",
+  "operator_user_type": "用户类型",
+  "oper_user": "用户ID",
+  "method": "执行方法",
+  "request_method": "请求方法",
+  "oper_url": "请求地址",
+  "oper_ip": "请求IP",
+  "oper_location": "IP地址",
+  "oper_param": "请求参数",
+  "json_result": "请求结果",
+  "oper_time": "操作时间",
+  "success": "操作成功"
+}

@@ -8,7 +8,7 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
 
-import { dictVal2Label, formatDate } from "@/lib";
+import { dictVal2Label, formatDateTime } from "@/lib";
 import {
   SystemDictApi,
   SystemDictTypeApi,
@@ -32,6 +32,7 @@ import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 import { IconUserSearch } from "@tabler/icons-react";
 import dayjs from "dayjs";
+import { format } from "crypto-js";
 
 export default function SysuserCompanyContent() {
   const { t, i18n } = useTranslation("admin_sysmonitor_login");
@@ -460,6 +461,12 @@ export default function SysuserCompanyContent() {
           title: t("success"),
           textAlign: "center",
           render: (row: any) => dictVal2Label(remoteDictSysYesNo, row.success),
+        },
+        {
+          accessor: "loginTime",
+          title: t("login_time"),
+          textAlign: "center",
+          render: (row: any) => formatDateTime(row.loginTime),
         },
         {
           accessor: "actions",

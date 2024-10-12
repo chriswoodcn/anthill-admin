@@ -14,7 +14,7 @@ import {
   SystemDictTypeApi,
   SysUserRoleApi,
   SysCompanyApi,
-  SysLoginInfoApi,
+  SysOperLogApi
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
@@ -43,7 +43,7 @@ export default function SysuserCompanyContent() {
   const PAGE_SIZES = [10, 20, 30, 50, 100];
   const [pageSize, setPageSize] = useState(PAGE_SIZES[0]);
   const initQueryParams = {
-    account: undefined,
+    user: undefined,
     success: undefined,
   };
   const [queryParams, updateQueryParams] =
@@ -72,7 +72,7 @@ export default function SysuserCompanyContent() {
     data: pageData,
     isLoading,
     mutate: pageDataMutate,
-  } = SysLoginInfoApi.usePage({
+  } = SysOperLogApi.usePage({
     pageNum: page,
     pageSize,
     ...queryParams,
@@ -403,7 +403,7 @@ export default function SysuserCompanyContent() {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id") + id}</p>,
       callback: async () => {
-        const res = await SysLoginInfoApi.clear([id]);
+        const res = await SysOperLogApi.clear([id]);
         if (res) pageDataMutate();
       },
     });
