@@ -11,5 +11,6 @@
   "oper_param": "请求参数",
   "json_result": "请求结果",
   "oper_time": "操作时间",
-  "success": "操作成功"
+  "success": "操作成功",
+  "error_msg": "错误消息"
 }

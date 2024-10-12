@@ -106,11 +106,14 @@ export default function SysuserCompanyContent() {
   const [show, setShow] = useState(false);
   const initialForm = {
     id: undefined,
-    companyNameJson: undefined,
-    status: "0",
-    activeTime: undefined,
-    templateId: undefined,
-    version: 0,
+    account: undefined,
+    success: "1",
+    ipaddr: undefined,
+    loginTime: undefined,
+    loginLocation: undefined,
+    os: undefined,
+    browser: undefined,
+    errorMsg: undefined,
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
   const formikDialog = useFormik({
@@ -186,7 +189,7 @@ export default function SysuserCompanyContent() {
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SysCompanyApi.getById(formId);
+    const r0 = await SysLoginInfoApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -209,159 +212,71 @@ export default function SysuserCompanyContent() {
       </div>
       <div className="p-4 sm:p-6 lg:p-10">
         {/* form */}
-        <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
-          <div
-            className={`${formikDialog.errors.id ? "has-error" : ""} min-w-60`}
-          >
-            <TextInput
-              withAsterisk
-              label={ct("id")}
-              placeholder={ct("placeholder_input") + ct("id")}
-              value={formikDialog.values.id}
-              onChange={(e) => {
-                if (dialogType != 3) return;
-                formikDialog.setFieldError("id", undefined);
-                formikDialog.setFieldValue("id", e.currentTarget.value, false);
-              }}
-              error={
-                formikDialog.errors.id ? (formikDialog.errors.id as string) : ""
-              }
-              rightSection={
-                formikDialog.values.id &&
-                dialogType == 3 && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("id", undefined, false)
-                    }
-                  />
-                )
-              }
-            />
-          </div>
-          <div
-            className={`${
-              formikDialog.errors.companyNameJson ? "has-error" : ""
-            } min-w-60`}
-          >
-            <JsonInput
-              label={t("company_name")}
-              placeholder={ct("placeholder_input") + t("company_name")}
-              description={ct("description_json_input")}
-              value={formikDialog.values.companyNameJson || ""}
-              onChange={(val) => {
-                formikDialog.setFieldError("companyNameJson", undefined);
-                formikDialog.setFieldValue("companyNameJson", val, false);
-              }}
-              error={
-                formikDialog.errors.companyNameJson
-                  ? (formikDialog.errors.companyNameJson as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.companyNameJson && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue(
-                        "companyNameJson",
-                        undefined,
-                        false
-                      )
-                    }
-                  />
-                )
-              }
-              autosize
-              formatOnBlur
-            />
-          </div>
-          {remoteTemplateSelect.length > 0 && (
-            <div className="min-w-60">
-              <Select
-                label={t("template_key")}
-                placeholder={ct("placeholder_select") + t("template_key")}
-                value={formikDialog.values.templateId + "" || null}
-                data={remoteTemplateSelect}
-                renderOption={({ option, checked }) => {
-                  return (
-                    <div
-                      className="flex-1 flex justify-between py-0.5"
-                      key={option.value}
-                    >
-                      {option.label}
-                      {checked && (
-                        <Icon
-                          name="check"
-                          className="w-5 h-5 text-white-5 dark:text-black-5"
-                        />
-                      )}
-                    </div>
-                  );
-                }}
-                onChange={(val, option) =>
-                  formikDialog.setFieldValue(
-                    "templateId",
-                    val || undefined,
-                    false
-                  )
-                }
-                allowDeselect
-              />
-            </div>
-          )}
-          <div className="min-w-60">
-            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-              {t("status")}
+        <form
+          className="grid grid-cols-2 gap-2 text-black-7 dark:text-white-7"
+          onSubmit={formikDialog.handleSubmit}
+        >
+          <div className="min-w-60 col-span-2">
+            <label className="text-white-5 dark:text-black-5">
+              {t("account")}
             </label>
-            <div className="text-sm">
-              {remoteDictSysStatus.map((item: any) => {
-                return (
-                  <label className="inline-flex mr-4" key={item.value}>
-                    <input
-                      type="radio"
-                      name="status"
-                      className="form-radio"
-                      disabled={item.value == "3"}
-                      checked={item.value == formikDialog.values.status}
-                      onChange={() =>
-                        formikDialog.setFieldValue("status", item.value, false)
-                      }
-                    />
-                    <span>{item.label}</span>
-                  </label>
-                );
-              })}
+            <div className="text-wrap break-all">
+              {formikDialog.values.account || "--"}
             </div>
           </div>
-          <div className="min-w-60">
-            <DatePickerInput
-              locale={i18n.language}
-              label={t("active_time")}
-              valueFormat="YYYY-MM-DD"
-              placeholder={ct("placeholder_select") + t("active_time")}
-              defaultDate={
-                formikDialog.values.activeTime
-                  ? dayjs(formikDialog.values.activeTime).toDate()
-                  : new Date()
-              }
-              value={
-                formikDialog.values.activeTime
-                  ? dayjs(formikDialog.values.activeTime).toDate()
-                  : null
-              }
-              onChange={(val: any) =>
-                formikDialog.setFieldValue(
-                  "activeTime",
-                  val ? dayjs(val).valueOf() : undefined,
-                  false
-                )
-              }
-              allowDeselect
-              clearable
-            />
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("ipaddr")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.ipaddr || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("login_location")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.loginLocation || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("browser")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.browser || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">{t("os")}</label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.os || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("success")}
+            </label>
+            <div className="text-wrap break-all">
+              {dictVal2Label(remoteDictSysYesNo, formikDialog.values.success)}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("login_time")}
+            </label>
+            <div className="text-wrap break-all">
+              {formatDateTime(formikDialog.values.loginTime || -1)}
+            </div>
+          </div>
+          <div className="min-w-60 col-span-2">
+            <label className="text-white-5 dark:text-black-5">
+              {t("error_msg")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.errorMsg || "--"}
+            </div>
           </div>
         </form>
         {/* button */}
@@ -404,7 +319,17 @@ export default function SysuserCompanyContent() {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id") + id}</p>,
       callback: async () => {
-        const res = await SysLoginInfoApi.clear([id]);
+        const ids = [id];
+        const res = await SysLoginInfoApi.clear(ids);
+        if (res) pageDataMutate();
+      },
+    });
+  };
+  const handleClear = async () => {
+    Toast.fireWarnConfirmModel({
+      html: <p>{ct("desc_clear")}</p>,
+      callback: async () => {
+        const res = await SysLoginInfoApi.clear();
         if (res) pageDataMutate();
       },
     });
@@ -475,7 +400,23 @@ export default function SysuserCompanyContent() {
           render: (row: any) => {
             return row.id ? (
               <div className="flex justify-center space-x-4" key={row.dictId}>
-                <WithPermissions permissions={["system:dict:remove"]}>
+                <WithPermissions permissions={["system:loginLog:list"]}>
+                  <button
+                    type="button"
+                    className="btn btn-xs mr-1 btn-outline-secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDetailRow(row.id);
+                    }}
+                  >
+                    <Icon
+                      name="view"
+                      className="w-5 h-5 mr-1 fill-secondary-light"
+                    />
+                    {ct("detail")}
+                  </button>
+                </WithPermissions>
+                <WithPermissions permissions={["system:loginLog:delete"]}>
                   <button
                     type="button"
                     className="btn btn-xs mr-1 btn-outline-danger"
@@ -582,25 +523,17 @@ export default function SysuserCompanyContent() {
       </QueryCondition>
       <div className="relative panel overflow-hidden min-h-96">
         <div className="flex flex-wrap gap-2 mb-4 print:hidden">
-          <WithPermissions permissions={["sys:dict:add"]}>
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              onClick={() => openDialog(3)}
-            >
-              <Icon
-                name="plus-circle"
-                className="w-5 h-5 fill-primary-light mr-1"
-              />
-              {ct("add")}
-            </button>
-          </WithPermissions>
-          <WithPermissions permissions={["sys:dict:export"]}>
-            <button type="button" className="btn btn-outline-success">
-              <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
-              {ct("export")}
-            </button>
-          </WithPermissions>
+          <button
+            type="button"
+            className="btn btn-outline-danger"
+            onClick={() => handleClear()}
+          >
+            <Icon
+              name="trash-lines"
+              className="w-5 h-5 fill-danger-light mr-1"
+            />
+            {ct("clear")}
+          </button>
         </div>
         {PageTable}
       </div>

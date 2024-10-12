@@ -8,13 +8,13 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
 
-import { dictVal2Label, formatDate } from "@/lib";
+import { dictVal2Label, formatDate, formatDateTime } from "@/lib";
 import {
   SystemDictApi,
   SystemDictTypeApi,
   SysUserRoleApi,
   SysCompanyApi,
-  SysOperLogApi
+  SysOperLogApi,
 } from "@/lib/hooks/admin/adminApi";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
 import logger from "@/lib/logger";
@@ -34,7 +34,7 @@ import { IconUserSearch } from "@tabler/icons-react";
 import dayjs from "dayjs";
 
 export default function SysuserCompanyContent() {
-  const { t, i18n } = useTranslation("admin_sysmonitor_login");
+  const { t, i18n } = useTranslation("admin_sysmonitor_operate");
   const { t: ct } = useTranslation("admin_common");
   const router = useRouter();
 
@@ -95,8 +95,8 @@ export default function SysuserCompanyContent() {
   const { data: remoteDictSysYesNo } = SystemDictApi.useDict({
     type: "sys_yes_no",
   });
-  const { data: remoteTemplateSelect } = SysUserRoleApi.useTemplateSelect({
-    flag: "2",
+  const { data: remoteDictSysOperateType } = SystemDictApi.useDict({
+    type: "sys_operate_type",
   });
 
   //#endregion
@@ -105,11 +105,20 @@ export default function SysuserCompanyContent() {
   const [show, setShow] = useState(false);
   const initialForm = {
     id: undefined,
-    companyNameJson: undefined,
-    status: "0",
-    activeTime: undefined,
-    templateId: undefined,
-    version: 0,
+    title: undefined,
+    businessType: undefined,
+    operatorUserType: undefined,
+    operUser: undefined,
+    method: undefined,
+    success: undefined,
+    requestMethod: undefined,
+    operTime: undefined,
+    operUrl: undefined,
+    operIp: undefined,
+    operLocation: undefined,
+    operParam: undefined,
+    jsonResult: undefined,
+    errorMsg: undefined,
   };
   const [form, updateForm] = useImmer<Record<string, any>>(initialForm);
   const formikDialog = useFormik({
@@ -185,7 +194,7 @@ export default function SysuserCompanyContent() {
       return;
     }
     if (formId == undefined) return;
-    const r0 = await SysCompanyApi.getById(formId);
+    const r0 = await SysOperLogApi.getById(formId);
     if (r0) {
       for (const key in initialForm) {
         if (Object.prototype.hasOwnProperty.call(initialForm, key)) {
@@ -208,159 +217,111 @@ export default function SysuserCompanyContent() {
       </div>
       <div className="p-4 sm:p-6 lg:p-10">
         {/* form */}
-        <form className="space-y-2" onSubmit={formikDialog.handleSubmit}>
-          <div
-            className={`${formikDialog.errors.id ? "has-error" : ""} min-w-60`}
-          >
-            <TextInput
-              withAsterisk
-              label={ct("id")}
-              placeholder={ct("placeholder_input") + ct("id")}
-              value={formikDialog.values.id}
-              onChange={(e) => {
-                if (dialogType != 3) return;
-                formikDialog.setFieldError("id", undefined);
-                formikDialog.setFieldValue("id", e.currentTarget.value, false);
-              }}
-              error={
-                formikDialog.errors.id ? (formikDialog.errors.id as string) : ""
-              }
-              rightSection={
-                formikDialog.values.id &&
-                dialogType == 3 && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue("id", undefined, false)
-                    }
-                  />
-                )
-              }
-            />
-          </div>
-          <div
-            className={`${
-              formikDialog.errors.companyNameJson ? "has-error" : ""
-            } min-w-60`}
-          >
-            <JsonInput
-              label={t("company_name")}
-              placeholder={ct("placeholder_input") + t("company_name")}
-              description={ct("description_json_input")}
-              value={formikDialog.values.companyNameJson || ""}
-              onChange={(val) => {
-                formikDialog.setFieldError("companyNameJson", undefined);
-                formikDialog.setFieldValue("companyNameJson", val, false);
-              }}
-              error={
-                formikDialog.errors.companyNameJson
-                  ? (formikDialog.errors.companyNameJson as string)
-                  : ""
-              }
-              rightSection={
-                formikDialog.values.companyNameJson && (
-                  <Icon
-                    name="x-circle"
-                    className="w-5 h-5"
-                    onClick={(e) =>
-                      formikDialog.setFieldValue(
-                        "companyNameJson",
-                        undefined,
-                        false
-                      )
-                    }
-                  />
-                )
-              }
-              autosize
-              formatOnBlur
-            />
-          </div>
-          {remoteTemplateSelect.length > 0 && (
-            <div className="min-w-60">
-              <Select
-                label={t("template_key")}
-                placeholder={ct("placeholder_select") + t("template_key")}
-                value={formikDialog.values.templateId + "" || null}
-                data={remoteTemplateSelect}
-                renderOption={({ option, checked }) => {
-                  return (
-                    <div
-                      className="flex-1 flex justify-between py-0.5"
-                      key={option.value}
-                    >
-                      {option.label}
-                      {checked && (
-                        <Icon
-                          name="check"
-                          className="w-5 h-5 text-white-5 dark:text-black-5"
-                        />
-                      )}
-                    </div>
-                  );
-                }}
-                onChange={(val, option) =>
-                  formikDialog.setFieldValue(
-                    "templateId",
-                    val || undefined,
-                    false
-                  )
-                }
-                allowDeselect
-              />
-            </div>
-          )}
-          <div className="min-w-60">
-            <label className="text-sm ltr:mr-2 rtl:ml-2 self-start mb-2 min-w-24">
-              {t("status")}
+        <form
+          className="grid grid-cols-2 gap-2 text-black-7 dark:text-white-7"
+          onSubmit={formikDialog.handleSubmit}
+        >
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("title")}
             </label>
-            <div className="text-sm">
-              {remoteDictSysStatus.map((item: any) => {
-                return (
-                  <label className="inline-flex mr-4" key={item.value}>
-                    <input
-                      type="radio"
-                      name="status"
-                      className="form-radio"
-                      disabled={item.value == "3"}
-                      checked={item.value == formikDialog.values.status}
-                      onChange={() =>
-                        formikDialog.setFieldValue("status", item.value, false)
-                      }
-                    />
-                    <span>{item.label}</span>
-                  </label>
-                );
-              })}
+            <div className="text-wrap break-all">
+              {formikDialog.values.title || "--"}
             </div>
           </div>
-          <div className="min-w-60">
-            <DatePickerInput
-              locale={i18n.language}
-              label={t("active_time")}
-              valueFormat="YYYY-MM-DD"
-              placeholder={ct("placeholder_select") + t("active_time")}
-              defaultDate={
-                formikDialog.values.activeTime
-                  ? dayjs(formikDialog.values.activeTime).toDate()
-                  : new Date()
-              }
-              value={
-                formikDialog.values.activeTime
-                  ? dayjs(formikDialog.values.activeTime).toDate()
-                  : null
-              }
-              onChange={(val: any) =>
-                formikDialog.setFieldValue(
-                  "activeTime",
-                  val ? dayjs(val).valueOf() : undefined,
-                  false
-                )
-              }
-              allowDeselect
-              clearable
-            />
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("business_type")}
+            </label>
+            <div className="text-wrap break-all">
+              {dictVal2Label(
+                remoteDictSysOperateType,
+                formikDialog.values.businessType || "0"
+              )}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("operator_user_type")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.operatorUserType || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("oper_user")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.operUser || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("oper_ip")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.operIp || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("oper_location")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.operLocation || "--"}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("oper_time")}
+            </label>
+            <div className="text-wrap break-all">
+              {formatDateTime(formikDialog.values.operTime || -1)}
+            </div>
+          </div>
+          <div className="min-w-30 col-span-1">
+            <label className="text-white-5 dark:text-black-5">
+              {t("success")}
+            </label>
+            <div className="text-wrap break-all">
+              {dictVal2Label(
+                remoteDictSysYesNo,
+                formikDialog.values.success || "1"
+              )}
+            </div>
+          </div>
+          <div className="min-w-60 col-span-2">
+            <label className="text-white-5 dark:text-black-5">
+              {t("oper_url")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.operUrl || "--"}
+            </div>
+          </div>
+          <div className="min-w-60 col-span-2">
+            <label className="text-white-5 dark:text-black-5">
+              {t("oper_param")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.operParam || "--"}
+            </div>
+          </div>
+          <div className="min-w-60 col-span-2">
+            <label className="text-white-5 dark:text-black-5">
+              {t("json_result")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.jsonResult || "--"}
+            </div>
+          </div>
+          <div className="min-w-60 col-span-2">
+            <label className="text-white-5 dark:text-black-5">
+              {t("error_msg")}
+            </label>
+            <div className="text-wrap break-all">
+              {formikDialog.values.errorMsg || "--"}
+            </div>
           </div>
         </form>
         {/* button */}
@@ -403,7 +364,17 @@ export default function SysuserCompanyContent() {
     Toast.fireWarnConfirmModel({
       html: <p>{ct("desc_delete_id") + id}</p>,
       callback: async () => {
-        const res = await SysOperLogApi.clear([id]);
+        const ids = [id];
+        const res = await SysOperLogApi.clear(ids);
+        if (res) pageDataMutate();
+      },
+    });
+  };
+  const handleClear = async () => {
+    Toast.fireWarnConfirmModel({
+      html: <p>{ct("desc_clear")}</p>,
+      callback: async () => {
+        const res = await SysOperLogApi.clear();
         if (res) pageDataMutate();
       },
     });
@@ -418,7 +389,7 @@ export default function SysuserCompanyContent() {
       loaderBackgroundBlur={2}
       highlightOnHover
       border={1}
-      className="table-hover whitespace-nowrap"
+      className="table-hover"
       columns={[
         {
           accessor: "id",
@@ -426,34 +397,42 @@ export default function SysuserCompanyContent() {
           textAlign: "center",
         },
         {
-          accessor: "account",
-          title: t("account"),
+          accessor: "title",
+          title: t("title"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "account"),
+          render: (row: any) => datatableColumnText(row, "title"),
         },
         {
-          accessor: "ipaddr",
-          title: t("ipaddr"),
+          accessor: "businessType",
+          title: t("business_type"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "ipaddr"),
+          render: (row: any) =>
+            dictVal2Label(remoteDictSysOperateType, row.businessType),
         },
         {
-          accessor: "loginLocation",
-          title: t("login_location"),
+          accessor: "operatorUserType",
+          title: t("operator_user_type"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "loginLocation"),
+          render: (row: any) => datatableColumnText(row, "operatorUserType"),
         },
         {
-          accessor: "browser",
-          title: t("browser"),
+          accessor: "operUser",
+          title: t("oper_user"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "browser"),
+          render: (row: any) => datatableColumnText(row, "operUser"),
         },
         {
-          accessor: "os",
-          title: t("os"),
+          accessor: "method",
+          title: t("method"),
           textAlign: "center",
-          render: (row: any) => datatableColumnText(row, "os"),
+          width: 200,
+          render: (row: any) => datatableColumnText(row, "method"),
+        },
+        {
+          accessor: "operTime",
+          title: t("oper_time"),
+          textAlign: "center",
+          render: (row: any) => formatDateTime(row.operTime),
         },
         {
           accessor: "success",
@@ -468,7 +447,23 @@ export default function SysuserCompanyContent() {
           render: (row: any) => {
             return row.id ? (
               <div className="flex justify-center space-x-4" key={row.dictId}>
-                <WithPermissions permissions={["system:dict:remove"]}>
+                <WithPermissions permissions={["system:operLog:list"]}>
+                  <button
+                    type="button"
+                    className="btn btn-xs mr-1 btn-outline-secondary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleDetailRow(row.id);
+                    }}
+                  >
+                    <Icon
+                      name="view"
+                      className="w-5 h-5 mr-1 fill-secondary-light"
+                    />
+                    {ct("detail")}
+                  </button>
+                </WithPermissions>
+                <WithPermissions permissions={["system:operLog:delete"]}>
                   <button
                     type="button"
                     className="btn btn-xs mr-1 btn-outline-danger"
@@ -517,26 +512,22 @@ export default function SysuserCompanyContent() {
         <form className="grid gap-x-4 gap-y-2 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 mt-2">
           <div className="min-w-60">
             <TextInput
-              label={t("account")}
-              placeholder={ct("placeholder_input") + t("account")}
-              value={formikQuery.values.account || ""}
+              label={t("oper_user")}
+              placeholder={ct("placeholder_input") + t("oper_user")}
+              value={formikQuery.values.user || ""}
               onChange={(e) =>
-                formikQuery.setFieldValue(
-                  "account",
-                  e.currentTarget.value,
-                  false
-                )
+                formikQuery.setFieldValue("user", e.currentTarget.value, false)
               }
               onKeyUp={(e: any) => {
                 if (e.keyCode == 13) pageDataMutate();
               }}
               rightSection={
-                formikQuery.values.account && (
+                formikQuery.values.user && (
                   <Icon
                     name="x-circle"
                     className="w-5 h-5"
                     onClick={(e) =>
-                      formikQuery.setFieldValue("account", undefined, false)
+                      formikQuery.setFieldValue("user", undefined, false)
                     }
                   />
                 )
@@ -575,25 +566,17 @@ export default function SysuserCompanyContent() {
       </QueryCondition>
       <div className="relative panel overflow-hidden min-h-96">
         <div className="flex flex-wrap gap-2 mb-4 print:hidden">
-          <WithPermissions permissions={["sys:dict:add"]}>
-            <button
-              type="button"
-              className="btn btn-outline-primary"
-              onClick={() => openDialog(3)}
-            >
-              <Icon
-                name="plus-circle"
-                className="w-5 h-5 fill-primary-light mr-1"
-              />
-              {ct("add")}
-            </button>
-          </WithPermissions>
-          <WithPermissions permissions={["sys:dict:export"]}>
-            <button type="button" className="btn btn-outline-success">
-              <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
-              {ct("export")}
-            </button>
-          </WithPermissions>
+          <button
+            type="button"
+            className="btn btn-outline-danger"
+            onClick={() => handleClear()}
+          >
+            <Icon
+              name="trash-lines"
+              className="w-5 h-5 fill-danger-light mr-1"
+            />
+            {ct("clear")}
+          </button>
         </div>
         {PageTable}
       </div>

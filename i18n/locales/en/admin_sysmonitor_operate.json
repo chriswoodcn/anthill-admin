@@ -11,5 +11,6 @@
   "oper_param": "Params",
   "json_result": "Result",
   "oper_time": "Operate Time",
-  "success": "Operate Success"
+  "success": "Operate Success",
+  "error_msg": "Error Message"
 }

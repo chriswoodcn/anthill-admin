@@ -61,7 +61,8 @@ export const aesDecrypt = (encrypted: string) => {
 }
 export const isBrowser = () => typeof window !== "undefined"
 
-export const dictVal2Label = (source: any[], val: string, defaultLabel: any = '--') => {
+export const dictVal2Label = (source: any[], val?: string, defaultLabel: any = '--') => {
+  if (!val) return defaultLabel;
   const find = source.find(s => s.value == val)
   return find ? find.label : defaultLabel
 }

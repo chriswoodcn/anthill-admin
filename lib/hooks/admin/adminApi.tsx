@@ -658,12 +658,12 @@ export const SysLoginInfoApi = {
     });
     return handleOperateResponse(res);
   },
-  clear: async (ids: (string | number)[]) => {
+  clear: async (ids: (string | number)[] | undefined = undefined) => {
     const res = await adminFetcher({
       url: "/backend/record/login/clear",
       method: "GET",
       params: {
-        ids,
+        ids: ids,
       },
     });
     return handleOperateResponse(res, OperateType.DELETE);
@@ -702,7 +702,7 @@ export const SysOperLogApi = {
     });
     return handleOperateResponse(res);
   },
-  clear: async (ids: (string | number)[]) => {
+  clear: async (ids: (string | number)[] | undefined = undefined) => {
     const res = await adminFetcher({
       url: "/backend/record/operate/clear",
       method: "GET",

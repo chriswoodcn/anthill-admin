@@ -5,5 +5,6 @@
   "browser": "浏览器",
   "os": "操作系统",
   "login_time": "登录时间",
-  "success": "登录成功"
+  "success": "登录成功",
+  "error_msg": "错误消息"
 }

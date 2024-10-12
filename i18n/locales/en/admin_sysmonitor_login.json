@@ -5,5 +5,6 @@
   "browser": "Browser",
   "os": "OS",
   "login_time": "Login Time",
-  "success": "Success"
+  "success": "Success",
+  "error_msg": "Error Message"
 }
