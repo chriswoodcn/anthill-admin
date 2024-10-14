@@ -1,3 +1,9 @@
-export default function SystemDict() {
-  return <div className="min-h-[calc(100vh-10rem)]">sysmonitor online</div>;
+import Content from './Content';
+
+export default function SystemMonitorOnline() {
+  return (
+    <div className="min-h-[calc(100vh-10rem)]">
+      <Content />
+    </div>
+  );
 }

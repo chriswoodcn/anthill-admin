@@ -8,6 +8,8 @@ import { adminFetcher, nextFetcher } from "@/lib/fetcher";
 import Toast from "@/lib/toast";
 import { i18next } from "@/i18n/client";
 import { aesDecrypt, aesEncrypt, isBrowser, withBasePath } from "@/lib";
+import { useRouter } from "next/navigation";
+import configuraton from "@/configuration.mjs";
 
 enum OperateType {
   GET,
@@ -16,7 +18,29 @@ enum OperateType {
   DELETE,
   CLEAR,
 }
+const handle401Response = (res: any) => {
+  if (res && res.code == 401) {
+    Toast.fireErrorAction({
+      html: (
+        <p className="text-2xl font-bold">
+          {res.msg || i18next.t("operate_error")}
+        </p>
+      ),
+      callback: () => {
+        console.log(window.history.state);
+        window.history.replaceState(
+          null,
+          "",
+          configuraton.BasePath + configuraton.PathAlias.Admin.Login
+        );
+      },
+    });
+    return false;
+  }
+  return true;
+};
 const handleOperateResponse = (res: any, ot = OperateType.GET) => {
+  if (!handle401Response(res)) return;
   if (res.code == 200) {
     if (ot == OperateType.GET) {
       return res.data;
@@ -181,17 +205,21 @@ export const setStorageLoginForm = ({
 };
 export const SysLoginApi = {
   login: async (data: LoginForm & Record<string, any>) => {
-    return await nextFetcher({
+    const res = await nextFetcher({
       url: withBasePath("/api/auth/login"),
       method: "POST",
       data: data,
     });
+    handle401Response(res);
+    return res;
   },
   logout: async () => {
-    return await nextFetcher({
+    const res = await nextFetcher({
       url: withBasePath("/api/auth/logout"),
       method: "GET",
     });
+    handle401Response(res);
+    return res;
   },
 };
 /**
@@ -204,21 +232,27 @@ export const SystemDictApi = {
   ) => {
     const { i18n } = useTranslation();
     const [result, setResult] = useState<any[]>([]);
-    const { data, isLoading } = useAdminFetch(true, undefined, {
+    const { data: fetchData, isLoading } = useAdminFetch(true, undefined, {
       url: "/backend/dict",
       method: "GET",
       params,
     });
     useEffectOnce(() => {
-      if (data && data.code == 200) {
-        const res = config.filter ? config.filter(data.data) : [...data.data];
-        res.forEach((d: any) => {
-          d.value = d.dictValue;
-          d.label = translate(d.dictLabelJson);
-        });
-        setResult(res);
+      handle401Response(fetchData);
+      if (fetchData) {
+        handle401Response(fetchData);
+        if (fetchData.code == 200) {
+          const res = config.filter
+            ? config.filter(fetchData.data)
+            : [...fetchData.data];
+          res.forEach((d: any) => {
+            d.value = d.dictValue;
+            d.label = translate(d.dictLabelJson);
+          });
+          setResult(res);
+        }
       }
-    }, [data, i18n.language]);
+    }, [fetchData, i18n.language]);
     return {
       data: result,
       isLoading,
@@ -241,8 +275,9 @@ export const SystemDictTypeApi = {
       data,
     });
     useEffectOnce(() => {
-      if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+      if (fetchData) {
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -306,8 +341,9 @@ export const SystemDictDataApi = {
       data,
     });
     useEffectOnce(() => {
-      if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+      if (fetchData) {
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -363,8 +399,9 @@ export const SystemConfigApi = {
       data,
     });
     useEffectOnce(() => {
-      if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+      if (fetchData) {
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -428,8 +465,9 @@ export const SysUserRoleApi = {
       data,
     });
     useEffectOnce(() => {
-      if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+      if (fetchData) {
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -488,12 +526,15 @@ export const SysUserRoleApi = {
       params: data,
     });
     useEffectOnce(() => {
-      if (fetchData && fetchData.code == 200) {
-        fetchData.data.forEach((item: any) => {
-          item.label = item.roleKey;
-          item.value = item.id + "";
-        });
-        setResult(fetchData.data);
+      if (fetchData) {
+        handle401Response(fetchData);
+        if (fetchData.code == 200) {
+          fetchData.data.forEach((item: any) => {
+            item.label = item.roleKey;
+            item.value = item.id + "";
+          });
+          setResult(fetchData.data);
+        }
       }
     }, [fetchData]);
     return {
@@ -528,7 +569,8 @@ export const SysCompanyApi = {
     });
     useEffectOnce(() => {
       if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -585,7 +627,8 @@ export const SystemUserApi = {
     });
     useEffectOnce(() => {
       if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -642,7 +685,8 @@ export const SysLoginInfoApi = {
     });
     useEffectOnce(() => {
       if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -686,7 +730,8 @@ export const SysOperLogApi = {
     });
     useEffectOnce(() => {
       if (fetchData && fetchData.code == 200) {
-        setResult(fetchData.data);
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
       }
     }, [fetchData]);
     return {
@@ -709,6 +754,42 @@ export const SysOperLogApi = {
       params: {
         ids,
       },
+    });
+    return handleOperateResponse(res, OperateType.DELETE);
+  },
+};
+/**
+ * 系统在线用户
+ */
+export const SysOnlineApi = {
+  usePage: (data: Record<string, any> = {}) => {
+    const [result, setResult] = useState<any>(undefined);
+    const {
+      data: fetchData,
+      isLoading,
+      mutate,
+    } = useAdminFetch(true, undefined, {
+      url: "/backend/online/page",
+      method: "POST",
+      data,
+    });
+    useEffectOnce(() => {
+      if (fetchData) {
+        handle401Response(fetchData);
+        if (fetchData.code == 200) setResult(fetchData.data);
+      }
+    }, [fetchData]);
+    return {
+      data: result,
+      isLoading,
+      mutate,
+    };
+  },
+  forceOut: async (params: Record<string, any>) => {
+    const res = await adminFetcher({
+      url: "/backend/online/forceOut",
+      method: "GET",
+      params,
     });
     return handleOperateResponse(res, OperateType.DELETE);
   },

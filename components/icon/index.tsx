@@ -45,6 +45,7 @@ const TemplateMap: Record<string, FC<IconOptions>> = {
   folder: IconFolder,
   box: IconBox,
   nodata: IconNodata,
+  logout: IconLogout,
 };
 const switchIcon = (
   name: string,

@@ -1,0 +1,7 @@
+{
+  "auth_label": "登录标识",
+  "device": "登录方式",
+  "username": "登录账号",
+  "user_type": "用户类型",
+  "user_id": "用户ID"
+}
