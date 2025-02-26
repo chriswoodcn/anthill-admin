@@ -18,12 +18,16 @@ const rememberedRootReducer = rememberReducer(rootReducer);
 export const store = configureStore({
   reducer: rememberedRootReducer,
   devTools: process.env.NODE_ENV == "development" ? true : false,
-  enhancers: (getDefaultEnhancers) => getDefaultEnhancers().concat(
-    rememberEnhancer(
-      window.localStorage,
-      rememberedKeys
-    )
-  ),
+  enhancers: (getDefaultEnhancers) => {
+    return typeof window !== "undefined" ?
+      getDefaultEnhancers().concat(
+        rememberEnhancer(
+          window.localStorage,
+          rememberedKeys
+        )
+      ) :
+      getDefaultEnhancers()
+  },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false, // 禁用序列化检查

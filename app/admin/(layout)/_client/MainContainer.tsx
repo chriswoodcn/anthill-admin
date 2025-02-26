@@ -27,9 +27,7 @@ const MainContainer = ({ children }: { children: React.ReactNode }) => {
       } else {
         Toast.fireErrorAction({
           html: (
-            <p className="text-black-7 dark:text-white-7 text-xl">
-              {res.msg}
-            </p>
+            <p className="text-black-7 dark:text-white-7 text-xl">{res.msg}</p>
           ),
         });
         dispatch(clearUserRouter());

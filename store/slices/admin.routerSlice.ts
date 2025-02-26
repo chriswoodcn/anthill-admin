@@ -26,6 +26,10 @@ const routerSlice = createSlice({
           state.userRouterTree = menus;
           state.userRouterList = flatMenuTree2MenuList(menus)
         }
+      } else {
+        state.userRouterMD5 = undefined
+        state.userRouterTree = initialRouter;
+        state.userRouterList = initialRouter;
       }
     },
     clearUserRouter: (state) => {
