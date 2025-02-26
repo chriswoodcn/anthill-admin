@@ -3,5 +3,11 @@
   "status": "状态",
   "template_key": "管理员模板",
   "active_time": "到期时间",
-  "invalid_com_id": "无效的客户ID"
+  "invalid_com_id": "无效的客户ID",
+  "SuperAdmin": "超级管理员",
+  "SuperUser": "超级用户",
+  "MaintainAdmin": "维护管理员",
+  "MaintainUser": "维护用户",
+  "SystemAdmin": "系统管理员",
+  "SystemUser": "系统用户"
 }

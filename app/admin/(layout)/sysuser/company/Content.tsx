@@ -466,7 +466,7 @@ export default function SysuserCompanyContent() {
           render: (row: any) => {
             return row.id ? (
               <div className="flex justify-center space-x-4" key={row.dictId}>
-                <WithPermissions permissions={["system:dict:list"]}>
+                <WithPermissions permissions={["system:company:list"]}>
                   <button
                     type="button"
                     className="btn btn-xs mr-1 btn-outline-secondary"
@@ -484,7 +484,7 @@ export default function SysuserCompanyContent() {
                 </WithPermissions>
                 {row.status != "3" && (
                   <>
-                    <WithPermissions permissions={["system:dict:edit"]}>
+                    <WithPermissions permissions={["system:company:edit"]}>
                       <button
                         type="button"
                         className="btn btn-xs btn-outline-primary"
@@ -500,7 +500,7 @@ export default function SysuserCompanyContent() {
                         {ct("update")}
                       </button>
                     </WithPermissions>
-                    <WithPermissions permissions={["system:dict:remove"]}>
+                    {/* <WithPermissions permissions={["system:company:remove"]}>
                       <button
                         type="button"
                         className="btn btn-xs mr-1 btn-outline-danger"
@@ -515,7 +515,7 @@ export default function SysuserCompanyContent() {
                         />
                         {ct("delete")}
                       </button>
-                    </WithPermissions>
+                    </WithPermissions> */}
                     <button
                       type="button"
                       className="btn btn-xs mr-1 btn-outline-secondary"

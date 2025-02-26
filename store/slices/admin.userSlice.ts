@@ -1,3 +1,4 @@
+import { UserType } from '@/app/admin/(layout)/sysuser/list/PanelUserList'
 import { getAuthorizationInfoClient } from '@/lib/jwt'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 

@@ -29,15 +29,7 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
-
-export enum UserType {
-  SuperAdmin,
-  SuperUser,
-  MaintaineAdmin,
-  MaintainUser,
-  SystemAdmin,
-  SystemUser,
-}
+import { UserType } from "@/store";
 
 export default function PanelUserList(props: Record<string, any>) {
   const { t } = useTranslation("admin_sysuser_list");
@@ -532,24 +524,28 @@ export default function PanelUserList(props: Record<string, any>) {
           accessor: "username",
           title: t("username"),
           textAlign: "center",
+          width: 100,
           render: (row: any) => datatableColumnText(row, "username"),
         },
         {
           accessor: "nickname",
           title: t("nickname"),
           textAlign: "center",
+          width: 200,
           render: (row: any) => datatableColumnText(row, "nickname"),
         },
         {
           accessor: "email",
           title: t("email"),
           textAlign: "center",
+          width: 300,
           render: (row: any) => datatableColumnText(row, "email"),
         },
         {
           accessor: "mobile",
           title: t("mobile"),
           textAlign: "center",
+          width: 200,
           render: (row: any) => datatableColumnText(row, "mobile"),
         },
         {
@@ -574,7 +570,7 @@ export default function PanelUserList(props: Record<string, any>) {
           render: (row: any) => {
             return row.id ? (
               <div className="flex justify-center space-x-4" key={row.dictId}>
-                <WithPermissions permissions={["system:dict:list"]}>
+                <WithPermissions permissions={["system:user:list"]}>
                   <button
                     type="button"
                     className="btn btn-xs mr-1 btn-outline-secondary"
@@ -592,7 +588,7 @@ export default function PanelUserList(props: Record<string, any>) {
                 </WithPermissions>
                 {row.status != "3" && (
                   <>
-                    <WithPermissions permissions={["system:dict:edit"]}>
+                    <WithPermissions permissions={["system:user:update"]}>
                       <button
                         type="button"
                         className="btn btn-xs btn-outline-primary"
@@ -608,7 +604,7 @@ export default function PanelUserList(props: Record<string, any>) {
                         {ct("update")}
                       </button>
                     </WithPermissions>
-                    <WithPermissions permissions={["system:dict:remove"]}>
+                    <WithPermissions permissions={["system:user:remove"]}>
                       <button
                         type="button"
                         className="btn btn-xs mr-1 btn-outline-danger"

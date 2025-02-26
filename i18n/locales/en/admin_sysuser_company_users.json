@@ -3,5 +3,11 @@
   "status": "Status",
   "template_key": "Admin Template",
   "active_time": "Expire Time",
-  "invalid_com_id": "Invalid Comany ID"
+  "invalid_com_id": "Invalid Comany ID",
+  "SuperAdmin": "Super Admin",
+  "SuperUser": "Super User",
+  "MaintainAdmin": "Maintain Admin",
+  "MaintainUser": "Maintain User",
+  "SystemAdmin": "System Admin",
+  "SystemUser": "System User"
 }

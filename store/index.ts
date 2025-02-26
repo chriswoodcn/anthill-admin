@@ -44,3 +44,51 @@ export type AppStore = typeof store
 // Use throughout your app instead of plain `useDispatch` and `useSelector`
 export const useAppDispatch = useDispatch.withTypes<AppDispatch>()
 export const useAppSelector = useSelector.withTypes<RootState>()
+
+export enum UserType {
+  SuperAdmin,
+  SuperUser,
+  MaintaineAdmin,
+  MaintainUser,
+  SystemAdmin,
+  SystemUser,
+  UnKonwn,
+}
+export const selectUserType = (state: RootState) => {
+  const userInfo = state.adminUser.userInfo;
+  if (userInfo == null || userInfo.id == undefined) {
+    return UserType.UnKonwn;
+  }
+  const affiliateFlag = userInfo.affiliateFlag ?? '0';
+  const adminFlag = userInfo.adminFlag ?? '0';
+  switch (affiliateFlag) {
+    case '0':
+      switch (adminFlag) {
+        case '0':
+          return UserType.SuperUser;
+        case '1':
+          return UserType.SuperAdmin;
+        default:
+          return UserType.SuperUser;
+      }
+    case '1':
+      switch (adminFlag) {
+        case '0':
+          return UserType.MaintainUser;
+        case '1':
+          return UserType.MaintaineAdmin;
+        default:
+          return UserType.MaintainUser;
+      }
+    case '2':
+      switch (adminFlag) {
+        case '0':
+          return UserType.SystemUser;
+        case '1':
+          return UserType.SystemAdmin;
+        default:
+          return UserType.SystemUser;
+      }
+  }
+  return UserType.UnKonwn;
+};
