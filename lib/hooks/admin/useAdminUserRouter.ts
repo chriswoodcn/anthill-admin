@@ -5,7 +5,7 @@ export default function useAdminUserRouter(doAction: boolean, params: Record<str
   const { data, error, isLoading } = useSWR(
     doAction
       ? {
-        url: "/backend/menu/userRouter",
+        url: "/backend/getRouters",
         method: "GET",
         data: params,
       }

@@ -72,5 +72,5 @@ export const formatDate = (timeStamp: number) => {
 }
 export const formatDateTime = (timeStamp: number) => {
   if (!timeStamp) return '--'
-  return dayjs(timeStamp).format("YYYY-MM-DD hh:mm:ss")
+  return dayjs(timeStamp).format("YYYY-MM-DD HH:mm:ss")
 }

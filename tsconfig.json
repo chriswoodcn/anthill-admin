@@ -27,6 +27,6 @@
     ".next/types/**/*.ts",
     "*.ts",
     "i18n/I18nProvider.jsx"
-  ],
+, "app/not-found.tsx.bak"  ],
   "exclude": ["node_modules"]
 }

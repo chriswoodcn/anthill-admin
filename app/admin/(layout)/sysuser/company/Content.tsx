@@ -77,6 +77,7 @@ export default function SysuserCompanyContent() {
     pageSize,
     ...queryParams,
   });
+
   const { data: remoteDictSysStatus } = SystemDictApi.useDict(
     {
       type: "sys_status",
@@ -95,6 +96,9 @@ export default function SysuserCompanyContent() {
   const { data: remoteTemplateSelect } = SysUserRoleApi.useTemplateSelect({
     flag: "2",
   });
+  const exportExcel = async () => {
+    await SysCompanyApi.exportExcel({ ...queryParams });
+  };
 
   //#endregion
 
@@ -128,7 +132,7 @@ export default function SysuserCompanyContent() {
           },
         }),
       templateId: Yup.number().required(),
-      activeTime: Yup.number().nullable(),
+      activeTime: Yup.string().nullable(),
     }),
     onSubmit: async (values) => {
       logger.debug("onSubmit values", values);
@@ -351,7 +355,7 @@ export default function SysuserCompanyContent() {
               onChange={(val: any) =>
                 formikDialog.setFieldValue(
                   "activeTime",
-                  val ? dayjs(val).valueOf() : undefined,
+                  val ? dayjs(val).format("YYYY-MM-DD HH:mm:ss") : undefined,
                   false
                 )
               }
@@ -454,7 +458,6 @@ export default function SysuserCompanyContent() {
           accessor: "activeTime",
           title: t("active_time"),
           textAlign: "center",
-          render: (row: any) => formatDate(row.activeTime),
         },
         {
           accessor: "actions",
@@ -605,7 +608,11 @@ export default function SysuserCompanyContent() {
             </button>
           </WithPermissions>
           <WithPermissions permissions={["sys:dict:export"]}>
-            <button type="button" className="btn btn-outline-success">
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={exportExcel}
+            >
               <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
               {ct("export")}
             </button>

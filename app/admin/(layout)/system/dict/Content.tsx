@@ -81,6 +81,9 @@ export default function () {
       },
     }
   );
+  const exportExcel = async () => {
+    await SystemDictTypeApi.exportExcel({ ...queryParams });
+  };
   //#endregion
 
   //#region dialog
@@ -381,7 +384,7 @@ export default function () {
   const handleEditRow = async (id: string | number) => {
     openDialog(4, id);
   };
-  const handleRefreshCache = async () => await SystemDictTypeApi.refresh();
+  const handleRefreshCache = async () => await SystemDictApi.refresh();
 
   //#region table
   const PageTable = (
@@ -598,7 +601,11 @@ export default function () {
             </button>
           </WithPermissions>
           <WithPermissions permissions={["sys:dict:export"]}>
-            <button type="button" className="btn btn-outline-success">
+            <button
+              type="button"
+              className="btn btn-outline-success"
+              onClick={exportExcel}
+            >
               <Icon name="export" className="w-5 h-5 fill-success-light mr-1" />
               {ct("export")}
             </button>

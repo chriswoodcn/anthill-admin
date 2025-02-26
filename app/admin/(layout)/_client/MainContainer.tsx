@@ -6,6 +6,7 @@ import logger from "@/lib/logger";
 import { RootState, useAppDispatch, useAppSelector } from "@/store";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
+import Toast from "@/lib/toast";
 
 const MainContainer = ({ children }: { children: React.ReactNode }) => {
   const adminSetting = useAppSelector((state: RootState) => state.adminSetting);
@@ -24,6 +25,13 @@ const MainContainer = ({ children }: { children: React.ReactNode }) => {
       if (res.code == 200) {
         dispatch(setUserRouter(res.data));
       } else {
+        Toast.fireErrorAction({
+          html: (
+            <p className="text-black-7 dark:text-white-7 text-xl">
+              {res.msg}
+            </p>
+          ),
+        });
         dispatch(clearUserRouter());
       }
     },

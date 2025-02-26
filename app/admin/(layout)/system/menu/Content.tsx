@@ -37,7 +37,7 @@ export default function () {
     },
     {
       filter: (records: any[]) => {
-        if (records.length > 0) {
+        if (records && records.length > 0) {
           if (records[0].dictType == "sys_status") {
             return records.filter((r) => r.dictValue != "2");
           }

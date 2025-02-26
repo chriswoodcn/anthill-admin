@@ -2,14 +2,13 @@ import { translate } from "@/lib/client";
 import useEffectOnce from "../useEffectOnce";
 import useAdminFetch from "./useAdminFetch";
 import { useState } from "react";
-import logger from "@/lib/logger";
 import { useTranslation } from "react-i18next";
 import { adminFetcher, nextFetcher } from "@/lib/fetcher";
 import Toast from "@/lib/toast";
 import { i18next } from "@/i18n/client";
 import { aesDecrypt, aesEncrypt, isBrowser, withBasePath } from "@/lib";
-import { useRouter } from "next/navigation";
 import configuraton from "@/configuration.mjs";
+import { saveAs } from "file-saver";
 
 enum OperateType {
   GET,
@@ -17,6 +16,7 @@ enum OperateType {
   UPDATE,
   DELETE,
   CLEAR,
+  EXPORT,
 }
 const handle401Response = (res: any) => {
   if (res && res.code == 401) {
@@ -39,7 +39,7 @@ const handle401Response = (res: any) => {
   }
   return true;
 };
-const handleOperateResponse = (res: any, ot = OperateType.GET) => {
+const handleOperateResponse = (res: any, ot: OperateType = OperateType.GET) => {
   if (!handle401Response(res)) return;
   if (res.code == 200) {
     if (ot == OperateType.GET) {
@@ -62,6 +62,48 @@ const handleOperateResponse = (res: any, ot = OperateType.GET) => {
     });
     return false;
   }
+};
+const blobValidate = async (data: any) => {
+  try {
+    const text = await data.text();
+    JSON.parse(text);
+    return false;
+  } catch (error) {
+    return true;
+  }
+};
+const handleExportExcel = async (
+  url: string,
+  params: Record<string, any>,
+  filename: string
+) => {
+  Toast.fireLoader(async (closeToast: Function) => {
+    const res = await adminFetcher({
+      url,
+      method: "GET",
+      params: params,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      responseType: "blob",
+    });
+    closeToast();
+    const isLogin = await blobValidate(res);
+    if (isLogin) {
+      const blob = new Blob([res]);
+      saveAs(blob, filename);
+    } else {
+      const resText = await res.text();
+      const rspObj = JSON.parse(resText);
+      const errMsg = rspObj.msg;
+      Toast.fireErrorAction({
+        html: (
+          <p className="text-2xl font-bold">
+            {errMsg || i18next.t("export_error")}
+          </p>
+        ),
+        timer: 0,
+      });
+    }
+  });
 };
 /**
  * 系统菜单
@@ -144,7 +186,7 @@ export const SystemMenuApi = {
   },
   delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
-      url: "/backend/menu/deleteLogic/" + ids,
+      url: "/backend/menu/remove/" + ids,
       method: "GET",
     });
     return handleOperateResponse(res, OperateType.DELETE);
@@ -241,7 +283,7 @@ export const SystemDictApi = {
       handle401Response(fetchData);
       if (fetchData) {
         handle401Response(fetchData);
-        if (fetchData.code == 200) {
+        if (fetchData.code == 200 && fetchData.data) {
           const res = config.filter
             ? config.filter(fetchData.data)
             : [...fetchData.data];
@@ -257,6 +299,13 @@ export const SystemDictApi = {
       data: result,
       isLoading,
     };
+  },
+  refresh: async () => {
+    const res = await adminFetcher({
+      url: "/backend/dict/refresh",
+      method: "GET",
+    });
+    return handleOperateResponse(res, OperateType.CLEAR);
   },
 };
 /**
@@ -311,18 +360,17 @@ export const SystemDictTypeApi = {
   },
   delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
-      url: "/backend/dict/type/deleteLogic/" + ids,
+      url: "/backend/dict/type/remove/" + ids,
       method: "GET",
     });
     return handleOperateResponse(res, OperateType.DELETE);
   },
-  refresh: async (params: Record<string, any> = {}) => {
-    const res = await adminFetcher({
-      url: "/backend/dict/type/refresh",
-      method: "GET",
-      params,
-    });
-    return handleOperateResponse(res, OperateType.CLEAR);
+  exportExcel: async (data: Record<string, any> = {}) => {
+    await handleExportExcel(
+      "/backend/dict/type/export",
+      data,
+      `SystemDictType_${new Date().getTime()}.xlsx`
+    );
   },
 };
 /**
@@ -377,7 +425,7 @@ export const SystemDictDataApi = {
   },
   delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
-      url: "/backend/dict/data/deleteLogic" + ids,
+      url: "/backend/dict/data/remove" + ids,
       method: "GET",
     });
     return handleOperateResponse(res, OperateType.DELETE);
@@ -435,7 +483,7 @@ export const SystemConfigApi = {
   },
   delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
-      url: "/backend/config/deleteLogic/" + ids,
+      url: "/backend/config/remove/" + ids,
       method: "GET",
     });
     return handleOperateResponse(res, OperateType.DELETE);
@@ -501,7 +549,7 @@ export const SysUserRoleApi = {
   },
   delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
-      url: "/backend/role/deleteLogic/" + ids,
+      url: "/backend/role/remove/" + ids,
       method: "GET",
     });
     return handleOperateResponse(res, OperateType.DELETE);
@@ -604,10 +652,17 @@ export const SysCompanyApi = {
   },
   delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
-      url: "/backend/company/deleteLogic/" + ids,
+      url: "/backend/company/remove/" + ids,
       method: "GET",
     });
     return handleOperateResponse(res, OperateType.DELETE);
+  },
+  exportExcel: async (data: Record<string, any> = {}) => {
+    await handleExportExcel(
+      "/backend/company/export",
+      data,
+      `SysCompany${new Date().getTime()}.xlsx`
+    );
   },
 };
 /**
@@ -662,7 +717,7 @@ export const SystemUserApi = {
   },
   delete: async (ids: (string | number)[]) => {
     const res = await adminFetcher({
-      url: "/backend/user/deleteLogic/" + ids,
+      url: "/backend/user/remove/" + ids,
       method: "GET",
     });
     return handleOperateResponse(res, OperateType.DELETE);
