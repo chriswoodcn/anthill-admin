@@ -5,7 +5,6 @@ import { useFormik } from "formik";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
-import Link from "next/link";
 
 import { dictVal2Label } from "@/lib";
 import {
@@ -29,10 +28,14 @@ import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 import RcTreeCheckbox from "../../_component/RcTreeCheckbox";
+import { RootState, selectUserType, useAppSelector, UserType } from "@/store";
 
 export default function () {
   const { t } = useTranslation("admin_sysuser_role");
   const { t: ct } = useTranslation("admin_common");
+  const loginUserType = useAppSelector((state: RootState) =>
+    selectUserType(state)
+  );
 
   //#region query
   const [page, setPage] = useState(1);
@@ -323,7 +326,9 @@ export default function () {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"}
+                      disabled={
+                        item.value == "3" && loginUserType > UserType.SuperUser
+                      }
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)
@@ -544,7 +549,7 @@ export default function () {
                     {ct("detail")}
                   </button>
                 </WithPermissions>
-                {row.status != "3" && (
+                {(row.status != "3" || loginUserType <= UserType.SuperUser) && (
                   <>
                     <WithPermissions permissions={["system:dict:edit"]}>
                       <button

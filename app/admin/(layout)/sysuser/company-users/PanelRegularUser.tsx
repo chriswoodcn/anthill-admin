@@ -28,11 +28,14 @@ import Icon from "@/components/icon/index";
 import EditDialog from "../../_component/EditDialog";
 import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
+import { RootState, selectUserType, useAppSelector, UserType } from "@/store";
 
 export default function PanelRegularUser(props: Record<string, any>) {
   const { t } = useTranslation("admin_sysuser_company");
   const { t: ct } = useTranslation("admin_common");
-  const router = useRouter();
+  const loginUserType = useAppSelector((state: RootState) =>
+    selectUserType(state)
+  );
 
   //#region query
   const [page, setPage] = useState(1);
@@ -420,7 +423,9 @@ export default function PanelRegularUser(props: Record<string, any>) {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"}
+                      disabled={
+                        item.value == "3" && loginUserType > UserType.SuperUser
+                      }
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)
@@ -572,7 +577,8 @@ export default function PanelRegularUser(props: Record<string, any>) {
                     {ct("detail")}
                   </button>
                 </WithPermissions>
-                {row.status != "3" && (
+                {(row.status != "3" ||
+                  loginUserType <= UserType.MaintainUser) && (
                   <>
                     <WithPermissions permissions={["system:dict:edit"]}>
                       <button

@@ -6,15 +6,16 @@ import PanelRegularUser from "./PanelRegularUser";
 import { useTranslation } from "react-i18next";
 import { useSearchParams } from "next/navigation";
 import NoData from "../../_component/NoData";
+import { UserType } from '@/store';
 
 const categories = [
   {
-    name: "管理员",
+    name: UserType[4],
     key: "admin",
     panel: (comId: string) => <PanelAdminUser comId={comId} />,
   },
   {
-    name: "普通用户",
+    name: UserType[5],
     key: "regular",
     panel: (comId: string) => <PanelRegularUser comId={comId} />,
   },
@@ -32,7 +33,7 @@ export default function SysuserCompanyUsersContent() {
             key={name}
             className="rounded-lg shadow-lg py-2 px-6 text-sm/6 font-semibold bg-white focus:outline-none data-[selected]:bg-primary data-[selected]:text-white data-[hover]:bg-white/50 data-[selected]:data-[hover]:bg-primary/50 data-[focus]:outline-1 data-[focus]:outline-white"
           >
-            {name}
+            {t(name)}
           </Tab>
         ))}
       </TabList>

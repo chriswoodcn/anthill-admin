@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { JsonInput, Select, TextInput } from "@mantine/core";
 import { DatePickerInput } from "@mantine/dates";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { use, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useImmer } from "use-immer";
 
@@ -31,11 +31,15 @@ import QueryCondition from "../../_component/QueryCondition";
 import Toast from "@/lib/toast";
 import { IconUserSearch } from "@tabler/icons-react";
 import dayjs from "dayjs";
+import { RootState, selectUserType, useAppSelector, UserType } from "@/store";
 
 export default function SysuserCompanyContent() {
   const { t, i18n } = useTranslation("admin_sysuser_company");
   const { t: ct } = useTranslation("admin_common");
   const router = useRouter();
+  const loginUserType = useAppSelector((state: RootState) =>
+    selectUserType(state)
+  );
 
   //#region query
   const [page, setPage] = useState(1);
@@ -217,6 +221,7 @@ export default function SysuserCompanyContent() {
               withAsterisk
               label={ct("id")}
               placeholder={ct("placeholder_input") + ct("id")}
+              disabled={dialogType == 4}
               value={formikDialog.values.id}
               onChange={(e) => {
                 if (dialogType != 3) return;
@@ -324,7 +329,9 @@ export default function SysuserCompanyContent() {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"}
+                      disabled={
+                        item.value == "3" && loginUserType > UserType.SuperUser
+                      }
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)

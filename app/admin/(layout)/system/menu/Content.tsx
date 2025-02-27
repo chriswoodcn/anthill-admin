@@ -26,10 +26,14 @@ import { JsonInput, NumberInput, TextInput } from "@mantine/core";
 import TreeSelect from "../../_component/TreeSelect";
 import Toast from "@/lib/toast";
 import useEffectOnce from "@/lib/hooks/useEffectOnce";
+import { RootState, selectUserType, useAppSelector, UserType } from "@/store";
 
 export default function () {
   const { t } = useTranslation("admin_system_menu");
   const { t: ct } = useTranslation("admin_common");
+  const loginUserType = useAppSelector((state: RootState) =>
+    selectUserType(state)
+  );
 
   const { data: remoteDictSysStatus } = SystemDictApi.useDict(
     {
@@ -854,7 +858,7 @@ export default function () {
                 </button>
               </WithPermissions>
             )}
-            {row.status !== "3" && (
+            {(row.status !== "3" || loginUserType <= UserType.SuperUser) && (
               <WithPermissions permissions={["sys:menu:delete"]}>
                 <button
                   type="button"

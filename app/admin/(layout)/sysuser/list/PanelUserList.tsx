@@ -447,7 +447,9 @@ export default function PanelUserList(props: Record<string, any>) {
                       type="radio"
                       name="status"
                       className="form-radio"
-                      disabled={item.value == "3"}
+                      disabled={
+                        item.value == "3" && props.type > UserType.SuperUser
+                      }
                       checked={item.value == formikDialog.values.status}
                       onChange={() =>
                         formikDialog.setFieldValue("status", item.value, false)
